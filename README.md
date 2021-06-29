@@ -12,7 +12,8 @@ See [about/](./about/).
 
 ### Media
 
-See [img/](./img/) for images (must be .png) and [pdf/](./pdf/) for PDFs.
+- [img/](./img/) for images (must be .png, except for people avatars which must be .jpg)
+- [pdf/](./pdf/) for PDFs.
 
 ## Compiling
 

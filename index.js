@@ -53,7 +53,7 @@ const headerAndNav = `
         <nav>
             <ul>
                 <li>
-                    <a href="#aboutus">about us</a>
+                    <a href="#aboutus">about</a>
                 </li>
                 <li>
                     <a href="#publications">publications</a>
@@ -79,6 +79,7 @@ const headerAndNav = `
 const stream = createReadStream(file);
 const papers = [];
 
+// Main loop
 csv
     .parseStream(stream, { headers: true })
     .on('data', data => data.Title !== '' && papers.push(data))
@@ -115,7 +116,11 @@ function createPages() {
  * @returns {string} HTML
  */
 function createPapersHtml(papers, isMember = false) {
-    return papers.map(d => `
+    return papers.map(d => {
+        const fileName = d['Key (e.g. for file names)'];
+        const pdf = `${isMember ? '..' : '.'}/pdf/${fileName}.pdf`;
+        const publisher = d['Publisher URL (official)'];
+        return `
     <div class="paper">
         <h2>${d['Title']}</h2>
         <div class="metaData">
@@ -130,15 +135,23 @@ function createPapersHtml(papers, isMember = false) {
         </span>
         </div>
         <div class="teaserImageDiv">
-            <a href="${isMember ? '..' : '.'}/pdf/${d['Key (e.g. for file names)']}.pdf">
-                <img src="${isMember ? '..' : '.'}/img/${d['Key (e.g. for file names)']}.png"/>
+            <a href="${pdf}">
+                <img
+                    class="publicationImage"
+                    src="${isMember ? '..' : '.'}/img/${fileName}.png"
+                />
             </a>
+        </div>
+        <div class="paperLinks">
+            <a href="${pdf}">PDF</a>
+            <a href="${publisher}">publisher website</a>
         </div>
         <div class="abstract">
             ${d['Abstract']}
         </div>
     </div>
-    `).join('');
+    `;
+    }).join('');
 }
 
 /**
@@ -181,8 +194,7 @@ function createMainPageHtml(published) {
         </div>
     </main>
 </body>
-</html>
-    `;
+</html>`;
     writeFileSync('./index.html', html);
     console.log(`Wrote index.html`);
 }
@@ -233,8 +245,7 @@ function createMemberPageHtml(member, fileName, papers) {
         </div>
     </main>
 </body>
-</html>
-    `;
+</html>`;
     const outFile = `./members/${fileName}.html`;
     writeFileSync(outFile, html);
     console.log(`Wrote ${outFile}`);

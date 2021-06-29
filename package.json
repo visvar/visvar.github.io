@@ -1,5 +1,5 @@
 {
-  "name": "visvar-website",
+  "name": "visvar.github.io",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,11 +7,14 @@
   "scripts": {
     "start": "node ./index.js",
     "mon": "nodemon ./index.js  -e js,html --ignore members/ --ignore index.html",
+    "resize": "node ./scripts/image-resizer.js",
+    "topng": "node ./scripts/image-to-png.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "",
-  "dependencies": {
+  "devDependencies": {
+    "image-js": "^0.31.4",
     "fast-csv": "^4.3.6",
     "nodemon": "^2.0.7"
   }

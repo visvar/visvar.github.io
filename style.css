@@ -2,7 +2,7 @@
     --textColor: #222;
     --textColor2: #555;
     --bodyBgColor: #fff;
-    --linkColor: rgb(56, 124, 250);
+    --linkColor: rgb(33, 117, 191);
 }
 
 body,
@@ -198,13 +198,22 @@ section a i {
 }
 
 
-/* Images */
-img {
-    margin-bottom: 15px;
-    width: 100%;
-    border-radius: 3px;
-    box-shadow: #888 1px 1px 10px;
+/* About pages */
+.avatarAndBio {
+    display: grid;
+    grid-template-columns: auto auto;
 }
+
+.avatarAndBio .bio {
+    padding: 10px 10px 10px 30px;
+}
+
+.avatarAndBio img.avatar {
+    border-radius: 50%;
+}
+
+/* Publications */
+
 
 .metaData {
     margin-bottom: 15px;
@@ -218,7 +227,26 @@ img {
 
 .publication {
     margin-right: 10px;
-    padding: 2px 4px;
+    padding: 1px 2px 1px 3px;
     border: 1px solid #888;
     border-radius: 5px;
+}
+
+img.publicationImage {
+    margin-bottom: 15px;
+    width: 100%;
+    border-radius: 3px;
+    box-shadow: #888 1px 1px 10px;
+}
+
+.paperLinks {
+    padding: 0 5px 5px 5px;
+}
+.paperLinks a {
+    padding: 0 5px;
+    text-decoration: underline;
+}
+
+.abstract {
+    font-size: 0.85em;
 }
