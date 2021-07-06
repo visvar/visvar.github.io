@@ -53,10 +53,10 @@ const headerAndNav = `
         <nav>
             <ul>
                 <li>
-                    <a href="#aboutus">about</a>
+                    <a href="${pageUrl}/#aboutus">about VISVAR</a>
                 </li>
                 <li>
-                    <a href="#publications">publications</a>
+                    <a href="${pageUrl}/#publications">all publications</a>
                 </li>
                 <li>
                     people
@@ -175,6 +175,7 @@ function createMainPageHtml(published) {
     <title>${pageTitle}</title>
 
     <link rel="stylesheet" href="./style.css">
+    <script src="./script.js"></script>
 </head>
 
 <body>
@@ -226,6 +227,7 @@ function createMemberPageHtml(member, fileName, papers) {
     <title>${member} | ${pageTitle}</title>
 
     <link rel="stylesheet" href="../style.css">
+    <script src="../script.js"></script>
 </head>
 
 <body>
