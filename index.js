@@ -118,41 +118,45 @@ function createPapersHtml(papers, isMember = false) {
         const pdf = `${isMember ? '..' : '.'}/pdf/${fileName}.pdf`;
         const publisher = d['Publisher URL (official)'];
         return `
-    <div class="paper">
-        <h2>${d['Title']}</h2>
+    <div
+        class="paper small"
+        id="paper${fileName}"
+    >
+        <h2
+           onclick="toggleClass('paper${fileName}', 'small'); toggleImageSize(image${fileName});"
+        >
+            ${d['Title']}
+        </h2>
+        <img
+            id="image${fileName}"
+            onclick="toggleClass('paper${fileName}', 'small'); toggleImageSize(this);"
+            class="publicationImage small"
+            src="${isMember ? '..' : '.'}/img/small/${fileName}.png"
+        />
         <div class="metaData">
-        <span class="publication">
-            ${d['Submission Target']}
-            ${d['Date / Deadline'].slice(0, 4)}
-            ${d['Type']}
-        </span>
-        <span class="authors">
-            <span class="firstAuthor">${d['First Author']}</span>${d['Other Authors'] !== '' ? ',' : ''}
-            ${d['Other Authors']}
-        </span>
+            <div>
+                <span class="publication">
+                    ${d['Submission Target']}
+                    ${d['Date / Deadline'].slice(0, 4)}
+                    ${d['Type']}
+                </span>
+                <span class="authors">
+                    <span class="firstAuthor">${d['First Author']}</span>${d['Other Authors'] !== '' ? ',' : ''}
+                    ${d['Other Authors']}
+                </span>
+            </div>
+            <div class="paperLinks">
+                <a href="${pdf}">PDF</a>
+                <a href="${publisher}">publisher website</a>
+            </div>
         </div>
-        <div class="teaserImageDiv">
-            <img
-                onclick="toggleImageSize(this)"
-                class="publicationImage small"
-                src="${isMember ? '..' : '.'}/img/small/${fileName}.png"
-            />
-        </div>
-        <div class="paperLinks">
-            <a href="${pdf}">PDF</a>
-            <a href="${publisher}">publisher website</a>
-        </div>
-        <div
-            class="abstractToggle"
-            onclick="toggleVisibility('abstract${fileName}')"
-        >
-            Abstract
-        </div>
-        <div
-            class="abstract"
-            id="abstract${fileName}"
-        >
-            ${d['Abstract']}
+        <div class="info">
+            <div class="abstract">
+                ${d['Abstract']}
+            </div>
+            <div class="bibtex">
+                ${d['bibtex'] ?? ''}
+            </div>
         </div>
     </div>
     `;

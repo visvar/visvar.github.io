@@ -1,6 +1,5 @@
 function toggleVisibility(elementId) {
     const element = document.getElementById(elementId);
-    console.log(element.style.display);
     if (element.style.display === 'none' || element.style.display === '') {
         element.style.display = 'block';
     } else {
@@ -13,7 +12,14 @@ function toggleClass(elementId, className) {
     element.classList.toggle(className);
 }
 
+/**
+ *
+ * @param {HTMLImageElement|string} img image element or HTML ID of the element
+ */
 function toggleImageSize(img) {
+    if (typeof img === 'string') {
+        img = document.getElementById(img);
+    }
     if (img.src.includes('small')) {
         img.src = img.src.replace('small/', '');
         img.classList.remove('small');

@@ -15,7 +15,10 @@ async function rescale() {
         console.log(file);
         try {
             const image = await Image.load(path.join('img', file));
-            const processed = image.resize({ width: TARGET_WIDTH });
+            const processed = image.resize({
+                width: TARGET_WIDTH,
+                interpolation: 'bilinear',
+            });
             processed.save(path.join('img', 'small', file));
         } catch (error) {
             console.log(error.message);
