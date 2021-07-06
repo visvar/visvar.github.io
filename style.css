@@ -236,6 +236,9 @@ img.publicationImage {
     border-radius: 3px;
     box-shadow: #888 1px 1px 10px;
 }
+img.publicationImage.small {
+    width: 256px;
+}
 
 .paperLinks {
     padding: 0 5px 5px 5px;
@@ -246,5 +249,6 @@ img.publicationImage {
 }
 
 .abstract {
+    display: none;
     font-size: 0.85em;
 }

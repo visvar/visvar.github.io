@@ -92,12 +92,9 @@ function createPages() {
     const published = papers.filter(d => d['Status'] === 'Published');
     console.log(`${published.length} published`);
     // console.log(published);
-
     // Main page
     createMainPageHtml(published);
-
     // Member / author pages
-    // TODO: member links
     for (const [index, member] of members.entries()) {
         const authoredPapers = published.filter(d => {
             return d['First Author'].includes(member)
@@ -135,18 +132,18 @@ function createPapersHtml(papers, isMember = false) {
         </span>
         </div>
         <div class="teaserImageDiv">
-            <a href="${pdf}">
-                <img
-                    class="publicationImage"
-                    src="${isMember ? '..' : '.'}/img/${fileName}.png"
-                />
-            </a>
+            <img
+                onclick="toggleImageSize(this)"
+                class="publicationImage small"
+                src="${isMember ? '..' : '.'}/img/small/${fileName}.png"
+            />
         </div>
         <div class="paperLinks">
             <a href="${pdf}">PDF</a>
             <a href="${publisher}">publisher website</a>
         </div>
-        <div class="abstract">
+        <div onclick="toggleVisibility('abstract${fileName}')">Abstract</div>
+        <div class="abstract" id="abstract${fileName}">
             ${d['Abstract']}
         </div>
     </div>
@@ -158,26 +155,20 @@ function createPapersHtml(papers, isMember = false) {
  * Creates HTML from the CSV data
  */
 function createMainPageHtml(published) {
-
     // Create HTML
     const papersHtml = createPapersHtml(published);
-
     // Read nav and about us page
     const aboutUs = readFileSync('./aboutus.html');
-
     // Combine HTML
     const html = `<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${pageTitle}</title>
-
     <link rel="stylesheet" href="./style.css">
     <script src="./script.js"></script>
 </head>
-
 <body>
     <a class="anchor" name="top"></a>
     <main>
@@ -204,10 +195,8 @@ function createMainPageHtml(published) {
  * Creates HTML from the CSV data
  */
 function createMemberPageHtml(member, fileName, papers) {
-
     // Create HTML
     const papersHtml = createPapersHtml(papers, true);
-
     // Read nav and about us page
     let about = '';
     const aboutFile = `./about/${fileName}.html`;
@@ -216,20 +205,16 @@ function createMemberPageHtml(member, fileName, papers) {
     } catch {
         console.warn(`No about found for ${member}, ${aboutFile} is missing`);
     }
-
     // Combine HTML
     const html = `<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${member} | ${pageTitle}</title>
-
     <link rel="stylesheet" href="../style.css">
     <script src="../script.js"></script>
 </head>
-
 <body>
     <a class="anchor" name="top"></a>
     <main>

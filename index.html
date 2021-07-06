@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VISVAR Research Group, University of Stuttgart</title>
-
     <link rel="stylesheet" href="./style.css">
     <script src="./script.js"></script>
 </head>
-
 <body>
     <a class="anchor" name="top"></a>
     <main>
@@ -217,18 +214,18 @@
         </span>
         </div>
         <div class="teaserImageDiv">
-            <a href="./pdf/heyen2020clavis.pdf">
-                <img
-                    class="publicationImage"
-                    src="./img/heyen2020clavis.png"
-                />
-            </a>
+            <img
+                onclick="toggleImageSize(this)"
+                class="publicationImage small"
+                src="./img/small/heyen2020clavis.png"
+            />
         </div>
         <div class="paperLinks">
             <a href="./pdf/heyen2020clavis.pdf">PDF</a>
             <a href="https://dl.acm.org/doi/10.1145/3399715.3399814">publisher website</a>
         </div>
-        <div class="abstract">
+        <div onclick="toggleVisibility('abstractheyen2020clavis')">Abstract</div>
+        <div class="abstract" id="abstractheyen2020clavis">
             We propose ClaVis, a visual analytics system for comparative analysis of classification models. ClaVis allows users to visually compare the performance and behavior of tens to hundreds of classifiers trained with different hyperparameter configurations. Our approach is plugin-based and classifier-agnostic and allows users to add their own datasets and classifier implementations. It provides multiple visualizations, including a multivariate ranking, a similarity map, a scatterplot that reveals correlations between parameters and scores, and a training history chart. We demonstrate the effectivity of our approach in multiple case studies for training classification models in the domain of natural language processing.
         </div>
     </div>
@@ -247,18 +244,18 @@
         </span>
         </div>
         <div class="teaserImageDiv">
-            <a href="./pdf/heyen2020supporting.pdf">
-                <img
-                    class="publicationImage"
-                    src="./img/heyen2020supporting.png"
-                />
-            </a>
+            <img
+                onclick="toggleImageSize(this)"
+                class="publicationImage small"
+                src="./img/small/heyen2020supporting.png"
+            />
         </div>
         <div class="paperLinks">
             <a href="./pdf/heyen2020supporting.pdf">PDF</a>
             <a href="https://vis2020-ieee.ipostersessions.com/default.aspx?s=82-F0-FF-F9-29-B9-B4-7F-FE-F3-A9-1D-4A-B7-4F-32">publisher website</a>
         </div>
-        <div class="abstract">
+        <div onclick="toggleVisibility('abstractheyen2020supporting')">Abstract</div>
+        <div class="abstract" id="abstractheyen2020supporting">
             
         </div>
     </div>
