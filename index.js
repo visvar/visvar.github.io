@@ -59,7 +59,7 @@ const headerAndNav = `
                     <a href="${pageUrl}/#publications">all publications</a>
                 </li>
                 <li>
-                    people
+                    <a href="${pageUrl}/#members">members</a>
                 </li>
                 <ul>
                     ${members.map((d, i) => `
@@ -142,8 +142,16 @@ function createPapersHtml(papers, isMember = false) {
             <a href="${pdf}">PDF</a>
             <a href="${publisher}">publisher website</a>
         </div>
-        <div onclick="toggleVisibility('abstract${fileName}')">Abstract</div>
-        <div class="abstract" id="abstract${fileName}">
+        <div
+            class="abstractToggle"
+            onclick="toggleVisibility('abstract${fileName}')"
+        >
+            Abstract
+        </div>
+        <div
+            class="abstract"
+            id="abstract${fileName}"
+        >
             ${d['Abstract']}
         </div>
     </div>
@@ -159,6 +167,8 @@ function createMainPageHtml(published) {
     const papersHtml = createPapersHtml(published);
     // Read nav and about us page
     const aboutUs = readFileSync('./aboutus.html');
+    // Create member list with avatars
+    const memberList = createMemberListHtml();
     // Combine HTML
     const html = `<!DOCTYPE html>
 <html lang="en">
@@ -178,6 +188,12 @@ function createMainPageHtml(published) {
         <div>
             <article> <a class="anchor" name="aboutus"></a>
                 ${aboutUs}
+            </article>
+            <article> <a class="anchor" name="members"></a>
+                <h1>Members</h1>
+                <div class="memberList">
+                    ${memberList}
+                </div>
             </article>
             <article> <a class="anchor" name="publications"></a>
                 <h1>Publications</h1>
@@ -236,4 +252,21 @@ function createMemberPageHtml(member, fileName, papers) {
     const outFile = `./members/${fileName}.html`;
     writeFileSync(outFile, html);
     console.log(`Wrote ${outFile}`);
+}
+
+
+function createMemberListHtml() {
+    return members.map((member, index) => `
+    <div>
+        <a href="./members/${memberPaths[index]}.html">
+            <img
+                class="avatar"
+                src="./img/small/${memberPaths[index]}.jpg"
+            />
+            <div>
+                ${member}
+            </div>
+        </a>
+    </div>
+    `).join('\n');
 }

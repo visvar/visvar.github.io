@@ -15,6 +15,8 @@ See [about/](./about/).
 - [img/](./img/) for images (must be .png, except for people avatars which must be .jpg)
 - [pdf/](./pdf/) for PDFs.
 
+**After adding new images, run `npm run resize` to automatically resize images.**
+
 ## Compiling
 
 If not done yet, install packages with `npm i` (you obviously need Node.js and npm to be installed).

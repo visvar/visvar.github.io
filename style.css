@@ -116,7 +116,7 @@ a.anchor {
         display: none;
     }
     .h1mobile {
-        display: none;
+        display: block;
     }
     article {
         grid-template-columns: auto;
@@ -178,6 +178,7 @@ h1 {
     margin: 18px 0;
     text-align: center;
     font-size: 28px;
+    color: var(--linkColor)
 }
 
 h2 {
@@ -197,6 +198,18 @@ section a i {
     margin: 0 6px;
 }
 
+/* Main page member list */
+.memberList {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 20px;
+    text-align: center;
+}
+
+.memberList img {
+    width: 128px;
+    height: 128px;
+}
 
 /* About pages */
 .avatarAndBio {
@@ -208,7 +221,7 @@ section a i {
     padding: 10px 10px 10px 30px;
 }
 
-.avatarAndBio img.avatar {
+img.avatar {
     border-radius: 50%;
 }
 
@@ -246,6 +259,10 @@ img.publicationImage.small {
 .paperLinks a {
     padding: 0 5px;
     text-decoration: underline;
+}
+
+.abstractToggle {
+    cursor: pointer;
 }
 
 .abstract {
