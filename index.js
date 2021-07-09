@@ -103,6 +103,8 @@ function createPages() {
         const fileName = memberPaths[index];
         createMemberPageHtml(member, fileName, authoredPapers);
     }
+    // Export papers.json
+    writeFileSync('papers.json', JSON.stringify(papers));
 }
 
 /**
