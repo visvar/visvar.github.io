@@ -237,6 +237,7 @@ img.avatar {
 
 .paper h2 {
     grid-area: span 1 / span 2;
+    font-size: 17px;
     cursor: pointer;
 }
 
@@ -254,10 +255,20 @@ img.avatar {
 }
 
 .metaData {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     padding-left: 20px;
     font-size: 0.9em;
     color: var(--textColor2);
+}
+.paper:not(.small) .metaData {
+    grid-area: span 1 / span 2;
+}
+.metaData.noImage {
+    grid-area: span 1 / span 2;
+}
+
+.paper .metaData div {
+    margin-bottom: 5px;
 }
 
 .authors .firstAuthor {
@@ -265,33 +276,42 @@ img.avatar {
 }
 
 .publication {
-    margin-right: 10px;
-    padding: 1px 2px 1px 3px;
+    margin-right: 5px;
+    padding: 1px 4px 1px 4px;
     border: 1px solid #888;
     border-radius: 5px;
 }
 
-.paperLinks {
-    padding: 0 5px 5px 5px;
-}
-.paperLinks a {
+.metaData a {
     padding: 0 5px;
     text-decoration: underline;
 }
 
 .paper .info {
     grid-area: span 1 / span 2;
+    margin: 0 50px;
 }
 
 .paper.small .info {
     display: none;
 }
 
-.paper .info .abstract {
-    font-size: 0.85em;
+.paper .info h4 {
+    margin: 2px 0 0 0;
 }
 
-.paper .info .bibtex {
+.paper .info .abstract {
+    font-size: 0.85em;
+    margin-bottom: 5px;
+}
+
+.paper .info .bibtex textarea {
+    margin: 0;
+    width: calc(100% - 20px);
+    height: 100px;
     font-size: 0.8em;
     font-family: 'Courier New', Courier, monospace;
+    border-radius: 5px;
+    appearance: none;
+    border: none;
 }

@@ -339,43 +339,63 @@
                 
     <div
         class="paper small"
-        id="paperheyen2020clavis"
+        id="paperyu2020perspective"
     >
         <h2
-           onclick="toggleClass('paperheyen2020clavis', 'small'); toggleImageSize(imageheyen2020clavis);"
+           onclick="toggleClass('paperyu2020perspective', 'small'); toggleImageSize(imageyu2020perspective);"
         >
-            ClaVis: An Interactive Visual Comparison System for Classifiers
+            Perspective Matters: Design Implications for Motion Guidance in Mixed Reality
         </h2>
-        <img
-            id="imageheyen2020clavis"
-            onclick="toggleClass('paperheyen2020clavis', 'small'); toggleImageSize(this);"
-            class="publicationImage small"
-            src="./img/small/heyen2020clavis.png"
-        />
-        <div class="metaData">
-            <div>
-                <span class="publication">
-                    AVI
-                    2020
-                    Full Paper
-                </span>
-                <span class="authors">
-                    <span class="firstAuthor">Frank Heyen</span>,
-                    Tanja Munz, Michael Neumann, Daniel Ortega, Ngoc Thang Vu, Daniel Weiskopf, Michael Sedlmair
-                </span>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Xingyao Yu</span>,
+                Katrin Angerbauer, Peter Mohr, Denis Kalkofen, Michael Sedlmair
             </div>
-            <div class="paperLinks">
-                <a href="./pdf/heyen2020clavis.pdf">PDF</a>
-                <a href="https://dl.acm.org/doi/10.1145/3399715.3399814">publisher website</a>
+            <div>
+                <span class="publication">ISMAR 2020</span>
+                <span class="publication">Full Paper</span>
+                
+                <a href="https://ieeexplore.ieee.org/abstract/document/9284729">publisher website</a>
             </div>
         </div>
         <div class="info">
+            <h4>Abstract</h4>
             <div class="abstract">
-                We propose ClaVis, a visual analytics system for comparative analysis of classification models. ClaVis allows users to visually compare the performance and behavior of tens to hundreds of classifiers trained with different hyperparameter configurations. Our approach is plugin-based and classifier-agnostic and allows users to add their own datasets and classifier implementations. It provides multiple visualizations, including a multivariate ranking, a similarity map, a scatterplot that reveals correlations between parameters and scores, and a training history chart. We demonstrate the effectivity of our approach in multiple case studies for training classification models in the domain of natural language processing.
+                We investigate how Mixed Reality (MR) can be used to guide human body motions, such as in physiotherapy, dancing, or workout applications. While first MR prototypes have shown promising results, many dimensions of the design space behind such applications remain largely unexplored. To better understand this design space, we approach the topic from different angles by contributing three user studies. In particular, we take a closer look at the influence of the perspective, the characteristics of motions, and visual guidance on different user performance measures. Our results indicate that a first-person perspective performs best for all visible motions, whereas the type of visual instruction plays a minor role. From our results we compile a set of considerations that can guide future work on the design of instructions, evaluations, and the technical setup of MR motion guidance systems.
             </div>
-            <div class="bibtex">
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperhube2020comparing"
+    >
+        <h2
+           onclick="toggleClass('paperhube2020comparing', 'small'); toggleImageSize(imagehube2020comparing);"
+        >
+            Comparing Methods for Mapping Facial Expressions to Enhance Immersive Collaboration with Signs of Emotion
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Natalie Hube</span>,
+                Oliver Lenz, Lars Engeln, Rainer Groh, Michael Sedlmair
+            </div>
+            <div>
+                <span class="publication">ISMAR 2020</span>
+                <span class="publication">Poster / Short Paper</span>
                 
+                <a href="https://ieeexplore.ieee.org/abstract/document/9288476/">publisher website</a>
             </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                We present a user study comparing a pre-evaluated mapping approach with a state-of-the-art direct mapping method of facial expressions for emotion judgment in an immersive setting. At its heart, the pre-evaluated approach leverages semiotics, a theory used in linguistic. In doing so, we want to compare pre-evaluation with an approach that seeks to directly map real facial expressions onto their virtual counterparts. To evaluate both approaches, we conduct a controlled lab study with 22 participants. The results show that users are significantly more accurate in judging virtual facial expressions with pre-evaluated mapping. Additionally, participants were slightly more confident when deciding on a presented emotion. We could not find any differences regarding potential Uncanny Valley effects. However, the pre-evaluated mapping shows potential to be more convenient in a conversational scenario.
+            </div>
+            
         </div>
     </div>
     
@@ -388,36 +408,747 @@
         >
             Supporting Music Education through Visualizations of MIDI Recordings
         </h2>
-        <img
-            id="imageheyen2020supporting"
-            onclick="toggleClass('paperheyen2020supporting', 'small'); toggleImageSize(this);"
-            class="publicationImage small"
-            src="./img/small/heyen2020supporting.png"
-        />
-        <div class="metaData">
-            <div>
-                <span class="publication">
-                    VIS
-                    2020
-                    Poster
-                </span>
-                <span class="authors">
-                    <span class="firstAuthor">Frank Heyen</span>,
-                    Michael Sedlmair
-                </span>
+        
+            <img
+                id="imageheyen2020supporting"
+                onclick="toggleClass('paperheyen2020supporting', 'small'); toggleImageSize(this);"
+                class="publicationImage small"
+                src="./img/small/heyen2020supporting.png"
+            />
+        <div class="metaData ">
+            <div class="authors">
+                <span class="firstAuthor">Frank Heyen</span>,
+                Michael Sedlmair
             </div>
-            <div class="paperLinks">
+            <div>
+                <span class="publication">VIS 2020</span>
+                <span class="publication">Poster</span>
                 <a href="./pdf/heyen2020supporting.pdf">PDF</a>
                 <a href="https://vis2020-ieee.ipostersessions.com/default.aspx?s=82-F0-FF-F9-29-B9-B4-7F-FE-F3-A9-1D-4A-B7-4F-32">publisher website</a>
             </div>
         </div>
         <div class="info">
+            <h4>Abstract</h4>
             <div class="abstract">
-                
+                Musicians mostly have to rely on their ears when they want to analyze what they play, for example to detect errors. Since hearing is sequential, it is not possible to quickly grasp an overview over one or multiple recordings of a whole piece of music at once. We therefore propose various visualizations that allow analyzing errors and stylistic variance. Our current approach focuses on rhythm and uses MIDI data for simplicity.
             </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperbalestrucci2020pipelines"
+    >
+        <h2
+           onclick="toggleClass('paperbalestrucci2020pipelines', 'small'); toggleImageSize(imagebalestrucci2020pipelines);"
+        >
+            Pipelines Bent, Pipelines Broken: Interdisciplinary Self-Reflection on the Impact of COVID-19 on Current and Future Research (Position Paper)
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Priscilla Balestrucci</span>,
+                Katrin Angerbauer, Cristina Morariu, Robin Welsch, Lewis L Chuang, Daniel Weiskopf, Marc O Ernst, Michael Sedlmair
+            </div>
+            <div>
+                <span class="publication">BELIV 2020</span>
+                <span class="publication">Workshop</span>
+                
+                <a href="https://ieeexplore.ieee.org/abstract/document/9307759">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                Among the many changes brought about by the COVID-19 pandemic, one of the most pressing for scientific research concerns user testing. For the researchers who conduct studies with human participants, the requirements for social distancing have created a need for reflecting on methodologies that previously seemed relatively straightforward. It has become clear from the emerging literature on the topic and from first-hand experiences of researchers that the restrictions due to the pandemic affect every aspect of the research pipeline. The current paper offers an initial reflection on user-based research, drawing on the authors' own experiences and on the results of a survey that was conducted among researchers in different disciplines, primarily psychology, human-computer interaction (HCI), and visualization communities. While this sampling of researchers is by no means comprehensive, the multi-disciplinary approach and the consideration of different aspects of the research pipeline allow us to examine current and future challenges for user-based research. Through an exploration of these issues, this paper also invites others in the VIS-as well as in the wider-research community, to reflect on and discuss the ways in which the current crisis might also present new and previously unexplored opportunities.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperweiß2020revisited"
+    >
+        <h2
+           onclick="toggleClass('paperweiß2020revisited', 'small'); toggleImageSize(imageweiß2020revisited);"
+        >
+            Revisited: Comparison of Empirical Methods to Evaluate Visualizations Supporting Crafting and Assembly Purposes
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Maximilian Weiß</span>,
+                Katrin Angerbauer, Alexandra Voit, Magdalena Schwarzl, Michael Sedlmair, Sven Mayer
+            </div>
+            <div>
+                <span class="publication">VIS 2020</span>
+                <span class="publication">Full Paper</span>
+                
+                <a href="https://ieeexplore.ieee.org/abstract/document/9225008">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                Ubiquitous, situated, and physical visualizations create entirely new possibilities for tasks contextualized in the real world, such as doctors inserting needles. During the development of situated visualizations, evaluating visualizations is a core requirement. However, performing such evaluations is intrinsically hard as the real scenarios are safety-critical or expensive to test. To overcome these issues, researchers and practitioners adapt classical approaches from ubiquitous computing and use surrogate empirical methods such as Augmented Reality (AR), Virtual Reality (VR) prototypes, or merely online demonstrations. This approach's primary assumption is that meaningful insights can also be gained from different, usually cheaper and less cumbersome empirical methods. Nevertheless, recent efforts in the Human-Computer Interaction (HCI) community have found evidence against this assumption, which would impede the use of surrogate empirical methods. Currently, these insights rely on a single investigation of four interactive objects. The goal of this work is to investigate if these prior findings also hold for situated visualizations. Therefore, we first created a scenario where situated visualizations support users in do-it-yourself (DIY) tasks such as crafting and assembly. We then set up five empirical study methods to evaluate the four tasks using an online survey, as well as VR, AR, laboratory, and in-situ studies. Using this study design, we conducted a new study with 60 participants. Our results show that the situated visualizations we investigated in this study are not prone to the same dependency on the empirical method, as found in previous work. Our study provides the first evidence that analyzing situated visualizations through different empirical (surrogate) methods might lead to comparable results.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperheyen2020clavis"
+    >
+        <h2
+           onclick="toggleClass('paperheyen2020clavis', 'small'); toggleImageSize(imageheyen2020clavis);"
+        >
+            ClaVis: An Interactive Visual Comparison System for Classifiers
+        </h2>
+        
+            <img
+                id="imageheyen2020clavis"
+                onclick="toggleClass('paperheyen2020clavis', 'small'); toggleImageSize(this);"
+                class="publicationImage small"
+                src="./img/small/heyen2020clavis.png"
+            />
+        <div class="metaData ">
+            <div class="authors">
+                <span class="firstAuthor">Frank Heyen</span>,
+                Tanja Munz, Michael Neumann, Daniel Ortega, Ngoc Thang Vu, Daniel Weiskopf, Michael Sedlmair
+            </div>
+            <div>
+                <span class="publication">AVI 2020</span>
+                <span class="publication">Full Paper</span>
+                <a href="./pdf/heyen2020clavis.pdf">PDF</a>
+                <a href="https://dl.acm.org/doi/10.1145/3399715.3399814">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                We propose ClaVis, a visual analytics system for comparative analysis of classification models. ClaVis allows users to visually compare the performance and behavior of tens to hundreds of classifiers trained with different hyperparameter configurations. Our approach is plugin-based and classifier-agnostic and allows users to add their own datasets and classifier implementations. It provides multiple visualizations, including a multivariate ranking, a similarity map, a scatterplot that reveals correlations between parameters and scores, and a training history chart. We demonstrate the effectivity of our approach in multiple case studies for training classification models in the domain of natural language processing.
+            </div>
+            
+            <h4>BibTex</h4>
             <div class="bibtex">
-                
+                <textarea>@inproceedings{10.1145/3399715.3399814,
+author = {Heyen, Frank and Munz, Tanja and Neumann, Michael and Ortega, Daniel and Vu, Ngoc Thang and Weiskopf, Daniel and Sedlmair, Michael},
+title = {ClaVis: An Interactive Visual Comparison System for Classifiers},
+year = {2020},
+isbn = {9781450375351},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3399715.3399814},
+doi = {10.1145/3399715.3399814},
+abstract = {We propose ClaVis, a visual analytics system for comparative analysis of classification
+models. ClaVis allows users to visually compare the performance and behavior of tens
+to hundreds of classifiers trained with different hyperparameter configurations. Our
+approach is plugin-based and classifier-agnostic and allows users to add their own
+datasets and classifier implementations. It provides multiple visualizations, including
+a multivariate ranking, a similarity map, a scatterplot that reveals correlations
+between parameters and scores, and a training history chart. We demonstrate the effectivity
+of our approach in multiple case studies for training classification models in the
+domain of natural language processing.},
+booktitle = {Proceedings of the International Conference on Advanced Visual Interfaces},
+articleno = {9},
+numpages = {9},
+keywords = {visual analytics, Visualization, machine learning, classifier comparison},
+location = {Salerno, Italy},
+series = {AVI '20}
+}</textarea>
             </div>
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperhube2020mixed"
+    >
+        <h2
+           onclick="toggleClass('paperhube2020mixed', 'small'); toggleImageSize(imagehube2020mixed);"
+        >
+            Mixed Reality based Collaboration for Design Processes
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Natalie Hube</span>,
+                Mathias Müller, Esther Lapczyna, Jan Wojdziak
+            </div>
+            <div>
+                <span class="publication">i-com 2020</span>
+                <span class="publication">Journal Paper</span>
+                
+                <a href="https://doi.org/10.1515/icom-2020-0012">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                Due to constantly and rapidly growing digitization, requirements for international cooperation are changing. Tools for collaborative work such as video telephony are already an integral part of today’s communication across companies. However, these tools are not sufficient to represent the full physical presence of an employee or a product as well as its components in another location, since the representation of information in a two-dimensional way and the resulting limited communication loses concrete objectivity. Thus, we present a novel object-centered approach that compromises of Augmented and Virtual Reality technology as well as design suggestions for remote collaboration. Furthermore, we identify current key areas for future research and specify a design space for the use of Augmented and Virtual Reality remote collaboration in the manufacturing process in the automotive industry.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperstreichert2020comparing"
+    >
+        <h2
+           onclick="toggleClass('paperstreichert2020comparing', 'small'); toggleImageSize(imagestreichert2020comparing);"
+        >
+            Comparing Input Modalities for Shape Drawing Tasks
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Annalena Streichert</span>,
+                Katrin Angerbauer, Magdalena Schwarzl, Michael Sedlmair
+            </div>
+            <div>
+                <span class="publication">ETVIS 2020</span>
+                <span class="publication">Workshop / Short Paper</span>
+                
+                <a href="https://dl.acm.org/doi/abs/10.1145/3379156.3391830">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                With the growing interest in Immersive Analytics, there is also a need for novel and suitable input modalities for such applications. We explore eye tracking, head tracking, hand motion tracking, and data gloves as input methods for a 2D tracing task and compare them to touch input as a baseline in an exploratory user study (N= 20). We compare these methods in terms of user experience, workload, accuracy, and time required for input. The results show that the input method has a significant influence on these measured variables. While touch input surpasses all other input methods in terms of user experience, workload, and accuracy, eye tracking shows promise in respect of the input time. The results form a starting point for future research investigating input methods.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="papermerino2020toward"
+    >
+        <h2
+           onclick="toggleClass('papermerino2020toward', 'small'); toggleImageSize(imagemerino2020toward);"
+        >
+            Toward Agile Situated Visualization: An Exploratory User Study
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Leonel Merino</span>,
+                Boris Sotomayor-Gómez, Xingyao Yu, Ronie Salgado, Alexandre Bergel, Michael Sedlmair, Daniel Weiskopf
+            </div>
+            <div>
+                <span class="publication">CHI 2020</span>
+                <span class="publication">Extended Abstract</span>
+                
+                <a href="https://dl.acm.org/doi/abs/10.1145/3334480.3383017">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                We introduce AVAR, a prototypical implementation of an agile situated visualization (SV) toolkit targeting liveness, integration, and expressiveness. We report on results of an exploratory study with AVAR and seven expert users. In it, participants wore a Microsoft HoloLens device and used a Bluetooth keyboard to program a visualization script for a given dataset. To support our analysis, we (i) video recorded sessions, (ii) tracked users' interactions, and (iii) collected data of participants' impressions. Our prototype confirms that agile SV is feasible. That is, liveness boosted participants' engagement when programming an SV, and so, the sessions were highly interactive and participants were willing to spend much time using our toolkit (i.e., median ≥ 1.5 hours). Participants used our integrated toolkit to deal with data transformations, visual mappings, and view transformations without leaving the immersive environment. Finally, participants benefited from our expressive toolkit and employed multiple of the available features when programming an SV.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperkurzhals2020a"
+    >
+        <h2
+           onclick="toggleClass('paperkurzhals2020a', 'small'); toggleImageSize(imagekurzhals2020a);"
+        >
+            A View on the Viewer: Gaze-Adaptive Captions for Videos
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Kuno Kurzhals</span>,
+                Fabian Göbel, Katrin Angerbauer, Michael Sedlmair, Martin Raubal
+            </div>
+            <div>
+                <span class="publication">CHI 2020</span>
+                <span class="publication">Full Paper</span>
+                
+                <a href="https://dl.acm.org/doi/abs/10.1145/3313831.3376266">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                Subtitles play a crucial role in cross-lingual distribution of multimedia content and help communicate information where auditory content is not feasible (loud environments, hearing impairments, unknown languages). Established methods utilize text at the bottom of the screen, which may distract from the video. Alternative techniques place captions closer to related content (e.g., faces) but are not applicable to arbitrary videos such as documentations. Hence, we propose to leverage live gaze as indirect input method to adapt captions to individual viewing behavior. We implemented two gaze-adaptive methods and compared them in a user study (n=54) to traditional captions and audio-only videos. The results show that viewers with less experience with captions prefer our gaze-adaptive methods as they assist them in reading. Furthermore, gaze distributions resulting from our methods are closer to natural viewing behavior compared to the traditional approach. Based on these results, we provide design implications for gaze-adaptive captions.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperkraus2020assessing"
+    >
+        <h2
+           onclick="toggleClass('paperkraus2020assessing', 'small'); toggleImageSize(imagekraus2020assessing);"
+        >
+            Assessing 2D and 3D Heatmaps for Comparative Analysis: An Empirical Study
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Matthias Kraus</span>,
+                Katrin Angerbauer, Juri Buchmüller, Daniel Schweitzer, Daniel A Keim, Michael Sedlmair, Johannes Fuchs
+            </div>
+            <div>
+                <span class="publication">CHI 2020</span>
+                <span class="publication">Full Paper</span>
+                
+                <a href="https://dl.acm.org/doi/abs/10.1145/3313831.3376675">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                Heatmaps are a popular visualization technique that encode 2D density distributions using color or brightness. Experimental studies have shown though that both of these visual variables are inaccurate when reading and comparing numeric data values. A potential remedy might be to use 3D heatmaps by introducing height as a third dimension to encode the data. Encoding abstract data in 3D, however, poses many problems, too. To better understand this tradeoff, we conducted an empirical study (N=48) to evaluate the user performance of 2D and 3D heatmaps for comparative analysis tasks. We test our conditions on a conventional 2D screen, but also in a virtual reality environment to allow for real stereoscopic vision. Our main results show that 3D heatmaps are superior in terms of error rate when reading and comparing single data items. However, for overview tasks, the well-established 2D heatmap performs better.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperangerbauer2019automatic"
+    >
+        <h2
+           onclick="toggleClass('paperangerbauer2019automatic', 'small'); toggleImageSize(imageangerbauer2019automatic);"
+        >
+            Automatic Compression of Subtitles with Neural Networks and its Effect on User Experience
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Katrin Angerbauer</span>,
+                Heike Adel, Ngoc Thang Vu
+            </div>
+            <div>
+                <span class="publication">INTERSPEECH 2019</span>
+                <span class="publication">Poster</span>
+                
+                <a href="https://www.isca-speech.org/archive/Interspeech_2019/abstracts/1750.html">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                Understanding spoken language can be impeded through factors like noisy environments, hearing impairments or lack of proficiency. Subtitles can help in those cases. However, for fast speech or limited screen size, it might be advantageous to compress the subtitles to their most relevant content. Therefore, we address automatic sentence compression in this paper. We propose a neural network model based on an encoder-decoder approach with the possibility of integrating the desired compression ratio. Using this model, we conduct a user study to investigate the effects of compressed subtitles on user experience. Our results show that compressed subtitles can suffice for comprehension but may pose additional cognitive load.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperkern2019lessons"
+    >
+        <h2
+           onclick="toggleClass('paperkern2019lessons', 'small'); toggleImageSize(imagekern2019lessons);"
+        >
+            Lessons Learned from Users Reading Highlighted Abstracts in a Digital Library
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Dagmar Kern</span>,
+                Daniel Hienert, Katrin Angerbauer, Tilman Dingler, Pia Borlund
+            </div>
+            <div>
+                <span class="publication">CHIIR 2019</span>
+                <span class="publication">Short Paper</span>
+                
+                <a href="https://dl.acm.org/doi/abs/10.1145/3295750.3298950">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                Finding relevant documents is essential for researchers of all disciplines. We investigated an approach for supporting searchers in their relevance decision in a digital library by automatically highlighting the most important keywords in abstracts. We conducted an eye-tracking study with 25 subjects and observed very different search and reading behavior which lead to diverse results. Some of the participants liked that highlighted abstracts accelerate their relevance decision, while others found that they disturb the reading flow. What many agree on is that the quality of highlighting is crucial for trust and system credibility.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperyu2018effect"
+    >
+        <h2
+           onclick="toggleClass('paperyu2018effect', 'small'); toggleImageSize(imageyu2018effect);"
+        >
+            Effect of Using HMDs for One Hour on Preteens Visual Fatigue
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Xingyao Yu</span>,
+                Dongdong Weng, Jie Guo, Haiyan Jiang, Yihua Bao
+            </div>
+            <div>
+                <span class="publication">ISMAR 2018</span>
+                <span class="publication">Poster</span>
+                
+                <a href="https://ieeexplore.ieee.org/abstract/document/8699249">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                We designed a within-subject experiment to compare visual discomfort to preteen users caused by using head-mounted displays (HMD) and tablet computers for an hour. 18 participants younger than 13 years old were recruited to fulfill a series of similar painting tasks under both display conditions. Visual fatigue was measured with visual analog scale before and after experiment and during the break of experiment. The results indicated that HMD had a trend to bring higher visual fatigue than tablet computer during the exposure of 1 hour. Although the symptoms of visual discomfort disappeared after resting, there is need for preteen-specific head-mounted displays.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperengeln2018immersive"
+    >
+        <h2
+           onclick="toggleClass('paperengeln2018immersive', 'small'); toggleImageSize(imageengeln2018immersive);"
+        >
+            Immersive VisualAudioDesign: Spectral Editing in VR
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Lars Engeln</span>,
+                Natalie Hube, Rainer Groh
+            </div>
+            <div>
+                <span class="publication">Audio Mostly 2018</span>
+                <span class="publication">Full Paper</span>
+                
+                <a href="https://dl.acm.org/doi/abs/10.1145/3243274.3243279">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                VisualAudioDesign (VAD) is an attempt to design audio in a visual way. The frequency-domain visualized as a spectrogram construed as pixel data can be manipulated with image filters. Thereby, an approach is described to get away from direct DSP parameter manipulation to a more comprehensible sound design. Virtual Reality (VR) offers immersive insights into data and embodied interaction in the virtual environment. VAD and VR combined enrich spectral editing with a natural work-flow. Therefore, a design paper prototype for interaction with audio data in an virtual environment was used and examined.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperhube2018towards"
+    >
+        <h2
+           onclick="toggleClass('paperhube2018towards', 'small'); toggleImageSize(imagehube2018towards);"
+        >
+            Towards augmented reality in quality assurance processes
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Natalie Hube</span>,
+                Mathias Müller, Jan Wojdziak, Franziska Hannß, Rainer Groh
+            </div>
+            <div>
+                <span class="publication">MMSys 2018</span>
+                <span class="publication">Workshop Paper</span>
+                
+                <a href="https://dl.acm.org/doi/abs/10.1145/3210438.3210442">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                Augmented reality (AR) has gained exceptional importance in supporting task performance. Particularly, in quality assurance (QA) processes in the automotive sector AR offers a diversity of use cases. In this paper we propose an interface design which projects information as a digital canvas on the surface of vehicle components. Based on a requirement analysis, we discuss design aspects and describe our application in applying the quality assurance process of a luxury automaker. The application includes a personal view on spatial information embedded in a guided interaction process as a design solution that can be applied to enhance QA processes.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperhube2018the"
+    >
+        <h2
+           onclick="toggleClass('paperhube2018the', 'small'); toggleImageSize(imagehube2018the);"
+        >
+            The Data in Your Hands: Exploring Novel Interaction Techniques and Data Visualization Approaches for Immersive Data Analytics
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Natalie Hube</span>,
+                Mathias Müller
+            </div>
+            <div>
+                <span class="publication">AVI  2018</span>
+                <span class="publication">Workshop Paper</span>
+                
+                <a href="">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                In this paper, we describe a concept for visualization and interaction with a large data set in an virtual environment. The core idea uses the traditional flat 2D representation as a base visualization but lets the user transform it into a spatial 3D visualizations on demand. Our visualization and interaction concept targets data analysts to use it for exploration and analysis, utilizing virtual reality to gain insight into complex data sets. The concept is based on the use of Parallel Sets for the representation of categorical data. By extending the conventional 2D Parallel Sets with a third dimension, correlations between path variables and the related number of items belonging to a specific node can be visualized. Furthermore, the concept uses virtual reality controllers in combination with a head-mounted display to control additional views. The purpose of the paper is to describe the core concepts and challenges for this type of spatial visualization and the related interaction design, including the use of gestures for direct manuipulation and a hand-attached menu for complex actions
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperhube2018facilitating"
+    >
+        <h2
+           onclick="toggleClass('paperhube2018facilitating', 'small'); toggleImageSize(imagehube2018facilitating);"
+        >
+            Facilitating exploration on exhibitions with augmented reality
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Natalie Hube</span>,
+                Mathias Müller, Rainer Groh
+            </div>
+            <div>
+                <span class="publication">AVI 2018</span>
+                <span class="publication">Poster Paper</span>
+                
+                <a href="https://dl.acm.org/doi/abs/10.1145/3206505.3206585">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                At exhibitions, visitors are usually in a completely unknown environment. Although visitors generally are informed about the topic before a visit, interests are still difficult to extract from the mass of exhibition stands and offers. In this paper we describe a concept using head-coupled AR together with recommender mechanisms for exhibitions. We present a conceptual development for a first prototype with focus on navigational aspects as well as explicit and implicit recommendations to generate input data for visually displayed recommendations.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperangerbauer2017the"
+    >
+        <h2
+           onclick="toggleClass('paperangerbauer2017the', 'small'); toggleImageSize(imageangerbauer2017the);"
+        >
+            The Back End is Only One Part of the Picture: Mobile-Aware Application Performance Monitoring and Problem Diagnosis
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Katrin Angerbauer</span>,
+                Dušan Okanović,  André van Hoorn, Christoph Heger
+            </div>
+            <div>
+                <span class="publication">VALUETOOLS 2017</span>
+                <span class="publication">Full Paper</span>
+                
+                <a href="https://dl.acm.org/doi/abs/10.1145/3150928.3150939">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                The success of modern businesses relies on the quality of their supporting application systems. Continuous application performance management is mandatory to enable efficient problem detection, diagnosis, and resolution during production. In today's age of ubiquitous computing, large fractions of users access application systems from mobile devices, such as phones and tablets. For detecting, diagnosing, and resolving performance and availability problems, an end-to-end view, i.e., traceability of requests starting on the (mobile) clients' devices, is becoming increasingly important. In this paper, we propose an approach for end-to-end monitoring of applications from the users' mobile devices to the back end, and diagnosing root-causes of detected performance problems. We extend our previous work on diagnosing performance anti-patterns from execution traces by new metrics and rules. The evaluation of this work shows that our approach successfully detects and diagnoses performance anti-patterns in applications with iOS-based mobile clients. While there are threats to validity to our experiment, our research is a promising starting point for future work.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperdingler2017text"
+    >
+        <h2
+           onclick="toggleClass('paperdingler2017text', 'small'); toggleImageSize(imagedingler2017text);"
+        >
+            Text Priming-Effects of Text Visualizations on Readers Prior to Reading
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Tilman Dingler</span>,
+                Dagmar Kern, Katrin Angerbauer, Albrecht Schmidt
+            </div>
+            <div>
+                <span class="publication">INTERACT 2017</span>
+                <span class="publication">Full Paper</span>
+                
+                <a href="https://link.springer.com/chapter/10.1007/978-3-319-67687-6_23">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                Living in our information society poses the challenge of having to deal with a plethora of information. While most content is represented through text, keyword extraction and visualization techniques allow the processing and adjustment of text presentation to the readers’ individual requirements and preferences. In this paper, we investigate four types of text visualizations and their feasibility to give readers an overview before they actually engage with a text: word clouds, highlighting, mind maps, and image collages. In a user study with 50 participants, we assessed the effects of such visualizations on reading comprehension, reading time, and subjective impressions. Results show that (1) mind maps best support readers in getting the gist of a text, (2) they also give better subjective impressions on text content and structure, and (3) highlighting keywords in a text before reading helps to reduce reading time. We discuss a set of guidelines to inform the design of automated systems for creating text visualizations for reader support.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="papermüller2017a"
+    >
+        <h2
+           onclick="toggleClass('papermüller2017a', 'small'); toggleImageSize(imagemüller2017a);"
+        >
+            A zoomable product browser for elastic displays
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Mathias Müller</span>,
+                Mandy Keck, Thomas Gründer, Natalie Hube, Rainer Groh
+            </div>
+            <div>
+                <span class="publication">xCoAX 2017</span>
+                <span class="publication">Full Paper</span>
+                
+                <a href="">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                In this paper, we present an interaction and visualization concept for elastic displays. The interaction concept was inspired by the search process of a rummage table to explore a large set of product data. The basic approach uses a similarity-based search pattern—based on a small set of items, the user refines the search result by examining similar items and exchanging them with items from the current result. A physically-based approach is used to interact with the data by deforming the surface of the elastic display. The presented visualization concept uses glyphs to directly compare items at a glance. Zoomable UI techniques controlled by the deformation of the elastic surface allow to display different levels of detail for each item.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperhube2017additional"
+    >
+        <h2
+           onclick="toggleClass('paperhube2017additional', 'small'); toggleImageSize(imagehube2017additional);"
+        >
+            Additional On-Demand Dimension for Data Visualization
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Natalie Hube</span>,
+                Mathias Müller, Rainer Groh
+            </div>
+            <div>
+                <span class="publication">EuroVis 2017</span>
+                <span class="publication">Short Paper</span>
+                
+                <a href="https://dl.acm.org/doi/10.2312/eurovisshort.20171151">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                In this paper, we present a concept to interactively extend an 2d visualization by an additional on-demand dimension. We use categorical data in a multidimensional information space applied in a travel search scenario. Parallel sets are used as the basis for the visualization concept, since this is particularly suitable for the visualization of categorical data. The on-demand dimension expands the vertical axis of a parallel coordinate graph into depth axis and is intended to increase comparability of path variables with respect to the number of elements belonging to the respective parameter axis instead of direct comparability of individual paths and keep relations between the parallel sets. The presented implementation suits as foundation for further studies about the usefulness of a dynamic, on demand extension a of 2d visualizations into spatial visualizations. Furthermore, we present some additional approaches about the usage of the increased visualization space.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperyu2016reduce"
+    >
+        <h2
+           onclick="toggleClass('paperyu2016reduce', 'small'); toggleImageSize(imageyu2016reduce);"
+        >
+            Reduce Simulator Sickness by Overwritten Symbol in Smartphone-Based VR System
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Xingyao Yu</span>,
+                Dongdong Weng, Li Cai
+            </div>
+            <div>
+                <span class="publication">IEEE ICVRV 2016</span>
+                <span class="publication">Workshop / Short Paper</span>
+                
+                <a href="https://ieeexplore.ieee.org/abstract/document/7938233">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                The aim of this paper is to reduce simulator sickness caused by the low refresh rate of display in smartphone-based VR system. Without regard to the improvement of hardware, the method proposed in this paper reduces simulator sickness by adding static symbol on the screen of the smartphone. A series of user-participation experiments were done to validate the effectiveness of the method. Participants' responses to the symbol with different textures (cross or Minion logo) and in different positions (the center or near the corners) were assessed by Simulator Sickness Questionnaire (SSQ). The preliminary results demonstrate that the existence, the position and complexity of the symbols can be factors in relieving symptoms of simulator sickness.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperhube2016virtual"
+    >
+        <h2
+           onclick="toggleClass('paperhube2016virtual', 'small'); toggleImageSize(imagehube2016virtual);"
+        >
+            Virtual UNREALity: Exploring Alternative Visualization Techniques for Virtual Reality
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Natalie Hube</span>,
+                Hannes Grusla, Mathias Müller, Ingmar S. Franke, Tobias Günther, Rainer Groh
+            </div>
+            <div>
+                <span class="publication">xCoAX 2016</span>
+                <span class="publication">Full Paper</span>
+                
+                <a href="">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                Virtual Reality (VR) offers new ways to perceive and interact with virtual content. Apart from photo-realism, VR can be used to explore new ways of visualization and interaction. In this contribution, we describe two student projects, which focused on creating innovative concepts for an artistic VR experience. We provide a review of sources of inspiration ranging from standard NPR-techniques through movies, interactive artworks and games to phenomena of human perception. Based on this wide collection of material we describe the prototypes, and discuss observations during implementation and from user feedback. Finally, possible future directions to use the potential of VR as a tool for novel, artful and unconventional experiences are discussed.
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperangerbauer2015utilizing"
+    >
+        <h2
+           onclick="toggleClass('paperangerbauer2015utilizing', 'small'); toggleImageSize(imageangerbauer2015utilizing);"
+        >
+            Utilizing the effects of priming to facilitate text comprehension
+        </h2>
+        
+        <div class="metaData noImage">
+            <div class="authors">
+                <span class="firstAuthor">Katrin Angerbauer</span>,
+                Tilman Dingler, Dagmar Kern, Albrecht Schmidt
+            </div>
+            <div>
+                <span class="publication">CHI 2015</span>
+                <span class="publication">Extended Abstract</span>
+                
+                <a href="https://dl.acm.org/doi/abs/10.1145/2702613.2732914">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                Due to the ever-growing amount of textual information we face in our everyday life, the skill of scanning and absorbing the essence of a piece of text is crucial. We cannot afford to read every text in detail, hence we need to acquire strategies to quickly decide on the importance of a text and how to grasp its content. Additionally, the sheer amount of daily reading makes it hard to remember the gist of every text encountered. Research in psychology has proposed priming as an implicit memory effect where exposure to one stimulus influences the response to a subsequent stimulus. Hence, exposure to contextual information can influence comprehension and recall. In our work we investigate the feasibility of using such an effect to visually present text summaries that are quick to understand and deliver the essence of a text in order to help readers not only make informed decisions about whether to read the text or not, but also to build out more cognitive associations that help to remember the content of the text afterward. In two focus groups we discussed our approach by providing four different visualizations representing the gist and important details of the text. In this paper we introduce the visualizations as well as results of the focus groups.
+            </div>
+            
         </div>
     </div>
     

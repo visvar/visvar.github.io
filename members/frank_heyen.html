@@ -166,48 +166,6 @@
                 
     <div
         class="paper small"
-        id="paperheyen2020clavis"
-    >
-        <h2
-           onclick="toggleClass('paperheyen2020clavis', 'small'); toggleImageSize(imageheyen2020clavis);"
-        >
-            ClaVis: An Interactive Visual Comparison System for Classifiers
-        </h2>
-        <img
-            id="imageheyen2020clavis"
-            onclick="toggleClass('paperheyen2020clavis', 'small'); toggleImageSize(this);"
-            class="publicationImage small"
-            src="../img/small/heyen2020clavis.png"
-        />
-        <div class="metaData">
-            <div>
-                <span class="publication">
-                    AVI
-                    2020
-                    Full Paper
-                </span>
-                <span class="authors">
-                    <span class="firstAuthor">Frank Heyen</span>,
-                    Tanja Munz, Michael Neumann, Daniel Ortega, Ngoc Thang Vu, Daniel Weiskopf, Michael Sedlmair
-                </span>
-            </div>
-            <div class="paperLinks">
-                <a href="../pdf/heyen2020clavis.pdf">PDF</a>
-                <a href="https://dl.acm.org/doi/10.1145/3399715.3399814">publisher website</a>
-            </div>
-        </div>
-        <div class="info">
-            <div class="abstract">
-                We propose ClaVis, a visual analytics system for comparative analysis of classification models. ClaVis allows users to visually compare the performance and behavior of tens to hundreds of classifiers trained with different hyperparameter configurations. Our approach is plugin-based and classifier-agnostic and allows users to add their own datasets and classifier implementations. It provides multiple visualizations, including a multivariate ranking, a similarity map, a scatterplot that reveals correlations between parameters and scores, and a training history chart. We demonstrate the effectivity of our approach in multiple case studies for training classification models in the domain of natural language processing.
-            </div>
-            <div class="bibtex">
-                
-            </div>
-        </div>
-    </div>
-    
-    <div
-        class="paper small"
         id="paperheyen2020supporting"
     >
         <h2
@@ -215,35 +173,95 @@
         >
             Supporting Music Education through Visualizations of MIDI Recordings
         </h2>
-        <img
-            id="imageheyen2020supporting"
-            onclick="toggleClass('paperheyen2020supporting', 'small'); toggleImageSize(this);"
-            class="publicationImage small"
-            src="../img/small/heyen2020supporting.png"
-        />
-        <div class="metaData">
-            <div>
-                <span class="publication">
-                    VIS
-                    2020
-                    Poster
-                </span>
-                <span class="authors">
-                    <span class="firstAuthor">Frank Heyen</span>,
-                    Michael Sedlmair
-                </span>
+        
+            <img
+                id="imageheyen2020supporting"
+                onclick="toggleClass('paperheyen2020supporting', 'small'); toggleImageSize(this);"
+                class="publicationImage small"
+                src="../img/small/heyen2020supporting.png"
+            />
+        <div class="metaData ">
+            <div class="authors">
+                <span class="firstAuthor">Frank Heyen</span>,
+                Michael Sedlmair
             </div>
-            <div class="paperLinks">
+            <div>
+                <span class="publication">VIS 2020</span>
+                <span class="publication">Poster</span>
                 <a href="../pdf/heyen2020supporting.pdf">PDF</a>
                 <a href="https://vis2020-ieee.ipostersessions.com/default.aspx?s=82-F0-FF-F9-29-B9-B4-7F-FE-F3-A9-1D-4A-B7-4F-32">publisher website</a>
             </div>
         </div>
         <div class="info">
+            <h4>Abstract</h4>
             <div class="abstract">
-                
+                Musicians mostly have to rely on their ears when they want to analyze what they play, for example to detect errors. Since hearing is sequential, it is not possible to quickly grasp an overview over one or multiple recordings of a whole piece of music at once. We therefore propose various visualizations that allow analyzing errors and stylistic variance. Our current approach focuses on rhythm and uses MIDI data for simplicity.
             </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperheyen2020clavis"
+    >
+        <h2
+           onclick="toggleClass('paperheyen2020clavis', 'small'); toggleImageSize(imageheyen2020clavis);"
+        >
+            ClaVis: An Interactive Visual Comparison System for Classifiers
+        </h2>
+        
+            <img
+                id="imageheyen2020clavis"
+                onclick="toggleClass('paperheyen2020clavis', 'small'); toggleImageSize(this);"
+                class="publicationImage small"
+                src="../img/small/heyen2020clavis.png"
+            />
+        <div class="metaData ">
+            <div class="authors">
+                <span class="firstAuthor">Frank Heyen</span>,
+                Tanja Munz, Michael Neumann, Daniel Ortega, Ngoc Thang Vu, Daniel Weiskopf, Michael Sedlmair
+            </div>
+            <div>
+                <span class="publication">AVI 2020</span>
+                <span class="publication">Full Paper</span>
+                <a href="../pdf/heyen2020clavis.pdf">PDF</a>
+                <a href="https://dl.acm.org/doi/10.1145/3399715.3399814">publisher website</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                We propose ClaVis, a visual analytics system for comparative analysis of classification models. ClaVis allows users to visually compare the performance and behavior of tens to hundreds of classifiers trained with different hyperparameter configurations. Our approach is plugin-based and classifier-agnostic and allows users to add their own datasets and classifier implementations. It provides multiple visualizations, including a multivariate ranking, a similarity map, a scatterplot that reveals correlations between parameters and scores, and a training history chart. We demonstrate the effectivity of our approach in multiple case studies for training classification models in the domain of natural language processing.
+            </div>
+            
+            <h4>BibTex</h4>
             <div class="bibtex">
-                
+                <textarea>@inproceedings{10.1145/3399715.3399814,
+author = {Heyen, Frank and Munz, Tanja and Neumann, Michael and Ortega, Daniel and Vu, Ngoc Thang and Weiskopf, Daniel and Sedlmair, Michael},
+title = {ClaVis: An Interactive Visual Comparison System for Classifiers},
+year = {2020},
+isbn = {9781450375351},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3399715.3399814},
+doi = {10.1145/3399715.3399814},
+abstract = {We propose ClaVis, a visual analytics system for comparative analysis of classification
+models. ClaVis allows users to visually compare the performance and behavior of tens
+to hundreds of classifiers trained with different hyperparameter configurations. Our
+approach is plugin-based and classifier-agnostic and allows users to add their own
+datasets and classifier implementations. It provides multiple visualizations, including
+a multivariate ranking, a similarity map, a scatterplot that reveals correlations
+between parameters and scores, and a training history chart. We demonstrate the effectivity
+of our approach in multiple case studies for training classification models in the
+domain of natural language processing.},
+booktitle = {Proceedings of the International Conference on Advanced Visual Interfaces},
+articleno = {9},
+numpages = {9},
+keywords = {visual analytics, Visualization, machine learning, classifier comparison},
+location = {Salerno, Italy},
+series = {AVI '20}
+}</textarea>
             </div>
         </div>
     </div>

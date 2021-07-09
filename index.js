@@ -1,8 +1,9 @@
-import { createReadStream, readFileSync, writeFileSync } from 'fs';
+import { createReadStream, readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
 import csv from 'fast-csv';
-import querystring from 'querystring';
+// import querystring from 'querystring';
 
-const file = './Papers by us.csv';
+const file = './Papers.csv';
 const members = [
     'Aimee Sousa Calepso',
     'Alexander Achberger',
@@ -88,15 +89,14 @@ csv
 
 function createPages() {
     console.log(`${papers.length} papers`);
-    // Only export published papers
-    const published = papers.filter(d => d['Status'] === 'Published');
-    console.log(`${published.length} published`);
-    // console.log(published);
+    // Sort by date descending, so newest at top of page
+    papers.sort((a, b) => a['Date'] > b['Date'] ? -1 : 1
+    );
     // Main page
-    createMainPageHtml(published);
+    createMainPageHtml(papers);
     // Member / author pages
     for (const [index, member] of members.entries()) {
-        const authoredPapers = published.filter(d => {
+        const authoredPapers = papers.filter(d => {
             return d['First Author'].includes(member)
                 || d['Other Authors'].includes(member);
         });
@@ -116,7 +116,20 @@ function createPapersHtml(papers, isMember = false) {
     return papers.map(d => {
         const fileName = d['Key (e.g. for file names)'];
         const pdf = `${isMember ? '..' : '.'}/pdf/${fileName}.pdf`;
+        const image = `${isMember ? '..' : '.'}/img/small/${fileName}.png`;
         const publisher = d['Publisher URL (official)'];
+        // See if files are there
+        const imageExists = existsSync(join('img', `${fileName}.png`));
+        const pdfExists = existsSync(join('pdf', `${fileName}.pdf`));
+        if (!isMember) {
+            if (!imageExists) {
+                console.log(`  missing image: img/${fileName}.png`);
+            }
+            if (!pdfExists) {
+                console.log(`  missing pdf: pdf/${fileName}.pdf`);
+            }
+        }
+
         return `
     <div
         class="paper small"
@@ -127,36 +140,41 @@ function createPapersHtml(papers, isMember = false) {
         >
             ${d['Title']}
         </h2>
-        <img
-            id="image${fileName}"
-            onclick="toggleClass('paper${fileName}', 'small'); toggleImageSize(this);"
-            class="publicationImage small"
-            src="${isMember ? '..' : '.'}/img/small/${fileName}.png"
-        />
-        <div class="metaData">
-            <div>
-                <span class="publication">
-                    ${d['Submission Target']}
-                    ${d['Date / Deadline'].slice(0, 4)}
-                    ${d['Type']}
-                </span>
-                <span class="authors">
-                    <span class="firstAuthor">${d['First Author']}</span>${d['Other Authors'] !== '' ? ',' : ''}
-                    ${d['Other Authors']}
-                </span>
+        ${imageExists
+                ? `
+            <img
+                id="image${fileName}"
+                onclick="toggleClass('paper${fileName}', 'small'); toggleImageSize(this);"
+                class="publicationImage small"
+                src="${image}"
+            />`
+                : ''
+            }
+        <div class="metaData ${imageExists ? '' : 'noImage'}">
+            <div class="authors">
+                <span class="firstAuthor">${d['First Author']}</span>${d['Other Authors'] !== '' ? ',' : ''}
+                ${d['Other Authors']}
             </div>
-            <div class="paperLinks">
-                <a href="${pdf}">PDF</a>
+            <div>
+                <span class="publication">${d['Submission Target']} ${d['Date'].slice(0, 4)}</span>
+                <span class="publication">${d['Type']}</span>
+                ${pdfExists ? `<a href="${pdf}">PDF</a>` : ''}
                 <a href="${publisher}">publisher website</a>
             </div>
         </div>
         <div class="info">
+            <h4>Abstract</h4>
             <div class="abstract">
                 ${d['Abstract']}
             </div>
+            ${d['bibtex']
+                ? `
+            <h4>BibTex</h4>
             <div class="bibtex">
-                ${d['bibtex'] ?? ''}
-            </div>
+                <textarea>${d['bibtex']}</textarea>
+            </div>`
+                : ''
+            }
         </div>
     </div>
     `;
