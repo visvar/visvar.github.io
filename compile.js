@@ -202,6 +202,9 @@ function createMainPageHtml(published) {
     <title>${pageTitle}</title>
     <link rel="stylesheet" href="./style.css">
     <script src="./script.js"></script>
+    <link rel="shortcut icon" href="./img/favicon.png">
+    <link rel="icon" type="image/png" href="./img/favicon.png" sizes="256x256">
+    <link rel="apple-touch-icon" sizes="256x256" href="./img/favicon.png">
 </head>
 <body>
     <a class="anchor" name="top"></a>
@@ -254,6 +257,9 @@ function createMemberPageHtml(member, fileName, papers) {
     <title>${member} | ${pageTitle}</title>
     <link rel="stylesheet" href="../style.css">
     <script src="../script.js"></script>
+    <link rel="shortcut icon" href="../img/favicon.png">
+    <link rel="icon" type="image/png" href="../img/favicon.png" sizes="256x256">
+    <link rel="apple-touch-icon" sizes="256x256" href="../img/favicon.png">
 </head>
 <body>
     <a class="anchor" name="top"></a>

@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node ./index.js",
-    "mon": "nodemon ./index.js  -e js,html,csv --ignore members/ --ignore index.html",
+    "start": "node ./compile.js",
+    "mon": "nodemon ./compile.js  -e js,html,csv --ignore members/ --ignore index.html",
     "resize": "node ./scripts/image-resizer.js",
     "topng": "node ./scripts/image-to-png.js",
     "test": "echo \"Error: no test specified\" && exit 1",
