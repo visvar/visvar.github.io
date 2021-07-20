@@ -59,10 +59,10 @@ const headerAndNav = `
                 <li>
                     <a href="${pageUrl}/#publications">all publications</a>
                 </li>
-                <li>
+                <li class="memberNav">
                     <a href="${pageUrl}/#members">members</a>
                 </li>
-                <ul>
+                <ul class="memberNav">
                     ${members.map((d, i) => `
                         <li>
                             <a href="${pageUrl}/members/${memberPaths[i]}.html">

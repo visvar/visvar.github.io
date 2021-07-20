@@ -7,6 +7,7 @@
 
 body,
 main {
+    min-width: 600px;
     margin: 0;
     background-color: var(--bodyBgColor);
     color: var(--textColor);
@@ -112,6 +113,9 @@ a.anchor {
     nav ul li {
         display: inline-block;
     }
+    .memberNav {
+        display: none;
+    }
     .h1desktop {
         display: none;
     }
@@ -123,13 +127,6 @@ a.anchor {
     }
     section {
         grid-area: span 1 / span 2;
-    }
-}
-
-@media (min-width: 600px) {
-    /* tablet layout */
-    .h1mobile {
-        display: block;
     }
 }
 
@@ -146,6 +143,9 @@ a.anchor {
     header > div,
     .h1desktop,
     nav ul li {
+        display: block;
+    }
+    .memberNav {
         display: block;
     }
     .h1mobile {
