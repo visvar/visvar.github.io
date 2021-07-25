@@ -5,10 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node ./compile.js",
-    "mon": "nodemon ./compile.js  -e js,html,csv --ignore members/ --ignore index.html",
-    "resize": "node ./scripts/image-resizer.js",
+    "start": "npm run resize && npm run tocsv && npm run mon",
     "topng": "node ./scripts/image-to-png.js",
+    "resize": "node ./scripts/image-resizer.js",
+    "tocsv": "node ./scripts/table-to-csv.js",
+    "mon": "nodemon ./compile.js  -e js,html,csv --ignore members/ --ignore index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
     "upd": "npm-check-updates -u"
   },
@@ -16,8 +17,9 @@
   "license": "",
   "devDependencies": {
     "fast-csv": "^4.3.6",
-    "image-js": "^0.31.4",
-    "nodemon": "^2.0.9",
-    "npm-check-updates": "^11.8.1"
+    "image-js": "^0.32.0",
+    "nodemon": "^2.0.12",
+    "npm-check-updates": "^11.8.3",
+    "xlsx": "^0.17.0"
   }
 }

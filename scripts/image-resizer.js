@@ -7,6 +7,7 @@ const TARGET_WIDTH = 256;
 rescale();
 
 async function rescale() {
+    console.log('image-resizer.js');
     const files = readdirSync('./img');
     for (const file of files) {
         if (file === 'small') {

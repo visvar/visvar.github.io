@@ -5,6 +5,7 @@
 ## Adding Content
 
 Only change files in the below folders, nothing else!
+After a change, compile the website as described below for changes to take effect.
 
 ### "About" Pages
 
@@ -15,22 +16,16 @@ See [about/](./about/).
 - [img/](./img/) for images (must be .png, except for people avatars which must be .jpg)
 - [pdf/](./pdf/) for PDFs.
 
-**After adding new images, run `npm run resize` to automatically resize images.**
-
 ### Papers
 
-- Export papers table to CSV, be careful to use **UTF-8** as encoding, otherwise special characters will break
-- Move the `Papers.csv` file in this directory
-- Compile website, as described below
+- Save / move the `Papers.xlsx` file into this directory
 
 ## Compiling
 
 If not done yet, install packages with `npm i` (you obviously need Node.js and npm to be installed).
 
-`npm run mon` starts the compiler in watch mode.
-
+`npm start` starts the compiler in watch mode.
 It will re-build the whole page any time a .js or .html file changes.
-
 You will still need to reload the page (e.g. press F5) in the browser to see changes!
 
 ## Deployment / Publishing
