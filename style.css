@@ -206,7 +206,7 @@ section a i {
     text-align: center;
 }
 
-.memberList img {
+.memberList img.avatar {
     width: 128px;
     height: 128px;
 }
@@ -222,6 +222,8 @@ section a i {
 }
 
 img.avatar {
+    width: 256px;
+    height: 256px;
     border-radius: 50%;
 }
 

@@ -13,8 +13,12 @@ See [about/](./about/).
 
 ### Media
 
+Media names must match the publication's key in the table.
+The pattern is lastnameYearKeyword (example: heyen2020clavis).
+
 - [img/](./img/) for images (must be .png, except for people avatars which must be .jpg)
 - [pdf/](./pdf/) for PDFs.
+- [video/](./video/) for videos.
 
 ### Papers
 

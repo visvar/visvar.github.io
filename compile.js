@@ -14,6 +14,7 @@ const members = [
     'Natalie Hube',
     'Quynh Ngo',
     'Rene Cutura',
+    'Ruben Bauer',
     'Xingyao Yu',
 ];
 
@@ -114,21 +115,30 @@ function createPages() {
  * @param {boolean} [isMember=false] is this a member page?
  * @returns {string} HTML
  */
-function createPapersHtml(papers, isMember = false) {
+function createPublicationsHtml(papers, isMember = false) {
     return papers.map(d => {
         const fileName = d['Key (e.g. for file names)'];
-        const pdf = `${isMember ? '..' : '.'}/pdf/${fileName}.pdf`;
+        let pdf = `${isMember ? '..' : '.'}/pdf/${fileName}.pdf`;
         const image = `${isMember ? '..' : '.'}/img/small/${fileName}.png`;
+        const type = d['Type'];
         const publisher = d['Publisher URL (official)'];
+        const video = d['Video'];
+        const supplemental = d['Supplemental'];
         // See if files are there
         const imageExists = existsSync(join('img', `${fileName}.png`));
-        const pdfExists = existsSync(join('pdf', `${fileName}.pdf`));
+        let pdfExists = existsSync(join('pdf', `${fileName}.pdf`));
+        // PDF might be a link instead of file
+        const pdfLink = d['PDF URL (public)'];
+        if (!pdfExists && pdfLink && pdfLink !== '') {
+            pdfExists = true;
+            pdf = pdfLink;
+        }
         if (!isMember) {
             if (!imageExists) {
                 console.log(`  missing image: img/${fileName}.png`);
             }
             if (!pdfExists) {
-                console.log(`  missing pdf: pdf/${fileName}.pdf`);
+                console.log(`  missing pdf:   pdf/${fileName}.pdf`);
             }
         }
 
@@ -159,9 +169,11 @@ function createPapersHtml(papers, isMember = false) {
             </div>
             <div>
                 <span class="publication">${d['Submission Target']} ${d['Date'].slice(0, 4)}</span>
-                <span class="publication">${d['Type']}</span>
-                ${pdfExists ? `<a href="${pdf}">PDF</a>` : ''}
-                <a href="${publisher}">publisher website</a>
+                ${type && type !== '' ? `<span class="publication">${d['Type']}</span>` : ''}
+                ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
+                <a href="${publisher}" target="_blank">publisher website</a>
+                ${video ? `<a href="${video}" target="_blank">video</a>` : ''}
+                ${supplemental ? `<a href="${supplemental}" target="_blank">supplemental material</a>` : ''}
             </div>
         </div>
         <div class="info">
@@ -177,6 +189,14 @@ function createPapersHtml(papers, isMember = false) {
             </div>`
                 : ''
             }
+            ${d['Acknowledgements']
+                ? `
+            <h4>Acknowledgements</h4>
+            <div class="abstract">
+                ${d['Acknowledgements']}
+            </div>`
+                : ''
+            }
         </div>
     </div>
     `;
@@ -188,7 +208,7 @@ function createPapersHtml(papers, isMember = false) {
  */
 function createMainPageHtml(published) {
     // Create HTML
-    const papersHtml = createPapersHtml(published);
+    const papersHtml = createPublicationsHtml(published);
     // Read nav and about us page
     const aboutUs = readFileSync('./aboutus.html');
     // Create member list with avatars
@@ -239,7 +259,7 @@ function createMainPageHtml(published) {
  */
 function createMemberPageHtml(member, fileName, papers) {
     // Create HTML
-    const papersHtml = createPapersHtml(papers, true);
+    const papersHtml = createPublicationsHtml(papers, true);
     // Read nav and about us page
     let about = '';
     const aboutFile = `./about/${fileName}.html`;
@@ -285,6 +305,10 @@ function createMemberPageHtml(member, fileName, papers) {
 }
 
 
+/**
+ * Members list with avatars
+ * @returns
+ */
 function createMemberListHtml() {
     return members.map((member, index) => `
     <div>
