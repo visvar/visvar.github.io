@@ -129,13 +129,25 @@
 <div class="aboutMember">
 
     <div class="avatarAndBio">
-        <img class="avatar" src="../img/small/ruben_bauer.jpg" />
+        <img class="avatar" src="../img/ruben_bauer.jpg" />
 
         <div class="bio">
             <p>
+                I research machine learning- and VR/AR-supported interactive visualization techniques to aid domain
+                experts, who work with ensemble simulation or experimental data, in analyzing their data and visualizing
+                their findings.
             </p>
         </div>
     </div>
+
+    <h2>Research Interests</h2>
+    <ul>
+        <li>Visual analytics</li>
+        <li>Ensemble data</li>
+        <li>Machine learning</li>
+        <li>VR/AR</li>
+        <li>HCI</li>
+    </ul>
 
     <p>
         <a href="https://www.visus.uni-stuttgart.de/en/institute/team/Bauer-00029/">Institute website</a>
@@ -147,6 +159,59 @@
             <article> <a class="anchor" name="publications"></a>
                 <h1>Publications</h1>
                 
+    <div
+        class="paper small"
+        id="paperbruder2019voronoi-based"
+    >
+        <h2
+           onclick="toggleClass('paperbruder2019voronoi-based', 'small'); toggleImageSize(imagebruder2019voronoi-based);"
+        >
+            Voronoi-Based Foveated Volume Rendering
+        </h2>
+        
+            <img
+                id="imagebruder2019voronoi-based"
+                onclick="toggleClass('paperbruder2019voronoi-based', 'small'); toggleImageSize(this);"
+                class="publicationImage small"
+                src="../img/small/bruder2019voronoi-based.png"
+            />
+        <div class="metaData ">
+            <div class="authors">
+                <span class="firstAuthor">Valentin Bruder</span>,
+                Christoph Schulz, Ruben Bauer, Steffen Frey, Daniel Weiskopf, Thomas Ertl
+            </div>
+            <div>
+                <span class="publication">EuroVis 2019</span>
+                <span class="publication">Short Paper</span>
+                <a href="https://diglib.eg.org/bitstream/handle/10.2312/evs20191172/067-071.pdf?sequence=1&isAllowed=y" target="_blank">PDF</a>
+                <a href="https://doi.org/10.2312/evs.20191172" target="_blank">publisher website</a>
+                
+                
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                Foveal vision is located in the center of the field of view with a rich impression of detail and color, whereas peripheral vision occurs on the side with more fuzzy and colorless perception. This visual acuity fall-off can be used to achieve higher frame rates by adapting rendering quality to the human visual system. Volume raycasting has unique characteristics, preventing a direct transfer of many traditional foveated rendering techniques. We present an approach that utilizes the visual acuity fall-off to accelerate volume rendering based on Linde-Buzo-Gray sampling and natural neighbor interpolation. First, we measure gaze using a stationary 1200 Hz eye-tracking system. Then, we adapt our sampling and reconstruction strategy to that gaze. Finally, we apply a temporal smoothing filter to attenuate undersampling artifacts since peripheral vision is particularly sensitive to contrast changes and movement. Our approach substantially improves rendering performance with barely perceptible changes in visual quality. We demonstrate the usefulness of our approach through performance measurements on various data sets.
+            </div>
+            
+            <h4>BibTex</h4>
+            <div class="bibtex">
+                <textarea>@inproceedings {10.2312:evs.20191172,
+booktitle = {EuroVis 2019 - Short Papers},
+editor = {Johansson, Jimmy and Sadlo, Filip and Marai, G. Elisabeta},
+title = {{Voronoi-Based Foveated Volume Rendering}},
+author = {Bruder, Valentin and Schulz, Christoph and Bauer, Ruben and Frey, Steffen and Weiskopf, Daniel and Ertl, Thomas},
+year = {2019},
+publisher = {The Eurographics Association},
+ISBN = {978-3-03868-090-1},
+DOI = {10.2312/evs.20191172}
+}</textarea>
+            </div>
+            
+        </div>
+    </div>
+    
             </article>
         </div>
     </main>
