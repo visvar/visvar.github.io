@@ -18,7 +18,7 @@ The pattern is lastnameYearKeyword (example: heyen2020clavis).
 
 - [img/](./img/) for images (must be .png, except for people avatars which must be .jpg)
 - [pdf/](./pdf/) for PDFs.
-- [video/](./video/) for videos.
+- [video/](./video/) for videos (must be .mp4).
 
 ### Papers
 

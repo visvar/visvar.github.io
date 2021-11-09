@@ -118,21 +118,28 @@ function createPages() {
 function createPublicationsHtml(papers, isMember = false) {
     return papers.map(d => {
         const fileName = d['Key (e.g. for file names)'];
-        let pdf = `${isMember ? '..' : '.'}/pdf/${fileName}.pdf`;
         const image = `${isMember ? '..' : '.'}/img/small/${fileName}.png`;
         const type = d['Type'];
         const publisher = d['Publisher URL (official)'];
-        const video = d['Video'];
         const supplemental = d['Supplemental'];
         // See if files are there
         const imageExists = existsSync(join('img', `${fileName}.png`));
+        // PDF and video might be a link instead of file
+        let pdf = d['PDF URL (public)'];
         let pdfExists = existsSync(join('pdf', `${fileName}.pdf`));
-        // PDF might be a link instead of file
-        const pdfLink = d['PDF URL (public)'];
-        if (!pdfExists && pdfLink && pdfLink !== '') {
+        if (!pdfExists && pdf && pdf !== '') {
             pdfExists = true;
-            pdf = pdfLink;
+        } else {
+            pdf = `${isMember ? '..' : '.'}/pdf/${fileName}.pdf`;
         }
+        let video = d['Video'];
+        let videoExists = existsSync(join('video', `${fileName}.mp4`));
+        if (!videoExists && video && video !== '') {
+            videoExists = true;
+        } else {
+            video = `${isMember ? '..' : '.'}/video/${fileName}.mp4`;
+        }
+        // Check for missing files, but only when compiling main page (only once)
         if (!isMember) {
             if (!imageExists) {
                 console.log(`  missing image: img/${fileName}.png`);
@@ -172,7 +179,7 @@ function createPublicationsHtml(papers, isMember = false) {
                 ${type && type !== '' ? `<span class="publication">${d['Type']}</span>` : ''}
                 ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
                 <a href="${publisher}" target="_blank">publisher website</a>
-                ${video ? `<a href="${video}" target="_blank">video</a>` : ''}
+                ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
                 ${supplemental ? `<a href="${supplemental}" target="_blank">supplemental material</a>` : ''}
             </div>
         </div>
