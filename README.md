@@ -2,6 +2,14 @@
 
 [visvar.github.io](https://visvar.github.io/)
 
+1. [VISVAR Homepage](#visvar-homepage)
+   1. [Adding Content](#adding-content)
+      1. ["About" Pages](#about-pages)
+      2. [Media](#media)
+      3. [Papers](#papers)
+   2. [Compiling](#compiling)
+   3. [Deployment / Publishing](#deployment--publishing)
+
 ## Adding Content
 
 Only change files in the below folders, nothing else!

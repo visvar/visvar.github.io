@@ -9,7 +9,7 @@
     "topng": "node ./scripts/image-to-png.js",
     "resize": "node ./scripts/image-resizer.js",
     "tocsv": "node ./scripts/table-to-csv.js",
-    "mon": "nodemon ./compile.js  -e js,html,csv --ignore members/ --ignore index.html",
+    "mon": "nodemon ./compile.js -e js,html,csv --ignore members/ --ignore index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
     "upd": "npm-check-updates -u"
   },

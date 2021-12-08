@@ -204,7 +204,7 @@
                 <span class="publication">ISMIR 2021</span>
                 <span class="publication">Late-Breaking Demo Poster</span>
                 <a href="../pdf/rau2021visual.pdf" target="_blank">PDF</a>
-                <a href="https://archives.ismir.net/ismir2021/latebreaking/000014.pdf" target="_blank">publisher website</a>
+                <a href="https://archives.ismir.net/ismir2021/latebreaking/000014.pdf" target="_blank">website</a>
                 <a href="../video/rau2021visual.mp4" target="_blank">video</a>
                 
             </div>
@@ -235,6 +235,114 @@
     
     <div
         class="paper small"
+        id="papercutura2021visap"
+    >
+        <h2
+           onclick="toggleClass('papercutura2021visap', 'small'); toggleImageSize(imagecutura2021visap);"
+        >
+            DaRt: Generative Art using Dimensionality Reduction Algorithms
+        </h2>
+        
+            <img
+                id="imagecutura2021visap"
+                onclick="toggleClass('papercutura2021visap', 'small'); toggleImageSize(this);"
+                class="publicationImage small"
+                src="../img/small/cutura2021visap.png"
+            />
+        <div class="metaData ">
+            <div class="authors">
+                <span class="firstAuthor">Rene Cutura</span>,
+                Kathrin Angerbauer, Frank Heyen, Natalie Hube, Michael Sedlmair
+            </div>
+            <div>
+                <span class="publication">VIS 2021</span>
+                <span class="publication">Pictorial</span>
+                <a href="../pdf/cutura2021visap.pdf" target="_blank">PDF</a>
+                <a href="https://doi.org/10.1109/VISAP52981.2021.00013" target="_blank">website</a>
+                <a href="https://youtu.be/pOcksJOiAPw" target="_blank">video</a>
+                
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                Dimensionality Reduction (DR) is a popular technique that is often used in Machine Learning and Visualization communities to analyze high-dimensional data. The approach is empirically proven to be powerful for uncovering previously unseen structures in the data. While observing the results of the intermediate optimization steps of DR algorithms, we coincidently discovered the artistic beauty of the DR process. With enthusiasm for the beauty, we decided to look at DR from a generative art lens rather than their technical application aspects and use DR techniques to create artwork. Particularly, we use the optimization process to generate images, by drawing each intermediate step of the optimization process with some opacity over the previous intermediate result. As another alternative input, we used a neural-network model for face-landmark detection, to apply DR to portraits, while maintaining some facial properties, resulting in abstracted facial avatars. In this work, we provide such a collection of such artwork.
+            </div>
+            
+            <h4>BibTex</h4>
+            <div class="bibtex">
+                <textarea>@inproceedings{cutura2021dart,
+  title={{DaRt}: Generative Art using Dimensionality Reduction Algorithms},
+  author={Cutura, Rene and Angerbauer, Katrin and Heyen, Frank and Hube, Natalie and Sedlmair, Michael},
+  booktitle={2021 IEEE VIS Arts Program (VISAP)},
+  pages={59--72},
+  year={2021},
+  organization={IEEE},
+}</textarea>
+            </div>
+            
+            <h4>Acknowledgements</h4>
+            <div class="abstract">
+                Funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) - Project-ID 251654672 - TRR 161
+            </div>
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="paperachberger2021vinci"
+    >
+        <h2
+           onclick="toggleClass('paperachberger2021vinci', 'small'); toggleImageSize(imageachberger2021vinci);"
+        >
+            PropellerHand: Hand-Mounted, Propeller-Based Force Feedback Device
+        </h2>
+        
+            <img
+                id="imageachberger2021vinci"
+                onclick="toggleClass('paperachberger2021vinci', 'small'); toggleImageSize(this);"
+                class="publicationImage small"
+                src="../img/small/achberger2021vinci.png"
+            />
+        <div class="metaData ">
+            <div class="authors">
+                <span class="firstAuthor">Alexander Achberger</span>,
+                Frank Heyen, Kresimir Vidackovic, Michael Sedlmair
+            </div>
+            <div>
+                <span class="publication">VINCI 2021</span>
+                <span class="publication">Full Paper</span>
+                <a href="../pdf/achberger2021vinci.pdf" target="_blank">PDF</a>
+                <a href="https://doi.org/10.1145/3481549.3481563" target="_blank">website</a>
+                
+                
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                Immersive analytics is a fast growing field that is often applied in virtual reality (VR). VR environments often lack immersion due to missing sensory feedback when interacting with data. Existing haptic devices are often expensive, stationary, or occupy the user’s hand, preventing them from grasping objects or using a controller. We propose PropellerHand, an ungrounded hand-mounted haptic device with two rotatable propellers, that allows exerting forces on the hand without obstructing hand use. PropellerHand is able to simulate feedback such as weight and torque by generating thrust up to 11 N in 2-DOF and a torque of 1.87 Nm in 2-DOF. Its design builds on our experience from quantitative and qualitative experiments with different form factors and parts. We evaluated our final version through a qualitative user study in various VR scenarios that required participants to manipulate virtual objects in different ways, while changing between torques and directional forces. Results show that PropellerHand improves users’ immersion in virtual reality.
+            </div>
+            
+            <h4>BibTex</h4>
+            <div class="bibtex">
+                <textarea>@inproceedings{achberger2021vinci,
+  author = {Alexander Achberger and Frank Heyen and Kresimir Vidackovic and Michael Sedlmair},
+  title = {PropellerHand: {A} Hand-Mounted, Propeller-Based Force Feedback Device},
+  booktitle = {International Symposium on Visual Information Communication and Interaction (VINCI)},
+  pages     = {4:1--4:8},
+  publisher = {ACM},
+  year      = {2021},
+  url       = {https://doi.org/10.1145/3481549.3481563},
+  doi       = {10.1145/3481549.3481563}
+}</textarea>
+            </div>
+            
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
         id="paperrijken2021illegible"
     >
         <h2
@@ -256,9 +364,9 @@
             </div>
             <div>
                 <span class="publication">alt.VIS 2021</span>
-                
+                <span class="publication">Workshop Paper</span>
                 <a href="https://arxiv.org/ftp/arxiv/papers/2109/2109.01688.pdf" target="_blank">PDF</a>
-                <a href="https://arxiv.org/abs/2109.01688" target="_blank">publisher website</a>
+                <a href="https://arxiv.org/abs/2109.01688" target="_blank">website</a>
                 <a href="https://www.youtube.com/watch?v=BZOdIhU-mrA" target="_blank">video</a>
                 <a href="http://illegiblesemantics.com" target="_blank">supplemental material</a>
             </div>
@@ -271,13 +379,12 @@
             
             <h4>BibTex</h4>
             <div class="bibtex">
-                <textarea>@misc{rijken2021illegible,
-      title={Illegible Semantics: Exploring the Design Space of Metal Logos}, 
-      author={Gerrit J. Rijken and Rene Cutura and Frank Heyen and Michael Sedlmair and Michael Correll and Jason Dykes and Noeska Smit},
-      year={2021},
-      eprint={2109.01688},
-      archivePrefix={arXiv},
-      primaryClass={cs.HC}
+                <textarea>@inproceedings{rijken2021altvis,
+	Author = {Gerrit J Rijken and Rene Cutura and Frank Heyen and Michael Sedlmair and Michael Correll and Jason Dykes and Noeska Smit},
+	Title = {Illegible Semantics: Exploring the Design Space of Metal Logos},
+	Booktitle = {{IEEE VIS} alt.VIS Workshop},
+	url = {https://arxiv.org/abs/2109.01688},
+	Year = {2021}
 }</textarea>
             </div>
             
@@ -309,7 +416,7 @@
                 <span class="publication">VIS 2020</span>
                 <span class="publication">Poster</span>
                 <a href="../pdf/heyen2020supporting.pdf" target="_blank">PDF</a>
-                <a href="https://vis2020-ieee.ipostersessions.com/default.aspx?s=82-F0-FF-F9-29-B9-B4-7F-FE-F3-A9-1D-4A-B7-4F-32" target="_blank">publisher website</a>
+                <a href="https://vis2020-ieee.ipostersessions.com/default.aspx?s=82-F0-FF-F9-29-B9-B4-7F-FE-F3-A9-1D-4A-B7-4F-32" target="_blank">website</a>
                 
                 
             </div>
@@ -349,7 +456,7 @@
                 <span class="publication">AVI 2020</span>
                 <span class="publication">Full Paper</span>
                 <a href="../pdf/heyen2020clavis.pdf" target="_blank">PDF</a>
-                <a href="https://doi.org/10.1145/3399715.3399814" target="_blank">publisher website</a>
+                <a href="https://doi.org/10.1145/3399715.3399814" target="_blank">website</a>
                 
                 <a href="https://github.com/fheyen/clavis" target="_blank">supplemental material</a>
             </div>

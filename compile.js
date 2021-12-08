@@ -178,7 +178,7 @@ function createPublicationsHtml(papers, isMember = false) {
                 <span class="publication">${d['Submission Target']} ${d['Date'].slice(0, 4)}</span>
                 ${type && type !== '' ? `<span class="publication">${d['Type']}</span>` : ''}
                 ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
-                <a href="${publisher}" target="_blank">publisher website</a>
+                <a href="${publisher}" target="_blank">website</a>
                 ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
                 ${supplemental ? `<a href="${supplemental}" target="_blank">supplemental material</a>` : ''}
             </div>

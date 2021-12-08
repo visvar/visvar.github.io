@@ -167,6 +167,126 @@
                 
     <div
         class="paper small"
+        id="papercutura2021visap"
+    >
+        <h2
+           onclick="toggleClass('papercutura2021visap', 'small'); toggleImageSize(imagecutura2021visap);"
+        >
+            DaRt: Generative Art using Dimensionality Reduction Algorithms
+        </h2>
+        
+            <img
+                id="imagecutura2021visap"
+                onclick="toggleClass('papercutura2021visap', 'small'); toggleImageSize(this);"
+                class="publicationImage small"
+                src="../img/small/cutura2021visap.png"
+            />
+        <div class="metaData ">
+            <div class="authors">
+                <span class="firstAuthor">Rene Cutura</span>,
+                Kathrin Angerbauer, Frank Heyen, Natalie Hube, Michael Sedlmair
+            </div>
+            <div>
+                <span class="publication">VIS 2021</span>
+                <span class="publication">Pictorial</span>
+                <a href="../pdf/cutura2021visap.pdf" target="_blank">PDF</a>
+                <a href="https://doi.org/10.1109/VISAP52981.2021.00013" target="_blank">website</a>
+                <a href="https://youtu.be/pOcksJOiAPw" target="_blank">video</a>
+                
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                Dimensionality Reduction (DR) is a popular technique that is often used in Machine Learning and Visualization communities to analyze high-dimensional data. The approach is empirically proven to be powerful for uncovering previously unseen structures in the data. While observing the results of the intermediate optimization steps of DR algorithms, we coincidently discovered the artistic beauty of the DR process. With enthusiasm for the beauty, we decided to look at DR from a generative art lens rather than their technical application aspects and use DR techniques to create artwork. Particularly, we use the optimization process to generate images, by drawing each intermediate step of the optimization process with some opacity over the previous intermediate result. As another alternative input, we used a neural-network model for face-landmark detection, to apply DR to portraits, while maintaining some facial properties, resulting in abstracted facial avatars. In this work, we provide such a collection of such artwork.
+            </div>
+            
+            <h4>BibTex</h4>
+            <div class="bibtex">
+                <textarea>@inproceedings{cutura2021dart,
+  title={{DaRt}: Generative Art using Dimensionality Reduction Algorithms},
+  author={Cutura, Rene and Angerbauer, Katrin and Heyen, Frank and Hube, Natalie and Sedlmair, Michael},
+  booktitle={2021 IEEE VIS Arts Program (VISAP)},
+  pages={59--72},
+  year={2021},
+  organization={IEEE},
+}</textarea>
+            </div>
+            
+            <h4>Acknowledgements</h4>
+            <div class="abstract">
+                Funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) - Project-ID 251654672 - TRR 161
+            </div>
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
+        id="papercutura2021vinci"
+    >
+        <h2
+           onclick="toggleClass('papercutura2021vinci', 'small'); toggleImageSize(imagecutura2021vinci);"
+        >
+            Hagrid — Gridify Scatterplots with Hilbert and Gosper Curves
+        </h2>
+        
+            <img
+                id="imagecutura2021vinci"
+                onclick="toggleClass('papercutura2021vinci', 'small'); toggleImageSize(this);"
+                class="publicationImage small"
+                src="../img/small/cutura2021vinci.png"
+            />
+        <div class="metaData ">
+            <div class="authors">
+                <span class="firstAuthor">Rene Cutura</span>,
+                
+Cristina Morariu, Zhanglin Cheng, Yunhai Wang, Daniel Weiskopf, 
+Michael Sedlmair
+            </div>
+            <div>
+                <span class="publication">VINCI 2021</span>
+                <span class="publication">Full Paper</span>
+                <a href="../pdf/cutura2021vinci.pdf" target="_blank">PDF</a>
+                <a href="https://doi.org/10.1145/3481549.3481569" target="_blank">website</a>
+                <a href="https://youtu.be/E_XP31_JzGY" target="_blank">video</a>
+                <a href="https://renecutura.eu/pdfs/hagrid_supplemental.pdf" target="_blank">supplemental material</a>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                A common enhancement of scatterplots represents points as small multiples, glyphs, or thumbnail images. As this encoding often results in overlaps, a general strategy is to alter the position of the data points, for instance, to a grid-like structure. Previous approaches rely on solving expensive optimization problems or on dividing the space that alter the global structure of the scatterplot. To find a good balance between efficiency and neighborhood and layout preservation, we propose Hagrid, a technique that uses space-filling curves (SFCs) to “gridify” a scatterplot without employing expensive collision detection and handling mechanisms. Using SFCs ensures that the points are plotted close to their original position, retaining approximately the same global structure. The resulting scatterplot is mapped onto a rectangular or hexagonal grid, using Hilbert and Gosper curves. We discuss and evaluate the theoretic runtime of our approach and quantitatively compare our approach to three state-of-the-art gridifying approaches, DGrid, Small multiples with gaps SMWG, and CorrelatedMultiples CMDS, in an evaluation comprising 339 scatterplots. Here, we compute several quality measures for neighborhood preservation together with an analysis of the actual runtimes. The main results show that, compared to the best other technique, Hagrid is faster by a factor of four, while achieving similar or even better quality of the gridified layout. Due to its computational efficiency, our approach also allows novel applications of gridifying approaches in interactive settings, such as removing local overlap upon hovering over a scatterplot.
+            </div>
+            
+            <h4>BibTex</h4>
+            <div class="bibtex">
+                <textarea>@inproceedings{cutura2021hagrid,
+	author = {Cutura, Rene and Morariu, Cristina and Cheng, Zhanglin and Wang, Yunhai and Weiskopf, Daniel and Sedlmair, Michael},
+	title = {{Hagrid -- Gridify Scatterplots with Hilbert and Gosper Curves}},
+	year = {2021},
+	isbn = {9781450386470},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/3481549.3481569},
+	doi = {10.1145/3481549.3481569},
+	booktitle = {The 14th International Symposium on Visual Information Communication and Interaction},
+	articleno = {1},
+	numpages = {8},
+	keywords = {Grid layout, Neighborhood-preserving., Space-filling curve},
+	location = {Potsdam, Germany},
+	series = {VINCI 2021}
+}</textarea>
+            </div>
+            
+            <h4>Acknowledgements</h4>
+            <div class="abstract">
+                This work was supported by the BMK FFG ICT of the Future program via the ViSciPub project (no. 867378), and by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) – Project-ID 251654672 – TRR 161.
+            </div>
+        </div>
+    </div>
+    
+    <div
+        class="paper small"
         id="paperrijken2021illegible"
     >
         <h2
@@ -188,9 +308,9 @@
             </div>
             <div>
                 <span class="publication">alt.VIS 2021</span>
-                
+                <span class="publication">Workshop Paper</span>
                 <a href="https://arxiv.org/ftp/arxiv/papers/2109/2109.01688.pdf" target="_blank">PDF</a>
-                <a href="https://arxiv.org/abs/2109.01688" target="_blank">publisher website</a>
+                <a href="https://arxiv.org/abs/2109.01688" target="_blank">website</a>
                 <a href="https://www.youtube.com/watch?v=BZOdIhU-mrA" target="_blank">video</a>
                 <a href="http://illegiblesemantics.com" target="_blank">supplemental material</a>
             </div>
@@ -203,13 +323,12 @@
             
             <h4>BibTex</h4>
             <div class="bibtex">
-                <textarea>@misc{rijken2021illegible,
-      title={Illegible Semantics: Exploring the Design Space of Metal Logos}, 
-      author={Gerrit J. Rijken and Rene Cutura and Frank Heyen and Michael Sedlmair and Michael Correll and Jason Dykes and Noeska Smit},
-      year={2021},
-      eprint={2109.01688},
-      archivePrefix={arXiv},
-      primaryClass={cs.HC}
+                <textarea>@inproceedings{rijken2021altvis,
+	Author = {Gerrit J Rijken and Rene Cutura and Frank Heyen and Michael Sedlmair and Michael Correll and Jason Dykes and Noeska Smit},
+	Title = {Illegible Semantics: Exploring the Design Space of Metal Logos},
+	Booktitle = {{IEEE VIS} alt.VIS Workshop},
+	url = {https://arxiv.org/abs/2109.01688},
+	Year = {2021}
 }</textarea>
             </div>
             
@@ -235,7 +354,7 @@
                 <span class="publication">arXiv 2021</span>
                 
                 <a href="https://arxiv.org/pdf/2105.09275.pdf" target="_blank">PDF</a>
-                <a href="https://arxiv.org/abs/2105.09275" target="_blank">publisher website</a>
+                <a href="https://arxiv.org/abs/2105.09275" target="_blank">website</a>
                 
                 
             </div>
@@ -246,6 +365,18 @@
                 A plethora of dimensionality reduction techniques have emerged over the past decades, leaving researchers and analysts with a wide variety of choices for reducing their data, all the more so given some techniques come with additional parametrization (e.g. t-SNE, UMAP, etc.). Recent studies are showing that people often use dimensionality reduction as a black-box regardless of the specific properties the method itself preserves. Hence, evaluating and comparing 2D projections is usually qualitatively decided, by setting projections side-by-side and letting human judgment decide which projection is the best. In this work, we propose a quantitative way of evaluating projections, that nonetheless places human perception at the center. We run a comparative study, where we ask people to select 'good' and 'misleading' views between scatterplots of low-level projections of image datasets, simulating the way people usually select projections. We use the study data as labels for a set of quality metrics whose purpose is to discover and quantify what exactly people are looking for when deciding between projections. With this proxy for human judgments, we use it to rank projections on new datasets, explain why they are relevant, and quantify the degree of subjectivity in projections selected.
             </div>
             
+            <h4>BibTex</h4>
+            <div class="bibtex">
+                <textarea>@techreport{morariu2021arxiv,
+	title = {{DumbleDR}: Predicting User Preferences of Dimensionality Reduction Projection Quality},
+	author = {Cristina Morariu and Adrien Bibal and Rene Cutura and Benoit Frenay and Michael Sedlmair},
+	Institution = {{arXiv} preprint},
+	Number = {arXiv:2105.09275},
+	Type = {Technical Report},
+	url = {https://arxiv.org/abs/2105.09275},
+	Year = {2021}
+}</textarea>
+            </div>
             
         </div>
     </div>
@@ -275,7 +406,7 @@
                 <span class="publication">VIS 2020</span>
                 <span class="publication">Short Paper</span>
                 <a href="../pdf/cutura2020druidjs.pdf" target="_blank">PDF</a>
-                <a href="https://ieeexplore.ieee.org/abstract/document/9331283" target="_blank">publisher website</a>
+                <a href="https://ieeexplore.ieee.org/abstract/document/9331283" target="_blank">website</a>
                 <a href="https://youtu.be/LyiqHl4rq34" target="_blank">video</a>
                 <a href="https://renecutura.eu/pdfs/Druid_Supp.pdf" target="_blank">supplemental material</a>
             </div>
@@ -330,7 +461,7 @@
                 <span class="publication">AVI  2020</span>
                 <span class="publication">Full Paper</span>
                 <a href="../pdf/cutura2020comparing.pdf" target="_blank">PDF</a>
-                <a href="https://dl.acm.org/doi/abs/10.1145/3399715.3399875" target="_blank">publisher website</a>
+                <a href="https://dl.acm.org/doi/abs/10.1145/3399715.3399875" target="_blank">website</a>
                 <a href="https://youtu.be/UPkH7rc0ulU" target="_blank">video</a>
                 
             </div>
@@ -378,7 +509,7 @@
                 <span class="publication">AVI  2020</span>
                 <span class="publication">Full Paper</span>
                 
-                <a href="https://dl.acm.org/doi/abs/10.1145/3399715.3399862" target="_blank">publisher website</a>
+                <a href="https://dl.acm.org/doi/abs/10.1145/3399715.3399862" target="_blank">website</a>
                 
                 
             </div>
@@ -389,6 +520,26 @@
                 We report on an interdisciplinary visual analytics project wherein automotive engineers analyze test drive videos. These videos are annotated with navigation-specific augmented reality (AR) content, and the engineers need to identify issues and evaluate the behavior of the underlying AR navigation system. With the increasing amount of video data, traditional analysis approaches can no longer be conducted in an acceptable timeframe. To address this issue, we collaboratively developed Caarvida, a visual analytics tool that helps engineers to accomplish their tasks faster and handle an increased number of videos. Caarvida combines automatic video analysis with interactive and visual user interfaces. We conducted two case studies which show that Caarvida successfully supports domain experts and speeds up their task completion time.
             </div>
             
+            <h4>BibTex</h4>
+            <div class="bibtex">
+                <textarea>@inproceedings{10.1145/3399715.3399862,
+author = {Achberger, Alexander and Cutura, Ren\'{e} and T\"{u}rksoy, Oguzhan and Sedlmair, Michael},
+title = {Caarvida: Visual Analytics for Test Drive Videos},
+year = {2020},
+isbn = {9781450375351},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3399715.3399862},
+doi = {10.1145/3399715.3399862},
+abstract = {We report on an interdisciplinary visual analytics project wherein automotive engineers analyze test drive videos. These videos are annotated with navigation-specific augmented reality (AR) content, and the engineers need to identify issues and evaluate the behavior of the underlying AR navigation system. With the increasing amount of video data, traditional analysis approaches can no longer be conducted in an acceptable timeframe. To address this issue, we collaboratively developed Caarvida, a visual analytics tool that helps engineers to accomplish their tasks faster and handle an increased number of videos. Caarvida combines automatic video analysis with interactive and visual user interfaces. We conducted two case studies which show that Caarvida successfully supports domain experts and speeds up their task completion time.},
+booktitle = {Proceedings of the International Conference on Advanced Visual Interfaces},
+articleno = {6},
+numpages = {9},
+keywords = {visual analytics, object detection, automotive, information visualization, human computer interaction},
+location = {Salerno, Italy},
+series = {AVI '20}
+}</textarea>
+            </div>
             
         </div>
     </div>
@@ -418,7 +569,7 @@
                 <span class="publication">ESANN 2018</span>
                 <span class="publication">Full Paper</span>
                 <a href="../pdf/cutura2018viscoder.pdf" target="_blank">PDF</a>
-                <a href="" target="_blank">publisher website</a>
+                <a href="" target="_blank">website</a>
                 <a href="https://youtu.be/gg2pgv0xwmc" target="_blank">video</a>
                 
             </div>
