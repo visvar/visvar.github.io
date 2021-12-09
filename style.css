@@ -7,7 +7,7 @@
 
 body,
 main {
-    min-width: 500px;
+    min-width: 400px;
     margin: 0;
     background-color: var(--bodyBgColor);
     color: var(--textColor);
@@ -296,6 +296,11 @@ img.avatar {
         grid-area: span 1 / span 2;
     }
 
+    /* Main page about and logo */
+    .aboutusTextAndLogo img {
+        display: none;
+    }
+
     .memberList img.avatar {
         width: 64px;
         height: 64px;
@@ -338,6 +343,11 @@ img.avatar {
         top: -5px;
     }
 
+    /* Main page about and logo */
+    .aboutusTextAndLogo img {
+        display: block;
+    }
+
     .memberList img.avatar {
         width: 96px;
         height: 96px;
@@ -378,6 +388,15 @@ img.avatar {
     }
     a.anchor {
         top: -5px;
+    }
+
+    /* Main page about and logo */
+    .aboutusTextAndLogo {
+        display: grid;
+        grid-template-columns: auto 200px;
+    }
+    .aboutusTextAndLogo img {
+        display: block;
     }
 
     .memberList img.avatar {
