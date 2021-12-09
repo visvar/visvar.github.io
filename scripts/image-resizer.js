@@ -2,25 +2,34 @@ import { readdirSync } from 'fs';
 import path from 'path';
 import { Image } from 'image-js';
 
-const TARGET_WIDTH = 256;
+if (process.argv.length !== 4) {
+    console.error('No directory or targetWidth argument given, run program as "node image-resizer.js ./dir 64" for rescaling images in ./dir to 64px');
+    console.log(process.argv);
+    process.exit(1);
+}
 
-rescale();
 
-async function rescale() {
-    console.log('image-resizer.js');
-    const files = readdirSync('./img');
+const directory = process.argv[2];
+const targetWidth = +process.argv[3];
+
+rescale(directory, targetWidth);
+
+async function rescale(directory, targetWidth) {
+    console.log(`image-resizer.js, dir=${directory} width=${targetWidth}`);
+    const files = readdirSync(directory);
     for (const file of files) {
         if (file === 'small') {
+            // THis is the subdirectory "directory/small/"
             continue;
         }
         console.log(file);
         try {
-            const image = await Image.load(path.join('img', file));
+            const image = await Image.load(path.join(directory, file));
             const processed = image.resize({
-                width: TARGET_WIDTH,
+                width: targetWidth,
                 // interpolation: 'bilinear',
             });
-            processed.save(path.join('img', 'small', file));
+            processed.save(path.join(directory, 'small', file));
         } catch (error) {
             console.log(error.message);
         }

@@ -2,7 +2,6 @@ import { readdirSync } from 'fs';
 import path from 'path';
 import { Image } from 'image-js';
 
-const TARGET_WIDTH = 256;
 
 rescale();
 

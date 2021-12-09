@@ -15,6 +15,8 @@ const members = [
     'Quynh Ngo',
     'Rene Cutura',
     'Ruben Bauer',
+    'Sebastian Rigling',
+    'Simeon Rau',
     'Xingyao Yu',
 ];
 
@@ -58,7 +60,7 @@ const headerAndNav = `
                     <a href="${pageUrl}/#aboutus">about VISVAR</a>
                 </li>
                 <li>
-                    <a href="${pageUrl}/#publications">all publications</a>
+                    <a href="${pageUrl}/#publications">publications</a>
                 </li>
                 <li class="memberNav">
                     <a href="${pageUrl}/#members">members</a>
@@ -88,6 +90,9 @@ csv
     .on('end', createPages);
 
 
+/**
+ * Creates all HTML pages
+ */
 function createPages() {
     console.log(`${papers.length} papers`);
     // Sort by date descending, so newest at top of page
@@ -106,108 +111,6 @@ function createPages() {
     }
     // Export papers.json
     writeFileSync('papers.json', JSON.stringify(papers));
-}
-
-/**
- * Creates HTML for an Array of papers extracted from the CSV
- *
- * @param {object[]} papers papers
- * @param {boolean} [isMember=false] is this a member page?
- * @returns {string} HTML
- */
-function createPublicationsHtml(papers, isMember = false) {
-    return papers.map(d => {
-        const fileName = d['Key (e.g. for file names)'];
-        const image = `${isMember ? '..' : '.'}/img/small/${fileName}.png`;
-        const type = d['Type'];
-        const publisher = d['Publisher URL (official)'];
-        const supplemental = d['Supplemental'];
-        // See if files are there
-        const imageExists = existsSync(join('img', `${fileName}.png`));
-        // PDF and video might be a link instead of file
-        let pdf = d['PDF URL (public)'];
-        let pdfExists = existsSync(join('pdf', `${fileName}.pdf`));
-        if (!pdfExists && pdf && pdf !== '') {
-            pdfExists = true;
-        } else {
-            pdf = `${isMember ? '..' : '.'}/pdf/${fileName}.pdf`;
-        }
-        let video = d['Video'];
-        let videoExists = existsSync(join('video', `${fileName}.mp4`));
-        if (!videoExists && video && video !== '') {
-            videoExists = true;
-        } else {
-            video = `${isMember ? '..' : '.'}/video/${fileName}.mp4`;
-        }
-        // Check for missing files, but only when compiling main page (only once)
-        if (!isMember) {
-            if (!imageExists) {
-                console.log(`  missing image: img/${fileName}.png`);
-            }
-            if (!pdfExists) {
-                console.log(`  missing pdf:   pdf/${fileName}.pdf`);
-            }
-        }
-
-        return `
-    <div
-        class="paper small"
-        id="paper${fileName}"
-    >
-        <h2
-           onclick="toggleClass('paper${fileName}', 'small'); toggleImageSize(image${fileName});"
-        >
-            ${d['Title']}
-        </h2>
-        ${imageExists
-                ? `
-            <img
-                id="image${fileName}"
-                onclick="toggleClass('paper${fileName}', 'small'); toggleImageSize(this);"
-                class="publicationImage small"
-                src="${image}"
-            />`
-                : ''
-            }
-        <div class="metaData ${imageExists ? '' : 'noImage'}">
-            <div class="authors">
-                <span class="firstAuthor">${d['First Author']}</span>${d['Other Authors'] !== '' ? ',' : ''}
-                ${d['Other Authors']}
-            </div>
-            <div>
-                <span class="publication">${d['Submission Target']} ${d['Date'].slice(0, 4)}</span>
-                ${type && type !== '' ? `<span class="publication">${d['Type']}</span>` : ''}
-                ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
-                <a href="${publisher}" target="_blank">website</a>
-                ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
-                ${supplemental ? `<a href="${supplemental}" target="_blank">supplemental material</a>` : ''}
-            </div>
-        </div>
-        <div class="info">
-            <h4>Abstract</h4>
-            <div class="abstract">
-                ${d['Abstract']}
-            </div>
-            ${d['bibtex']
-                ? `
-            <h4>BibTex</h4>
-            <div class="bibtex">
-                <textarea>${d['bibtex']}</textarea>
-            </div>`
-                : ''
-            }
-            ${d['Acknowledgements']
-                ? `
-            <h4>Acknowledgements</h4>
-            <div class="abstract">
-                ${d['Acknowledgements']}
-            </div>`
-                : ''
-            }
-        </div>
-    </div>
-    `;
-    }).join('');
 }
 
 /**
@@ -259,6 +162,110 @@ function createMainPageHtml(published) {
 </html>`;
     writeFileSync('./index.html', html);
     console.log(`Wrote index.html`);
+}
+
+/**
+ * Creates HTML for an Array of papers extracted from the CSV
+ *
+ * @param {object[]} papers papers
+ * @param {boolean} [isMember=false] is this a member page?
+ * @returns {string} HTML
+ */
+function createPublicationsHtml(papers, isMember = false) {
+    return papers.map(d => {
+        const fileName = d['Key (e.g. for file names)'];
+        const image = `${isMember ? '..' : '.'}/img/small/${fileName}.png`;
+        const type = d['Type'];
+        const publisher = d['Publisher URL (official)'];
+        const supplemental = d['Supplemental'];
+        // See if files are there
+        const imageExists = existsSync(join('img', `${fileName}.png`));
+        // PDF and video might be a link instead of file
+        let pdf = d['PDF URL (public)'];
+        let pdfExists = existsSync(join('pdf', `${fileName}.pdf`));
+        if (!pdfExists && pdf && pdf !== '') {
+            pdfExists = true;
+        } else {
+            pdf = `${isMember ? '..' : '.'}/pdf/${fileName}.pdf`;
+        }
+        let video = d['Video'];
+        let videoExists = existsSync(join('video', `${fileName}.mp4`));
+        if (!videoExists && video && video !== '') {
+            videoExists = true;
+        } else {
+            video = `${isMember ? '..' : '.'}/video/${fileName}.mp4`;
+        }
+        // Check for missing files, but only when compiling main page (only once)
+        if (!isMember) {
+            if (!imageExists) {
+                console.log(`  missing image: img/${fileName}.png`);
+            }
+            if (!pdfExists) {
+                console.log(`  missing pdf:   pdf/${fileName}.pdf`);
+            }
+        }
+
+        return `
+    <div
+        class="paper small"
+        id="paper${fileName}"
+    >
+        ${imageExists
+                ? `
+            <img
+                id="image${fileName}"
+                title="Click to enlarge and show details"
+                onclick="toggleClass('paper${fileName}', 'small'); toggleImageSize(this);"
+                class="publicationImage small"
+                src="${image}"
+            />`
+                : ''
+            }
+        <div class="metaData ${imageExists ? '' : 'noImage'}">
+            <h2
+                onclick="toggleClass('paper${fileName}', 'small'); toggleImageSize(image${fileName});"
+                title="Click to show details"
+            >
+                ${d['Title']}
+            </h2>
+            <div class="authors">
+                <span class="firstAuthor">${d['First Author']}</span>${d['Other Authors'] !== '' ? ',' : ''}
+                ${d['Other Authors']}
+            </div>
+            <div>
+                <span class="publication">${d['Submission Target']} ${d['Date'].slice(0, 4)}</span>
+                ${type && type !== '' ? `<span class="publication">${d['Type']}</span>` : ''}
+                ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
+                <a href="${publisher}" target="_blank">website</a>
+                ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
+                ${supplemental ? `<a href="${supplemental}" target="_blank">more...</a>` : ''}
+            </div>
+        </div>
+        <div class="info">
+            <h4>Abstract</h4>
+            <div class="abstract">
+                ${d['Abstract']}
+            </div>
+            ${d['bibtex']
+                ? `
+            <h4>BibTex</h4>
+            <div class="bibtex">
+                <textarea>${d['bibtex']}</textarea>
+            </div>`
+                : ''
+            }
+            ${d['Acknowledgements']
+                ? `
+            <h4>Acknowledgements</h4>
+            <div class="abstract">
+                ${d['Acknowledgements']}
+            </div>`
+                : ''
+            }
+        </div>
+    </div>
+    `;
+    }).join('');
 }
 
 /**
@@ -314,7 +321,7 @@ function createMemberPageHtml(member, fileName, papers) {
 
 /**
  * Members list with avatars
- * @returns
+ * @returns {string} HTML
  */
 function createMemberListHtml() {
     return members.map((member, index) => `
@@ -322,7 +329,7 @@ function createMemberListHtml() {
         <a href="./members/${memberPaths[index]}.html">
             <img
                 class="avatar"
-                src="./img/small/${memberPaths[index]}.jpg"
+                src="./img/people/small/${memberPaths[index]}.jpg"
             />
             <div>
                 ${member}
