@@ -40,6 +40,7 @@ async function rescale(directory, targetWidth) {
             });
             processed.save(path.join(directory, 'small', file));
         } catch (error) {
+            console.log('Error:');
             console.log(error.message);
         }
     }

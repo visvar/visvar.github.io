@@ -173,49 +173,49 @@ function createMainPageHtml(published) {
  */
 function createPublicationsHtml(papers, isMember = false) {
     return papers.map(d => {
-        const fileName = d['Key (e.g. for file names)'];
-        const image = `${isMember ? '..' : '.'}/img/small/${fileName}.png`;
+        const key = d['Key (e.g. for file names)'];
+        const image = `${isMember ? '..' : '.'}/img/small/${key}.png`;
         const type = d['Type'];
         const publisher = d['Publisher URL (official)'];
         const supplemental = d['Supplemental'];
         // See if files are there
-        const imageExists = existsSync(join('img', `${fileName}.png`));
+        const imageExists = existsSync(join('img', `${key}.png`));
         // PDF and video might be a link instead of file
         let pdf = d['PDF URL (public)'];
-        let pdfExists = existsSync(join('pdf', `${fileName}.pdf`));
+        let pdfExists = existsSync(join('pdf', `${key}.pdf`));
         if (!pdfExists && pdf && pdf !== '') {
             pdfExists = true;
         } else {
-            pdf = `${isMember ? '..' : '.'}/pdf/${fileName}.pdf`;
+            pdf = `${isMember ? '..' : '.'}/pdf/${key}.pdf`;
         }
         let video = d['Video'];
-        let videoExists = existsSync(join('video', `${fileName}.mp4`));
+        let videoExists = existsSync(join('video', `${key}.mp4`));
         if (!videoExists && video && video !== '') {
             videoExists = true;
         } else {
-            video = `${isMember ? '..' : '.'}/video/${fileName}.mp4`;
+            video = `${isMember ? '..' : '.'}/video/${key}.mp4`;
         }
         // Check for missing files, but only when compiling main page (only once)
         if (!isMember) {
             if (!imageExists) {
-                console.log(`  missing image: img/${fileName}.png`);
+                console.log(`  missing image: img/${key}.png`);
             }
             if (!pdfExists) {
-                console.log(`  missing pdf:   pdf/${fileName}.pdf`);
+                console.log(`  missing pdf:   pdf/${key}.pdf`);
             }
         }
 
         return `
     <div
         class="paper small"
-        id="paper${fileName}"
+        id="paper${key}"
     >
         ${imageExists
                 ? `
             <img
-                id="image${fileName}"
+                id="image${key}"
                 title="Click to enlarge and show details"
-                onclick="toggleClass('paper${fileName}', 'small'); toggleImageSize(this);"
+                onclick="toggleClass('paper${key}', 'small'); toggleImageSize(this);"
                 class="publicationImage small"
                 src="${image}"
             />`
@@ -223,11 +223,11 @@ function createPublicationsHtml(papers, isMember = false) {
             }
         <div class="metaData ${imageExists ? '' : 'noImage'}">
             <h2
-                onclick="toggleClass('paper${fileName}', 'small'); toggleImageSize(image${fileName});"
+                onclick="toggleClass('paper${key}', 'small'); toggleImageSize(image${key});"
                 title="Click to show details"
             >
                 ${d['Title']}
-            </h2>
+            </h2>  <a class="anchor" name="${key}"></a>
             <div class="authors">
                 <span class="firstAuthor">${d['First Author']}</span>${d['Other Authors'] !== '' ? ',' : ''}
                 ${d['Other Authors']}

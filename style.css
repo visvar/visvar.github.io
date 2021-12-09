@@ -11,7 +11,7 @@ main {
     margin: 0;
     background-color: var(--bodyBgColor);
     color: var(--textColor);
-    font-size: 14px;
+    font-size: 14.5px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -39,13 +39,13 @@ nav {
 
 article {
     margin: 0 5px 5px 5px;
-    padding-bottom: 20px;
+    padding-bottom: 100px;
 }
 
 section {
     background-color: #333;
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 10px 20px 30px 20px;
 }
 
 nav ul {
@@ -131,6 +131,8 @@ section a i {
 
 /* Main page member list */
 .memberList {
+    max-width: 620px;
+    margin: auto;
     display: grid;
     row-gap: 20px;
     text-align: center;
@@ -163,12 +165,14 @@ img.avatar {
 
 /* Publications */
 .paper {
+    margin-top: 75px;
     margin-bottom: 100px;
     display: grid;
     grid-template-columns: auto;
 }
 
 .paper.small {
+    margin-top: 0;
     margin-bottom: 25px;
     grid-template-columns: 132px auto;
 }
@@ -181,7 +185,7 @@ img.avatar {
 
 .paper img.publicationImage {
     grid-area: span 1 / span 2;
-    margin-bottom: 15px;
+    margin: 4px 0 15px 0;
     width: 100%;
     border-radius: 3px;
     box-shadow: #888 1px 1px 10px;
@@ -193,9 +197,8 @@ img.avatar {
 }
 
 .metaData {
-    margin-bottom: 5px;
     padding-left: 20px;
-    font-size: 0.9em;
+    font-size: 0.95em;
     color: var(--textColor2);
 }
 .paper:not(.small) .metaData {
@@ -216,13 +219,14 @@ img.avatar {
 .publication {
     margin-right: 5px;
     padding: 1px 4px 1px 4px;
-    border: 1px solid #888;
+    border: 1px solid #ccc;
     border-radius: 5px;
 }
 
 .metaData a {
-    padding: 0 5px;
-    text-decoration: underline;
+    padding: 0 3px;
+    /* text-decoration: underline; */
+    text-decoration: none;
 }
 
 .paper .info {
