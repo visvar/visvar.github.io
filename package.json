@@ -8,7 +8,7 @@
     "start": "npm run resizePeople && npm run resizeThumbs  && npm run tocsv && npm run mon",
     "topng": "node ./scripts/image-to-png.js",
     "resizePeople": "node ./scripts/image-resizer.js img/people 256",
-    "resizeThumbs": "node ./scripts/image-resizer.js img 128",
+    "resizeThumbs": "node ./scripts/image-resizer.js img 256",
     "tocsv": "node ./scripts/table-to-csv.js",
     "mon": "nodemon ./compile.js -e js,html,csv --ignore members/ --ignore index.html",
     "test": "echo \"Error: no test specified\" && exit 1",

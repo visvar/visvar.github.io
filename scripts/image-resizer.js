@@ -27,8 +27,8 @@ async function rescale(directory, targetWidth) {
     console.log(`image-resizer.js, dir=${directory} width=${targetWidth}`);
     const files = readdirSync(directory);
     for (const file of files) {
-        if (file === 'small') {
-            // This is the subdirectory "directory/small/"
+        if (!file.includes('.')) {
+            // Subdirectory or at least no image file
             continue;
         }
         console.log(file);
