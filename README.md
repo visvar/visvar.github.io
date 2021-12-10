@@ -13,7 +13,7 @@
 ## Adding Content
 
 Only change files in the below folders, nothing else!
-After a change, compile the website as described below for changes to take effect.
+After a change, compile the website as described below for changes to take effect or ask @fheyen.
 
 ### "About" Pages
 
@@ -34,7 +34,7 @@ The pattern is lastnameYearKeyword (example: heyen2020clavis).
 
 ## Compiling
 
-If not done yet, install packages with `npm i` (you obviously need Node.js and npm to be installed).
+If not done yet, install packages with `npm i` (you obviously need [Node.js and npm](https://nodejs.org/en/) to be installed).
 
 `npm start` starts the compiler in watch mode.
 It will re-build the whole page any time a .js or .html file changes.
