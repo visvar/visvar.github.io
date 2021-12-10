@@ -172,9 +172,10 @@ function createMainPageHtml(published) {
  * @returns {string} HTML
  */
 function createPublicationsHtml(papers, isMember = false) {
-    return papers.map(d => {
+    return papers.map((d, i) => {
         const key = d['Key (e.g. for file names)'];
         const image = `${isMember ? '..' : '.'}/img/small/${key}.png`;
+        const year = d['Date'].slice(0, 4);
         const type = d['Type'];
         const publisher = d['Publisher URL (official)'];
         const supplemental = d['Supplemental'];
@@ -206,6 +207,12 @@ function createPublicationsHtml(papers, isMember = false) {
         }
 
         return `
+    ${i === 0 || year !== papers[i - 1]['Date'].slice(0, 4)
+                ? `
+    <h2>
+        ${year}
+    </h2>
+    `: ''}
     <div
         class="paper small"
         id="paper${key}"
@@ -222,18 +229,18 @@ function createPublicationsHtml(papers, isMember = false) {
                 : ''
             }
         <div class="metaData ${imageExists ? '' : 'noImage'}">
-            <h2
+            <h3
                 onclick="toggleClass('paper${key}', 'small'); toggleImageSize(image${key});"
                 title="Click to show details"
             >
                 ${d['Title']}
-            </h2>  <a class="anchor" name="${key}"></a>
+            </h3>  <a class="anchor" name="${key}"></a>
             <div class="authors">
                 <span class="firstAuthor">${d['First Author']}</span>${d['Other Authors'] !== '' ? ',' : ''}
                 ${d['Other Authors']}
             </div>
             <div>
-                <span class="publication">${d['Submission Target']} ${d['Date'].slice(0, 4)}</span>
+                <span class="publication">${d['Submission Target']} ${year}</span>
                 ${type && type !== '' ? `<span class="publication">${d['Type']}</span>` : ''}
                 ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
                 <a href="${publisher}" target="_blank">website</a>

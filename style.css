@@ -112,7 +112,8 @@ h1 {
     color: var(--linkColor)
 }
 
-h2 {
+h2,
+h3 {
     margin-top: 30px;
     font-size: 20px;
     color: var(--textColor2);
@@ -165,19 +166,17 @@ img.avatar {
 
 /* Publications */
 .paper {
-    margin-top: 75px;
     margin-bottom: 100px;
     display: grid;
     grid-template-columns: auto;
 }
 
 .paper.small {
-    margin-top: 0;
     margin-bottom: 25px;
     grid-template-columns: 132px auto;
 }
 
-.paper h2 {
+.paper h3 {
     margin: 0;
     font-size: 15px;
     cursor: pointer;
@@ -197,7 +196,7 @@ img.avatar {
 }
 
 .metaData {
-    padding-left: 20px;
+    padding-left: 15px;
     font-size: 0.95em;
     color: var(--textColor2);
 }
@@ -218,7 +217,7 @@ img.avatar {
 
 .publication {
     margin-right: 5px;
-    padding: 1px 4px 1px 4px;
+    padding: 0 4px 1px 4px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
