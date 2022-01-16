@@ -1,9 +1,9 @@
-import { createReadStream, readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
-import csv from 'fast-csv';
+import { createReadStream, readFileSync, writeFileSync, existsSync } from 'node:fs'
+import { join } from 'node:path'
+import csv from 'fast-csv'
 // import querystring from 'querystring';
 
-const file = './Papers.csv';
+const file = './Papers.csv'
 const members = [
     'Aimee Sousa Calepso',
     'Alexander Achberger',
@@ -18,19 +18,19 @@ const members = [
     'Sebastian Rigling',
     'Simeon Rau',
     'Xingyao Yu',
-];
+]
 
-const pageUrl = 'https://visvar.github.io';
-const pageTitle = 'VISVAR Research Group, University of Stuttgart';
+const pageUrl = 'https://visvar.github.io'
+const pageTitle = 'VISVAR Research Group, University of Stuttgart'
 
 const memberPaths = members.map(member => {
     return member
         .trim()
         .split(' ')
         .join('_')
-        .toLowerCase();
+        .toLowerCase()
     // TODO: url encode!
-});
+})
 // .map(d => querystring.stringify(d'));
 
 const headerAndNav = `
@@ -77,52 +77,52 @@ const headerAndNav = `
             </ul>
         </nav>
     </div>
-</header>`;
+</header>`
 
 
-const stream = createReadStream(file);
-const papers = [];
+const stream = createReadStream(file)
+const papers = []
 
 // Main loop
 csv
     .parseStream(stream, { headers: true })
     .on('data', data => data.Title !== '' && papers.push(data))
-    .on('end', createPages);
+    .on('end', createPages)
 
 
 /**
  * Creates all HTML pages
  */
-function createPages() {
-    console.log(`${papers.length} papers`);
+function createPages () {
+    console.log(`${papers.length} papers`)
     // Sort by date descending, so newest at top of page
     papers.sort((a, b) => a['Date'] > b['Date'] ? -1 : 1
-    );
+    )
     // Main page
-    createMainPageHtml(papers);
+    createMainPageHtml(papers)
     // Member / author pages
     for (const [index, member] of members.entries()) {
         const authoredPapers = papers.filter(d => {
             return d['First Author'].includes(member)
-                || d['Other Authors'].includes(member);
-        });
-        const fileName = memberPaths[index];
-        createMemberPageHtml(member, fileName, authoredPapers);
+                || d['Other Authors'].includes(member)
+        })
+        const fileName = memberPaths[index]
+        createMemberPageHtml(member, fileName, authoredPapers)
     }
     // Export papers.json
-    writeFileSync('papers.json', JSON.stringify(papers));
+    writeFileSync('papers.json', JSON.stringify(papers))
 }
 
 /**
  * Creates HTML from the CSV data
  */
-function createMainPageHtml(published) {
+function createMainPageHtml (published) {
     // Create HTML
-    const papersHtml = createPublicationsHtml(published);
+    const papersHtml = createPublicationsHtml(published)
     // Read nav and about us page
-    const aboutUs = readFileSync('./aboutus.html');
+    const aboutUs = readFileSync('./aboutus.html')
     // Create member list with avatars
-    const memberList = createMemberListHtml();
+    const memberList = createMemberListHtml()
     // Combine HTML
     const html = `<!DOCTYPE html>
 <html lang="en">
@@ -159,9 +159,9 @@ function createMainPageHtml(published) {
         </div>
     </main>
 </body>
-</html>`;
-    writeFileSync('./index.html', html);
-    console.log(`Wrote index.html`);
+</html>`
+    writeFileSync('./index.html', html)
+    console.log(`Wrote index.html`)
 }
 
 /**
@@ -171,38 +171,38 @@ function createMainPageHtml(published) {
  * @param {boolean} [isMember=false] is this a member page?
  * @returns {string} HTML
  */
-function createPublicationsHtml(papers, isMember = false) {
+function createPublicationsHtml (papers, isMember = false) {
     return papers.map((d, i) => {
-        const key = d['Key (e.g. for file names)'];
-        const image = `${isMember ? '..' : '.'}/img/small/${key}.png`;
-        const year = d['Date'].slice(0, 4);
-        const type = d['Type'];
-        const publisher = d['Publisher URL (official)'];
-        const supplemental = d['Supplemental'];
+        const key = d['Key (e.g. for file names)']
+        const image = `${isMember ? '..' : '.'}/img/small/${key}.png`
+        const year = d['Date'].slice(0, 4)
+        const type = d['Type']
+        const publisher = d['Publisher URL (official)']
+        const supplemental = d['Supplemental']
         // See if files are there
-        const imageExists = existsSync(join('img', `${key}.png`));
+        const imageExists = existsSync(join('img', `${key}.png`))
         // PDF and video might be a link instead of file
-        let pdf = d['PDF URL (public)'];
-        let pdfExists = existsSync(join('pdf', `${key}.pdf`));
+        let pdf = d['PDF URL (public)']
+        let pdfExists = existsSync(join('pdf', `${key}.pdf`))
         if (!pdfExists && pdf && pdf !== '') {
-            pdfExists = true;
+            pdfExists = true
         } else {
-            pdf = `${isMember ? '..' : '.'}/pdf/${key}.pdf`;
+            pdf = `${isMember ? '..' : '.'}/pdf/${key}.pdf`
         }
-        let video = d['Video'];
-        let videoExists = existsSync(join('video', `${key}.mp4`));
+        let video = d['Video']
+        let videoExists = existsSync(join('video', `${key}.mp4`))
         if (!videoExists && video && video !== '') {
-            videoExists = true;
+            videoExists = true
         } else {
-            video = `${isMember ? '..' : '.'}/video/${key}.mp4`;
+            video = `${isMember ? '..' : '.'}/video/${key}.mp4`
         }
         // Check for missing files, but only when compiling main page (only once)
         if (!isMember) {
             if (!imageExists) {
-                console.log(`  missing image: img/${key}.png`);
+                console.log(`  missing image: img/${key}.png`)
             }
             if (!pdfExists) {
-                console.log(`  missing pdf:   pdf/${key}.pdf`);
+                console.log(`  missing pdf:   pdf/${key}.pdf`)
             }
         }
 
@@ -271,23 +271,23 @@ function createPublicationsHtml(papers, isMember = false) {
             }
         </div>
     </div>
-    `;
-    }).join('');
+    `
+    }).join('')
 }
 
 /**
  * Creates HTML from the CSV data
  */
-function createMemberPageHtml(member, fileName, papers) {
+function createMemberPageHtml (member, fileName, papers) {
     // Create HTML
-    const papersHtml = createPublicationsHtml(papers, true);
+    const papersHtml = createPublicationsHtml(papers, true)
     // Read nav and about us page
-    let about = '';
-    const aboutFile = `./about/${fileName}.html`;
+    let about = ''
+    const aboutFile = `./about/${fileName}.html`
     try {
-        about = readFileSync(aboutFile);
+        about = readFileSync(aboutFile)
     } catch {
-        console.warn(`No about found for ${member}, ${aboutFile} is missing`);
+        console.warn(`No about found for ${member}, ${aboutFile} is missing`)
     }
     // Combine HTML
     const html = `<!DOCTYPE html>
@@ -319,10 +319,10 @@ function createMemberPageHtml(member, fileName, papers) {
         </div>
     </main>
 </body>
-</html>`;
-    const outFile = `./members/${fileName}.html`;
-    writeFileSync(outFile, html);
-    console.log(`Wrote ${outFile}`);
+</html>`
+    const outFile = `./members/${fileName}.html`
+    writeFileSync(outFile, html)
+    console.log(`Wrote ${outFile}`)
 }
 
 
@@ -330,7 +330,7 @@ function createMemberPageHtml(member, fileName, papers) {
  * Members list with avatars
  * @returns {string} HTML
  */
-function createMemberListHtml() {
+function createMemberListHtml () {
     return members.map((member, index) => `
     <div>
         <a href="./members/${memberPaths[index]}.html">
@@ -343,5 +343,5 @@ function createMemberListHtml() {
             </div>
         </a>
     </div>
-    `).join('\n');
+    `).join('\n')
 }
