@@ -178,7 +178,7 @@ function createPublicationsHtml (papers, isMember = false) {
     const image = `${isMember ? '..' : '.'}/img/small/${key}.png`
     const year = d['Date'].slice(0, 4)
     const type = d['Type']
-    const publisher = d['Publisher URL (official)']
+    const website = d['Publisher URL (official)']
     const supplemental = d['Supplemental']
     // See if files are there
     const imageExists = existsSync(join('img', `${key}.png`))
@@ -244,7 +244,7 @@ function createPublicationsHtml (papers, isMember = false) {
                 <span class="publication">${d['Submission Target']} ${year}</span>
                 ${type && type !== '' ? `<span class="publication">${d['Type']}</span>` : ''}
                 ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
-                <a href="${publisher}" target="_blank">website</a>
+                ${website && website !== '' ? `<a href="${website}" target="_blank">website</a>` : ''}
                 ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
                 ${supplemental ? `<a href="${supplemental}" target="_blank">more...</a>` : ''}
             </div>

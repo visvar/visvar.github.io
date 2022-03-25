@@ -9,6 +9,7 @@
       3. [Papers](#papers)
    2. [Compiling](#compiling)
    3. [Deployment / Publishing](#deployment--publishing)
+   4. [Dependency Update](#dependency-update)
 
 ## Adding Content
 
@@ -47,3 +48,8 @@ Simply do a git commit and push, e.g. run
 - `git add .`
 - `git commit -m "some useful commit message"`
 - `git push`
+
+## Dependency Update
+
+- `npm run upd`
+- `npm i`
