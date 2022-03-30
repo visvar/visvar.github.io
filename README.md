@@ -18,7 +18,9 @@ After a change, compile the website as described below for changes to take effec
 
 ### "About" Pages
 
-See [about/](./about/).
+The main page is inside `aboutus.html`.
+
+One for each member, see [about/](./about/).
 
 ### Media
 
