@@ -179,10 +179,9 @@ function createPublicationsHtml (papers, isMember = false) {
     const year = d['Date'].slice(0, 4)
     const type = d['Type']
     const website = d['Publisher URL (official)']
-    const supplemental = d['Supplemental']
     // See if files are there
     const imageExists = existsSync(join('img', `${key}.png`))
-    // PDF and video might be a link instead of file
+    // PDF, video, and supplemental might be a link instead of file
     let pdf = d['PDF URL (public)']
     let pdfExists = existsSync(join('pdf', `${key}.pdf`))
     if (!pdfExists && pdf && pdf !== '') {
@@ -196,6 +195,13 @@ function createPublicationsHtml (papers, isMember = false) {
       videoExists = true
     } else {
       video = `${isMember ? '..' : '.'}/video/${key}.mp4`
+    }
+    let suppl = d['Supplemental']
+    let supplExists = existsSync(join('suppl', `${key}.zip`))
+    if (!supplExists && suppl && suppl !== '') {
+      supplExists = true
+    } else {
+      suppl = `${isMember ? '..' : '.'}/suppl/${key}.zip`
     }
     // Check for missing files, but only when compiling main page (only once)
     if (!isMember) {
@@ -246,7 +252,7 @@ function createPublicationsHtml (papers, isMember = false) {
                 ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
                 ${website && website !== '' ? `<a href="${website}" target="_blank">website</a>` : ''}
                 ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
-                ${supplemental ? `<a href="${supplemental}" target="_blank">more...</a>` : ''}
+                ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
             </div>
         </div>
         <div class="info">
