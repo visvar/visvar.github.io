@@ -20,7 +20,7 @@
     "fast-csv": "^4.3.6",
     "image-js": "^1.0.0-alpha.3",
     "nodemon": "^2.0.16",
-    "npm-check-updates": "^12.5.11",
+    "npm-check-updates": "^13.0.0",
     "xlsx": "^0.18.5"
   }
 }
