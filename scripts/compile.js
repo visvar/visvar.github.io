@@ -264,7 +264,7 @@ function createPublicationsHtml (papers, isMember = false) {
         ? `
             <h4>BibTex</h4>
             <div class="bibtex">
-                <textarea>${d['bibtex']}</textarea>
+                <textarea>${d['bibtex'].trim()}</textarea>
             </div>`
         : ''
       }
