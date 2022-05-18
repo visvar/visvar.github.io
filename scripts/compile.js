@@ -36,48 +36,48 @@ const memberPaths = members.map(member => {
 
 const headerAndNav = `
 <header>
-    <div>
-        <a href="${pageUrl}/">
-            <h1 class="h1desktop">
-                <div>
-                    VISVAR
-                </div>
-                <div>
-                    Research
-                </div>
-                <div>
-                    Group
-                </div>
-            </h1>
-            <h1 class="h1mobile">
-                VISVAR
-            </h1>
-        </a>
-    </div>
-    <div>
-        <nav>
-            <ul>
-                <li>
-                    <a href="${pageUrl}/#aboutus">about VISVAR</a>
-                </li>
-                <li>
-                    <a href="${pageUrl}/#publications">publications</a>
-                </li>
-                <li class="memberNav">
-                    <a href="${pageUrl}/#members">members</a>
-                </li>
-                <ul class="memberNav">
-                    ${members.map((d, i) => `
-                        <li>
-                            <a href="${pageUrl}/members/${memberPaths[i]}.html">
-                                ${d}
-                            </a>
-                        </li>
-                    `).join('')}
-                </ul>
-            </ul>
-        </nav>
-    </div>
+  <div>
+    <a href="${pageUrl}/">
+      <h1 class="h1desktop">
+        <div>
+          VISVAR
+        </div>
+        <div>
+          Research
+        </div>
+        <div>
+          Group
+        </div>
+      </h1>
+      <h1 class="h1mobile">
+        VISVAR
+      </h1>
+    </a>
+  </div>
+  <div>
+    <nav>
+      <ul>
+        <li>
+          <a href="${pageUrl}/#aboutus">about VISVAR</a>
+        </li>
+        <li>
+          <a href="${pageUrl}/#publications">publications</a>
+        </li>
+        <li class="memberNav">
+          <a href="${pageUrl}/#members">members</a>
+        </li>
+        <ul class="memberNav">
+          ${members.map((d, i) => `
+            <li>
+              <a href="${pageUrl}/members/${memberPaths[i]}.html">
+                ${d}
+              </a>
+            </li>
+          `).join('')}
+        </ul>
+      </ul>
+    </nav>
+  </div>
 </header>`
 
 
@@ -128,37 +128,37 @@ function createMainPageHtml (published) {
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${pageTitle}</title>
-    <link rel="stylesheet" href="./style.css">
-    <script src="./script.js"></script>
-    <link rel="shortcut icon" href="./img/favicon.png">
-    <link rel="icon" type="image/png" href="./img/favicon.png" sizes="256x256">
-    <link rel="apple-touch-icon" sizes="256x256" href="./img/favicon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${pageTitle}</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js"></script>
+  <link rel="shortcut icon" href="./img/favicon.png">
+  <link rel="icon" type="image/png" href="./img/favicon.png" sizes="256x256">
+  <link rel="apple-touch-icon" sizes="256x256" href="./img/favicon.png">
 </head>
 <body>
-    <a class="anchor" name="top"></a>
-    <main>
-        <div>
-            ${headerAndNav}
+  <a class="anchor" name="top"></a>
+  <main>
+    <div>
+      ${headerAndNav}
+    </div>
+    <div>
+      <article> <a class="anchor" name="aboutus"></a>
+        ${aboutUs}
+      </article>
+      <article> <a class="anchor" name="members"></a>
+        <h1>Members</h1>
+        <div class="memberList">
+          ${memberList}
         </div>
-        <div>
-            <article> <a class="anchor" name="aboutus"></a>
-                ${aboutUs}
-            </article>
-            <article> <a class="anchor" name="members"></a>
-                <h1>Members</h1>
-                <div class="memberList">
-                    ${memberList}
-                </div>
-            </article>
-            <article> <a class="anchor" name="publications"></a>
-                <h1>Publications</h1>
-                ${papersHtml}
-            </article>
-        </div>
-    </main>
+      </article>
+      <article> <a class="anchor" name="publications"></a>
+        <h1>Publications</h1>
+        ${papersHtml}
+      </article>
+    </div>
+  </main>
 </body>
 </html>`
   writeFileSync('./index.html', html)
@@ -206,79 +206,80 @@ function createPublicationsHtml (papers, isMember = false) {
     // Check for missing files, but only when compiling main page (only once)
     if (!isMember) {
       if (!imageExists) {
-        console.log(`  missing image: img/${key}.png`)
+        console.log(`  missing: img/${key}.png`)
       }
       if (!pdfExists) {
-        console.log(`  missing pdf:   pdf/${key}.pdf`)
+        console.log(`  missing: pdf/${key}.pdf`)
       }
     }
 
     return `
-    ${i === 0 || year !== papers[i - 1]['Date'].slice(0, 4)
+  ${i === 0 || year !== papers[i - 1]['Date'].slice(0, 4)
         ? `
-    <h2>
-        ${year}
-    </h2>
-    `: ''}
-    <div
-        class="paper small"
-        id="paper${key}"
-    >
-        ${imageExists
+  <h2>
+    ${year}
+  </h2>
+  `: ''}
+  <div
+    class="paper small"
+    id="paper${key}"
+  >
+    ${imageExists
         ? `
-            <img
-                id="image${key}"
-                title="Click to enlarge and show details"
-                onclick="toggleClass('paper${key}', 'small'); toggleImageSize(this);"
-                class="publicationImage small"
-                src="${image}"
-            />`
+      <img
+        id="image${key}"
+        title="Click to enlarge and show details"
+        onclick="toggleClass('paper${key}', 'small'); toggleImageSize(this);"
+        class="publicationImage small"
+        src="${image}"
+      />`
         : ''
       }
-        <div class="metaData ${imageExists ? '' : 'noImage'}">
-            <h3
-                onclick="toggleClass('paper${key}', 'small'); toggleImageSize(image${key});"
-                title="Click to show details"
-            >
-                ${d['Title']}
-            </h3>  <a class="anchor" name="${key}"></a>
-            <div class="authors">
-                <span class="firstAuthor">${d['First Author']}</span>${d['Other Authors'] !== '' ? ',' : ''}
-                ${d['Other Authors']}
-            </div>
-            <div>
-                <span class="publication">${d['Submission Target']} ${year}</span>
-                ${type && type !== '' ? `<span class="publication">${d['Type']}</span>` : ''}
-                ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
-                ${website && website !== '' ? `<a href="${website}" target="_blank">website</a>` : ''}
-                ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
-                ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
-            </div>
-        </div>
-        <div class="info">
-            <h4>Abstract</h4>
-            <div class="abstract">
-                ${d['Abstract']}
-            </div>
-            ${d['bibtex']
-        ? `
-            <h4>BibTex</h4>
-            <div class="bibtex">
-                <textarea>${d['bibtex'].trim()}</textarea>
-            </div>`
-        : ''
-      }
-            ${d['Acknowledgements']
-        ? `
-            <h4>Acknowledgements</h4>
-            <div class="abstract">
-                ${d['Acknowledgements']}
-            </div>`
-        : ''
-      }
-        </div>
+    <div class="metaData ${imageExists ? '' : 'noImage'}">
+      <h3
+        onclick="toggleClass('paper${key}', 'small'); toggleImageSize(image${key});"
+        title="Click to show details"
+      >
+        ${d['Title']}
+        <a class="anchor" name="${key}"></a>
+      </h3>
+      <div class="authors">
+        <span class="firstAuthor">${d['First Author']}</span>${d['Other Authors'] !== '' ? ',' : ''}
+        ${d['Other Authors']}
+      </div>
+      <div>
+        <span class="publication">${d['Submission Target']} ${year}</span>
+        ${type && type !== '' ? `<span class="publication">${d['Type']}</span>` : ''}
+        ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
+        ${website && website !== '' ? `<a href="${website}" target="_blank">website</a>` : ''}
+        ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
+        ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
+      </div>
     </div>
-    `
+    <div class="info">
+      <h4>Abstract</h4>
+      <div class="abstract">
+        ${d['Abstract']}
+      </div>
+      ${d['bibtex']
+        ? `
+      <h4>BibTex</h4>
+      <div class="bibtex">
+        <textarea>${d['bibtex'].trim()}</textarea>
+      </div>`
+        : ''
+      }
+      ${d['Acknowledgements']
+        ? `
+      <h4>Acknowledgements</h4>
+      <div class="abstract">
+        ${d['Acknowledgements']}
+      </div>`
+        : ''
+      }
+    </div>
+  </div>
+  `
   }).join('')
 }
 
@@ -300,31 +301,31 @@ function createMemberPageHtml (member, fileName, papers) {
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${member} | ${pageTitle}</title>
-    <link rel="stylesheet" href="../style.css">
-    <script src="../script.js"></script>
-    <link rel="shortcut icon" href="../img/favicon.png">
-    <link rel="icon" type="image/png" href="../img/favicon.png" sizes="256x256">
-    <link rel="apple-touch-icon" sizes="256x256" href="../img/favicon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${member} | ${pageTitle}</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="../script.js"></script>
+  <link rel="shortcut icon" href="../img/favicon.png">
+  <link rel="icon" type="image/png" href="../img/favicon.png" sizes="256x256">
+  <link rel="apple-touch-icon" sizes="256x256" href="../img/favicon.png">
 </head>
 <body>
-    <a class="anchor" name="top"></a>
-    <main>
-        <div>
-            ${headerAndNav}
-        </div>
-        <div>
-            <article> <a class="anchor" name="aboutus"></a>
-                ${about}
-            </article>
-            <article> <a class="anchor" name="publications"></a>
-                <h1>Publications</h1>
-                ${papersHtml}
-            </article>
-        </div>
-    </main>
+  <a class="anchor" name="top"></a>
+  <main>
+    <div>
+      ${headerAndNav}
+    </div>
+    <div>
+      <article> <a class="anchor" name="aboutus"></a>
+        ${about}
+      </article>
+      <article> <a class="anchor" name="publications"></a>
+        <h1>Publications</h1>
+        ${papersHtml}
+      </article>
+    </div>
+  </main>
 </body>
 </html>`
   const outFile = `./members/${fileName}.html`
@@ -339,16 +340,16 @@ function createMemberPageHtml (member, fileName, papers) {
  */
 function createMemberListHtml () {
   return members.map((member, index) => `
-    <div>
-        <a href="./members/${memberPaths[index]}.html">
-            <img
-                class="avatar"
-                src="./img/people/small/${memberPaths[index]}.jpg"
-            />
-            <div>
-                ${member}
-            </div>
-        </a>
-    </div>
-    `).join('\n')
+  <div>
+    <a href="./members/${memberPaths[index]}.html">
+      <img
+        class="avatar"
+        src="./img/people/small/${memberPaths[index]}.jpg"
+      />
+      <div>
+        ${member}
+      </div>
+    </a>
+  </div>
+  `).join('\n')
 }
