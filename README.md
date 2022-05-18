@@ -22,14 +22,17 @@ The main page is inside `aboutus.html`.
 
 One for each member, see [about/](./about/).
 
+(Do not change anything in `members/` or `index.html`!)
+
 ### Media
 
 Media names must match the publication's key in the table.
-The pattern is lastnameYearKeyword (example: heyen2020clavis).
+The pattern usually is lastnameYearKeyword (example: heyen2020clavis).
 
-- [img/](./img/) for images (must be .png, except for people avatars which must be .jpg)
+- [img/](./img/) for images (must be .png, except for people avatars which must be .jpg and placed inside `img/people/`)
 - [pdf/](./pdf/) for PDFs.
 - [video/](./video/) for videos (must be .mp4).
+- [suppl/](./suppl/) for supplemental (must be .zip).
 
 ### Papers
 
