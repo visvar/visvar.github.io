@@ -37,20 +37,8 @@ const headerAndNav = `
 <header>
   <div>
     <a href="${pageUrl}/">
-      <h1 class="h1desktop">
-        <div>
-          VISVAR
-        </div>
-        <div>
-          Research
-        </div>
-        <div>
-          Group
-        </div>
-      </h1>
-      <h1 class="h1mobile">
-        VISVAR
-      </h1>
+      <h1 class="h1desktop"><div>VISVAR</div><div>Research</div><div>Group</div></h1>
+      <h1 class="h1mobile">VISVAR</h1>
     </a>
   </div>
   <div>
@@ -67,11 +55,7 @@ const headerAndNav = `
         </li>
         <ul class="memberNav">
           ${members.map((d, i) => `
-            <li>
-              <a href="${pageUrl}/members/${memberPaths[i]}.html">
-                ${d}
-              </a>
-            </li>
+            <li><a href="${pageUrl}/members/${memberPaths[i]}.html">${d}</a></li>
           `).join('')}
         </ul>
       </ul>
@@ -83,16 +67,14 @@ const allImages = new Set(readdirSync("img"))
 const allPdfs = new Set(readdirSync("pdf"))
 const allVideos = new Set(readdirSync("video"))
 const allSuppl = new Set(readdirSync("suppl"))
-
-const stream = createReadStream(file)
 const publications = []
+const stream = createReadStream(file)
 
 // Main loop
 csv
   .parseStream(stream, { headers: true })
   .on('data', data => data.Title !== '' && publications.push(data))
   .on('end', createPages)
-
 
 /**
  * Creates all HTML pages
@@ -115,7 +97,6 @@ function createPages () {
   }
   // Export papers.json
   writeFileSync('papers.json', JSON.stringify(publications))
-
   // Detect missing and extra files
   let missing = []
   let extra = []
@@ -142,13 +123,6 @@ function createPages () {
  * Creates HTML from the CSV data
  */
 function createMainPageHtml (published) {
-  // Create HTML
-  const publicationsHtml = createPublicationsHtml(published)
-  // Read nav and about us page
-  const aboutUs = readFileSync('./aboutus.html')
-  // Create member list with avatars
-  const memberList = createMemberListHtml()
-  // Combine HTML
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -169,17 +143,24 @@ function createMainPageHtml (published) {
     </div>
     <div>
       <article> <a class="anchor" name="aboutus"></a>
-        ${aboutUs}
+        ${readFileSync('./aboutus.html')}
       </article>
       <article> <a class="anchor" name="members"></a>
         <h1>Members</h1>
         <div class="memberList">
-          ${memberList}
+          ${members.map((member, index) => `
+            <div>
+              <a href="./members/${memberPaths[index]}.html">
+                <img class="avatar" src="./img/people/small/${memberPaths[index]}.jpg" />
+                <div>${member}</div>
+              </a>
+            </div>
+            `).join('\n')}
         </div>
       </article>
       <article> <a class="anchor" name="publications"></a>
         <h1>Publications</h1>
-        ${publicationsHtml}
+        ${createPublicationsHtml(published)}
       </article>
     </div>
   </main>
@@ -203,8 +184,6 @@ function createPublicationsHtml (publications, isMember = false) {
     const year = pub['Date'].slice(0, 4)
     const type = pub['Type']
     const website = pub['Publisher URL (official)']
-    // See if files are there
-    // const imageExists = existsSync(join('img', `${key}.png`))
     const imageExists = allImages.has(`${key}.png`)
     // PDF, video, and supplemental might be a link instead of file
     let pdf = pub['PDF URL (public)']
@@ -232,20 +211,15 @@ function createPublicationsHtml (publications, isMember = false) {
     return `
   ${i === 0 || year !== publications[i - 1]['Date'].slice(0, 4)
         ? `
-  <h2>
-    ${year}
-  </h2>
+  <h2>${year}</h2>
   `: ''}
-  <div
-    class="paper small"
-    id="paper${key}"
-  >
+  <div class="paper small" id="paper${key}">
     ${imageExists
         ? `
       <img
         id="image${key}"
         title="Click to enlarge and show details"
-        onclick="toggleClass('paper${key}', 'small'); toggleImageSize(this);"
+        onclick="toggleClass('paper${key}', 'small'); toggleImageSize(this)"
         class="publicationImage small"
         src="${image}"
       />`
@@ -253,15 +227,13 @@ function createPublicationsHtml (publications, isMember = false) {
       }
     <div class="metaData ${imageExists ? '' : 'noImage'}">
       <h3
-        onclick="toggleClass('paper${key}', 'small'); toggleImageSize(image${key});"
+        onclick="toggleClass('paper${key}', 'small'); toggleImageSize(image${key})"
         title="Click to show details"
       >
-        ${pub['Title']}
-        <a class="anchor" name="${key}"></a>
+        ${pub['Title']}<a class="anchor" name="${key}"></a>
       </h3>
       <div class="authors">
-        <span class="firstAuthor">${pub['First Author']}</span>${pub['Other Authors'] !== '' ? ',' : ''}
-        ${pub['Other Authors']}
+        ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
       </div>
       <div>
         <span class="publication">${pub['Submission Target']} ${year}</span>
@@ -273,24 +245,16 @@ function createPublicationsHtml (publications, isMember = false) {
       </div>
     </div>
     <div class="info">
-      <h4>Abstract</h4>
-      <div class="abstract">
-        ${pub['Abstract']}
-      </div>
+      ${pub['Abstract']
+        ? `<h4>Abstract</h4><div class="abstract">${pub['Abstract']}</div>`
+        : ''
+      }
       ${pub['bibtex']
-        ? `
-      <h4>BibTex</h4>
-      <div class="bibtex">
-        <textarea>${pub['bibtex'].trim()}</textarea>
-      </div>`
+        ? `<h4>BibTex</h4><div class="bibtex"><textarea>${pub['bibtex'].trim()}</textarea></div>`
         : ''
       }
       ${pub['Acknowledgements']
-        ? `
-      <h4>Acknowledgements</h4>
-      <div class="abstract">
-        ${pub['Acknowledgements']}
-      </div>`
+        ? `<h4>Acknowledgements</h4><div class="abstract">${pub['Acknowledgements']}</div>`
         : ''
       }
     </div>
@@ -346,25 +310,4 @@ function createMemberPageHtml (member, fileName, publications) {
 </html>`
   const outFile = `./members/${fileName}.html`
   writeFileSync(outFile, html)
-}
-
-
-/**
- * Members list with avatars
- * @returns {string} HTML
- */
-function createMemberListHtml () {
-  return members.map((member, index) => `
-  <div>
-    <a href="./members/${memberPaths[index]}.html">
-      <img
-        class="avatar"
-        src="./img/people/small/${memberPaths[index]}.jpg"
-      />
-      <div>
-        ${member}
-      </div>
-    </a>
-  </div>
-  `).join('\n')
 }
