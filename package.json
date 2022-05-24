@@ -5,12 +5,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "npm run resizePeople && npm run resizeThumbs  && npm run tocsv && npm run mon",
+    "start": "npm run resizePeople && npm run resizeThumbs  && npm run tocsv && npm run compile",
     "topng": "node ./scripts/image-to-png.js",
     "resizePeople": "node ./scripts/image-resizer.js img/people 256",
     "resizeThumbs": "node ./scripts/image-resizer.js img 256",
     "tocsv": "node ./scripts/table-to-csv.js",
-    "mon": "nodemon ./scripts/compile.js -e js,html,csv --ignore members/ --ignore index.html",
+    "compile": "node ./scripts/compile.js -e js,html,csv --ignore members/ --ignore index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
     "upd": "npm-check-updates -u"
   },
@@ -19,7 +19,6 @@
   "devDependencies": {
     "fast-csv": "^4.3.6",
     "image-js": "^1.0.0-alpha.3",
-    "nodemon": "^2.0.16",
     "npm-check-updates": "^13.0.3",
     "xlsx": "^0.18.5"
   }
