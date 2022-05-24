@@ -78,12 +78,13 @@ nav ul li {
   list-style: none;
   font-size: 1.1em;
   padding: 0 10px;
-  line-height: 35px;
+  line-height: 2.5em;
 }
 
 nav ul ul li {
   margin-left: 15px;
   font-size: 1em;
+  line-height: 2.2em;
 }
 
 nav a,
@@ -144,6 +145,7 @@ section a i {
 .memberList img.avatar {
   width: 128px;
   height: 128px;
+  box-shadow: #bbb 1px 1px 15px;
 }
 
 .memberList a,
