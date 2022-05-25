@@ -281,12 +281,11 @@ function createPublicationsHtml (publications, isMember = false) {
       >
         ${pub['Title']}<a class="anchor" name="${key}"></a>
       </h3>
-      <div class="authors">
+      <div>
         ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
       </div>
       <div>
-        <span class="publication">${pub['Submission Target']} ${year}</span>
-        ${type && type !== '' ? `<span class="publication">${pub['Type']}</span>` : ''}
+        ${pub['Submission Target']} (${year}) ${pub['Type']}
         ${website && website !== '' ? `<a href="${website}" target="_blank">website</a>` : ''}
         ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
         ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}

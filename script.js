@@ -19,11 +19,8 @@ function toggleImageSize (img) {
   if (typeof img === 'string') {
     img = document.getElementById(img)
   }
-  if (img.src.includes('small')) {
-    img.src = img.src.replace('small/', '')
-    img.classList.remove('small')
-  } else {
-    img.src = img.src.replace('img/', 'img/small/')
-    img.classList.add('small')
-  }
+  img.src.includes('small')
+    ? img.src = img.src.replace('small/', '')
+    : img.src = img.src.replace('img/', 'img/small/')
+  toggleClass(img, "small")
 }
