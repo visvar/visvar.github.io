@@ -170,6 +170,55 @@ function createMainPageHtml (published) {
 }
 
 /**
+ * Creates HTML from the CSV data
+ */
+function createMemberPageHtml (member, fileName, publications) {
+  // Create HTML
+  const publicationsHtml = createPublicationsHtml(publications, true)
+  // Read nav and about us page
+  let about = ''
+  const aboutFile = `./about/${fileName}.html`
+  try {
+    about = readFileSync(aboutFile)
+  } catch {
+    console.warn(`No about found for ${member}, ${aboutFile} is missing`)
+  }
+  // Combine HTML
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${member} | ${pageTitle}</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="../script.js"></script>
+  <link rel="shortcut icon" href="../img/favicon.png">
+  <link rel="icon" type="image/png" href="../img/favicon.png" sizes="256x256">
+  <link rel="apple-touch-icon" sizes="256x256" href="../img/favicon.png">
+</head>
+<body>
+  <a class="anchor" name="top"></a>
+  <main>
+    <div>
+      ${headerAndNav}
+    </div>
+    <div>
+      <article> <a class="anchor" name="aboutus"></a>
+        ${about}
+      </article>
+      <article> <a class="anchor" name="publications"></a>
+        <h1>Publications</h1>
+        ${publicationsHtml}
+      </article>
+    </div>
+  </main>
+</body>
+</html>`
+  const outFile = `./members/${fileName}.html`
+  writeFileSync(outFile, html)
+}
+
+/**
  * Creates HTML for an Array of publications extracted from the CSV
  *
  * @param {object[]} publications publications
@@ -261,53 +310,4 @@ function createPublicationsHtml (publications, isMember = false) {
   </div>
   `
   }).join('')
-}
-
-/**
- * Creates HTML from the CSV data
- */
-function createMemberPageHtml (member, fileName, publications) {
-  // Create HTML
-  const publicationsHtml = createPublicationsHtml(publications, true)
-  // Read nav and about us page
-  let about = ''
-  const aboutFile = `./about/${fileName}.html`
-  try {
-    about = readFileSync(aboutFile)
-  } catch {
-    console.warn(`No about found for ${member}, ${aboutFile} is missing`)
-  }
-  // Combine HTML
-  const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${member} | ${pageTitle}</title>
-  <link rel="stylesheet" href="../style.css">
-  <script src="../script.js"></script>
-  <link rel="shortcut icon" href="../img/favicon.png">
-  <link rel="icon" type="image/png" href="../img/favicon.png" sizes="256x256">
-  <link rel="apple-touch-icon" sizes="256x256" href="../img/favicon.png">
-</head>
-<body>
-  <a class="anchor" name="top"></a>
-  <main>
-    <div>
-      ${headerAndNav}
-    </div>
-    <div>
-      <article> <a class="anchor" name="aboutus"></a>
-        ${about}
-      </article>
-      <article> <a class="anchor" name="publications"></a>
-        <h1>Publications</h1>
-        ${publicationsHtml}
-      </article>
-    </div>
-  </main>
-</body>
-</html>`
-  const outFile = `./members/${fileName}.html`
-  writeFileSync(outFile, html)
 }
