@@ -1,5 +1,4 @@
-import { createReadStream, readFileSync, writeFileSync, existsSync } from 'node:fs'
-import { join } from 'node:path'
+import { createReadStream, readFileSync, writeFileSync, readdirSync } from 'node:fs'
 import csv from 'fast-csv'
 // import querystring from 'querystring';
 
@@ -38,20 +37,8 @@ const headerAndNav = `
 <header>
   <div>
     <a href="${pageUrl}/">
-      <h1 class="h1desktop">
-        <div>
-          VISVAR
-        </div>
-        <div>
-          Research
-        </div>
-        <div>
-          Group
-        </div>
-      </h1>
-      <h1 class="h1mobile">
-        VISVAR
-      </h1>
+      <h1 class="h1desktop"><div>VISVAR</div><div>Research</div><div>Group</div></h1>
+      <h1 class="h1mobile">VISVAR</h1>
     </a>
   </div>
   <div>
@@ -68,11 +55,7 @@ const headerAndNav = `
         </li>
         <ul class="memberNav">
           ${members.map((d, i) => `
-            <li>
-              <a href="${pageUrl}/members/${memberPaths[i]}.html">
-                ${d}
-              </a>
-            </li>
+            <li><a href="${pageUrl}/members/${memberPaths[i]}.html">${d}</a></li>
           `).join('')}
         </ul>
       </ul>
@@ -80,51 +63,66 @@ const headerAndNav = `
   </div>
 </header>`
 
-
+const allImages = new Set(readdirSync("img"))
+const allPdfs = new Set(readdirSync("pdf"))
+const allVideos = new Set(readdirSync("video"))
+const allSuppl = new Set(readdirSync("suppl"))
+const publications = []
 const stream = createReadStream(file)
-const papers = []
 
 // Main loop
 csv
   .parseStream(stream, { headers: true })
-  .on('data', data => data.Title !== '' && papers.push(data))
+  .on('data', data => data.Title !== '' && publications.push(data))
   .on('end', createPages)
-
 
 /**
  * Creates all HTML pages
  */
 function createPages () {
-  console.log(`${papers.length} papers`)
+  console.log(`${publications.length} publications`)
   // Sort by date descending, so newest at top of page
-  papers.sort((a, b) => a['Date'] > b['Date'] ? -1 : 1
+  publications.sort((a, b) => a['Date'] > b['Date'] ? -1 : 1
   )
   // Main page
-  createMainPageHtml(papers)
+  createMainPageHtml(publications)
   // Member / author pages
   for (const [index, member] of members.entries()) {
-    const authoredPapers = papers.filter(d => {
+    const authoredPubs = publications.filter(d => {
       return d['First Author'].includes(member)
         || d['Other Authors'].includes(member)
     })
     const fileName = memberPaths[index]
-    createMemberPageHtml(member, fileName, authoredPapers)
+    createMemberPageHtml(member, fileName, authoredPubs)
   }
   // Export papers.json
-  writeFileSync('papers.json', JSON.stringify(papers))
+  writeFileSync('papers.json', JSON.stringify(publications))
+  // Detect missing and extra files
+  let missing = []
+  let extra = []
+  for (const pub of publications) {
+    const key = pub['Key (e.g. for file names)']
+    if (!allImages.has(`${key}.png`)) { missing.push(`${key}.png`) }
+    let pdf = pub['PDF URL (public)']
+    if ((!pdf || pdf === "") && !allPdfs.has(`${key}.pdf`)) { missing.push(`${key}.pdf`) }
+  }
+  console.log(`\nmissing files:\n${missing.join("\n")}`)
+  const allKeys = new Set(publications.map(d => d['Key (e.g. for file names)']))
+  const allFiles = [...allImages, ...allPdfs, ...allVideos, ...allSuppl]
+  const ignore = new Set(["small", "people", "favicon.png", "visvar_logo.svg"])
+  for (const f of allFiles) {
+    const key = f.slice(0, f.lastIndexOf("."))
+    if (!allKeys.has(key) && !ignore.has(f)) {
+      extra.push(f)
+    }
+  }
+  console.log(`\nextra files:\n${extra.join("\n")}`)
 }
 
 /**
  * Creates HTML from the CSV data
  */
 function createMainPageHtml (published) {
-  // Create HTML
-  const papersHtml = createPublicationsHtml(published)
-  // Read nav and about us page
-  const aboutUs = readFileSync('./aboutus.html')
-  // Create member list with avatars
-  const memberList = createMemberListHtml()
-  // Combine HTML
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -145,150 +143,38 @@ function createMainPageHtml (published) {
     </div>
     <div>
       <article> <a class="anchor" name="aboutus"></a>
-        ${aboutUs}
+        ${readFileSync('./aboutus.html')}
       </article>
       <article> <a class="anchor" name="members"></a>
         <h1>Members</h1>
         <div class="memberList">
-          ${memberList}
+          ${members.map((member, index) => `
+            <div>
+              <a href="./members/${memberPaths[index]}.html">
+                <img class="avatar" src="./img/people/small/${memberPaths[index]}.jpg" />
+                <div>${member}</div>
+              </a>
+            </div>
+            `).join('\n')}
         </div>
       </article>
       <article> <a class="anchor" name="publications"></a>
         <h1>Publications</h1>
-        ${papersHtml}
+        ${createPublicationsHtml(published)}
       </article>
     </div>
   </main>
 </body>
 </html>`
   writeFileSync('./index.html', html)
-  console.log(`Wrote index.html`)
-}
-
-/**
- * Creates HTML for an Array of papers extracted from the CSV
- *
- * @param {object[]} papers papers
- * @param {boolean} [isMember=false] is this a member page?
- * @returns {string} HTML
- */
-function createPublicationsHtml (papers, isMember = false) {
-  return papers.map((d, i) => {
-    const key = d['Key (e.g. for file names)']
-    const image = `${isMember ? '..' : '.'}/img/small/${key}.png`
-    const year = d['Date'].slice(0, 4)
-    const type = d['Type']
-    const website = d['Publisher URL (official)']
-    // See if files are there
-    const imageExists = existsSync(join('img', `${key}.png`))
-    // PDF, video, and supplemental might be a link instead of file
-    let pdf = d['PDF URL (public)']
-    let pdfExists = existsSync(join('pdf', `${key}.pdf`))
-    if (!pdfExists && pdf && pdf !== '') {
-      pdfExists = true
-    } else {
-      pdf = `${isMember ? '..' : '.'}/pdf/${key}.pdf`
-    }
-    let video = d['Video']
-    let videoExists = existsSync(join('video', `${key}.mp4`))
-    if (!videoExists && video && video !== '') {
-      videoExists = true
-    } else {
-      video = `${isMember ? '..' : '.'}/video/${key}.mp4`
-    }
-    let suppl = d['Supplemental']
-    let supplExists = existsSync(join('suppl', `${key}.zip`))
-    if (!supplExists && suppl && suppl !== '') {
-      supplExists = true
-    } else {
-      suppl = `${isMember ? '..' : '.'}/suppl/${key}.zip`
-    }
-    // Check for missing files, but only when compiling main page (only once)
-    if (!isMember) {
-      if (!imageExists) {
-        console.log(`  missing: img/${key}.png`)
-      }
-      if (!pdfExists) {
-        console.log(`  missing: pdf/${key}.pdf`)
-      }
-    }
-
-    return `
-  ${i === 0 || year !== papers[i - 1]['Date'].slice(0, 4)
-        ? `
-  <h2>
-    ${year}
-  </h2>
-  `: ''}
-  <div
-    class="paper small"
-    id="paper${key}"
-  >
-    ${imageExists
-        ? `
-      <img
-        id="image${key}"
-        title="Click to enlarge and show details"
-        onclick="toggleClass('paper${key}', 'small'); toggleImageSize(this);"
-        class="publicationImage small"
-        src="${image}"
-      />`
-        : ''
-      }
-    <div class="metaData ${imageExists ? '' : 'noImage'}">
-      <h3
-        onclick="toggleClass('paper${key}', 'small'); toggleImageSize(image${key});"
-        title="Click to show details"
-      >
-        ${d['Title']}
-        <a class="anchor" name="${key}"></a>
-      </h3>
-      <div class="authors">
-        <span class="firstAuthor">${d['First Author']}</span>${d['Other Authors'] !== '' ? ',' : ''}
-        ${d['Other Authors']}
-      </div>
-      <div>
-        <span class="publication">${d['Submission Target']} ${year}</span>
-        ${type && type !== '' ? `<span class="publication">${d['Type']}</span>` : ''}
-        ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
-        ${website && website !== '' ? `<a href="${website}" target="_blank">website</a>` : ''}
-        ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
-        ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
-      </div>
-    </div>
-    <div class="info">
-      <h4>Abstract</h4>
-      <div class="abstract">
-        ${d['Abstract']}
-      </div>
-      ${d['bibtex']
-        ? `
-      <h4>BibTex</h4>
-      <div class="bibtex">
-        <textarea>${d['bibtex'].trim()}</textarea>
-      </div>`
-        : ''
-      }
-      ${d['Acknowledgements']
-        ? `
-      <h4>Acknowledgements</h4>
-      <div class="abstract">
-        ${d['Acknowledgements']}
-      </div>`
-        : ''
-      }
-    </div>
-  </div>
-  `
-  }).join('')
 }
 
 /**
  * Creates HTML from the CSV data
  */
-function createMemberPageHtml (member, fileName, papers) {
+function createMemberPageHtml (member, fileName, publications) {
   // Create HTML
-  const papersHtml = createPublicationsHtml(papers, true)
+  const publicationsHtml = createPublicationsHtml(publications, true)
   // Read nav and about us page
   let about = ''
   const aboutFile = `./about/${fileName}.html`
@@ -322,7 +208,7 @@ function createMemberPageHtml (member, fileName, papers) {
       </article>
       <article> <a class="anchor" name="publications"></a>
         <h1>Publications</h1>
-        ${papersHtml}
+        ${publicationsHtml}
       </article>
     </div>
   </main>
@@ -330,26 +216,97 @@ function createMemberPageHtml (member, fileName, papers) {
 </html>`
   const outFile = `./members/${fileName}.html`
   writeFileSync(outFile, html)
-  console.log(`Wrote ${outFile}`)
 }
 
-
 /**
- * Members list with avatars
+ * Creates HTML for an Array of publications extracted from the CSV
+ *
+ * @param {object[]} publications publications
+ * @param {boolean} [isMember=false] is this a member page?
  * @returns {string} HTML
  */
-function createMemberListHtml () {
-  return members.map((member, index) => `
-  <div>
-    <a href="./members/${memberPaths[index]}.html">
+function createPublicationsHtml (publications, isMember = false) {
+  const p = isMember ? '..' : '.'
+  return publications.map((pub, i) => {
+    const key = pub['Key (e.g. for file names)']
+    const image = `${p}/img/small/${key}.png`
+    const year = pub['Date'].slice(0, 4)
+    const type = pub['Type']
+    const website = pub['Publisher URL (official)']
+    const imageExists = allImages.has(`${key}.png`)
+    // PDF, video, and supplemental might be a link instead of file
+    let pdf = pub['PDF URL (public)']
+    let pdfExists = allPdfs.has(`${key}.pdf`)
+    if (!pdfExists && pdf && pdf !== '') {
+      pdfExists = true
+    } else {
+      pdf = `${p}/pdf/${key}.pdf`
+    }
+    let video = pub['Video']
+    let videoExists = allVideos.has(`${key}.mp4`)
+    if (!videoExists && video && video !== '') {
+      videoExists = true
+    } else {
+      video = `${p}/video/${key}.mp4`
+    }
+    let suppl = pub['Supplemental']
+    let supplExists = allSuppl.has(`${key}.zip`)
+    if (!supplExists && suppl && suppl !== '') {
+      supplExists = true
+    } else {
+      suppl = `${p}/suppl/${key}.zip`
+    }
+
+    return `
+  ${i === 0 || year !== publications[i - 1]['Date'].slice(0, 4)
+        ? `
+  <h2>${year}</h2>
+  `: ''}
+  <div class="paper small" id="paper${key}">
+    ${imageExists
+        ? `
       <img
-        class="avatar"
-        src="./img/people/small/${memberPaths[index]}.jpg"
-      />
+        id="image${key}"
+        title="Click to enlarge and show details"
+        onclick="toggleClass('paper${key}', 'small'); toggleImageSize(this)"
+        class="publicationImage small"
+        src="${image}"
+      />`
+        : ''
+      }
+    <div class="metaData ${imageExists ? '' : 'noImage'}">
+      <h3
+        onclick="toggleClass('paper${key}', 'small'); toggleImageSize(image${key})"
+        title="Click to show details"
+      >
+        ${pub['Title']}<a class="anchor" name="${key}"></a>
+      </h3>
       <div>
-        ${member}
+        ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
       </div>
-    </a>
+      <div>
+        ${pub['Submission Target']} (${year}) ${pub['Type']}
+        ${website && website !== '' ? `<a href="${website}" target="_blank">website</a>` : ''}
+        ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
+        ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
+        ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
+      </div>
+    </div>
+    <div class="info">
+      ${pub['Abstract']
+        ? `<h4>Abstract</h4><div class="abstract">${pub['Abstract']}</div>`
+        : ''
+      }
+      ${pub['bibtex']
+        ? `<h4>BibTex</h4><div class="bibtex"><textarea>${pub['bibtex'].trim()}</textarea></div>`
+        : ''
+      }
+      ${pub['Acknowledgements']
+        ? `<h4>Acknowledgements</h4><div class="abstract">${pub['Acknowledgements']}</div>`
+        : ''
+      }
+    </div>
   </div>
-  `).join('\n')
+  `
+  }).join('')
 }

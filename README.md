@@ -42,9 +42,8 @@ The pattern usually is lastnameYearKeyword (example: heyen2020clavis).
 
 If not done yet, install packages with `npm i` (you obviously need [Node.js and npm](https://nodejs.org/en/) to be installed).
 
-`npm start` starts the compiler in watch mode.
-It will re-build the whole page any time a .js or .html file changes.
-You will still need to reload the page (e.g. press F5) in the browser to see changes!
+`npm start` starts the compiler.
+You will still need to reload the page (e.g., press F5) in the browser to see changes!
 
 ## Deployment / Publishing
 
