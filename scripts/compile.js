@@ -79,7 +79,7 @@ csv
 /**
  * Creates all HTML pages
  */
-function createPages () {
+function createPages() {
   console.log(`${publications.length} publications`)
   // Sort by date descending, so newest at top of page
   publications.sort((a, b) => a['Date'] > b['Date'] ? -1 : 1
@@ -94,6 +94,10 @@ function createPages () {
     })
     const fileName = memberPaths[index]
     createMemberPageHtml(member, fileName, authoredPubs)
+  }
+  // Publication pages
+  for (const pub of publications) {
+    createPublicationPageHtml(pub)
   }
   // Export papers.json
   writeFileSync('papers.json', JSON.stringify(publications))
@@ -122,7 +126,7 @@ function createPages () {
 /**
  * Creates HTML from the CSV data
  */
-function createMainPageHtml (published) {
+function createMainPageHtml(published) {
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -172,7 +176,7 @@ function createMainPageHtml (published) {
 /**
  * Creates HTML from the CSV data
  */
-function createMemberPageHtml (member, fileName, publications) {
+function createMemberPageHtml(member, fileName, publications) {
   // Create HTML
   const publicationsHtml = createPublicationsHtml(publications, true)
   // Read nav and about us page
@@ -225,13 +229,12 @@ function createMemberPageHtml (member, fileName, publications) {
  * @param {boolean} [isMember=false] is this a member page?
  * @returns {string} HTML
  */
-function createPublicationsHtml (publications, isMember = false) {
+function createPublicationsHtml(publications, isMember = false) {
   const p = isMember ? '..' : '.'
   return publications.map((pub, i) => {
     const key = pub['Key (e.g. for file names)']
     const image = `${p}/img/small/${key}.png`
     const year = pub['Date'].slice(0, 4)
-    const type = pub['Type']
     const website = pub['Publisher URL (official)']
     const imageExists = allImages.has(`${key}.png`)
     // PDF, video, and supplemental might be a link instead of file
@@ -259,9 +262,7 @@ function createPublicationsHtml (publications, isMember = false) {
 
     return `
   ${i === 0 || year !== publications[i - 1]['Date'].slice(0, 4)
-        ? `
-  <h2>${year}</h2>
-  `: ''}
+        ? `<h2>${year}</h2>` : ''}
   <div class="paper small" id="paper${key}">
     ${imageExists
         ? `
@@ -305,8 +306,95 @@ function createPublicationsHtml (publications, isMember = false) {
         ? `<h4>Acknowledgements</h4><div class="abstract">${pub['Acknowledgements']}</div>`
         : ''
       }
+      <div>
+        <a href="${pageUrl}/pub/${key}.html" target="_blank">direct link</a>
+      </div>
     </div>
   </div>
   `
   }).join('')
+}
+
+/**
+ * Creates the page for a single publication
+ */
+function createPublicationPageHtml(pub) {
+  const key = pub['Key (e.g. for file names)']
+  const year = pub['Date'].slice(0, 4)
+  const website = pub['Publisher URL (official)']
+  const imageExists = allImages.has(`${key}.png`)
+  // PDF, video, and supplemental might be a link instead of file
+  let pdf = pub['PDF URL (public)']
+  let pdfExists = allPdfs.has(`${key}.pdf`)
+  if (!pdfExists && pdf && pdf !== '') {
+    pdfExists = true
+  } else {
+    pdf = `../pdf/${key}.pdf`
+  }
+  let video = pub['Video']
+  let videoExists = allVideos.has(`${key}.mp4`)
+  if (!videoExists && video && video !== '') {
+    videoExists = true
+  } else {
+    video = `../video/${key}.mp4`
+  }
+  let suppl = pub['Supplemental']
+  let supplExists = allSuppl.has(`${key}.zip`)
+  if (!supplExists && suppl && suppl !== '') {
+    supplExists = true
+  } else {
+    suppl = `../suppl/${key}.zip`
+  }
+  // Create HTML
+  const html = `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>${pub["Title"]} | ${pageTitle}</title>
+      <link rel="stylesheet" href="../style.css">
+      <script src="../script.js"></script>
+      <link rel="shortcut icon" href="../img/favicon.png">
+      <link rel="icon" type="image/png" href="../img/favicon.png" sizes="256x256">
+      <link rel="apple-touch-icon" sizes="256x256" href="../img/favicon.png">
+    </head>
+    <body>
+      <a class="anchor" name="top"></a>
+      <main>
+        <div>
+          ${headerAndNav}
+        </div>
+        <div>
+          <article> <a class="anchor" name="publications"></a>
+            <h1>${pub["Title"]}</h1>
+            <div class="pubPageContent">
+              <div class="pubImage">
+              ${imageExists ? `<img id="image${key}" src="../img/small/${key}.png"/>` : ''}
+              </div>
+              <div>
+              ${pub['Submission Target']} (${year}) ${pub['Type']}
+              </div>
+              <h4>Authors</h4>
+              <div>
+              ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
+              </div>
+              <h4>Materials</h4>
+              <div>
+                ${website && website !== '' ? `<a href="${website}" target="_blank">website</a>` : ''}
+                ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
+                ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
+                ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
+              </div>
+              ${pub['Abstract'] ? `<h4>Abstract</h4><div class="abstract">${pub['Abstract']}</div>` : ''}
+              ${pub['bibtex'] ? `<h4>BibTex</h4><div class="bibtex"><textarea>${pub['bibtex'].trim()}</textarea></div>` : ''}
+              ${pub['Acknowledgements'] ? `<h4>Acknowledgements</h4><div class="abstract">${pub['Acknowledgements']}</div>` : ''}
+            </div>
+          </div>
+          </article>
+        </div>
+      </main>
+    </body>
+    </html>`
+  const outFile = `./pub/${pub['Key (e.g. for file names)']}.html`
+  writeFileSync(outFile, html)
 }

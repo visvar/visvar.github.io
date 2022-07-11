@@ -10,6 +10,7 @@
    2. [Compiling](#compiling)
    3. [Deployment / Publishing](#deployment--publishing)
    4. [Dependency Update](#dependency-update)
+   5. [Repository Structure](#repository-structure)
 
 ## Adding Content
 
@@ -45,6 +46,8 @@ If not done yet, install packages with `npm i` (you obviously need [Node.js and 
 `npm start` starts the compiler.
 You will still need to reload the page (e.g., press F5) in the browser to see changes!
 
+Fast compile: If publications, images, etc. did not change, you can run `npm run compile` to only re-compile the HTML.
+
 ## Deployment / Publishing
 
 Simply do a git commit and push, e.g. run
@@ -57,3 +60,20 @@ Simply do a git commit and push, e.g. run
 
 - `npm run upd`
 - `npm i`
+
+## Repository Structure
+
+- about/: member page content (to edit)
+- img/: images
+- img/people: member pictures
+- img/**/small: thumbnails
+- members/: compiled member pages
+- pdf/: pdfs
+- pub/: compiled publication pages
+- scripts/: compile scripts
+- suppl/: supplemental material
+- video/: videos
+- aboutus.html: main page content
+- index.html: compiled main page
+- script.js: page scripts
+- style.css: page styles

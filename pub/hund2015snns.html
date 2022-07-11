@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Subspace Nearest Neighbor Search - Problem Statement, Approaches, and Discussion | VISVAR Research Group, University of Stuttgart</title>
+      <link rel="stylesheet" href="../style.css">
+      <script src="../script.js"></script>
+      <link rel="shortcut icon" href="../img/favicon.png">
+      <link rel="icon" type="image/png" href="../img/favicon.png" sizes="256x256">
+      <link rel="apple-touch-icon" sizes="256x256" href="../img/favicon.png">
+    </head>
+    <body>
+      <a class="anchor" name="top"></a>
+      <main>
+        <div>
+          
+<header>
+  <div>
+    <a href="https://visvar.github.io/">
+      <h1 class="h1desktop"><div>VISVAR</div><div>Research</div><div>Group</div></h1>
+      <h1 class="h1mobile">VISVAR</h1>
+    </a>
+  </div>
+  <div>
+    <nav>
+      <ul>
+        <li>
+          <a href="https://visvar.github.io/#aboutus">about VISVAR</a>
+        </li>
+        <li>
+          <a href="https://visvar.github.io/#publications">publications</a>
+        </li>
+        <li class="memberNav">
+          <a href="https://visvar.github.io/#members">members</a>
+        </li>
+        <ul class="memberNav">
+          
+            <li><a href="https://visvar.github.io/members/aimee_sousa_calepso.html">Aimee Sousa Calepso</a></li>
+          
+            <li><a href="https://visvar.github.io/members/alexander_achberger.html">Alexander Achberger</a></li>
+          
+            <li><a href="https://visvar.github.io/members/frank_heyen.html">Frank Heyen</a></li>
+          
+            <li><a href="https://visvar.github.io/members/jonas_haischt.html">Jonas Haischt</a></li>
+          
+            <li><a href="https://visvar.github.io/members/katrin_angerbauer.html">Katrin Angerbauer</a></li>
+          
+            <li><a href="https://visvar.github.io/members/melissa_reinelt.html">Melissa Reinelt</a></li>
+          
+            <li><a href="https://visvar.github.io/members/michael_sedlmair.html">Michael Sedlmair</a></li>
+          
+            <li><a href="https://visvar.github.io/members/natalie_hube.html">Natalie Hube</a></li>
+          
+            <li><a href="https://visvar.github.io/members/quynh_ngo.html">Quynh Ngo</a></li>
+          
+            <li><a href="https://visvar.github.io/members/rene_cutura.html">Rene Cutura</a></li>
+          
+            <li><a href="https://visvar.github.io/members/ruben_bauer.html">Ruben Bauer</a></li>
+          
+            <li><a href="https://visvar.github.io/members/sebastian_rigling.html">Sebastian Rigling</a></li>
+          
+            <li><a href="https://visvar.github.io/members/simeon_rau.html">Simeon Rau</a></li>
+          
+            <li><a href="https://visvar.github.io/members/xingyao_yu.html">Xingyao Yu</a></li>
+          
+        </ul>
+      </ul>
+    </nav>
+  </div>
+</header>
+        </div>
+        <div>
+          <article> <a class="anchor" name="publications"></a>
+            <h1>Subspace Nearest Neighbor Search - Problem Statement, Approaches, and Discussion</h1>
+            <div class="pubPageContent">
+              <div class="pubImage">
+              <img id="imagehund2015snns" src="../img/small/hund2015snns.png"/>
+              </div>
+              <div>
+              SISAP (2015) 
+              </div>
+              <h4>Authors</h4>
+              <div>
+              Michael Hund, Michael Behrisch, Ines Färber, Michael Sedlmair, Tobias Schreck, Thomas Seidl, Daniel A Keim
+              </div>
+              <h4>Materials</h4>
+              <div>
+                <a href="https://doi.org/10.1007/978-3-319-25087-8_29" target="_blank">website</a>
+                <a href="../pdf/hund2015snns.pdf" target="_blank">PDF</a>
+                
+                
+              </div>
+              <h4>Abstract</h4><div class="abstract">Computing the similarity between objects is a central task for many applications in the field of information retrieval and data mining. For finding k-nearest neighbors, typically a ranking is computed based on a predetermined set of data dimensions and a distance function, constant over all possible queries. However, many high-dimensional feature spaces contain a large number of dimensions, many of which may contain noise, irrelevant, redundant, or contradicting information. More specifically, the relevance of dimensions may depend on the query object itself, and in general, different dimension sets (subspaces) may be appropriate for a query. Approaches for feature selection or -weighting typically provide a global subspace selection, which may not be suitable for all possibly queries. In this position paper, we frame a new research problem, called subspace nearest neighbor search, aiming at multiple query-dependent subspaces for nearest neighbor search. We describe relevant problem characteristics, relate to existing approaches, and outline potential research directions.</div>
+              <h4>BibTex</h4><div class="bibtex"><textarea>@InProceedings{10.1007/978-3-319-25087-8_29,
+author="Hund, Michael
+and Behrisch, Michael
+and F{\"a}rber, Ines
+and Sedlmair, Michael
+and Schreck, Tobias
+and Seidl, Thomas
+and Keim, Daniel",
+editor="Amato, Giuseppe
+and Connor, Richard
+and Falchi, Fabrizio
+and Gennaro, Claudio",
+title="Subspace Nearest Neighbor Search - Problem Statement, Approaches, and Discussion",
+booktitle="Similarity Search and Applications",
+year="2015",
+publisher="Springer International Publishing",
+address="Cham",
+pages="307--313",
+abstract="Computing the similarity between objects is a central task for many applications in the field of information retrieval and data mining. For finding k-nearest neighbors, typically a ranking is computed based on a predetermined set of data dimensions and a distance function, constant over all possible queries. However, many high-dimensional feature spaces contain a large number of dimensions, many of which may contain noise, irrelevant, redundant, or contradicting information. More specifically, the relevance of dimensions may depend on the query object itself, and in general, different dimension sets (subspaces) may be appropriate for a query. Approaches for feature selection or -weighting typically provide a global subspace selection, which may not be suitable for all possibly queries. In this position paper, we frame a new research problem, called subspace nearest neighbor search, aiming at multiple query-dependent subspaces for nearest neighbor search. We describe relevant problem characteristics, relate to existing approaches, and outline potential research directions.",
+isbn="978-3-319-25087-8"
+}</textarea></div>
+              
+            </div>
+          </div>
+          </article>
+        </div>
+      </main>
+    </body>
+    </html>
