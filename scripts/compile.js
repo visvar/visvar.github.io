@@ -79,7 +79,7 @@ csv
 /**
  * Creates all HTML pages
  */
-function createPages() {
+function createPages () {
   console.log(`${publications.length} publications`)
   // Sort by date descending, so newest at top of page
   publications.sort((a, b) => a['Date'] > b['Date'] ? -1 : 1
@@ -126,7 +126,7 @@ function createPages() {
 /**
  * Creates HTML from the CSV data
  */
-function createMainPageHtml(published) {
+function createMainPageHtml (published) {
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -176,7 +176,7 @@ function createMainPageHtml(published) {
 /**
  * Creates HTML from the CSV data
  */
-function createMemberPageHtml(member, fileName, publications) {
+function createMemberPageHtml (member, fileName, publications) {
   // Create HTML
   const publicationsHtml = createPublicationsHtml(publications, true)
   // Read nav and about us page
@@ -229,7 +229,7 @@ function createMemberPageHtml(member, fileName, publications) {
  * @param {boolean} [isMember=false] is this a member page?
  * @returns {string} HTML
  */
-function createPublicationsHtml(publications, isMember = false) {
+function createPublicationsHtml (publications, isMember = false) {
   const p = isMember ? '..' : '.'
   return publications.map((pub, i) => {
     const key = pub['Key (e.g. for file names)']
@@ -318,7 +318,7 @@ function createPublicationsHtml(publications, isMember = false) {
 /**
  * Creates the page for a single publication
  */
-function createPublicationPageHtml(pub) {
+function createPublicationPageHtml (pub) {
   const key = pub['Key (e.g. for file names)']
   const year = pub['Date'].slice(0, 4)
   const website = pub['Publisher URL (official)']
@@ -369,7 +369,7 @@ function createPublicationPageHtml(pub) {
             <h1>${pub["Title"]}</h1>
             <div class="pubPageContent">
               <div class="pubImage">
-              ${imageExists ? `<img id="image${key}" src="../img/small/${key}.png"/>` : ''}
+              ${imageExists ? `<img id="image${key}" src="../img/${key}.png"/>` : ''}
               </div>
               <div>
               ${pub['Submission Target']} (${year}) ${pub['Type']}
