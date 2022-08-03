@@ -19,7 +19,7 @@
   "devDependencies": {
     "fast-csv": "^4.3.6",
     "image-js": "^1.0.0-alpha.3",
-    "npm-check-updates": "^15.3.4",
+    "npm-check-updates": "^16.0.5",
     "xlsx": "^0.18.5"
   }
 }
