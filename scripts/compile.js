@@ -2,7 +2,6 @@ import { createReadStream, readFileSync, writeFileSync, readdirSync } from 'node
 import csv from 'fast-csv'
 // import querystring from 'querystring';
 
-const file = './Papers.csv'
 const members = [
   'Aimee Sousa Calepso',
   'Alexander Achberger',
@@ -12,6 +11,7 @@ const members = [
   'Melissa Reinelt',
   'Michael Sedlmair',
   'Natalie Hube',
+  'Nina Dörr',
   'Quynh Ngo',
   'Rene Cutura',
   'Ruben Bauer',
@@ -20,6 +20,7 @@ const members = [
   'Xingyao Yu',
 ]
 
+const publicationSheet = './Papers.csv'
 const pageUrl = 'https://visvar.github.io'
 const pageTitle = 'VISVAR Research Group, University of Stuttgart'
 
@@ -29,6 +30,9 @@ const memberPaths = members.map(member => {
     .split(' ')
     .join('_')
     .toLowerCase()
+    .replaceAll('ä', 'ae')
+    .replaceAll('ö', 'oe')
+    .replaceAll('ü', 'ue')
   // TODO: url encode!
 })
 // .map(d => querystring.stringify(d'));
@@ -68,7 +72,7 @@ const allPdfs = new Set(readdirSync("pdf"))
 const allVideos = new Set(readdirSync("video"))
 const allSuppl = new Set(readdirSync("suppl"))
 const publications = []
-const stream = createReadStream(file)
+const stream = createReadStream(publicationSheet)
 
 // Main loop
 csv

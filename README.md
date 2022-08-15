@@ -43,6 +43,8 @@ The pattern usually is lastnameYearKeyword (example: heyen2020clavis).
 
 If not done yet, install packages with `npm i` (you obviously need [Node.js and npm](https://nodejs.org/en/) to be installed).
 
+Before compiling, make sure the local version of the repository and the `Papers.xlsx` are both up to date.
+
 `npm start` starts the compiler.
 You will still need to reload the page (e.g., press F5) in the browser to see changes!
 
