@@ -10,7 +10,8 @@
    2. [Compiling](#compiling)
    3. [Deployment / Publishing](#deployment--publishing)
    4. [Dependency Update](#dependency-update)
-   5. [Repository Structure](#repository-structure)
+   5. [Adding new Members](#adding-new-members)
+   6. [Repository Structure](#repository-structure)
 
 ## Adding Content
 
@@ -62,6 +63,14 @@ Simply do a git commit and push, e.g. run
 
 - `npm run upd`
 - `npm i`
+
+## Adding new Members
+
+- Add member to the config at the top of [scripts/compile.js](scripts/compile.js)
+- Add a page in [about/](about/)
+- Add an image in [img/people/](img/people/)
+
+Make sure the filenames equal the `path` in the config and only contain ASCII characters.
 
 ## Repository Structure
 

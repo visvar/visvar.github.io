@@ -1,41 +1,80 @@
 import { createReadStream, readFileSync, writeFileSync, readdirSync } from 'node:fs'
 import csv from 'fast-csv'
-// import querystring from 'querystring';
 
-const members = [
-  'Aimee Sousa Calepso',
-  'Alexander Achberger',
-  'Frank Heyen',
-  'Jonas Haischt',
-  'Katrin Angerbauer',
-  'Melissa Reinelt',
-  'Michael Sedlmair',
-  'Natalie Hube',
-  'Nina Dörr',
-  'Quynh Ngo',
-  'Rene Cutura',
-  'Ruben Bauer',
-  'Sebastian Rigling',
-  'Simeon Rau',
-  'Xingyao Yu',
+/**
+ * name: the same name as used on the publication dataset
+ * path: the filename used for about/ and img/people/
+ */
+const memberConfig = [
+  {
+    name: 'Michael Sedlmair',
+    path: 'michael_sedlmair'
+  },
+  {
+    name: 'Aimee Sousa Calepso',
+    path: 'aimee_sousa_calepso'
+  },
+  {
+    name: 'Alexander Achberger',
+    path: 'alexander_achberger'
+  },
+  {
+    name: 'Frank Heyen',
+    path: 'frank_heyen'
+  },
+  {
+    name: 'Jonas Haischt',
+    path: 'jonas_haischt'
+  },
+  {
+    name: 'Katrin Angerbauer',
+    path: 'katrin_angerbauer'
+  },
+  {
+    name: 'Melissa Reinelt',
+    path: 'melissa_reinelt'
+  },
+  {
+    name: 'Natalie Hube',
+    path: 'natalie_hube'
+  },
+  {
+    name: 'Nina Dörr',
+    path: 'nina_doerr'
+  },
+  {
+    name: 'Quynh Quang Ngo',
+    path: 'quynh_quang_ngo'
+  },
+  {
+    name: 'Rene Cutura',
+    path: 'rene_cutura'
+  },
+  {
+    name: 'Ruben Bauer',
+    path: 'ruben_bauer'
+  },
+  {
+    name: 'Sebastian Rigling',
+    path: 'sebastian_rigling'
+  },
+  {
+    name: 'Simeon Rau',
+    path: 'simeon_rau'
+  },
+  {
+    name: 'Xingyao Yu',
+    path: 'xingyao_yu'
+  },
 ]
+
 
 const publicationSheet = './Papers.csv'
 const pageUrl = 'https://visvar.github.io'
 const pageTitle = 'VISVAR Research Group, University of Stuttgart'
 
-const memberPaths = members.map(member => {
-  return member
-    .trim()
-    .split(' ')
-    .join('_')
-    .toLowerCase()
-    .replaceAll('ä', 'ae')
-    .replaceAll('ö', 'oe')
-    .replaceAll('ü', 'ue')
-  // TODO: url encode!
-})
-// .map(d => querystring.stringify(d'));
+const members = memberConfig.map(d => d.name)
+const memberPaths = memberConfig.map(d => d.path)
 
 const headerAndNav = `
 <header>
@@ -83,7 +122,7 @@ csv
 /**
  * Creates all HTML pages
  */
-function createPages () {
+function createPages() {
   console.log(`${publications.length} publications`)
   // Sort by date descending, so newest at top of page
   publications.sort((a, b) => a['Date'] > b['Date'] ? -1 : 1
@@ -107,14 +146,16 @@ function createPages () {
   writeFileSync('papers.json', JSON.stringify(publications))
   // Detect missing and extra files
   let missing = []
-  let extra = []
   for (const pub of publications) {
     const key = pub['Key (e.g. for file names)']
     if (!allImages.has(`${key}.png`)) { missing.push(`${key}.png`) }
     let pdf = pub['PDF URL (public)']
     if ((!pdf || pdf === "") && !allPdfs.has(`${key}.pdf`)) { missing.push(`${key}.pdf`) }
   }
-  console.log(`\nmissing files:\n${missing.join("\n")}`)
+  if (missing.length > 0) {
+    console.log(`\nmissing files:\n${missing.sort().join("\n")}`)
+  }
+  let extra = []
   const allKeys = new Set(publications.map(d => d['Key (e.g. for file names)']))
   const allFiles = [...allImages, ...allPdfs, ...allVideos, ...allSuppl]
   const ignore = new Set(["small", "people", "favicon.png", "visvar_logo.svg"])
@@ -124,13 +165,15 @@ function createPages () {
       extra.push(f)
     }
   }
-  console.log(`\nextra files:\n${extra.join("\n")}`)
+  if (extra.length > 0) {
+    console.log(`\nextra files:\n${extra.sort().join("\n")}`)
+  }
 }
 
 /**
  * Creates HTML from the CSV data
  */
-function createMainPageHtml (published) {
+function createMainPageHtml(published) {
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -180,7 +223,7 @@ function createMainPageHtml (published) {
 /**
  * Creates HTML from the CSV data
  */
-function createMemberPageHtml (member, fileName, publications) {
+function createMemberPageHtml(member, fileName, publications) {
   // Create HTML
   const publicationsHtml = createPublicationsHtml(publications, true)
   // Read nav and about us page
@@ -233,7 +276,7 @@ function createMemberPageHtml (member, fileName, publications) {
  * @param {boolean} [isMember=false] is this a member page?
  * @returns {string} HTML
  */
-function createPublicationsHtml (publications, isMember = false) {
+function createPublicationsHtml(publications, isMember = false) {
   const p = isMember ? '..' : '.'
   return publications.map((pub, i) => {
     const key = pub['Key (e.g. for file names)']
@@ -322,7 +365,7 @@ function createPublicationsHtml (publications, isMember = false) {
 /**
  * Creates the page for a single publication
  */
-function createPublicationPageHtml (pub) {
+function createPublicationPageHtml(pub) {
   const key = pub['Key (e.g. for file names)']
   const year = pub['Date'].slice(0, 4)
   const website = pub['Publisher URL (official)']
