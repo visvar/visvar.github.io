@@ -153,7 +153,7 @@ function createPages() {
     if ((!pdf || pdf === "") && !allPdfs.has(`${key}.pdf`)) { missing.push(`${key}.pdf`) }
   }
   if (missing.length > 0) {
-    console.log(`\nmissing files:\n${missing.sort().join("\n")}`)
+    console.log(`\nmissing files:\n  ${missing.sort().join("\n  ")}`)
   }
   let extra = []
   const allKeys = new Set(publications.map(d => d['Key (e.g. for file names)']))
@@ -166,7 +166,7 @@ function createPages() {
     }
   }
   if (extra.length > 0) {
-    console.log(`\nextra files:\n${extra.sort().join("\n")}`)
+    console.log(`\nextra files:\n  ${extra.sort().join("\n  ")}`)
   }
 }
 
