@@ -328,6 +328,7 @@ function createPublicationsHtml(publications, isMember = false) {
         title="Click to enlarge and show details"
         onclick="toggleClass('paper${key}', 'small'); toggleImageSize(this)"
         class="publicationImage small"
+        loading="lazy"
         src="${image}"
       />`
         : ''

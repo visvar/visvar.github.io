@@ -1,4 +1,4 @@
-function toggleVisibility (elementId) {
+function toggleVisibility(elementId) {
   const element = document.getElementById(elementId)
   if (element.style.display === 'none' || element.style.display === '') {
     element.style.display = 'block'
@@ -7,7 +7,7 @@ function toggleVisibility (elementId) {
   }
 }
 
-function toggleClass (elementId, className) {
+function toggleClass(elementId, className) {
   const element = document.getElementById(elementId)
   element.classList.toggle(className)
 }
@@ -15,7 +15,7 @@ function toggleClass (elementId, className) {
 /**
  * @param {HTMLImageElement|string} img image element or HTML ID of the element
  */
-function toggleImageSize (img) {
+function toggleImageSize(img) {
   if (typeof img === 'string') {
     img = document.getElementById(img)
   }
