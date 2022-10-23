@@ -4,6 +4,8 @@ import csv from 'fast-csv'
 /**
  * name: the same name as used on the publication dataset
  * path: the filename used for about/ and img/people/
+ *
+ * Sorted by name, except for the group leader who goes first
  */
 const memberConfig = [
   {
@@ -29,6 +31,10 @@ const memberConfig = [
   {
     name: 'Katrin Angerbauer',
     path: 'katrin_angerbauer'
+  },
+  {
+    name: 'Markus Wieland',
+    path: 'markus_wieland'
   },
   {
     name: 'Melissa Reinelt',
@@ -61,10 +67,6 @@ const memberConfig = [
   {
     name: 'Simeon Rau',
     path: 'simeon_rau'
-  },
-  {
-    name: 'Markus Wieland',
-    path: 'markus_wieland'
   },
   {
     name: 'Tobias Rau',
