@@ -63,6 +63,14 @@ const memberConfig = [
     path: 'simeon_rau'
   },
   {
+    name: 'Markus Wieland',
+    path: 'markus_wieland'
+  },
+  {
+    name: 'Tobias Rau',
+    path: 'tobias_rau'
+  },
+  {
     name: 'Xingyao Yu',
     path: 'xingyao_yu'
   },
