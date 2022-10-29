@@ -1,5 +1,7 @@
-import { createReadStream, readFileSync, writeFileSync, readdirSync } from 'node:fs'
+import { createReadStream, readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs'
 import csv from 'fast-csv'
+import { AwesomeQR } from 'awesome-qr'
+// import { AwesomeQR } from 'aweseome-qr/dist/aweseome-qr.js'
 
 /**
  * name: the same name as used on the publication dataset
@@ -132,7 +134,7 @@ csv
 /**
  * Creates all HTML pages
  */
-function createPages() {
+function createPages () {
   console.log(`${publications.length} publications`)
   // Sort by date descending, so newest at top of page
   publications.sort((a, b) => a['Date'] > b['Date'] ? -1 : 1
@@ -154,6 +156,8 @@ function createPages() {
   }
   // Export papers.json
   writeFileSync('papers.json', JSON.stringify(publications))
+  // Create missing QR codes
+  createQRCodes(publications)
   // Detect missing and extra files
   let missing = []
   for (const pub of publications) {
@@ -183,7 +187,7 @@ function createPages() {
 /**
  * Creates HTML from the CSV data
  */
-function createMainPageHtml(published) {
+function createMainPageHtml (published) {
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -233,7 +237,7 @@ function createMainPageHtml(published) {
 /**
  * Creates HTML from the CSV data
  */
-function createMemberPageHtml(member, fileName, publications) {
+function createMemberPageHtml (member, fileName, publications) {
   // Create HTML
   const publicationsHtml = createPublicationsHtml(publications, true)
   // Read nav and about us page
@@ -286,7 +290,7 @@ function createMemberPageHtml(member, fileName, publications) {
  * @param {boolean} [isMember=false] is this a member page?
  * @returns {string} HTML
  */
-function createPublicationsHtml(publications, isMember = false) {
+function createPublicationsHtml (publications, isMember = false) {
   const p = isMember ? '..' : '.'
   return publications.map((pub, i) => {
     const key = pub['Key (e.g. for file names)']
@@ -349,6 +353,7 @@ function createPublicationsHtml(publications, isMember = false) {
         ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
         ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
         ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
+        <a href="${pageUrl}/pub/${key}.html" target="_blank">direct link</a>
       </div>
     </div>
     <div class="info">
@@ -364,9 +369,6 @@ function createPublicationsHtml(publications, isMember = false) {
         ? `<h4>Acknowledgements</h4><div class="abstract">${pub['Acknowledgements']}</div>`
         : ''
       }
-      <div>
-        <a href="${pageUrl}/pub/${key}.html" target="_blank">direct link</a>
-      </div>
     </div>
   </div>
   `
@@ -376,7 +378,7 @@ function createPublicationsHtml(publications, isMember = false) {
 /**
  * Creates the page for a single publication
  */
-function createPublicationPageHtml(pub) {
+function createPublicationPageHtml (pub) {
   const key = pub['Key (e.g. for file names)']
   const year = pub['Date'].slice(0, 4)
   const website = pub['Publisher URL (official)']
@@ -426,26 +428,24 @@ function createPublicationPageHtml(pub) {
           <article> <a class="anchor" name="publications"></a>
             <h1>${pub["Title"]}</h1>
             <div class="pubPageContent">
-              <div class="pubImage">
               ${imageExists ? `<img id="image${key}" src="../img/${key}.png"/>` : ''}
+              <div>
+                <b>Venue.</b> ${pub['Submission Target']} (${year}) ${pub['Type']}
               </div>
               <div>
-              ${pub['Submission Target']} (${year}) ${pub['Type']}
+                <b>Authors.</b> ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
               </div>
-              <h4>Authors</h4>
               <div>
-              ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
-              </div>
-              <h4>Materials</h4>
-              <div>
+                <b>Materials.</b>
                 ${website && website !== '' ? `<a href="${website}" target="_blank">website</a>` : ''}
                 ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
                 ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
                 ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
               </div>
-              ${pub['Abstract'] ? `<h4>Abstract</h4><div class="abstract">${pub['Abstract']}</div>` : ''}
-              ${pub['bibtex'] ? `<h4>BibTex</h4><div class="bibtex"><textarea>${pub['bibtex'].trim()}</textarea></div>` : ''}
-              ${pub['Acknowledgements'] ? `<h4>Acknowledgements</h4><div class="abstract">${pub['Acknowledgements']}</div>` : ''}
+              ${pub['Abstract'] ? `<div class="abstract"><b>Abstract.</b> ${pub['Abstract']}</div>` : ''}
+              ${pub['bibtex'] ? `<div class="bibtex"><textarea>${pub['bibtex'].trim()}</textarea></div>` : ''}
+              ${pub['Acknowledgements'] ? `<div class="abstract"><b>Acknowledgements.</b> ${pub['Acknowledgements']}</div>` : ''}
+              <img class="qr" src="../qr/${key}.png"/>
             </div>
           </div>
           </article>
@@ -455,4 +455,39 @@ function createPublicationPageHtml(pub) {
     </html>`
   const outFile = `./pub/${pub['Key (e.g. for file names)']}.html`
   writeFileSync(outFile, html)
+}
+
+/**
+ * Creates QR code with
+ * @param {object[]} publications publication data
+ */
+async function createQRCodes (publications) {
+  let count = 0
+  const dir = "./qr"
+  const logo = readFileSync("./qr/_qrbg.png")
+  for (const pub of publications) {
+    const key = pub['Key (e.g. for file names)']
+    const path = `${dir}/${key}.png`
+    // Check if QR code image already exists
+    if (existsSync(path)) {
+      continue
+    }
+    const url = `${pageUrl}/pub/${key}.html`
+    const buffer = await new AwesomeQR({
+      text: url,
+      size: 420,
+      margin: 0,
+      colorDark: '#333',
+      logoImage: logo,
+      logoScale: 0.33,
+      logoMargin: 8,
+      logoCornerRadius: 70
+
+    }).draw()
+    writeFileSync(path, buffer)
+    count++
+  }
+  console.log(`\nCreated ${count} new QRs`)
+
+  // TODO: look for orphan QR code PNGs
 }

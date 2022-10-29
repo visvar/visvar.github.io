@@ -17,9 +17,10 @@
   "author": "",
   "license": "",
   "devDependencies": {
+    "awesome-qr": "2.1.5-rc.0",
     "fast-csv": "^4.3.6",
     "image-js": "^1.0.0-alpha.3",
-    "npm-check-updates": "^16.3.14",
+    "npm-check-updates": "^16.3.16",
     "xlsx": "^0.18.5"
   }
 }

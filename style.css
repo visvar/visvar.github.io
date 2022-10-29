@@ -161,6 +161,7 @@ section a i {
 
 .avatarAndBio .bio {
   padding: 10px 10px 10px 30px;
+  text-align: justify;
 }
 
 img.avatar {
@@ -257,6 +258,7 @@ img.avatar {
 .paper .info .abstract {
   font-size: 0.85em;
   margin-bottom: 5px;
+  text-align: justify;
 }
 
 .paper .info .bibtex textarea {
@@ -274,8 +276,12 @@ img.avatar {
 
 
 /* Publication page */
-.pubPageContent .pubImage {
+.pubPageContent {
   text-align: center;
+}
+
+.pubPageContent>div {
+  margin-top: 10px;
 }
 
 .pubPageContent img {
@@ -285,14 +291,26 @@ img.avatar {
   border-radius: 3px;
 }
 
+.pubPageContent .abstract {
+  text-align: justify;
+}
+
 .pubPageContent textarea {
   width: 90%;
   min-height: 200px;
   max-height: 400px;
+  border: 10px solid #f8f8f8;
+  border-radius: 10px;
+  background: #fcfcfc;
 }
 
 .pubPageContent a {
   padding: 0 3px;
+}
+
+.pubPageContent img.qr {
+  width: 140px;
+  margin: 30px;
 }
 
 

@@ -12,6 +12,7 @@
    4. [Dependency Update](#dependency-update)
    5. [Adding new Members](#adding-new-members)
    6. [Repository Structure](#repository-structure)
+   7. [Used Libraries](#used-libraries)
 
 ## Adding Content
 
@@ -81,6 +82,7 @@ Make sure the filenames equal the `path` in the config and only contain ASCII ch
 - members/: compiled member pages
 - pdf/: pdfs
 - pub/: compiled publication pages
+- qr/: QR code PNGs for all publication pages
 - scripts/: compile scripts
 - suppl/: supplemental material
 - video/: videos
@@ -88,3 +90,11 @@ Make sure the filenames equal the `path` in the config and only contain ASCII ch
 - index.html: compiled main page
 - script.js: page scripts
 - style.css: page styles
+
+## Used Libraries
+
+- [awesome-qr](https://github.com/sumimakito/Awesome-qr.js) for QR codes
+- [fast-csv](https://github.com/C2FO/fast-csv) for parsing .csv
+- [image-js](https://github.com/image-js/image-js) for image resizing for thumbnails (`npm run resizePeople`, `npm run resizeThumbs`)
+- [npm-check-updates](https://github.com/raineorshine/npm-check-updates) for updating packages (`npm run upd`)
+- [xlsx](https://github.com/SheetJS/sheetjs) for converting .xlsx to .csv `npm run tocsv`
