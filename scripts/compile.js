@@ -134,7 +134,7 @@ csv
 /**
  * Creates all HTML pages
  */
-function createPages () {
+function createPages() {
   console.log(`${publications.length} publications`)
   // Sort by date descending, so newest at top of page
   publications.sort((a, b) => a['Date'] > b['Date'] ? -1 : 1
@@ -187,7 +187,7 @@ function createPages () {
 /**
  * Creates HTML from the CSV data
  */
-function createMainPageHtml (published) {
+function createMainPageHtml(published) {
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -237,7 +237,7 @@ function createMainPageHtml (published) {
 /**
  * Creates HTML from the CSV data
  */
-function createMemberPageHtml (member, fileName, publications) {
+function createMemberPageHtml(member, fileName, publications) {
   // Create HTML
   const publicationsHtml = createPublicationsHtml(publications, true)
   // Read nav and about us page
@@ -290,7 +290,7 @@ function createMemberPageHtml (member, fileName, publications) {
  * @param {boolean} [isMember=false] is this a member page?
  * @returns {string} HTML
  */
-function createPublicationsHtml (publications, isMember = false) {
+function createPublicationsHtml(publications, isMember = false) {
   const p = isMember ? '..' : '.'
   return publications.map((pub, i) => {
     const key = pub['Key (e.g. for file names)']
@@ -378,7 +378,7 @@ function createPublicationsHtml (publications, isMember = false) {
 /**
  * Creates the page for a single publication
  */
-function createPublicationPageHtml (pub) {
+function createPublicationPageHtml(pub) {
   const key = pub['Key (e.g. for file names)']
   const year = pub['Date'].slice(0, 4)
   const website = pub['Publisher URL (official)']
@@ -461,10 +461,10 @@ function createPublicationPageHtml (pub) {
  * Creates QR code with
  * @param {object[]} publications publication data
  */
-async function createQRCodes (publications) {
+async function createQRCodes(publications) {
   let count = 0
   const dir = "./qr"
-  const logo = readFileSync("./qr/_qrbg.png")
+  // const logo = readFileSync("./qr/_qrbg.png")
   for (const pub of publications) {
     const key = pub['Key (e.g. for file names)']
     const path = `${dir}/${key}.png`
@@ -478,10 +478,10 @@ async function createQRCodes (publications) {
       size: 420,
       margin: 0,
       colorDark: '#333',
-      logoImage: logo,
-      logoScale: 0.33,
-      logoMargin: 8,
-      logoCornerRadius: 70
+      // logoImage: logo,
+      // logoScale: 0.33,
+      // logoMargin: 8,
+      // logoCornerRadius: 70
 
     }).draw()
     writeFileSync(path, buffer)
