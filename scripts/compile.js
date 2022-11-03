@@ -323,7 +323,7 @@ function createPublicationsHtml(publications, isMember = false) {
 
     return `
   ${i === 0 || year !== publications[i - 1]['Date'].slice(0, 4)
-        ? `<h2>${year}</h2>` : ''}
+        ? `<h2 class="yearHeading">${year}</h2>` : ''}
   <div class="paper small" id="paper${key}">
     ${imageExists
         ? `

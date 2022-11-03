@@ -153,6 +153,7 @@ section a i {
   color: var(--textColor);
 }
 
+
 /* About pages */
 .avatarAndBio {
   display: grid;
@@ -167,6 +168,33 @@ section a i {
 img.avatar {
   border-radius: 50%;
 }
+
+.furtherInfo {
+  padding: 10px;
+  display: grid;
+  gap: 15px;
+}
+
+@media (min-width: 1020px) {
+  .furtherInfo {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.furtherInfo h2 {
+  margin-bottom: 10px;
+}
+
+.furtherInfo ul li {
+  margin-left: -15px;
+}
+
+/* Year headings */
+.yearHeading {
+  text-align: center;
+  border-bottom: 2px solid #eee;
+}
+
 
 /* Publications */
 .paper {
@@ -473,6 +501,12 @@ img.avatar {
 
   .aboutusTextAndLogo img {
     display: block;
+  }
+
+  /* Main page about infos */
+  .aboutusFurtherInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
   .memberList img.avatar {
