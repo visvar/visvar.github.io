@@ -3,9 +3,9 @@ import path from 'path'
 import { Image } from 'image-js'
 
 
-rescale()
+convert()
 
-async function rescale () {
+async function convert() {
     console.log('image-to-png.js')
     const files = readdirSync('./img')
     for (const file of files) {
