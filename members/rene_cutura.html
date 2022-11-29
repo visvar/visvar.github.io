@@ -140,6 +140,78 @@
         <h1>Publications</h1>
         
   <h2 class="yearHeading">2022</h2>
+  <div class="paper small" id="papermorariu2022predicting">
+    
+    <div class="metaData noImage">
+      <h3
+        onclick="toggleClass('papermorariu2022predicting', 'small'); toggleImageSize(imagemorariu2022predicting)"
+        title="Click to show details"
+      >
+        Predicting User Preferences of Dimensionality Reduction Embedding Quality<a class="anchor" name="morariu2022predicting"></a>
+      </h3>
+      <div>
+        Cristina Morariu, Adrien Bibal, Rene Cutura, Benoit Frenay, Michael Sedlmair
+      </div>
+      <div>
+        TVCG (2022) Full Paper
+        <a href="https://doi.org/10.1109/TVCG.2022.3209449" target="_blank">website</a>
+        
+        
+        <a href="https://doi.org/10.1109/TVCG.2022.3209449/mm1" target="_blank">supplemental</a>
+        <a href="https://visvar.github.io/pub/morariu2022predicting.html" target="_blank">direct link</a>
+      </div>
+    </div>
+    <div class="info">
+      <h4>Abstract</h4><div class="abstract">A plethora of dimensionality reduction techniques have emerged over the past decades, leaving researchers and analysts with a wide variety of choices for reducing their data, all the more so given some techniques come with additional hyper-parametrization (e.g., t-SNE, UMAP, etc.). Recent studies are showing that people often use dimensionality reduction as a black-box regardless of the specific properties the method itself preserves. Hence, evaluating and comparing 2D embeddings is usually qualitatively decided, by setting embeddings side-by-side and letting human judgment decide which embedding is the best. In this work, we propose a quantitative way of evaluating embeddings, that nonetheless places human perception at the center. We run a comparative study, where we ask people to select “good” and “misleading” views between scatterplots of low-dimensional embeddings of image datasets, simulating the way people usually select embeddings. We use the study data as labels for a set of quality metrics for a supervised machine learning model whose purpose is to discover and quantify what exactly people are looking for when deciding between embeddings. With the model as a proxy for human judgments, we use it to rank embeddings on new datasets, explain why they are relevant, and quantify the degree of subjectivity when people select preferred embeddings.</div>
+      <h4>BibTex</h4><div class="bibtex"><textarea>@article{morariu2022predicting,
+  title={{Predicting User Preferences of Dimensionality Reduction Embedding Quality}},
+  author={Morariu, Cristina and Bibal, Adrien and Cutura, Rene and Frenay, Benoit and Sedlmair, Michael},
+  journal={IEEE Transactions on Visualization and Computer Graphics (TVCG)},
+  year={2022},
+  publisher={IEEE},
+  pages={1-11},
+  doi={10.1109/TVCG.2022.3209449}}</textarea></div>
+      <h4>Acknowledgements</h4><div class="abstract">Funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) – Project-ID 251654672 – TRR 161 (Project A08).</div>
+    </div>
+  </div>
+  
+  
+  <div class="paper small" id="papercutura2022hagrid">
+    
+    <div class="metaData noImage">
+      <h3
+        onclick="toggleClass('papercutura2022hagrid', 'small'); toggleImageSize(imagecutura2022hagrid)"
+        title="Click to show details"
+      >
+        Hagrid: using Hilbert and Gosper curves to gridify scatterplots<a class="anchor" name="cutura2022hagrid"></a>
+      </h3>
+      <div>
+        Rene Cutura, Rene Cutura, Cristina Morariu, Zhanglin Cheng, Yunhai Wang, Daniel Weiskopf, Michael Sedlmair 
+      </div>
+      <div>
+        JoV (2022) Full Paper
+        <a href="https://doi.org/10.1007/s12650-022-00854-7" target="_blank">website</a>
+        
+        
+        
+        <a href="https://visvar.github.io/pub/cutura2022hagrid.html" target="_blank">direct link</a>
+      </div>
+    </div>
+    <div class="info">
+      <h4>Abstract</h4><div class="abstract">A common enhancement of scatterplots represents points as small multiples, glyphs, or thumbnail images. As this encoding often results in overlaps, a general strategy is to alter the position of the data points, for instance, to a grid-like structure. Previous approaches rely on solving expensive optimization problems or on dividing the space that alter the global structure of the scatterplot. To find a good balance between efficiency and neighborhood and layout preservation, we propose HAGRID, a technique that uses space-filling curves (SFCs) to “gridify” a scatterplot without employing expensive collision detection and handling mechanisms. Using SFCs ensures that the points are plotted close to their original position, retaining approximately the same global structure. The resulting scatterplot is mapped onto a rectangular or hexagonal grid, using Hilbert and Gosper curves. We discuss and evaluate the theoretic runtime of our approach and quantitatively compare our approach to three state-of-the-art gridifying approaches, DGRID, Small multiples with gaps SMWG, and CorrelatedMultiples CMDS, in an evaluation comprising 339 scatterplots. Here, we compute several quality measures for neighborhood preservation together with an analysis of the actual runtimes. The main results show that, compared to the best other technique, HAGRID is faster by a factor of four, while achieving similar or even better quality of the gridified layout. Due to its computational efficiency, our approach also allows novel applications of gridifying approaches in interactive settings, such as removing local overlap upon hovering over a scatterplot.</div>
+      <h4>BibTex</h4><div class="bibtex"><textarea>@article{cutura2022hagrid,
+  title={{Hagrid: using Hilbert and Gosper curves to gridify scatterplots}},
+  author={Cutura, Rene and Morariu, Cristina and Cheng, Zhanglin and Wang, Yunhai and Weiskopf, Daniel and Sedlmair, Michael},
+  journal={Journal of Visualization},
+  pages={1--17},
+  year={2022},
+  publisher={Springer}
+}</textarea></div>
+      <h4>Acknowledgements</h4><div class="abstract">This work was supported by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) - Project-ID 251654672 - TRR 161.</div>
+    </div>
+  </div>
+  
+  
   <div class="paper small" id="paperangerbauer2022accessibility">
     
       <img
@@ -187,6 +259,59 @@ keywords = {color vision deficiency, crowdsourcing, visualization, accessibility
 series = {CHI '22}
 }</textarea></div>
       <h4>Acknowledgements</h4><div class="abstract">Funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) – Project-ID 251654672 – TRR 161 (projects A08 and B01). We thank all our study participants and in particular Sajid Baloch for his valuable input.</div>
+    </div>
+  </div>
+  
+  
+  <div class="paper small" id="papertkachev2022metaphorical">
+    
+      <img
+        id="imagetkachev2022metaphorical"
+        title="Click to enlarge and show details"
+        onclick="toggleClass('papertkachev2022metaphorical', 'small'); toggleImageSize(this)"
+        class="publicationImage small"
+        loading="lazy"
+        src="../img/small/tkachev2022metaphorical.png"
+      />
+    <div class="metaData ">
+      <h3
+        onclick="toggleClass('papertkachev2022metaphorical', 'small'); toggleImageSize(imagetkachev2022metaphorical)"
+        title="Click to show details"
+      >
+        Metaphorical Visualization: Mapping Data to Familiar Concepts<a class="anchor" name="tkachev2022metaphorical"></a>
+      </h3>
+      <div>
+        Gleb Tkachev, Rene Cutura, Michael Sedlmair, Steffen Frey, Thomas Ertl
+      </div>
+      <div>
+        alt.CHI (2022) Extended Abstract
+        <a href="https://doi.org/10.1145/3491101.3516393" target="_blank">website</a>
+        <a href="../pdf/tkachev2022metaphorical.pdf" target="_blank">PDF</a>
+        <a href="https://gleb-t.com/media/videos/MetaphorVisFastForward_LowBitrate.mp4" target="_blank">video</a>
+        <a href="https://gleb-t.com/publication/metaphor-vis/metaphorvis_2022_supplemental.pdf" target="_blank">supplemental</a>
+        <a href="https://visvar.github.io/pub/tkachev2022metaphorical.html" target="_blank">direct link</a>
+      </div>
+    </div>
+    <div class="info">
+      <h4>Abstract</h4><div class="abstract">We present a new approach to visualizing data that is well-suited for personal and casual applications. The idea is to map the data to another dataset that is already familiar to the user, and then rely on their existing knowledge to illustrate relationships in the data. We construct the map by preserving pairwise distances or by maintaining relative values of specific data attributes. This metaphorical mapping is very flexible and allows us to adapt the visualization to its application and target audience. We present several examples where we map data to different domains and representations. This includes mapping data to cat images, encoding research interests with neural style transfer and representing movies as stars in the night sky. Overall, we find that although metaphors are not as accurate as the traditional techniques, they can help design engaging and personalized visualizations</div>
+      <h4>BibTex</h4><div class="bibtex"><textarea>@inproceedings{10.1145/3491101.3516393,
+title = {Metaphorical Visualization: Mapping Data to Familiar Concepts},
+  author = {Tkachev, Gleb and Cutura, Rene and Sedlmair, Michael and Frey, Steffen and Ertl, Thomas},
+  year = {2022},
+  isbn = {9781450391566},
+  publisher = {ACM},
+  url = {https://doi.org/10.1145/3491101.3516393},
+  doi = {10.1145/3491101.3516393},
+  booktitle = {Extended Abstracts of the 2022 CHI Conference on Human Factors in Computing Systems},
+  articleno = {10},
+  numpages = {10},
+  keywords = {Metaphor, Image embedding, Word embedding},
+  series = {CHI EA '22},
+  eventtitle = {Alt.{{CHI}} 2022}
+}</textarea></div>
+      <h4>Acknowledgements</h4><div class="abstract">Funded by the Deutsche Forschungsgemeinschaft (DFG, German
+Research Foundation) under Germany’s Excellence Strategy EXC
+2075 – 390740016, and TRR 161 – 251654672.</div>
     </div>
   </div>
   
@@ -349,7 +474,7 @@ Cristina Morariu, Zhanglin Cheng, Yunhai Wang, Daniel Weiskopf, Michael Sedlmair
         DumbleDR: Predicting User Preferences of Dimensionality Reduction Projection Quality<a class="anchor" name="morariu2021arxiv"></a>
       </h3>
       <div>
-        Cristina Morariu, Adrien Bibal, Rene Cutura, Benoît Frénay, Michael Sedlmair
+        Cristina Morariu, Adrien Bibal, Rene Cutura, Benoit Frenay, Michael Sedlmair
       </div>
       <div>
         arXiv (2021) 

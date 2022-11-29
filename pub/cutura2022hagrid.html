@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Hagrid: using Hilbert and Gosper curves to gridify scatterplots | VISVAR Research Group, University of Stuttgart</title>
+      <link rel="stylesheet" href="../style.css">
+      <script src="../script.js"></script>
+      <link rel="shortcut icon" href="../img/favicon.png">
+      <link rel="icon" type="image/png" href="../img/favicon.png" sizes="256x256">
+      <link rel="apple-touch-icon" sizes="256x256" href="../img/favicon.png">
+    </head>
+    <body>
+      <a class="anchor" name="top"></a>
+      <main>
+        <div>
+          
+<header>
+  <div>
+    <a href="https://visvar.github.io/">
+      <h1 class="h1desktop"><div>VISVAR</div><div>Research</div><div>Group</div></h1>
+      <h1 class="h1mobile">VISVAR</h1>
+    </a>
+  </div>
+  <div>
+    <nav>
+      <ul>
+        <li>
+          <a href="https://visvar.github.io/#aboutus">about VISVAR</a>
+        </li>
+        <li>
+          <a href="https://visvar.github.io/#publications">publications</a>
+        </li>
+        <li class="memberNav">
+          <a href="https://visvar.github.io/#members">members</a>
+        </li>
+        <ul class="memberNav">
+          
+            <li><a href="https://visvar.github.io/members/michael_sedlmair.html">Michael Sedlmair</a></li>
+          
+            <li><a href="https://visvar.github.io/members/aimee_sousa_calepso.html">Aimee Sousa Calepso</a></li>
+          
+            <li><a href="https://visvar.github.io/members/alexander_achberger.html">Alexander Achberger</a></li>
+          
+            <li><a href="https://visvar.github.io/members/frank_heyen.html">Frank Heyen</a></li>
+          
+            <li><a href="https://visvar.github.io/members/jonas_haischt.html">Jonas Haischt</a></li>
+          
+            <li><a href="https://visvar.github.io/members/katrin_angerbauer.html">Katrin Angerbauer</a></li>
+          
+            <li><a href="https://visvar.github.io/members/markus_wieland.html">Markus Wieland</a></li>
+          
+            <li><a href="https://visvar.github.io/members/melissa_reinelt.html">Melissa Reinelt</a></li>
+          
+            <li><a href="https://visvar.github.io/members/natalie_hube.html">Natalie Hube</a></li>
+          
+            <li><a href="https://visvar.github.io/members/nina_doerr.html">Nina Dörr</a></li>
+          
+            <li><a href="https://visvar.github.io/members/quynh_quang_ngo.html">Quynh Quang Ngo</a></li>
+          
+            <li><a href="https://visvar.github.io/members/rene_cutura.html">Rene Cutura</a></li>
+          
+            <li><a href="https://visvar.github.io/members/ruben_bauer.html">Ruben Bauer</a></li>
+          
+            <li><a href="https://visvar.github.io/members/sebastian_rigling.html">Sebastian Rigling</a></li>
+          
+            <li><a href="https://visvar.github.io/members/simeon_rau.html">Simeon Rau</a></li>
+          
+            <li><a href="https://visvar.github.io/members/tobias_rau.html">Tobias Rau</a></li>
+          
+            <li><a href="https://visvar.github.io/members/xingyao_yu.html">Xingyao Yu</a></li>
+          
+        </ul>
+      </ul>
+    </nav>
+  </div>
+</header>
+        </div>
+        <div>
+          <article> <a class="anchor" name="publications"></a>
+            <h1>Hagrid: using Hilbert and Gosper curves to gridify scatterplots</h1>
+            <div class="pubPageContent">
+              
+              <div>
+                <b>Venue.</b> JoV (2022) Full Paper
+              </div>
+              <div>
+                <b>Authors.</b> Rene Cutura, Rene Cutura, Cristina Morariu, Zhanglin Cheng, Yunhai Wang, Daniel Weiskopf, Michael Sedlmair 
+              </div>
+              <div>
+                <b>Materials.</b>
+                <a href="https://doi.org/10.1007/s12650-022-00854-7" target="_blank">website</a>
+                
+                
+                
+              </div>
+              <div class="abstract"><b>Abstract.</b> A common enhancement of scatterplots represents points as small multiples, glyphs, or thumbnail images. As this encoding often results in overlaps, a general strategy is to alter the position of the data points, for instance, to a grid-like structure. Previous approaches rely on solving expensive optimization problems or on dividing the space that alter the global structure of the scatterplot. To find a good balance between efficiency and neighborhood and layout preservation, we propose HAGRID, a technique that uses space-filling curves (SFCs) to “gridify” a scatterplot without employing expensive collision detection and handling mechanisms. Using SFCs ensures that the points are plotted close to their original position, retaining approximately the same global structure. The resulting scatterplot is mapped onto a rectangular or hexagonal grid, using Hilbert and Gosper curves. We discuss and evaluate the theoretic runtime of our approach and quantitatively compare our approach to three state-of-the-art gridifying approaches, DGRID, Small multiples with gaps SMWG, and CorrelatedMultiples CMDS, in an evaluation comprising 339 scatterplots. Here, we compute several quality measures for neighborhood preservation together with an analysis of the actual runtimes. The main results show that, compared to the best other technique, HAGRID is faster by a factor of four, while achieving similar or even better quality of the gridified layout. Due to its computational efficiency, our approach also allows novel applications of gridifying approaches in interactive settings, such as removing local overlap upon hovering over a scatterplot.</div>
+              <div class="bibtex"><textarea>@article{cutura2022hagrid,
+  title={{Hagrid: using Hilbert and Gosper curves to gridify scatterplots}},
+  author={Cutura, Rene and Morariu, Cristina and Cheng, Zhanglin and Wang, Yunhai and Weiskopf, Daniel and Sedlmair, Michael},
+  journal={Journal of Visualization},
+  pages={1--17},
+  year={2022},
+  publisher={Springer}
+}</textarea></div>
+              <div class="abstract"><b>Acknowledgements.</b> This work was supported by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) - Project-ID 251654672 - TRR 161.</div>
+              <img class="qr" src="../qr/cutura2022hagrid.png"/>
+            </div>
+          </div>
+          </article>
+        </div>
+      </main>
+    </body>
+    </html>
