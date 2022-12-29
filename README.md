@@ -9,9 +9,9 @@
       3. [Papers](#papers)
    2. [Compiling](#compiling)
    3. [Deployment / Publishing](#deployment--publishing)
-   4. [Dependency Update](#dependency-update)
-   5. [Adding new Members](#adding-new-members)
-   6. [Repository Structure](#repository-structure)
+   4. [Adding new Members](#adding-new-members)
+   5. [Repository Structure](#repository-structure)
+   6. [Dependency Update](#dependency-update)
    7. [Used Libraries](#used-libraries)
 
 ## Adding Content
@@ -22,10 +22,8 @@ After a change, compile the website as described below for changes to take effec
 ### "About" Pages
 
 The main page is inside `aboutus.html`.
-
-One for each member, see [about/](./about/).
-
-(Do not change anything in `members/` or `index.html`!)
+Member information is configured inside [config.js](./config.js).
+*(Do not change anything in `members/`, `pub/` or `index.html`!)*
 
 ### Media
 
@@ -60,22 +58,15 @@ Simply do a git commit and push, e.g. run
 - `git commit -m "some useful commit message"`
 - `git push`
 
-## Dependency Update
-
-- `npm run upd`
-- `npm i`
-
 ## Adding new Members
 
-- Add member to the config at the top of [scripts/compile.js](scripts/compile.js)
-- Add a page in [about/](about/)
-- Add an image in [img/people/](img/people/)
+- Add information in [config.js](./config.js)
+- Add a picture in [img/people/](img/people/)
 
 Make sure the filenames equal the `path` in the config and only contain ASCII characters.
 
 ## Repository Structure
 
-- about/: member page content (to edit)
 - img/: images
 - img/people: member pictures
 - img/**/small: thumbnails
@@ -90,6 +81,11 @@ Make sure the filenames equal the `path` in the config and only contain ASCII ch
 - index.html: compiled main page
 - script.js: page scripts
 - style.css: page styles
+
+## Dependency Update
+
+- `npm run upd`
+- `npm i`
 
 ## Used Libraries
 

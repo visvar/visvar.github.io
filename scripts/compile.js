@@ -1,89 +1,7 @@
 import { createReadStream, readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs'
 import csv from 'fast-csv'
 import { AwesomeQR } from 'awesome-qr'
-// import { AwesomeQR } from 'aweseome-qr/dist/aweseome-qr.js'
-
-/**
- * name: the same name as used on the publication dataset
- * path: the filename used for about/ and img/people/
- *
- * Sorted by name, except for the group leader who goes first
- */
-const memberConfig = [
-  {
-    name: 'Michael Sedlmair',
-    path: 'michael_sedlmair'
-  },
-  {
-    name: 'Aimee Sousa Calepso',
-    path: 'aimee_sousa_calepso'
-  },
-  {
-    name: 'Alexander Achberger',
-    path: 'alexander_achberger'
-  },
-  {
-    name: 'Frank Heyen',
-    path: 'frank_heyen'
-  },
-  {
-    name: 'Jonas Haischt',
-    path: 'jonas_haischt'
-  },
-  {
-    name: 'Katrin Angerbauer',
-    path: 'katrin_angerbauer'
-  },
-  {
-    name: 'Markus Wieland',
-    path: 'markus_wieland'
-  },
-  {
-    name: 'Melissa Reinelt',
-    path: 'melissa_reinelt'
-  },
-  {
-    name: 'Natalie Hube',
-    path: 'natalie_hube'
-  },
-  {
-    name: 'Nina Dörr',
-    path: 'nina_doerr'
-  },
-  {
-    name: 'Quynh Quang Ngo',
-    path: 'quynh_quang_ngo'
-  },
-  {
-    name: 'Rene Cutura',
-    path: 'rene_cutura'
-  },
-  {
-    name: 'Ruben Bauer',
-    path: 'ruben_bauer'
-  },
-  {
-    name: 'Sebastian Rigling',
-    path: 'sebastian_rigling'
-  },
-  {
-    name: 'Simeon Rau',
-    path: 'simeon_rau'
-  },
-  {
-    name: 'Tobias Rau',
-    path: 'tobias_rau'
-  },
-  {
-    name: 'Xingyao Yu',
-    path: 'xingyao_yu'
-  },
-]
-
-
-const publicationSheet = './Papers.csv'
-const pageUrl = 'https://visvar.github.io'
-const pageTitle = 'VISVAR Research Group, University of Stuttgart'
+import { publicationSheet, pageUrl, pageTitle, memberConfig } from '../config.js'
 
 const members = memberConfig.map(d => d.name)
 const memberPaths = memberConfig.map(d => d.path)
@@ -109,8 +27,8 @@ const headerAndNav = `
           <a href="${pageUrl}/#members">members</a>
         </li>
         <ul class="memberNav">
-          ${members.map((d, i) => `
-            <li><a href="${pageUrl}/members/${memberPaths[i]}.html">${d}</a></li>
+          ${memberConfig.map(d => `
+            <li><a href="${pageUrl}/members/${d.path}.html">${d.name}</a></li>
           `).join('')}
         </ul>
       </ul>
@@ -143,13 +61,12 @@ function createPages () {
   // Main page
   createMainPageHtml(publications)
   // Member / author pages
-  for (const [index, member] of members.entries()) {
-    const authoredPubs = publications.filter(d => {
-      return d['First Author'].includes(member)
-        || d['Other Authors'].includes(member)
-    })
-    const fileName = memberPaths[index]
-    createMemberPageHtml(member, fileName, authoredPubs)
+  for (const member of memberConfig) {
+    const authoredPubs = publications.filter(d =>
+      d['First Author'].includes(member.name)
+      || d['Other Authors'].includes(member.name)
+    )
+    createMemberPageHtml(member, authoredPubs)
   }
   // Publication pages
   for (const pub of publications) {
@@ -214,11 +131,11 @@ function createMainPageHtml (published) {
       <article> <a class="anchor" name="members"></a>
         <h1>Members</h1>
         <div class="memberList">
-          ${members.map((member, index) => `
+          ${memberConfig.map(member => `
             <div>
-              <a href="./members/${memberPaths[index]}.html">
-                <img class="avatar" src="./img/people/small/${memberPaths[index]}.jpg" />
-                <div>${member}</div>
+              <a href="./members/${member.path}.html">
+                <img class="avatar" src="./img/people/small/${member.path}.jpg" />
+                <div>${member.name}</div>
               </a>
             </div>
             `).join('\n')}
@@ -238,24 +155,13 @@ function createMainPageHtml (published) {
 /**
  * Creates HTML from the CSV data
  */
-function createMemberPageHtml (member, fileName, publications) {
-  // Create HTML
-  const publicationsHtml = createPublicationsHtml(publications, true)
-  // Read nav and about us page
-  let about = ''
-  const aboutFile = `./about/${fileName}.html`
-  try {
-    about = readFileSync(aboutFile)
-  } catch {
-    console.warn(`No about found for ${member}, ${aboutFile} is missing`)
-  }
-  // Combine HTML
+function createMemberPageHtml (member, publications) {
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${member} | ${pageTitle}</title>
+  <title>${member.title} | ${pageTitle}</title>
   <link rel="stylesheet" href="../style.css">
   <script src="../script.js"></script>
   <link rel="shortcut icon" href="../img/favicon.png">
@@ -270,17 +176,45 @@ function createMemberPageHtml (member, fileName, publications) {
     </div>
     <div>
       <article> <a class="anchor" name="aboutus"></a>
-        ${about}
+        <h1>${member.title}</h1>
+        <div class="aboutMember">
+          <div class="avatarAndBio">
+            <img class="avatar" src="../img/people/${member.path}.jpg" />
+            <div class="bio">${member.bio}</div>
+          </div>
+          <div class="furtherInfo">
+            <div>
+              <h2>Research Interests</h2>
+              <ul>
+                <li>${member.research.join("</li>\n<li>")}</li>
+              </ul>
+            </div>
+            <div>
+              <h2>Links</h2>
+              <ul>
+                <li>${member.links.map(d => `<a href="${d.url}" target="_blank" rel="noreferrer">${d.text}</a>`).join("</li>\n<li>")}</li>
+              </ul>
+            </div>
+            ${member.projects.length === 0 ? '' : `
+            <div>
+            <h2>Projects &amp; Funding</h2>
+            <ul>
+              <li>${member.projects.map(d => `<a href="${d.url}" target="_blank" rel="noreferrer">${d.text}</a>`).join("</li>\n<li>")}</li>
+            </ul>
+          </div>
+            `}
+          </div>
+        </div>
       </article>
       <article> <a class="anchor" name="publications"></a>
         <h1>Publications</h1>
-        ${publicationsHtml}
+        ${createPublicationsHtml(publications, true)}
       </article>
     </div>
   </main>
 </body>
 </html>`
-  const outFile = `./members/${fileName}.html`
+  const outFile = `./members/${member.path}.html`
   writeFileSync(outFile, html)
 }
 
