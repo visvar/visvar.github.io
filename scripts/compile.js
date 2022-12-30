@@ -77,6 +77,14 @@ function createPages () {
   // Create missing QR codes
   createQRCodes(publications)
   // Detect missing and extra files
+  reportMissingFiles(publications)
+}
+
+/**
+ * Logs missing and extra files to the console as warnings
+ * @param {object[]} publications publication data
+ */
+function reportMissingFiles (publications) {
   let missing = []
   for (const pub of publications) {
     const key = pub['Key (e.g. for file names)']
@@ -219,6 +227,21 @@ function createMemberPageHtml (member, publications) {
 }
 
 /**
+ * Chooses a different link text depending on the URL's domain.
+ * @todo just display the domain? at least as fallback?
+ * @param {string} url url
+ * @returns {string} link text
+ */
+function urlText (url) {
+  const u = url.toLowerCase()
+  if (u.includes('doi.org')) { return 'DOI' }
+  if (u.includes('acm.org')) { return 'ACM' }
+  if (u.includes('ieee.org')) { return 'IEEE' }
+  if (u.includes('arxiv.org')) { return 'arXiv' }
+  return 'link'
+}
+
+/**
  * Creates HTML for an Array of publications extracted from the CSV
  *
  * @param {object[]} publications publications
@@ -231,7 +254,8 @@ function createPublicationsHtml (publications, isMember = false) {
     const key = pub['Key (e.g. for file names)']
     const image = `${p}/img/small/${key}.png`
     const year = pub['Date'].slice(0, 4)
-    const website = pub['Publisher URL (official)']
+    const url1 = pub['Publisher URL (official)']
+    const url2 = pub['url2']
     const imageExists = allImages.has(`${key}.png`)
     // PDF, video, and supplemental might be a link instead of file
     let pdf = pub['PDF URL (public)']
@@ -284,11 +308,12 @@ function createPublicationsHtml (publications, isMember = false) {
       </div>
       <div>
         ${pub['Submission Target']} (${year}) ${pub['Type']}
-        ${website && website !== '' ? `<a href="${website}" target="_blank">website</a>` : ''}
+        <a href="${pageUrl}/pub/${key}.html" target="_blank">direct link</a>
+        ${url1 && url1 !== '' ? `<a href="${url1}" target="_blank">${urlText(url1)}</a>` : ''}
+        ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank">${urlText(url2)}</a>` : ''}
         ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
         ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
         ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
-        <a href="${pageUrl}/pub/${key}.html" target="_blank">direct link</a>
       </div>
     </div>
     <div class="info">
@@ -393,7 +418,7 @@ function createPublicationPageHtml (pub) {
 }
 
 /**
- * Creates QR code with
+ * Creates QR codes with awesome-qr (https://github.com/sumimakito/Awesome-qr.js)
  * @param {object[]} publications publication data
  */
 async function createQRCodes (publications) {
