@@ -94,3 +94,4 @@ Make sure the filenames equal the `path` in the config and only contain ASCII ch
 - [image-js](https://github.com/image-js/image-js) for image resizing for thumbnails (`npm run resizePeople`, `npm run resizeThumbs`)
 - [npm-check-updates](https://github.com/raineorshine/npm-check-updates) for updating packages (`npm run upd`)
 - [xlsx](https://github.com/SheetJS/sheetjs) for converting .xlsx to .csv `npm run tocsv`
+- [bibtex-tidy](https://github.com/FlamingTempura/bibtex-tidy) for more beautiful bibtex

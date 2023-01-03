@@ -2,39 +2,7 @@ import { createReadStream, readFileSync, writeFileSync, readdirSync, existsSync 
 import csv from 'fast-csv'
 import { AwesomeQR } from 'awesome-qr'
 import { publicationSheet, pageUrl, pageTitle, memberConfig } from '../config.js'
-
-const members = memberConfig.map(d => d.name)
-const memberPaths = memberConfig.map(d => d.path)
-
-const headerAndNav = `
-<header>
-  <div>
-    <a href="${pageUrl}/">
-      <h1 class="h1desktop"><div>VISVAR</div><div>Research</div><div>Group</div></h1>
-      <h1 class="h1mobile">VISVAR</h1>
-    </a>
-  </div>
-  <div>
-    <nav>
-      <ul>
-        <li>
-          <a href="${pageUrl}/#aboutus">about VISVAR</a>
-        </li>
-        <li>
-          <a href="${pageUrl}/#publications">publications</a>
-        </li>
-        <li class="memberNav">
-          <a href="${pageUrl}/#members">members</a>
-        </li>
-        <ul class="memberNav">
-          ${memberConfig.map(d => `
-            <li><a href="${pageUrl}/members/${d.path}.html">${d.name}</a></li>
-          `).join('')}
-        </ul>
-      </ul>
-    </nav>
-  </div>
-</header>`
+import { tidy } from 'bibtex-tidy'
 
 const allImages = new Set(readdirSync("img"))
 const allQRs = new Set(readdirSync("qr"))
@@ -42,9 +10,41 @@ const allPdfs = new Set(readdirSync("pdf"))
 const allVideos = new Set(readdirSync("video"))
 const allSuppl = new Set(readdirSync("suppl"))
 const publications = []
-const stream = createReadStream(publicationSheet)
+
+const headerAndNav = `
+<header>
+<div>
+<a href="${pageUrl}/">
+<h1 class="h1desktop"><div>VISVAR</div><div>Research</div><div>Group</div></h1>
+<h1 class="h1mobile">VISVAR</h1>
+</a>
+</div>
+<div>
+<nav>
+<ul>
+<li>
+<a href="${pageUrl}/#aboutus">about VISVAR</a>
+</li>
+<li>
+          <a href="${pageUrl}/#publications">publications</a>
+        </li>
+        <li class="memberNav">
+        <a href="${pageUrl}/#members">members</a>
+        </li>
+        <ul class="memberNav">
+        ${memberConfig.map(d => `
+        <li><a href="${pageUrl}/members/${d.path}.html">${d.name}</a></li>
+        `).join('')}
+        </ul>
+        </ul>
+        </nav>
+        </div>
+        </header>`
+
+
 
 // Main loop
+const stream = createReadStream(publicationSheet)
 csv
   .parseStream(stream, { headers: true })
   .on('data', data => data.Title !== '' && publications.push(data))
@@ -53,10 +53,10 @@ csv
 /**
  * Creates all HTML pages
  */
-function createPages () {
+function createPages() {
   console.log(`${publications.length} publications`)
   // Sort by date descending, so newest at top of page
-  publications.sort((a, b) => a['Date'] > b['Date'] ? -1 : 1
+  publications.sort((a, b) => a.Date > b.Date ? -1 : 1
   )
   // Main page
   createMainPageHtml(publications)
@@ -84,7 +84,7 @@ function createPages () {
  * Logs missing and extra files to the console as warnings
  * @param {object[]} publications publication data
  */
-function reportMissingFiles (publications) {
+function reportMissingFiles(publications) {
   let missing = []
   for (const pub of publications) {
     const key = pub['Key (e.g. for file names)']
@@ -113,7 +113,7 @@ function reportMissingFiles (publications) {
 /**
  * Creates HTML from the CSV data
  */
-function createMainPageHtml (published) {
+function createMainPageHtml(published) {
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -163,7 +163,7 @@ function createMainPageHtml (published) {
 /**
  * Creates HTML from the CSV data
  */
-function createMemberPageHtml (member, publications) {
+function createMemberPageHtml(member, publications) {
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -227,33 +227,18 @@ function createMemberPageHtml (member, publications) {
 }
 
 /**
- * Chooses a different link text depending on the URL's domain.
- * @todo just display the domain? at least as fallback?
- * @param {string} url url
- * @returns {string} link text
- */
-function urlText (url) {
-  const u = url.toLowerCase()
-  if (u.includes('doi.org')) { return 'DOI' }
-  if (u.includes('acm.org')) { return 'ACM' }
-  if (u.includes('ieee.org')) { return 'IEEE' }
-  if (u.includes('arxiv.org')) { return 'arXiv' }
-  return 'link'
-}
-
-/**
  * Creates HTML for an Array of publications extracted from the CSV
  *
  * @param {object[]} publications publications
  * @param {boolean} [isMember=false] is this a member page?
  * @returns {string} HTML
  */
-function createPublicationsHtml (publications, isMember = false) {
+function createPublicationsHtml(publications, isMember = false) {
   const p = isMember ? '..' : '.'
   return publications.map((pub, i) => {
     const key = pub['Key (e.g. for file names)']
     const image = `${p}/img/small/${key}.png`
-    const year = pub['Date'].slice(0, 4)
+    const year = pub.Date.slice(0, 4)
     const url1 = pub['Publisher URL (official)']
     const url2 = pub['url2']
     const imageExists = allImages.has(`${key}.png`)
@@ -265,14 +250,14 @@ function createPublicationsHtml (publications, isMember = false) {
     } else {
       pdf = `${p}/pdf/${key}.pdf`
     }
-    let video = pub['Video']
+    let video = pub.Video
     let videoExists = allVideos.has(`${key}.mp4`)
     if (!videoExists && video && video !== '') {
       videoExists = true
     } else {
       video = `${p}/video/${key}.mp4`
     }
-    let suppl = pub['Supplemental']
+    let suppl = pub.Supplemental
     let supplExists = allSuppl.has(`${key}.zip`)
     if (!supplExists && suppl && suppl !== '') {
       supplExists = true
@@ -314,19 +299,20 @@ function createPublicationsHtml (publications, isMember = false) {
         ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
         ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
         ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
+        ${pub.notes ? `<span>${pub.notes}</span>` : ''}
       </div>
     </div>
     <div class="info">
       ${pub['Abstract']
-        ? `<h4>Abstract</h4><div class="abstract">${pub['Abstract']}</div>`
+        ? `<h4>Abstract</h4><div class="abstract">${pub.Abstract}</div>`
         : ''
       }
-      ${pub['bibtex']
-        ? `<h4>BibTex</h4><div class="bibtex"><textarea>${pub['bibtex'].trim()}</textarea></div>`
+      ${pub.bibtex
+        ? `<h4>BibTex</h4><div class="bibtex"><textarea>${formatBibtex(key, pub.bibtex)}</textarea></div>`
         : ''
       }
       ${pub['Acknowledgements']
-        ? `<h4>Acknowledgements</h4><div class="abstract">${pub['Acknowledgements']}</div>`
+        ? `<h4>Acknowledgements</h4><div class="abstract">${pub.Acknowledgements}</div>`
         : ''
       }
     </div>
@@ -338,9 +324,9 @@ function createPublicationsHtml (publications, isMember = false) {
 /**
  * Creates the page for a single publication
  */
-function createPublicationPageHtml (pub) {
+function createPublicationPageHtml(pub) {
   const key = pub['Key (e.g. for file names)']
-  const year = pub['Date'].slice(0, 4)
+  const year = pub.Date.slice(0, 4)
   const website = pub['Publisher URL (official)']
   const imageExists = allImages.has(`${key}.png`)
   // PDF, video, and supplemental might be a link instead of file
@@ -351,14 +337,14 @@ function createPublicationPageHtml (pub) {
   } else {
     pdf = `../pdf/${key}.pdf`
   }
-  let video = pub['Video']
+  let video = pub.Video
   let videoExists = allVideos.has(`${key}.mp4`)
   if (!videoExists && video && video !== '') {
     videoExists = true
   } else {
     video = `../video/${key}.mp4`
   }
-  let suppl = pub['Supplemental']
+  let suppl = pub.Supplemental
   let supplExists = allSuppl.has(`${key}.zip`)
   if (!supplExists && suppl && suppl !== '') {
     supplExists = true
@@ -371,7 +357,7 @@ function createPublicationPageHtml (pub) {
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>${pub["Title"]} | ${pageTitle}</title>
+      <title>${pub.Title} | ${pageTitle}</title>
       <link rel="stylesheet" href="../style.css">
       <script src="../script.js"></script>
       <link rel="shortcut icon" href="../img/favicon.png">
@@ -386,7 +372,7 @@ function createPublicationPageHtml (pub) {
         </div>
         <div>
           <article> <a class="anchor" name="publications"></a>
-            <h1>${pub["Title"]}</h1>
+            <h1>${pub.Title}</h1>
             <div class="pubPageContent">
               ${imageExists ? `<img id="image${key}" src="../img/${key}.png"/>` : ''}
               <div>
@@ -403,11 +389,11 @@ function createPublicationPageHtml (pub) {
                 ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
               </div>
               ${pub['Abstract'] ? `<div class="abstract"><b>Abstract.</b> ${pub['Abstract']}</div>` : ''}
-              ${pub['bibtex'] ? `<div class="bibtex"><textarea>${pub['bibtex'].trim()}</textarea></div>` : ''}
+              ${pub.bibtex ? `<div class="bibtex"><textarea>${formatBibtex(key, pub.bibtex)}</textarea></div>` : ''}
               ${pub['Acknowledgements'] ? `<div class="abstract"><b>Acknowledgements.</b> ${pub['Acknowledgements']}</div>` : ''}
+              ${pub.notes ? `<span>${pub.notes}</span>` : ''}
               <img class="qr" src="../qr/${key}.png"/>
             </div>
-          </div>
           </article>
         </div>
       </main>
@@ -418,10 +404,53 @@ function createPublicationPageHtml (pub) {
 }
 
 /**
+ * Chooses a different link text depending on the URL's domain.
+ *
+ * @todo just display the domain? at least as fallback?
+ * @param {string} url url
+ * @returns {string} link text
+ */
+function urlText(url) {
+  const u = url.toLowerCase()
+  if (u.includes('doi.org')) { return 'DOI' }
+  if (u.includes('acm.org')) { return 'ACM' }
+  if (u.includes('ieee.org')) { return 'IEEE' }
+  if (u.includes('arxiv.org')) { return 'arXiv' }
+  return 'link'
+}
+
+/**
+ * Formats bibtex for more beautiful and uniform display
+ *
+ * @see https://github.com/FlamingTempura/bibtex-tidy
+ * @param {string} key pub key (for debugging logs)
+ * @param {string} bibtexString bibtex string
+ */
+function formatBibtex(key, bibtexString) {
+  try {
+    const formatted = tidy(bibtexString, {
+      omit: ['address', 'location', 'isbn'],
+      curly: true,
+      space: 4,
+      align: true,
+      stripEnclosingBraces: true,
+      sortFields: true,
+      removeEmptyFields: true
+    })
+    return formatted.bibtex
+  } catch (e) {
+    // console.log(e);
+    console.warn(`Invalid bibtex for pub with key ${key}`)
+    console.log(bibtexString);
+    return bibtexString
+  }
+}
+
+/**
  * Creates QR codes with awesome-qr (https://github.com/sumimakito/Awesome-qr.js)
  * @param {object[]} publications publication data
  */
-async function createQRCodes (publications) {
+async function createQRCodes(publications) {
   let count = 0
   const dir = "./qr"
   // const logo = readFileSync("./qr/_qrbg.png")
