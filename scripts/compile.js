@@ -9,9 +9,9 @@ const allQRs = new Set(readdirSync("qr"))
 const allPdfs = new Set(readdirSync("pdf"))
 const allVideos = new Set(readdirSync("video"))
 const allSuppl = new Set(readdirSync("suppl"))
-const publications = []
 
 const headerAndNav = `
+<div>
 <header>
 <div>
 <a href="${pageUrl}/">
@@ -22,28 +22,24 @@ const headerAndNav = `
 <div>
 <nav>
 <ul>
-<li>
-<a href="${pageUrl}/#aboutus">about VISVAR</a>
-</li>
-<li>
-          <a href="${pageUrl}/#publications">publications</a>
-        </li>
-        <li class="memberNav">
-        <a href="${pageUrl}/#members">members</a>
-        </li>
-        <ul class="memberNav">
-        ${memberConfig.map(d => `
-        <li><a href="${pageUrl}/members/${d.path}.html">${d.name}</a></li>
-        `).join('')}
-        </ul>
-        </ul>
-        </nav>
-        </div>
-        </header>`
+<li><a href="${pageUrl}/#aboutus">about VISVAR</a></li>
+<li><a href="${pageUrl}/#publications">publications</a></li>
+<li class="memberNav"><a href="${pageUrl}/#members">members</a></li>
+<ul class="memberNav">
+${memberConfig.map(d => `
+<li><a href="${pageUrl}/members/${d.path}.html">${d.name}</a></li>
+`).join('')}
+</ul>
+</ul>
+</nav>
+</div>
+</header>
+</div>`
 
 
 
 // Main loop
+const publications = []
 const stream = createReadStream(publicationSheet)
 csv
   .parseStream(stream, { headers: true })
@@ -81,36 +77,6 @@ function createPages() {
 }
 
 /**
- * Logs missing and extra files to the console as warnings
- * @param {object[]} publications publication data
- */
-function reportMissingFiles(publications) {
-  let missing = []
-  for (const pub of publications) {
-    const key = pub['Key (e.g. for file names)']
-    if (!allImages.has(`${key}.png`)) { missing.push(`${key}.png`) }
-    let pdf = pub['PDF URL (public)']
-    if ((!pdf || pdf === "") && !allPdfs.has(`${key}.pdf`)) { missing.push(`${key}.pdf`) }
-  }
-  if (missing.length > 0) {
-    console.log(`\nmissing files:\n  ${missing.sort().join("\n  ")}`)
-  }
-  let extra = []
-  const allKeys = new Set(publications.map(d => d['Key (e.g. for file names)']))
-  const allFiles = [...allImages, ...allPdfs, ...allVideos, ...allSuppl]
-  const ignore = new Set(["small", "people", "favicon.png", "visvar_logo.svg"])
-  for (const f of allFiles) {
-    const key = f.slice(0, f.lastIndexOf("."))
-    if (!allKeys.has(key) && !ignore.has(f)) {
-      extra.push(f)
-    }
-  }
-  if (extra.length > 0) {
-    console.log(`\nextra files:\n  ${extra.sort().join("\n  ")}`)
-  }
-}
-
-/**
  * Creates HTML from the CSV data
  */
 function createMainPageHtml(published) {
@@ -129,11 +95,9 @@ function createMainPageHtml(published) {
 <body>
   <a class="anchor" name="top"></a>
   <main>
+    ${headerAndNav}
     <div>
-      ${headerAndNav}
-    </div>
-    <div>
-      <article> <a class="anchor" name="aboutus"></a>
+      <article><a class="anchor" name="aboutus"></a>
         ${readFileSync('./aboutus.html')}
       </article>
       <article> <a class="anchor" name="members"></a>
@@ -179,11 +143,9 @@ function createMemberPageHtml(member, publications) {
 <body>
   <a class="anchor" name="top"></a>
   <main>
+    ${headerAndNav}
     <div>
-      ${headerAndNav}
-    </div>
-    <div>
-      <article> <a class="anchor" name="aboutus"></a>
+      <article><a class="anchor" name="aboutus"></a>
         <h1>${member.title}</h1>
         <div class="aboutMember">
           <div class="avatarAndBio">
@@ -367,11 +329,9 @@ function createPublicationPageHtml(pub) {
     <body>
       <a class="anchor" name="top"></a>
       <main>
+        ${headerAndNav}
         <div>
-          ${headerAndNav}
-        </div>
-        <div>
-          <article> <a class="anchor" name="publications"></a>
+          <article><a class="anchor" name="publications"></a>
             <h1>${pub.Title}</h1>
             <div class="pubPageContent">
               ${imageExists ? `<img id="image${key}" src="../img/${key}.png"/>` : ''}
@@ -429,13 +389,14 @@ function urlText(url) {
 function formatBibtex(key, bibtexString) {
   try {
     const formatted = tidy(bibtexString, {
-      omit: ['address', 'location', 'isbn'],
+      omit: ['address', 'location', 'isbn', 'timestamp'],
       curly: true,
       space: 4,
-      align: true,
+      align: 13,
       stripEnclosingBraces: true,
       sortFields: true,
-      removeEmptyFields: true
+      removeEmptyFields: true,
+      lowercase: true
     })
     return formatted.bibtex
   } catch (e) {
@@ -448,6 +409,7 @@ function formatBibtex(key, bibtexString) {
 
 /**
  * Creates QR codes with awesome-qr (https://github.com/sumimakito/Awesome-qr.js)
+ *
  * @param {object[]} publications publication data
  */
 async function createQRCodes(publications) {
@@ -487,7 +449,6 @@ async function createQRCodes(publications) {
     count++
   }
   console.log(`\nCreated ${count} new QRs`)
-
   // Look for orphan QR code PNGs
   allQRs.delete('.gitkeep')
   allQRs.delete('_qrbg.png')
@@ -496,5 +457,35 @@ async function createQRCodes(publications) {
   }
   if (allQRs.size > 0) {
     console.log(`\nextra QR code images:\n  ${[...allQRs].join("\n  ")}`)
+  }
+}
+
+/**
+ * Logs missing and extra files to the console as warnings
+ * @param {object[]} publications publication data
+ */
+function reportMissingFiles(publications) {
+  let missing = []
+  for (const pub of publications) {
+    const key = pub['Key (e.g. for file names)']
+    if (!allImages.has(`${key}.png`)) { missing.push(`${key}.png`) }
+    let pdf = pub['PDF URL (public)']
+    if ((!pdf || pdf === "") && !allPdfs.has(`${key}.pdf`)) { missing.push(`${key}.pdf`) }
+  }
+  if (missing.length > 0) {
+    console.log(`\nmissing files:\n  ${missing.sort().join("\n  ")}`)
+  }
+  let extra = []
+  const allKeys = new Set(publications.map(d => d['Key (e.g. for file names)']))
+  const allFiles = [...allImages, ...allPdfs, ...allVideos, ...allSuppl]
+  const ignore = new Set(["small", "people", "favicon.png", "visvar_logo.svg"])
+  for (const f of allFiles) {
+    const key = f.slice(0, f.lastIndexOf("."))
+    if (!allKeys.has(key) && !ignore.has(f)) {
+      extra.push(f)
+    }
+  }
+  if (extra.length > 0) {
+    console.log(`\nextra files:\n  ${extra.sort().join("\n  ")}`)
   }
 }
