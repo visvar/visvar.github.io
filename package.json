@@ -22,5 +22,8 @@
     "image-js": "^1.0.0-alpha.3",
     "npm-check-updates": "^16.6.2",
     "xlsx": "^0.18.5"
+  },
+  "dependencies": {
+    "bibtex-tidy": "^1.8.5"
   }
 }

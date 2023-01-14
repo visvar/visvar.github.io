@@ -100,7 +100,7 @@ nav a:hover {
 
 article {
   margin: 0 5px 5px 5px;
-  padding-bottom: 80px;
+  padding-bottom: 40px;
 }
 
 section {
@@ -139,12 +139,10 @@ section a i {
   display: grid;
   row-gap: 20px;
   text-align: center;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .memberList img.avatar {
-  width: 128px;
-  height: 128px;
   box-shadow: #bbb 1px 1px 15px;
 }
 
@@ -217,7 +215,7 @@ img.avatar {
 }
 
 .paper h3 {
-  margin: 0 0 5px 0;
+  margin-top: 0;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
@@ -509,10 +507,10 @@ img.avatar {
     grid-template-columns: 1fr 1fr;
   }
 
-  .memberList img.avatar {
+  /* .memberList img.avatar {
     width: 128px;
     height: 128px;
-  }
+  } */
 
   img.avatar {
     width: 256px;
