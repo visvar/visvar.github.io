@@ -126,7 +126,7 @@ export const memberConfig = [
     bio: `
     <p>
       My research focuses on data-driven music visualization, mainly to support music students and teachers.
-      For eample, see <a href="https://vis2020-ieee.ipostersessions.com/default.aspx?s=82-F0-FF-F9-29-B9-B4-7F-FE-F3-A9-1D-4A-B7-4F-32" target="_blank" rel="noreferrer">this poster</a>
+      For example, see <a href="https://vis2020-ieee.ipostersessions.com/default.aspx?s=82-F0-FF-F9-29-B9-B4-7F-FE-F3-A9-1D-4A-B7-4F-32" target="_blank" rel="noreferrer">this poster</a>
       (<a href="../pdf/heyen2020supporting.pdf" target="_blank" rel="noreferrer">PDF</a>) and
       <a href="../pdf/heyen2022datadriven.pdf" target="_blank" rel="noreferrer">paper</a>
       (<a href="https://doi.org/10.48550/arxiv.2203.13320" target="_blank" rel="noreferrer">DOI</a>,
