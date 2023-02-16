@@ -1,5 +1,6 @@
 # TODO
 
+- Allow hosting PDF and video somewhere else
 - Better mobile layout
 - Fix slight width difference between some pages
 - Allow arbitrary file endings, as long as base name equals publication key, especially for images and videos

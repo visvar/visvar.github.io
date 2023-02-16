@@ -57,36 +57,6 @@ export const memberConfig = [
   },
 
   // Post-doc
-  // {
-  //   name: 'Benjamin Lee',
-  //   title: 'Benjamin Lee, Ph.D.',
-  //   path: 'benjamin_lee',
-  //   bio: `
-  //   <p>
-  //     My research revolves around the field of Immersive Analytics: the use of virtual and/or augmented reality technologies to support visual data exploration and presentation.
-  //     In particular, my work has investigated how 2D surfaces can be used inside of an immersive 3D space to facilitate (collaborative) visual analysis and data understanding.
-  //   </p>
-  //   <p>
-  //     I submitted my PhD at the <a href="https://www.monash.edu/it/hcc/dvia-lab" target="_blank" rel="noreferrer">Data Visualisation and Immersive Analytics Lab</a>, Monash University.
-  //     My supervisors were Prof. Tim Dwyer (main), A/Prof. Bernhard Jenny, Dr. Maxime Cordeil, and Dr. Arnaud Prouzeau.
-  //     </p>
-  //     `,
-  //   research: ['Data visualization', 'Immersive analytics', 'Collaborative analysis', 'VR/AR'],
-  //   links: [
-  //     // TODO:
-  //     // {
-  //     //   text: "University of Stuttgart website",
-  //     //   url: "https://www.visus.uni-stuttgart.de/en/institute/team/Ngo-00001/"
-  //     // },
-  //     { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=oJUHhu4AAAAJ' },
-  //     // TODO:
-  //     // { text: "ORCID", url: 'https://orcid.org/0000-0001-5254-1480' }
-  //     { text: 'Personal website', url: 'https://benjaminchlee.github.io/' },
-  //     { text: 'YouTube', url: 'https://www.youtube.com/@benjaminchlee' },
-  //   ],
-  //   projects: []
-  // },
-
   {
     name: 'Quynh Quang Ngo',
     title: 'Quynh Quang Ngo, Ph.D.',
@@ -106,6 +76,35 @@ export const memberConfig = [
       },
       { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=qwIOAYAAAAAJ' },
       { text: "ORCID", url: 'https://orcid.org/0000-0001-5254-1480' }
+    ],
+    projects: []
+  },
+  {
+    name: 'Benjamin Lee',
+    title: 'Benjamin Lee, Ph.D.',
+    path: 'benjamin_lee',
+    bio: `
+    <p>
+      My research revolves around the field of Immersive Analytics: the use of virtual and/or augmented reality technologies to support visual data exploration and presentation.
+      In particular, my work has investigated how 2D surfaces can be used inside of an immersive 3D space to facilitate (collaborative) visual analysis and data understanding.
+    </p>
+    <p>
+      I submitted my PhD at the <a href="https://www.monash.edu/it/hcc/dvia-lab" target="_blank" rel="noreferrer">Data Visualisation and Immersive Analytics Lab</a>, Monash University.
+      My supervisors were Prof. Tim Dwyer (main), A/Prof. Bernhard Jenny, Dr. Maxime Cordeil, and Dr. Arnaud Prouzeau.
+      </p>
+      `,
+    research: ['Data visualization', 'Immersive analytics', 'Collaborative analysis', 'VR/AR'],
+    links: [
+      // TODO:
+      // {
+      //   text: "University of Stuttgart website",
+      //   url: "https://www.visus.uni-stuttgart.de/en/institute/team/Ngo-00001/"
+      // },
+      { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=oJUHhu4AAAAJ' },
+      // TODO:
+      // { text: "ORCID", url: 'https://orcid.org/0000-0001-5254-1480' }
+      { text: 'Personal website', url: 'https://benjaminchlee.github.io/' },
+      { text: 'YouTube', url: 'https://www.youtube.com/@benjaminchlee' },
     ],
     projects: []
   },
