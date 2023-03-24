@@ -2,7 +2,9 @@ import { createReadStream, readFileSync, writeFileSync, readdirSync, existsSync 
 import csv from 'fast-csv'
 import { AwesomeQR } from 'awesome-qr'
 import { publicationSheet, pageUrl, pageTitle, memberConfig } from '../config.js'
-import { tidy } from 'bibtex-tidy'
+// import { tidy } from 'bibtex-tidy'
+import pkg from 'bibtex-tidy'
+const { tidy } = pkg
 
 const allImages = new Set(readdirSync("img"))
 const allQRs = new Set(readdirSync("qr"))
@@ -49,7 +51,7 @@ csv
 /**
  * Creates all HTML pages
  */
-function createPages() {
+function createPages () {
   console.log(`${publications.length} publications`)
   // Sort by date descending, so newest at top of page
   publications.sort((a, b) => a.Date > b.Date ? -1 : 1
@@ -79,7 +81,7 @@ function createPages() {
 /**
  * Creates HTML from the CSV data
  */
-function createMainPageHtml(published) {
+function createMainPageHtml (published) {
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,7 +129,7 @@ function createMainPageHtml(published) {
 /**
  * Creates HTML from the CSV data
  */
-function createMemberPageHtml(member, publications) {
+function createMemberPageHtml (member, publications) {
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -195,7 +197,7 @@ function createMemberPageHtml(member, publications) {
  * @param {boolean} [isMember=false] is this a member page?
  * @returns {string} HTML
  */
-function createPublicationsHtml(publications, isMember = false) {
+function createPublicationsHtml (publications, isMember = false) {
   const p = isMember ? '..' : '.'
   return publications.map((pub, i) => {
     const key = pub['Key (e.g. for file names)']
@@ -286,7 +288,7 @@ function createPublicationsHtml(publications, isMember = false) {
 /**
  * Creates the page for a single publication
  */
-function createPublicationPageHtml(pub) {
+function createPublicationPageHtml (pub) {
   const key = pub['Key (e.g. for file names)']
   const year = pub.Date.slice(0, 4)
   const website = pub['Publisher URL (official)']
@@ -370,7 +372,7 @@ function createPublicationPageHtml(pub) {
  * @param {string} url url
  * @returns {string} link text
  */
-function urlText(url) {
+function urlText (url) {
   const u = url.toLowerCase()
   if (u.includes('doi.org')) { return 'DOI' }
   if (u.includes('acm.org')) { return 'ACM' }
@@ -386,7 +388,7 @@ function urlText(url) {
  * @param {string} key pub key (for debugging logs)
  * @param {string} bibtexString bibtex string
  */
-function formatBibtex(key, bibtexString) {
+function formatBibtex (key, bibtexString) {
   try {
     const formatted = tidy(bibtexString, {
       omit: ['address', 'location', 'isbn', 'timestamp'],
@@ -402,7 +404,7 @@ function formatBibtex(key, bibtexString) {
   } catch (e) {
     // console.log(e);
     console.warn(`Invalid bibtex for pub with key ${key}`)
-    console.log(bibtexString);
+    console.log(bibtexString)
     return bibtexString
   }
 }
@@ -412,7 +414,7 @@ function formatBibtex(key, bibtexString) {
  *
  * @param {object[]} publications publication data
  */
-async function createQRCodes(publications) {
+async function createQRCodes (publications) {
   let count = 0
   const dir = "./qr"
   // const logo = readFileSync("./qr/_qrbg.png")
@@ -464,7 +466,7 @@ async function createQRCodes(publications) {
  * Logs missing and extra files to the console as warnings
  * @param {object[]} publications publication data
  */
-function reportMissingFiles(publications) {
+function reportMissingFiles (publications) {
   let missing = []
   for (const pub of publications) {
     const key = pub['Key (e.g. for file names)']
