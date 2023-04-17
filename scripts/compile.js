@@ -2,7 +2,9 @@ import { createReadStream, readFileSync, writeFileSync, readdirSync, existsSync 
 import csv from 'fast-csv'
 import { AwesomeQR } from 'awesome-qr'
 import { publicationSheet, pageUrl, pageTitle, memberConfig } from '../config.js'
-import { tidy } from 'bibtex-tidy'
+// import { tidy } from 'bibtex-tidy'
+import pkg from 'bibtex-tidy'
+const { tidy } = pkg
 
 const allImages = new Set(readdirSync("img"))
 const allQRs = new Set(readdirSync("qr"))
@@ -402,7 +404,7 @@ function formatBibtex(key, bibtexString) {
   } catch (e) {
     // console.log(e);
     console.warn(`Invalid bibtex for pub with key ${key}`)
-    console.log(bibtexString);
+    console.log(bibtexString)
     return bibtexString
   }
 }
