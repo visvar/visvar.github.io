@@ -79,7 +79,7 @@ function createPages() {
 /**
  * Creates HTML from the CSV data
  */
-function createMainPageHtml(published) {
+function createMainPageHtml(publications) {
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,7 +115,7 @@ function createMainPageHtml(published) {
       </article>
       <article> <a class="anchor" name="publications"></a>
         <h1>Publications</h1>
-        ${createPublicationsHtml(published)}
+        ${createPublicationsHtml(publications)}
       </article>
     </div>
   </main>
