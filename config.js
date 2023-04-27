@@ -290,8 +290,8 @@ export const memberConfig = [
   },
 
   {
-    name: 'Nina Dörr',
-    title: 'Nina Dörr, M.Sc.',
+    name: 'Nina Doerr',
+    title: 'Nina Doerr, M.Sc.',
     path: 'nina_doerr',
     bio: `
     <p>
