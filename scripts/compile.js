@@ -2,43 +2,45 @@ import { createReadStream, readFileSync, writeFileSync, readdirSync, existsSync 
 import csv from 'fast-csv'
 import { AwesomeQR } from 'awesome-qr'
 import { publicationSheet, pageUrl, pageTitle, memberConfig } from '../config.js'
-// import { tidy } from 'bibtex-tidy'
 import pkg from 'bibtex-tidy'
 const { tidy } = pkg
+
+/**
+ * This will be added to every .html page
+ */
+const headerAndNav = `
+<div>
+  <header>
+    <div>
+      <a href="${pageUrl}/">
+        <img class="logo" src="img/visvar_logo.svg" />
+      </a>
+    </div>
+    <div>
+      <nav>
+      <ul>
+        <li><a href="${pageUrl}/#aboutus">about VISVAR</a></li>
+        <li><a href="${pageUrl}/#publications">publications</a></li>
+        <li><a href="${pageUrl}/#members">members</a></li>
+        <ul class="memberNav">
+          ${memberConfig.map(d => `
+          <li><a href="${pageUrl}/members/${d.path}.html">${d.name}</a></li>
+          `).join('')}
+        </ul>
+      </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+`
+
 
 const allImages = new Set(readdirSync("img"))
 const allQRs = new Set(readdirSync("qr"))
 const allPdfs = new Set(readdirSync("pdf"))
 const allVideos = new Set(readdirSync("video"))
 const allSuppl = new Set(readdirSync("suppl"))
-
-const headerAndNav = `
-<div>
-<header>
-<div>
-<a href="${pageUrl}/">
-<h1 class="h1desktop"><div>VISVAR</div><div>Research</div><div>Group</div></h1>
-<h1 class="h1mobile">VISVAR</h1>
-</a>
-</div>
-<div>
-<nav>
-<ul>
-<li><a href="${pageUrl}/#aboutus">about VISVAR</a></li>
-<li><a href="${pageUrl}/#publications">publications</a></li>
-<li class="memberNav"><a href="${pageUrl}/#members">members</a></li>
-<ul class="memberNav">
-${memberConfig.map(d => `
-<li><a href="${pageUrl}/members/${d.path}.html">${d.name}</a></li>
-`).join('')}
-</ul>
-</ul>
-</nav>
-</div>
-</header>
-</div>`
-
-
+const allPub = new Set(readdirSync("pub"))
 
 // Main loop
 const publications = []
@@ -75,7 +77,7 @@ function createPages() {
   // Create missing QR codes
   createQRCodes(publications)
   // Detect missing and extra files
-  reportMissingFiles(publications)
+  reportMissingOrExtraFiles(publications)
 }
 
 /**
@@ -89,7 +91,6 @@ function createMainPageHtml(publications) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${pageTitle}</title>
   <link rel="stylesheet" href="./style.css">
-  <script src="./script.js"></script>
   <link rel="shortcut icon" href="./img/favicon.png">
   <link rel="icon" type="image/png" href="./img/favicon.png" sizes="256x256">
   <link rel="apple-touch-icon" sizes="256x256" href="./img/favicon.png">
@@ -137,7 +138,6 @@ function createMemberPageHtml(member, publications) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${member.title} | ${pageTitle}</title>
   <link rel="stylesheet" href="../style.css">
-  <script src="../script.js"></script>
   <link rel="shortcut icon" href="../img/favicon.png">
   <link rel="icon" type="image/png" href="../img/favicon.png" sizes="256x256">
   <link rel="apple-touch-icon" sizes="256x256" href="../img/favicon.png">
@@ -194,7 +194,7 @@ function createMemberPageHtml(member, publications) {
  * Creates HTML for an Array of publications extracted from the CSV
  *
  * @param {object[]} publications publications
- * @param {boolean} [isMember=false] is this a member page?
+ * @param {boolean} [isMember=false] is this a member page? (affects paths)
  * @returns {string} HTML
  */
 function createPublicationsHtml(publications, isMember = false) {
@@ -232,32 +232,29 @@ function createPublicationsHtml(publications, isMember = false) {
     return `
   ${i === 0 || year !== publications[i - 1]['Date'].slice(0, 4)
         ? `<h2 class="yearHeading">${year}</h2>` : ''}
-  <div class="paper small" id="paper${key}">
+  <div class="paper" id="paper${key}">
     ${imageExists
         ? `
-      <img
-        id="image${key}"
-        title="Click to enlarge and show details"
-        onclick="toggleClass('paper${key}', 'small'); toggleImageSize(this)"
-        class="publicationImage small"
-        loading="lazy"
-        src="${image}"
-      />`
+      <a href="${pageUrl}/pub/${key}.html" target="_blank">
+        <img
+          class="publicationImage"
+          loading="lazy"
+          src="${image}"
+        />
+      </a>`
         : ''
       }
     <div class="metaData ${imageExists ? '' : 'noImage'}">
-      <h3
-        onclick="toggleClass('paper${key}', 'small'); toggleImageSize(image${key})"
-        title="Click to show details"
-      >
-        ${pub['Title']}<a class="anchor" name="${key}"></a>
+      <h3>
+        <a href="${pageUrl}/pub/${key}.html" target="_blank">
+        ${pub['Title']}
+        </a>
       </h3>
       <div>
         ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
       </div>
       <div>
         ${pub['Submission Target']} (${year}) ${pub['Type']}
-        <a href="${pageUrl}/pub/${key}.html" target="_blank">direct link</a>
         ${url1 && url1 !== '' ? `<a href="${url1}" target="_blank">${urlText(url1)}</a>` : ''}
         ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank">${urlText(url2)}</a>` : ''}
         ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
@@ -265,20 +262,6 @@ function createPublicationsHtml(publications, isMember = false) {
         ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
         ${pub.notes ? `<span>${pub.notes}</span>` : ''}
       </div>
-    </div>
-    <div class="info">
-      ${pub['Abstract']
-        ? `<h4>Abstract</h4><div class="abstract">${pub.Abstract}</div>`
-        : ''
-      }
-      ${pub.bibtex
-        ? `<h4>BibTex</h4><div class="bibtex"><textarea>${formatBibtex(key, pub.bibtex)}</textarea></div>`
-        : ''
-      }
-      ${pub['Acknowledgements']
-        ? `<h4>Acknowledgements</h4><div class="abstract">${pub.Acknowledgements}</div>`
-        : ''
-      }
     </div>
   </div>
   `
@@ -323,7 +306,6 @@ function createPublicationPageHtml(pub) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>${pub.Title} | ${pageTitle}</title>
       <link rel="stylesheet" href="../style.css">
-      <script src="../script.js"></script>
       <link rel="shortcut icon" href="../img/favicon.png">
       <link rel="icon" type="image/png" href="../img/favicon.png" sizes="256x256">
       <link rel="apple-touch-icon" sizes="256x256" href="../img/favicon.png">
@@ -466,11 +448,13 @@ async function createQRCodes(publications) {
  * Logs missing and extra files to the console as warnings
  * @param {object[]} publications publication data
  */
-function reportMissingFiles(publications) {
+function reportMissingOrExtraFiles(publications) {
   let missing = []
   for (const pub of publications) {
     const key = pub['Key (e.g. for file names)']
+    // publication teaser images
     if (!allImages.has(`${key}.png`)) { missing.push(`${key}.png`) }
+    // publication PDF
     let pdf = pub['PDF URL (public)']
     if ((!pdf || pdf === "") && !allPdfs.has(`${key}.pdf`)) { missing.push(`${key}.pdf`) }
   }
@@ -479,7 +463,7 @@ function reportMissingFiles(publications) {
   }
   let extra = []
   const allKeys = new Set(publications.map(d => d['Key (e.g. for file names)']))
-  const allFiles = [...allImages, ...allPdfs, ...allVideos, ...allSuppl]
+  const allFiles = [...allImages, ...allPdfs, ...allVideos, ...allSuppl, ...allPub]
   const ignore = new Set(["small", "people", "favicon.png", "visvar_logo.svg"])
   for (const f of allFiles) {
     const key = f.slice(0, f.lastIndexOf("."))
@@ -489,5 +473,8 @@ function reportMissingFiles(publications) {
   }
   if (extra.length > 0) {
     console.log(`\nextra files:\n  ${extra.sort().join("\n  ")}`)
+  }
+  if (missing.length > 0 || extra.length > 0) {
+    console.log('\nlook inside the following folders depending on file type:\n.pdf   pdf/\n.png   img/\n.html  pub/');
   }
 }

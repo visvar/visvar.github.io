@@ -95,11 +95,10 @@ export const memberConfig = [
       `,
     research: ['Data visualization', 'Immersive analytics', 'Collaborative analysis', 'VR/AR'],
     links: [
-      // TODO:
-      // {
-      //   text: "University of Stuttgart website",
-      //   url: "https://www.visus.uni-stuttgart.de/en/institute/team/Ngo-00001/"
-      // },
+      {
+        text: "University of Stuttgart website",
+        url: "https://www.visus.uni-stuttgart.de/en/institute/team/Lee-00006/"
+      },
       { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=oJUHhu4AAAAJ' },
       // TODO:
       // { text: "ORCID", url: 'https://orcid.org/0000-0001-5254-1480' }
