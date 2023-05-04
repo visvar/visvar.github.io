@@ -13,7 +13,7 @@ const headerAndNav = `
   <header>
     <div>
       <a href="${pageUrl}/">
-        <img class="logo" src="img/visvar_logo.svg" />
+        <img class="logo" src="${pageUrl}/img/visvar_logo.svg" />
       </a>
     </div>
     <div>
