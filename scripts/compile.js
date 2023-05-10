@@ -449,17 +449,37 @@ async function createQRCodes(publications) {
  * @param {object[]} publications publication data
  */
 function reportMissingOrExtraFiles(publications) {
+  // for each missing file we want to know who is responsible
+  const memberNames = new Set(memberConfig.map(d => d.name))
+  const getResp = (pub) => {
+    const authors = [pub['First Author'], ...pub['Other Authors'].split(', ')]
+    for (const author of authors) {
+      if (memberNames.has(author)) {
+        return author;
+      }
+    }
+    return ''
+  }
   let missing = []
   for (const pub of publications) {
     const key = pub['Key (e.g. for file names)']
     // publication teaser images
-    if (!allImages.has(`${key}.png`)) { missing.push(`${key}.png`) }
+    if (!allImages.has(`${key}.png`)) { missing.push([`${key}.png`, getResp(pub)]) }
     // publication PDF
     let pdf = pub['PDF URL (public)']
-    if ((!pdf || pdf === "") && !allPdfs.has(`${key}.pdf`)) { missing.push(`${key}.pdf`) }
+    if ((!pdf || pdf === "") && !allPdfs.has(`${key}.pdf`)) { missing.push([`${key}.pdf`, getResp(pub)]) }
   }
   if (missing.length > 0) {
-    console.log(`\nmissing files:\n  ${missing.sort().join("\n  ")}`)
+    missing.sort((a, b) => a[1] < b[1] ? -1 : 1)
+    console.log(`\nmissing files:`)
+    let last = ''
+    for (const [file, member] of missing) {
+      if (last !== member) {
+        console.log('  ' + member);
+      }
+      console.log('    ' + file);
+      last = member
+    }
   }
   let extra = []
   const allKeys = new Set(publications.map(d => d['Key (e.g. for file names)']))
