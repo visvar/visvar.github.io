@@ -460,14 +460,15 @@ function reportMissingOrExtraFiles(publications) {
     }
     return ''
   }
+  // missing files
   let missing = []
   for (const pub of publications) {
     const key = pub['Key (e.g. for file names)']
     // publication teaser images
-    if (!allImages.has(`${key}.png`)) { missing.push([`${key}.png`, getResp(pub)]) }
+    if (!allImages.has(`${key}.png`)) { missing.push([`${key}.png (teaser)`, getResp(pub)]) }
     // publication PDF
     let pdf = pub['PDF URL (public)']
-    if ((!pdf || pdf === "") && !allPdfs.has(`${key}.pdf`)) { missing.push([`${key}.pdf`, getResp(pub)]) }
+    if ((!pdf || pdf === "") && !allPdfs.has(`${key}.pdf`)) { missing.push([`${key}.pdf (publication)`, getResp(pub)]) }
   }
   if (missing.length > 0) {
     missing.sort((a, b) => a[1] < b[1] ? -1 : 1)
@@ -481,6 +482,7 @@ function reportMissingOrExtraFiles(publications) {
       last = member
     }
   }
+  // extra files
   let extra = []
   const allKeys = new Set(publications.map(d => d['Key (e.g. for file names)']))
   const allFiles = [...allImages, ...allPdfs, ...allVideos, ...allSuppl, ...allPub]
@@ -496,5 +498,19 @@ function reportMissingOrExtraFiles(publications) {
   }
   if (missing.length > 0 || extra.length > 0) {
     console.log('\nlook inside the following folders depending on file type:\n.pdf   pdf/\n.png   img/\n.html  pub/');
+  }
+  // missing member info
+  console.log();
+  for (const member of memberConfig) {
+    if (member.bio === '') {
+      console.log(`${member.name} is missing a bio`);
+    }
+    const links = member.links.map(d => d.text)
+    if (!links.includes('ORCID')) {
+      console.log(`${member.name} is missing an ORCID link`);
+    }
+    if (!links.includes('Google Scholar')) {
+      console.log(`${member.name} is missing a scholar link`);
+    }
   }
 }
