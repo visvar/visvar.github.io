@@ -254,13 +254,15 @@ function createPublicationsHtml(publications, isMember = false) {
         ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
       </div>
       <div>
-        ${pub['Submission Target']} (${year}) ${pub['Type']}
+      ${pub['Submission Target']} (${year}) ${pub['Type']}
+      </div>
+      <div>
         ${url1 && url1 !== '' ? `<a href="${url1}" target="_blank">${urlText(url1)}</a>` : ''}
         ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank">${urlText(url2)}</a>` : ''}
         ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
         ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
         ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
-        ${pub.notes ? `<span>${pub.notes}</span>` : ''}
+        ${pub.notes ? `<div>${pub.notes}</div>` : ''}
       </div>
     </div>
   </div>
