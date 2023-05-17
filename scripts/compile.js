@@ -13,7 +13,7 @@ const headerAndNav = `
   <header>
     <div>
       <a href="${pageUrl}/">
-        <img class="logo" src="${pageUrl}/img/visvar_logo.svg" />
+        <img class="logo" src="${pageUrl}/img/misc/visvar_logo.svg" />
       </a>
     </div>
     <div>
@@ -91,7 +91,7 @@ function createMainPageHtml(publications) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${pageTitle}</title>
   <link rel="stylesheet" href="./style.css">
-  <link rel="shortcut icon" href="./img/favicon.png">
+  <link rel="shortcut icon" href="./img/misc/favicon.png">
   <link rel="icon" type="image/png" href="./img/favicon.png" sizes="256x256">
   <link rel="apple-touch-icon" sizes="256x256" href="./img/favicon.png">
 </head>
@@ -138,7 +138,7 @@ function createMemberPageHtml(member, publications) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${member.title} | ${pageTitle}</title>
   <link rel="stylesheet" href="../style.css">
-  <link rel="shortcut icon" href="../img/favicon.png">
+  <link rel="shortcut icon" href="../img/misc/favicon.png">
   <link rel="icon" type="image/png" href="../img/favicon.png" sizes="256x256">
   <link rel="apple-touch-icon" sizes="256x256" href="../img/favicon.png">
 </head>
@@ -308,7 +308,7 @@ function createPublicationPageHtml(pub) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>${pub.Title} | ${pageTitle}</title>
       <link rel="stylesheet" href="../style.css">
-      <link rel="shortcut icon" href="../img/favicon.png">
+      <link rel="shortcut icon" href="../img/misc/favicon.png">
       <link rel="icon" type="image/png" href="../img/favicon.png" sizes="256x256">
       <link rel="apple-touch-icon" sizes="256x256" href="../img/favicon.png">
     </head>
@@ -488,7 +488,7 @@ function reportMissingOrExtraFiles(publications) {
   let extra = []
   const allKeys = new Set(publications.map(d => d['Key (e.g. for file names)']))
   const allFiles = [...allImages, ...allPdfs, ...allVideos, ...allSuppl, ...allPub]
-  const ignore = new Set(["small", "people", "favicon.png", "visvar_logo.svg"])
+  const ignore = new Set(["small", "people", "misc"])
   for (const f of allFiles) {
     const key = f.slice(0, f.lastIndexOf("."))
     if (!allKeys.has(key) && !ignore.has(f)) {
