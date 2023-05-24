@@ -34,6 +34,27 @@ const headerAndNav = `
 </div>
 `
 
+/**
+ * Generates the HTML head of a page
+ * @param {string} title page title for <title>
+ * @param {'.'|'..'} [path=.] either '.' for index.html or '..' for others
+ * @returns {string} HTML code
+ */
+function htmlHead(title, path = '.') {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=500, initial-scale=1">
+  <title>${title}</title>
+  <link rel="stylesheet" href="${path}/style.css">
+  <link rel="shortcut icon" href="${path}/img/misc/favicon.png">
+  <link rel="icon" type="image/png" href="${path}/img/favicon.png" sizes="256x256">
+  <link rel="apple-touch-icon" sizes="256x256" href="${path}/img/favicon.png">
+</head>
+`
+}
+
 
 const allImages = new Set(readdirSync("img"))
 const allQRs = new Set(readdirSync("qr"))
@@ -84,17 +105,7 @@ function createPages() {
  * Creates HTML from the CSV data
  */
 function createMainPageHtml(publications) {
-  const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${pageTitle}</title>
-  <link rel="stylesheet" href="./style.css">
-  <link rel="shortcut icon" href="./img/misc/favicon.png">
-  <link rel="icon" type="image/png" href="./img/favicon.png" sizes="256x256">
-  <link rel="apple-touch-icon" sizes="256x256" href="./img/favicon.png">
-</head>
+  const html = `${htmlHead(pageTitle)}
 <body>
   <a class="anchor" name="top"></a>
   <main>
@@ -131,17 +142,8 @@ function createMainPageHtml(publications) {
  * Creates HTML from the CSV data
  */
 function createMemberPageHtml(member, publications) {
-  const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${member.title} | ${pageTitle}</title>
-  <link rel="stylesheet" href="../style.css">
-  <link rel="shortcut icon" href="../img/misc/favicon.png">
-  <link rel="icon" type="image/png" href="../img/favicon.png" sizes="256x256">
-  <link rel="apple-touch-icon" sizes="256x256" href="../img/favicon.png">
-</head>
+  const title = `${member.title} | ${pageTitle}`
+  const html = `${htmlHead(title, '..')}
 <body>
   <a class="anchor" name="top"></a>
   <main>
@@ -301,17 +303,8 @@ function createPublicationPageHtml(pub) {
     suppl = `../suppl/${key}.zip`
   }
   // Create HTML
-  const html = `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>${pub.Title} | ${pageTitle}</title>
-      <link rel="stylesheet" href="../style.css">
-      <link rel="shortcut icon" href="../img/misc/favicon.png">
-      <link rel="icon" type="image/png" href="../img/favicon.png" sizes="256x256">
-      <link rel="apple-touch-icon" sizes="256x256" href="../img/favicon.png">
-    </head>
+  const title = `${pub.Title} | ${pageTitle}`
+  const html = `${htmlHead(title, '..')}
     <body>
       <a class="anchor" name="top"></a>
       <main>
@@ -503,16 +496,23 @@ function reportMissingOrExtraFiles(publications) {
   }
   // missing member info
   console.log();
+  let missingInfo = false;
   for (const member of memberConfig) {
     if (member.bio === '') {
       console.log(`${member.name} is missing a bio`);
+      missingInfo = true
     }
     const links = member.links.map(d => d.text)
     if (!links.includes('ORCID')) {
       console.log(`${member.name} is missing an ORCID link`);
+      missingInfo = true
     }
     if (!links.includes('Google Scholar')) {
       console.log(`${member.name} is missing a scholar link`);
+      missingInfo = true
     }
+  }
+  if (missingInfo) {
+    console.log('\nadd missing info in config.js');
   }
 }
