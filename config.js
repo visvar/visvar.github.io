@@ -148,6 +148,26 @@ export const memberConfig = [
   },
 
   {
+    name: 'Carlos-Victor Quijano-Chavez',
+    title: 'Carlos-Victor Quijano-Chavez, M.Sc.',
+    path: 'carlos-victor_quijano-chavez',
+    bio: `
+    <p>
+    Currently, I'm a PhD student at the University of Stuttgart. 
+    I obtained my MSc degree in Computer Science at the Federal University of Rio Grande do Sul (UFRGS) in Porto Alegre, Brazil. 
+    My research focuses on applying engaging, embodied display and interaction techniques for data visualization and visual analytics in immersive environments. 
+    </p>
+    `,
+    research: ['HCI', 'Visualization'],
+    links: [
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Quijano-Chavez/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=3_fYPGQAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0001-9129-5366' },
+    ],
+    projects: []
+  },
+
+  {
     name: 'Frank Heyen',
     title: 'Frank Heyen, M.Sc.',
     path: 'frank_heyen',
@@ -184,6 +204,25 @@ export const memberConfig = [
     projects: [
       { text: 'CyberValley - InstruData', url: 'https://www.visus.uni-stuttgart.de/en/projects/cvrf-instrudata/' }
     ]
+  },
+
+  {
+    name: 'Hyerim Park',
+    title: 'Hyerim Park, M.Sc.',
+    path: 'hyerim_park',
+    bio: `
+    <p>
+      I have a background in media informatics and human-computer interaction. 
+      During my master's thesis at Ludwig Maximilian Universität München, I dedicated my research to developing technical solutions that facilitate seamless communication between VR users and non-VR users in a co-located setting. 
+      Currently, as a doctoral candidate, my focus is on exploring novel interaction concepts and creating prototypes for collaborative creative tasks in immersive environments. 
+      My investigations revolve around human-AI collaboration and leverage extended reality (XR) technologies such as VR, AR, and MR.
+    </p>
+    `,
+    research: ['HCI', 'Human-AI', 'VR/AR/MR'],
+    links: [
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Park-00004/' }
+    ],
+    projects: []
   },
 
   {
@@ -246,6 +285,7 @@ export const memberConfig = [
     links: [
       { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Wieland-00007/' },
       { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=3Ya8r3gAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0002-1936-0474' },
       { text: 'LinkedIn', url: 'https://de.linkedin.com/in/markus-wieland' }
     ],
     projects: []
@@ -302,6 +342,7 @@ export const memberConfig = [
     research: ['Perception', 'Attention guidance', 'VR/AR', 'HCI'],
     links: [
       { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Doerr-00001/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=DJBB8I8AAAAJ' },
       { text: 'ORCID', url: 'https://orcid.org/0000-0003-3249-5354' }
     ],
     projects: []
@@ -339,13 +380,14 @@ export const memberConfig = [
     path: 'ruben_bauer',
     bio: `
     <p>
-      I research machine learning- and VR/AR-supported interactive visualization techniques to aid domain experts, who work with ensemble simulation or experimental data, in analyzing their data and visualizing their findings.
+    I research machine learning- and VR/AR-supported interactive visualization techniques to aid domain experts, who work with ensemble simulation or experimental data, in analyzing their data and visualizing their findings.
     </p>
     `,
     research: ['Visual analytics', 'Ensemble data', 'Machine learning', 'VR/AR', 'HCI'],
     links: [
       { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Bauer-00029/' },
-      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=vqiuvPMAAAAJ' }
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=vqiuvPMAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0003-2614-2480' }
     ],
     projects: []
   },

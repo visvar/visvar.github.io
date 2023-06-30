@@ -22,17 +22,18 @@ const headerAndNav = `
         <li><a href="${pageUrl}/#aboutus">about VISVAR</a></li>
         <li><a href="${pageUrl}/#publications">publications</a></li>
         <li><a href="${pageUrl}/#members">members</a></li>
-        <ul class="memberNav">
-          ${memberConfig.map(d => `
-          <li><a href="${pageUrl}/members/${d.path}.html">${d.name}</a></li>
-          `).join('')}
-        </ul>
       </ul>
       </nav>
     </div>
   </header>
 </div>
 `
+// removed member page links
+// <ul class="memberNav">
+// ${memberConfig.map(d => `
+// <li><a href="${pageUrl}/members/${d.path}.html">${d.name}</a></li>
+// `).join('')}
+// </ul>
 
 /**
  * Generates the HTML head of a page
@@ -354,7 +355,10 @@ function urlText(url) {
   if (u.includes('doi.org')) { return 'DOI' }
   if (u.includes('acm.org')) { return 'ACM' }
   if (u.includes('ieee.org')) { return 'IEEE' }
+  if (u.includes('eg.org')) { return 'Eurographics' }
   if (u.includes('arxiv.org')) { return 'arXiv' }
+  if (u.includes('ismir.net')) { return 'ISMIR' }
+  if (u.includes('springer.com')) { return 'Springer' }
   return 'link'
 }
 

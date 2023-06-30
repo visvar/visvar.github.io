@@ -1,5 +1,6 @@
 # TODO
 
+- add link to video https://www.youtube.com/watch?v=jvvx-IrJpXM
 - Allow hosting video somewhere else
 - Allow arbitrary file endings, as long as base name equals publication key, especially for images and videos
 - replace special characters such as & in title, journal, etc
