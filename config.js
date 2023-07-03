@@ -100,8 +100,7 @@ export const memberConfig = [
         url: "https://www.visus.uni-stuttgart.de/en/institute/team/Lee-00006/"
       },
       { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=oJUHhu4AAAAJ' },
-      // TODO:
-      // { text: "ORCID", url: 'https://orcid.org/0000-0001-5254-1480' }
+      { text: "ORCID", url: 'https://orcid.org/0000-0002-1171-4741' },
       { text: 'Personal website', url: 'https://benjaminchlee.github.io/' },
       { text: 'YouTube', url: 'https://www.youtube.com/@benjaminchlee' },
     ],
@@ -142,7 +141,8 @@ export const memberConfig = [
     research: ['HCI', 'Haptics'],
     links: [
       { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Achberger/' },
-      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=V3QAjFsAAAAJ' }
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=V3QAjFsAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0002-2226-6593' }
     ],
     projects: []
   },
@@ -421,8 +421,8 @@ export const memberConfig = [
     path: 'simeon_rau',
     bio: `
     <p>
-      I conduct research on visualization for and with machine learning, mainly to support non experts in using and developing new machine learning models.
-      Currently, I am working on the topic of music composition and how AI and visualization can enhance the human instead of replacing it. 
+    I conduct research on visualization for and with machine learning, mainly to support non experts in using and developing new machine learning models.
+    Currently, I am working on the topic of music composition and how AI and visualization can enhance the human instead of replacing it. 
       One of the answers is: Using a human centered, AI-assisted approach with visualization as efficient communication between human and AI.
       At the start I focus only on monophonic melody composition. 
       Later I want to expand my research to other steps in the composition process, machine learning pipeline, and human-AI interaction to foster the human creativity, music writing, 
@@ -432,6 +432,7 @@ export const memberConfig = [
     research: ['Visualization &amp; visual analytics', 'Machine learning', 'HCI'],
     links: [
       { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Rau-00009/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=QeFmHn8AAAAJ' },
       { text: 'ORCID', url: 'https://orcid.org/0000-0002-3124-0467' }
     ],
     projects: []
