@@ -226,6 +226,31 @@ export const memberConfig = [
   },
 
   {
+    name: 'Jan Krieglstein',
+    title: 'Dipl.-Ing. Jan Krieglstein',
+    path: 'jan_krieglstein',
+    bio: `
+    <p>
+    I'm a research associate at Fraunhofer Institute for Manifacturing Engineering and Automation IPA in Stuttgart. 
+    My research focuses on skill-based robot programming using Extended Reality techniques and devices. 
+    A proof of concept paper for robot programming using a Mixed Reality user interface can be found <a href="https://ieeexplore.ieee.org/abstract/document/10161095" target="_blank" rel="noreferrer">here</a> and a video <a href="https://www.youtube.com/watch?v=VL1_hjB78pQ" target="_blank" rel="noreferrer">here</a>. 
+    Future work will focus on evaluating the benefits of Mixed Reality for robot programming in a user study and further development of helpful XR-features for robot programming.
+    </p>
+    `,
+    research: [
+      'Robot programming',
+      'Mixed Reality applications',
+      'Contact force simulation'
+    ],
+    links: [
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Krieglstein/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=EZEkmI4AAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0003-2538-3653' },
+    ],
+    projects: []
+  },
+
+  {
     name: 'Jonas Haischt',
     title: 'Jonas Haischt, M.Sc.',
     path: 'jonas_haischt',
