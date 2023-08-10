@@ -1,3 +1,9 @@
+/**
+ * Information on publication venues, will be shown when clicking on a venue name in a publication.
+ *
+ * @todo compile venue pages
+ * @todo add more information here
+ */
 export const venues = [
     {
         short: 'ISMIR',
@@ -17,10 +23,12 @@ export const venues = [
     },
     {
         short: 'IEEE TVCG',
-        name: 'IEEE Transactions on Visualization and Computer Graphics', publisher: 'IEEE',
-        url: 'https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?reload=true&punumber=2945'
+        name: 'IEEE Transactions on Visualization and Computer Graphics',
+        publisher: 'IEEE',
+        url: 'https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?reload=true&punumber=2945',
+        resources: []
     },
-    // TODO
+    // TODO: more information
     { short: 'TISMIR' },
     { short: 'IEEE VIS' },
     { short: 'IEEE VR' },
@@ -28,4 +36,6 @@ export const venues = [
     { short: 'VINCI' },
     { short: 'EuroVis' },
     { short: 'PacificVis' },
+    { short: 'ISMAR' },
+    { short: 'MUC' },
 ]

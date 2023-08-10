@@ -75,7 +75,7 @@ csv
 /**
  * Creates all HTML pages
  */
-function createPages() {
+async function createPages() {
   console.log(`${publications.length} publications`)
   // Sort by date descending, so newest at top of page
   publications.sort((a, b) => a.Date > b.Date ? -1 : 1
@@ -97,7 +97,7 @@ function createPages() {
   // Export papers.json
   writeFileSync('papers.json', JSON.stringify(publications))
   // Create missing QR codes
-  createQRCodes(publications)
+  await createQRCodes(publications)
   // Detect missing and extra files
   reportMissingOrExtraFiles(publications)
 }
@@ -121,7 +121,7 @@ function createMainPageHtml(publications) {
           ${memberConfig.map(member => `
             <div>
               <a href="./members/${member.path}.html">
-                <img class="avatar" src="./img/people/small/${member.path}.jpg" />
+                <img class="avatar" src="./img/people/small/${member.path}.jpg" loading="lazy" />
                 <div>${member.name}</div>
               </a>
             </div>
