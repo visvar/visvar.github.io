@@ -331,7 +331,7 @@ function createPublicationPageHtml(pub) {
               ${pub['Abstract'] ? `<div class="abstract"><b>Abstract.</b> ${pub['Abstract']}</div>` : ''}
               ${pub.bibtex ? `<div class="bibtex"><textarea>${formatBibtex(key, pub.bibtex)}</textarea></div>` : ''}
               ${pub['Acknowledgements'] ? `<div class="abstract"><b>Acknowledgements.</b> ${pub['Acknowledgements']}</div>` : ''}
-              ${pub.notes ? `<span>${pub.notes}</span>` : ''}
+              ${pub.notes ? `<div>${pub.notes}</div>` : ''}
               <img class="qr" src="../qr/${key}.png"/>
             </div>
           </article>
