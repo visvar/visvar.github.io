@@ -2,6 +2,7 @@ import { createReadStream, readFileSync, writeFileSync, readdirSync, existsSync 
 import csv from 'fast-csv'
 import { AwesomeQR } from 'awesome-qr'
 import { publicationSheet, pageUrl, pageTitle, memberConfig } from '../config.js'
+import { venueMap } from '../venues.js'
 import pkg from 'bibtex-tidy'
 const { tidy } = pkg
 
@@ -94,6 +95,8 @@ async function createPages() {
   for (const pub of publications) {
     createPublicationPageHtml(pub)
   }
+  // Venue pages
+  createVenuePages(venueMap)
   // Export papers.json
   writeFileSync('papers.json', JSON.stringify(publications))
   // Create missing QR codes
@@ -208,6 +211,7 @@ function createPublicationsHtml(publications, isMember = false) {
     const year = pub.Date.slice(0, 4)
     const url1 = pub['Publisher URL (official)']
     const url2 = pub['url2']
+    const venue = pub['Submission Target']
     const imageExists = allImages.has(`${key}.png`)
     // PDF, video, and supplemental might be a link instead of file
     let pdf = pub['PDF URL (public)']
@@ -257,7 +261,7 @@ function createPublicationsHtml(publications, isMember = false) {
         ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
       </div>
       <div>
-      ${pub['Submission Target']} (${year}) ${pub['Type']}
+      ${venueLink(venue, p)} (${year}) ${pub['Type']}
       </div>
       <div>
         ${url1 && url1 !== '' ? `<a href="${url1}" target="_blank">${urlText(url1)}</a>` : ''}
@@ -279,7 +283,9 @@ function createPublicationsHtml(publications, isMember = false) {
 function createPublicationPageHtml(pub) {
   const key = pub['Key (e.g. for file names)']
   const year = pub.Date.slice(0, 4)
-  const website = pub['Publisher URL (official)']
+  const url1 = pub['Publisher URL (official)']
+  const url2 = pub['url2']
+  const venue = pub['Submission Target']
   const imageExists = allImages.has(`${key}.png`)
   // PDF, video, and supplemental might be a link instead of file
   let pdf = pub['PDF URL (public)']
@@ -316,14 +322,15 @@ function createPublicationPageHtml(pub) {
             <div class="pubPageContent">
               ${imageExists ? `<img id="image${key}" src="../img/${key}.png"/>` : ''}
               <div>
-                <b>Venue.</b> ${pub['Submission Target']} (${year}) ${pub['Type']}
+                <b>Venue.</b> ${venueLink(venue, '..')} (${year}) ${pub['Type']}
               </div>
               <div>
                 <b>Authors.</b> ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
               </div>
               <div>
                 <b>Materials.</b>
-                ${website && website !== '' ? `<a href="${website}" target="_blank">website</a>` : ''}
+                ${url1 && url1 !== '' ? `<a href="${url1}" target="_blank">${urlText(url1)}</a>` : ''}
+                ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank">${urlText(url2)}</a>` : ''}
                 ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
                 ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
                 ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
@@ -341,6 +348,52 @@ function createPublicationPageHtml(pub) {
     </html>`
   const outFile = `./pub/${pub['Key (e.g. for file names)']}.html`
   writeFileSync(outFile, html)
+}
+
+/**
+ * @todo For each venue in venues.js, create page with its information
+ */
+function createVenuePages(venueMap) {
+  for (const venue of venueMap.values()) {
+    const title = `${venue.short} | ${pageTitle}`
+    const html = `${htmlHead(title, '..')}
+    <body>
+      <a class="anchor" name="top"></a>
+      <main>
+        ${headerAndNav}
+        <div>
+          <article>
+            <h1>${venue.name} (${venue.short})</h1>
+            <div class="pubPageContent">
+              ${venue.publisher.length ? `<div>Publisher: ${venue.publisher}<div>` : ''}
+              <div>
+                ${venue.url ? `<a href="${venue.url}" target="_blank">official website</a>` : ''}
+                ${venue.resources.map(d => `<a href="${d.url}" target="_blank">${d.label}</a>`).join('')}
+              </div>
+            </div>
+          </article>
+        </div>
+      </main>
+    </body>
+    </html>`
+    const outFile = `./venue/${venue.pageUrl}.html`
+    writeFileSync(outFile, html)
+  }
+}
+
+/**
+ * @todo for "submission target", look up venues.js and link to the venue page if it exists
+ * @param {*} venueShort
+ */
+function venueLink(venueShort, path = '.') {
+  venueShort = venueShort.trim()
+  if (venueMap.has(venueShort)) {
+    const venue = venueMap.get(venueShort)
+    return `<a href="${path}/venue/${venue.pageUrl}.html" target="_blank" title="${venue.name}">${venueShort}</a>`
+  } else {
+    if (path === '.' && venueShort !== '') console.log('unknown venue', venueShort)
+    return venueShort
+  }
 }
 
 /**
