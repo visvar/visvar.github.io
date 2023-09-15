@@ -201,6 +201,32 @@ const venues = [
         url: 'https://ieeexplore.ieee.org/xpl/conhome/1836626/all-proceedings',
         resources: []
     },
+    {
+        short: 'AutomotiveUI',
+        name: 'Automotive User Interfaces and Interactive Vehicular Applications',
+        publisher: 'ACM',
+        url: 'https://dl.acm.org/conference/automotiveui',
+        resources: []
+    },
+    {
+        short: 'Transport in Porous Media',
+        name: 'Transport in Porous Media',
+        publisher: 'Springer',
+        url: 'https://www.springer.com/journal/11242',
+        resources: []
+    },
+    {
+        short: 'CHI IMI Workshop',
+        name: 'CHI IMI Workshop',
+        publisher: '',
+        url: 'https://teamdarmstadt.de/imi/',
+        resources: [
+            {
+                label: 'Extended abstract',
+                url: 'https://doi.org/10.1145/3491101.3503743'
+            }
+        ]
+    },
 ]
 
 export const venueMap = new Map(venues.map(d => [
