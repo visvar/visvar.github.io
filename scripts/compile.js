@@ -590,3 +590,4 @@ function updateFile(path, newContent) {
   if (oldContent !== newContent) {
     writeFileSync(path, newContent)
   }
+}
