@@ -98,7 +98,7 @@ async function createPages() {
   // Venue pages
   createVenuePages(venueMap)
   // Export papers.json
-  writeFileSync('papers.json', JSON.stringify(publications))
+  updateFile('papers.json', JSON.stringify(publications))
   // Create missing QR codes
   await createQRCodes(publications)
   // Detect missing and extra files
@@ -139,7 +139,7 @@ function createMainPageHtml(publications) {
   </main>
 </body>
 </html>`
-  writeFileSync('./index.html', html)
+  updateFile('./index.html', html)
 }
 
 /**
@@ -193,7 +193,7 @@ function createMemberPageHtml(member, publications) {
 </body>
 </html>`
   const outFile = `./members/${member.path}.html`
-  writeFileSync(outFile, html)
+  updateFile(outFile, html)
 }
 
 /**
@@ -347,7 +347,7 @@ function createPublicationPageHtml(pub) {
     </body>
     </html>`
   const outFile = `./pub/${pub['Key (e.g. for file names)']}.html`
-  writeFileSync(outFile, html)
+  updateFile(outFile, html)
 }
 
 /**
@@ -377,7 +377,7 @@ function createVenuePages(venueMap) {
     </body>
     </html>`
     const outFile = `./venue/${venue.pageUrl}.html`
-    writeFileSync(outFile, html)
+    updateFile(outFile, html)
   }
 }
 
@@ -573,3 +573,20 @@ function reportMissingOrExtraFiles(publications) {
     console.log('\nadd missing info in config.js');
   }
 }
+
+/**
+ * Writes content to a file, but only if the content has changed or it does not
+ * exist yet
+ *
+ * @param {string} path file path
+ * @param {string} newContent the new content that would be written to the file
+ */
+function updateFile(path, newContent) {
+  if (!existsSync(path)) {
+    writeFileSync(path, newContent)
+    return
+  }
+  const oldContent = readFileSync(path).toString();
+  if (oldContent !== newContent) {
+    writeFileSync(path, newContent)
+  }
