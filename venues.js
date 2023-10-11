@@ -107,8 +107,14 @@ const venues = [
         short: 'MuC',
         name: 'Mensch und Computer',
         publisher: 'ACM',
-        url: '',
-        resources: []
+        url: 'https://fb-mci.gi.de/aktivitaeten/tagungsreihe-mensch-und-computer',
+        resources: [
+            {
+                label: 'proceedings',
+                url: 'https://dl.gi.de/communities/e76cbded-ce13-459a-9848-b52cb3e54706'
+            }
+        ]
+
     },
     {
         short: 'arXiv',
