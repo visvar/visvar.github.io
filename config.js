@@ -168,6 +168,27 @@ export const memberConfig = [
   },
 
   {
+    name: 'Christian Krauter',
+    title: 'Christian Krauter, M.Sc.',
+    path: 'christian_krauter',
+    bio: `
+    <p>
+      My research interests cover Human-Computer Interaction (HCI), information visualization, and Augmented and Virtual Reality (AR/VR), which I aim to combine during my PhD studies.
+      I acquired my Bachelor's in media informatics and my Master's in computer science here at the University of Stuttgart.
+      My previous work covered notification placement in VR (bachelor thesis, <a href="https://doi.org/10.1145/3311350.3347190" target="_blank" rel="noreferrer">link</a>), an immersive social distancing VR demo (<a href="https://doi.org/10.1145/3473856.3474031" target="_blank" rel="noreferrer">link</a>, <a href="https://visvar.github.io/pdf/krauter2021muc.pdf" target="_blank" rel="noreferrer">pdf</a>), and a smart chair for sitting posture recognition and feedback (master thesis).
+    </p>
+    `,
+    research: ['HCI', 'AR/ VR', 'Information Visualization'],
+    links: [
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=sNDlSbkAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0002-9787-0816' },
+      { text: 'ResearchGate', url: 'https://www.researchgate.net/profile/Christian-Krauter-2' },
+      { text: 'LinkedIn', url: 'https://www.linkedin.com/in/christian-krauter-4b8640218' }
+    ],
+    projects: []
+  },
+
+  {
     name: 'Frank Heyen',
     title: 'Frank Heyen, M.Sc.',
     path: 'frank_heyen',
@@ -501,25 +522,4 @@ export const memberConfig = [
     ],
     projects: []
   },
-
-  {
-    name: 'Christian Krauter',
-    title: 'Christian Krauter, M.Sc.',
-    path: 'christian_krauter',
-    bio: `
-    <p>
-      My research interests cover Human-Computer Interaction (HCI), information visualization, and Augmented and Virtual Reality (AR/VR), which I aim to combine during my PhD studies.
-      I acquired my Bachelor's in media informatics and my Master's in computer science here at the University of Stuttgart.
-      My previous work covered notification placement in VR (bachelor thesis, <a href="https://doi.org/10.1145/3311350.3347190" target="_blank" rel="noreferrer">link</a>), an immersive social distancing VR demo (<a href="https://doi.org/10.1145/3473856.3474031" target="_blank" rel="noreferrer">link</a>, <a href="https://visvar.github.io/pdf/krauter2021muc.pdf" target="_blank" rel="noreferrer">pdf</a>), and a smart chair for sitting posture recognition and feedback (master thesis).
-    </p>
-    `,
-    research: ['HCI', 'AR/ VR', 'Information Visualization'],
-    links: [
-      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=sNDlSbkAAAAJ' },
-      { text: 'ORCID', url: 'https://orcid.org/0000-0002-9787-0816' },
-      { text: 'ResearchGate', url: 'https://www.researchgate.net/profile/Christian-Krauter-2' },
-      { text: 'LinkedIn', url: 'https://www.linkedin.com/in/christian-krauter-4b8640218' }
-    ],
-    projects: []
-  }
 ]

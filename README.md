@@ -61,6 +61,9 @@ Simply do a git commit and push, e.g. run
 ## Adding new Members
 
 - Add information in [config.js](./config.js)
+   - Insert the new member in the correct position.
+      - First, there are Professors, then Post-Docs, and finally Ph.D.s
+      - Members of each category are sorted alphabetically by first name.
 - Add a picture in [img/people/](img/people/)
 
 Make sure the filenames equal the `path` in the config and only contain ASCII characters.
