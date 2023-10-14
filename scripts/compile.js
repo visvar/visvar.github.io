@@ -42,7 +42,7 @@ const headerAndNav = `
  * @param {'.'|'..'} [path=.] either '.' for index.html or '..' for others
  * @returns {string} HTML code
  */
-function htmlHead(title, path = '.') {
+function htmlHead (title, path = '.') {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,7 +76,7 @@ csv
 /**
  * Creates all HTML pages
  */
-async function createPages() {
+async function createPages () {
   console.log(`${publications.length} publications`)
   // Sort by date descending, so newest at top of page
   publications.sort((a, b) => a.Date > b.Date ? -1 : 1
@@ -108,7 +108,7 @@ async function createPages() {
 /**
  * Creates HTML from the CSV data
  */
-function createMainPageHtml(publications) {
+function createMainPageHtml (publications) {
   const html = `${htmlHead(pageTitle)}
 <body>
   <a class="anchor" name="top"></a>
@@ -125,6 +125,7 @@ function createMainPageHtml(publications) {
             <div>
               <a href="./members/${member.path}.html">
                 <img class="avatar" src="./img/people/small/${member.path}.jpg" loading="lazy" />
+                <div class="${member.role}"></div>
                 <div>${member.name}</div>
               </a>
             </div>
@@ -145,7 +146,7 @@ function createMainPageHtml(publications) {
 /**
  * Creates HTML from the CSV data
  */
-function createMemberPageHtml(member, publications) {
+function createMemberPageHtml (member, publications) {
   const title = `${member.title} | ${pageTitle}`
   const html = `${htmlHead(title, '..')}
 <body>
@@ -203,7 +204,7 @@ function createMemberPageHtml(member, publications) {
  * @param {boolean} [isMember=false] is this a member page? (affects paths)
  * @returns {string} HTML
  */
-function createPublicationsHtml(publications, isMember = false) {
+function createPublicationsHtml (publications, isMember = false) {
   const p = isMember ? '..' : '.'
   return publications.map((pub, i) => {
     const key = pub['Key (e.g. for file names)']
@@ -280,7 +281,7 @@ function createPublicationsHtml(publications, isMember = false) {
 /**
  * Creates the page for a single publication
  */
-function createPublicationPageHtml(pub) {
+function createPublicationPageHtml (pub) {
   const key = pub['Key (e.g. for file names)']
   const year = pub.Date.slice(0, 4)
   const url1 = pub['Publisher URL (official)']
@@ -353,7 +354,7 @@ function createPublicationPageHtml(pub) {
 /**
  * @todo For each venue in venues.js, create page with its information
  */
-function createVenuePages(venueMap) {
+function createVenuePages (venueMap) {
   for (const venue of venueMap.values()) {
     const title = `${venue.short} | ${pageTitle}`
     const html = `${htmlHead(title, '..')}
@@ -385,7 +386,7 @@ function createVenuePages(venueMap) {
  * @todo for "submission target", look up venues.js and link to the venue page if it exists
  * @param {*} venueShort
  */
-function venueLink(venueShort, path = '.') {
+function venueLink (venueShort, path = '.') {
   venueShort = venueShort.trim()
   if (venueMap.has(venueShort)) {
     const venue = venueMap.get(venueShort)
@@ -403,7 +404,7 @@ function venueLink(venueShort, path = '.') {
  * @param {string} url url
  * @returns {string} link text
  */
-function urlText(url) {
+function urlText (url) {
   const u = url.toLowerCase()
   if (u.includes('doi.org')) { return 'DOI' }
   if (u.includes('acm.org')) { return 'ACM' }
@@ -412,6 +413,7 @@ function urlText(url) {
   if (u.includes('arxiv.org')) { return 'arXiv' }
   if (u.includes('ismir.net')) { return 'ISMIR' }
   if (u.includes('springer.com')) { return 'Springer' }
+  if (u.includes('wiley.com')) { return 'Wiley' }
   return 'link'
 }
 
@@ -422,7 +424,7 @@ function urlText(url) {
  * @param {string} key pub key (for debugging logs)
  * @param {string} bibtexString bibtex string
  */
-function formatBibtex(key, bibtexString) {
+function formatBibtex (key, bibtexString) {
   try {
     const formatted = tidy(bibtexString, {
       omit: ['address', 'location', 'isbn', 'timestamp'],
@@ -448,7 +450,7 @@ function formatBibtex(key, bibtexString) {
  *
  * @param {object[]} publications publication data
  */
-async function createQRCodes(publications) {
+async function createQRCodes (publications) {
   let count = 0
   const dir = "./qr"
   // const logo = readFileSync("./qr/_qrbg.png")
@@ -500,14 +502,14 @@ async function createQRCodes(publications) {
  * Logs missing and extra files to the console as warnings
  * @param {object[]} publications publication data
  */
-function reportMissingOrExtraFiles(publications) {
+function reportMissingOrExtraFiles (publications) {
   // for each missing file we want to know who is responsible
   const memberNames = new Set(memberConfig.map(d => d.name))
   const getResp = (pub) => {
     const authors = [pub['First Author'], ...pub['Other Authors'].split(', ')]
     for (const author of authors) {
       if (memberNames.has(author)) {
-        return author;
+        return author
       }
     }
     return ''
@@ -528,9 +530,9 @@ function reportMissingOrExtraFiles(publications) {
     let last = ''
     for (const [file, member] of missing) {
       if (last !== member) {
-        console.log('  ' + member);
+        console.log('  ' + member)
       }
-      console.log('    ' + file);
+      console.log('    ' + file)
       last = member
     }
   }
@@ -549,28 +551,28 @@ function reportMissingOrExtraFiles(publications) {
     console.log(`\nextra files:\n  ${extra.sort().join("\n  ")}`)
   }
   if (missing.length > 0 || extra.length > 0) {
-    console.log('\nlook inside the following folders depending on file type:\n.pdf   pdf/\n.png   img/\n.html  pub/');
+    console.log('\nlook inside the following folders depending on file type:\n.pdf   pdf/\n.png   img/\n.html  pub/')
   }
   // missing member info
-  console.log();
-  let missingInfo = false;
+  console.log()
+  let missingInfo = false
   for (const member of memberConfig) {
     if (member.bio === '') {
-      console.log(`${member.name} is missing a bio`);
+      console.log(`${member.name} is missing a bio`)
       missingInfo = true
     }
     const links = member.links.map(d => d.text)
     if (!links.includes('ORCID')) {
-      console.log(`${member.name} is missing an ORCID link`);
+      console.log(`${member.name} is missing an ORCID link`)
       missingInfo = true
     }
     if (!links.includes('Google Scholar')) {
-      console.log(`${member.name} is missing a scholar link`);
+      console.log(`${member.name} is missing a scholar link`)
       missingInfo = true
     }
   }
   if (missingInfo) {
-    console.log('\nadd missing info in config.js');
+    console.log('\nadd missing info in config.js')
   }
 }
 
@@ -581,12 +583,12 @@ function reportMissingOrExtraFiles(publications) {
  * @param {string} path file path
  * @param {string} newContent the new content that would be written to the file
  */
-function updateFile(path, newContent) {
+function updateFile (path, newContent) {
   if (!existsSync(path)) {
     writeFileSync(path, newContent)
     return
   }
-  const oldContent = readFileSync(path).toString();
+  const oldContent = readFileSync(path).toString()
   if (oldContent !== newContent) {
     writeFileSync(path, newContent)
   }

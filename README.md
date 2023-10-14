@@ -81,9 +81,10 @@ Make sure the filenames equal the `path` in the config and only contain ASCII ch
 - suppl/: supplemental material
 - video/: videos
 - aboutus.html: main page content
+- config.js member information
 - index.html: compiled main page
-- script.js: page scripts
 - style.css: page styles
+- venues.js venue information
 
 ## Dependency Update
 

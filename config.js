@@ -9,6 +9,7 @@ export const pageTitle = 'VISVAR Research Group, University of Stuttgart'
  *
  * {string} name: the same name as used on the publication dataset
  * {string} title: name with academic title(s)
+ * {string} role: professor, postdoc (ommitted for phds)
  * {string} path: the filename used for about/ and img/people/
  * {string} bio: bio description
  * {string[]} research: list of research interests
@@ -22,6 +23,7 @@ export const memberConfig = [
   {
     name: 'Michael Sedlmair',
     title: 'Prof. Dr. Michael Sedlmair',
+    role: 'professor',
     path: 'michael_sedlmair',
     bio: `
     <p>
@@ -60,6 +62,7 @@ export const memberConfig = [
   {
     name: 'Quynh Quang Ngo',
     title: 'Quynh Quang Ngo, Ph.D.',
+    role: 'postdoc',
     path: 'quynh_quang_ngo',
     bio: `
     <p>
@@ -82,6 +85,7 @@ export const memberConfig = [
   {
     name: 'Benjamin Lee',
     title: 'Benjamin Lee, Ph.D.',
+    role: 'postdoc',
     path: 'benjamin_lee',
     bio: `
     <p>
@@ -153,9 +157,9 @@ export const memberConfig = [
     path: 'carlos-victor_quijano-chavez',
     bio: `
     <p>
-    Currently, I'm a PhD student at the University of Stuttgart. 
-    I obtained my MSc degree in Computer Science at the Federal University of Rio Grande do Sul (UFRGS) in Porto Alegre, Brazil. 
-    My research focuses on applying engaging, embodied display and interaction techniques for data visualization and visual analytics in immersive environments. 
+    Currently, I'm a PhD student at the University of Stuttgart.
+    I obtained my MSc degree in Computer Science at the Federal University of Rio Grande do Sul (UFRGS) in Porto Alegre, Brazil.
+    My research focuses on applying engaging, embodied display and interaction techniques for data visualization and visual analytics in immersive environments.
     </p>
     `,
     research: ['HCI', 'Visualization'],
@@ -233,9 +237,9 @@ export const memberConfig = [
     path: 'hyerim_park',
     bio: `
     <p>
-      I have a background in media informatics and human-computer interaction. 
-      During my master's thesis at Ludwig Maximilian Universität München, I dedicated my research to developing technical solutions that facilitate seamless communication between VR users and non-VR users in a co-located setting. 
-      Currently, as a doctoral candidate, my focus is on exploring novel interaction concepts and creating prototypes for collaborative creative tasks in immersive environments. 
+      I have a background in media informatics and human-computer interaction.
+      During my master's thesis at Ludwig Maximilian Universität München, I dedicated my research to developing technical solutions that facilitate seamless communication between VR users and non-VR users in a co-located setting.
+      Currently, as a doctoral candidate, my focus is on exploring novel interaction concepts and creating prototypes for collaborative creative tasks in immersive environments.
       My investigations revolve around human-AI collaboration and leverage extended reality (XR) technologies such as VR, AR, and MR.
     </p>
     `,
@@ -252,9 +256,9 @@ export const memberConfig = [
     path: 'jan_krieglstein',
     bio: `
     <p>
-    I'm a research associate at Fraunhofer Institute for Manifacturing Engineering and Automation IPA in Stuttgart. 
-    My research focuses on skill-based robot programming using Extended Reality techniques and devices. 
-    A proof of concept paper for robot programming using a Mixed Reality user interface can be found <a href="https://ieeexplore.ieee.org/abstract/document/10161095" target="_blank" rel="noreferrer">here</a> and a video <a href="https://www.youtube.com/watch?v=VL1_hjB78pQ" target="_blank" rel="noreferrer">here</a>. 
+    I'm a research associate at Fraunhofer Institute for Manifacturing Engineering and Automation IPA in Stuttgart.
+    My research focuses on skill-based robot programming using Extended Reality techniques and devices.
+    A proof of concept paper for robot programming using a Mixed Reality user interface can be found <a href="https://ieeexplore.ieee.org/abstract/document/10161095" target="_blank" rel="noreferrer">here</a> and a video <a href="https://www.youtube.com/watch?v=VL1_hjB78pQ" target="_blank" rel="noreferrer">here</a>.
     Future work will focus on evaluating the benefits of Mixed Reality for robot programming in a user study and further development of helpful XR-features for robot programming.
     </p>
     `,
@@ -468,10 +472,10 @@ export const memberConfig = [
     bio: `
     <p>
     I conduct research on visualization for and with machine learning, mainly to support non experts in using and developing new machine learning models.
-    Currently, I am working on the topic of music composition and how AI and visualization can enhance the human instead of replacing it. 
+    Currently, I am working on the topic of music composition and how AI and visualization can enhance the human instead of replacing it.
       One of the answers is: Using a human centered, AI-assisted approach with visualization as efficient communication between human and AI.
-      At the start I focus only on monophonic melody composition. 
-      Later I want to expand my research to other steps in the composition process, machine learning pipeline, and human-AI interaction to foster the human creativity, music writing, 
+      At the start I focus only on monophonic melody composition.
+      Later I want to expand my research to other steps in the composition process, machine learning pipeline, and human-AI interaction to foster the human creativity, music writing,
       and bring AI to non expert people.
     </p>
     `,
