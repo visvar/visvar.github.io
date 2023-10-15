@@ -152,26 +152,10 @@ section a i {
   box-shadow: #bbb 1px 1px 15px;
 }
 
-/* TODO: mark special roles */
-/* .memberList .professor {
-  position: relative;
-  top: -20px;
-  left: 100px;
-  width: 10px;
-  height: 10px;
-  background: blue;
-  border-radius: 50%;
-}
-
-.memberList .postdoc {
-  background: red;
-} */
-
 .memberList a,
 .memberList a:hover {
   color: var(--textColor);
 }
-
 
 /* About pages */
 .avatarAndBio {

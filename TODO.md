@@ -1,17 +1,18 @@
 # TODO
 
-- mark special member roles visually
-- add link to video https://www.youtube.com/watch?v=jvvx-IrJpXM
-- Allow hosting video somewhere else
 - Allow arbitrary file endings, as long as base name equals publication key, especially for images and videos
+- Allow multiple videos
 
 ## Maybe
 
 - separate about, people, publications into different pages
 - add page for news once we have some
   - add link to video https://www.youtube.com/watch?v=jvvx-IrJpXM
+  - move job openings there
 - add social media once we have some
-- Allow multiple videos
+
+## Vis
+
 - Add page with paper/author vis, in another repo
   - timeline dotplot with teaser images and colored border for conference/journal
   - interactive filters

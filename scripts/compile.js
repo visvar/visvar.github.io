@@ -125,7 +125,6 @@ function createMainPageHtml (publications) {
             <div>
               <a href="./members/${member.path}.html">
                 <img class="avatar" src="./img/people/small/${member.path}.jpg" loading="lazy" />
-                <div class="${member.role}"></div>
                 <div>${member.name}</div>
               </a>
             </div>
