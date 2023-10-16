@@ -32,12 +32,6 @@ const headerAndNav = `
   </header>
 </div>
 `
-// removed member page links
-// <ul class="memberNav">
-// ${memberConfig.map(d => `
-// <li><a href="${pageUrl}/members/${d.path}.html">${d.name}</a></li>
-// `).join('')}
-// </ul>
 
 /**
  * Generates the HTML head of a page
@@ -354,7 +348,7 @@ function createPublicationPageHtml (pub) {
 }
 
 /**
- * @todo For each venue in venues.js, create page with its information
+ * For each venue in venues.js, create page with its information
  */
 function createVenuePages (venueMap) {
   for (const venue of venueMap.values()) {
@@ -385,7 +379,7 @@ function createVenuePages (venueMap) {
 }
 
 /**
- * @todo for "submission target", look up venues.js and link to the venue page if it exists
+ * For "submission target", look up venues.js and link to the venue page if it exists
  * @param {*} venueShort
  */
 function venueLink (venueShort, path = '.') {
@@ -404,7 +398,6 @@ function venueLink (venueShort, path = '.') {
 /**
  * Chooses a different link text depending on the URL's domain.
  *
- * @todo just display the domain? at least as fallback?
  * @param {string} url url
  * @returns {string} link text
  */
@@ -418,6 +411,8 @@ function urlText (url) {
   if (u.includes('ismir.net')) { return 'ISMIR' }
   if (u.includes('springer.com')) { return 'Springer' }
   if (u.includes('wiley.com')) { return 'Wiley' }
+  if (u.includes('degruyter.com')) { return 'De Gruyter' }
+  // console.log('unknown url', url)
   return 'link'
 }
 
@@ -490,7 +485,7 @@ async function createQRCodes (publications) {
     writeFileSync(path, buffer)
     count++
   }
-  console.log(`\nCreated ${count} new QRs`)
+  // console.log(`\nCreated ${count} new QRs`)
   // Look for orphan QR code PNGs
   allQRs.delete('.gitkeep')
   allQRs.delete('_qrbg.png')
@@ -563,6 +558,10 @@ function reportMissingOrExtraFiles (publications) {
   for (const member of memberConfig) {
     if (member.bio === '') {
       console.log(`${member.name} is missing a bio`)
+      missingInfo = true
+    }
+    if (member.research.length === 0) {
+      console.log(`${member.name} is missing research interests`)
       missingInfo = true
     }
     const links = member.links.map(d => d.text)
