@@ -6,6 +6,9 @@ import { venueMap } from '../venues.js'
 import pkg from 'bibtex-tidy'
 const { tidy } = pkg
 
+
+const reportUnknownVenues = false
+
 /**
  * This will be added to every .html page
  */
@@ -261,7 +264,7 @@ function createPublicationsHtml (publications, isMember = false) {
         ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
       </div>
       <div>
-      ${venueLink(venue, p)} (${year}) ${pub['Type']}
+        ${venueLink(venue, p)} (${year}) ${pub['Type']}
       </div>
       <div>
         ${url1 && url1 !== '' ? `<a href="${url1}" target="_blank">${urlText(url1)}</a>` : ''}
@@ -391,7 +394,9 @@ function venueLink (venueShort, path = '.') {
     const venue = venueMap.get(venueShort)
     return `<a href="${path}/venue/${venue.pageUrl}.html" target="_blank" title="${venue.name}">${venueShort}</a>`
   } else {
-    if (path === '.' && venueShort !== '') console.log('unknown venue', venueShort)
+    if (reportUnknownVenues && path === '.' && venueShort !== '') {
+      console.log('unknown venue', venueShort)
+    }
     return venueShort
   }
 }
@@ -561,6 +566,10 @@ function reportMissingOrExtraFiles (publications) {
       missingInfo = true
     }
     const links = member.links.map(d => d.text)
+    if (!links.includes('University of Stuttgart website')) {
+      console.log(`${member.name} is missing an Uni link`)
+      missingInfo = true
+    }
     if (!links.includes('ORCID')) {
       console.log(`${member.name} is missing an ORCID link`)
       missingInfo = true

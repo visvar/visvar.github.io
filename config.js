@@ -5,6 +5,8 @@ export const pageTitle = 'VISVAR Research Group, University of Stuttgart'
 
 /**
  * Member configuration
+ * Please keep members sorted: professor, then postdocs, then phds;
+ * members of the same sole sorted by first name alphabetically.
  * All fields may contain HTML
  *
  * {string} name: the same name as used on the publication dataset
@@ -499,6 +501,37 @@ export const memberConfig = [
     ],
     projects: []
   },
+
+  // // TODO:
+  // {
+  //   name: 'Jan Ulrich Bartels',
+  //   title: 'Jan Ulrich Bartels, M.Sc.',
+  //   path: 'jan_ulrich_bartels',
+  //   bio: ``,
+  //   research: [],
+  //   links: [
+  //     // { text: 'University of Stuttgart website', url: '' },
+  //     { text: 'LinkedIn', url: 'https://www.linkedin.com/in/jubartels/' },
+  //     { text: 'Personal website', url: 'https://janulrichbartels.com/' },
+
+  //   ],
+  //   projects: []
+  // },
+
+  // // TODO:
+  // {
+  //   name: 'Vindhya Singh',
+  //   title: 'Vindhya Singh, M.Sc.',
+  //   path: 'vindhya_singh',
+  //   bio: ``,
+  //   research: [],
+  //   links: [
+  //     // { text: 'University of Stuttgart website', url: '' },
+  //     { text: 'LinkedIn', url: 'https://www.linkedin.com/in/vindhya-singh-44663762' },
+
+  //   ],
+  //   projects: []
+  // },
 
   {
     name: 'Xingyao Yu',
