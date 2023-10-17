@@ -278,6 +278,28 @@ export const memberConfig = [
   },
 
   {
+    name: 'Jan Ulrich Bartels',
+    title: 'Jan Ulrich Bartels, M.Sc.',
+    path: 'jan_ulrich_bartels',
+    bio: `
+    <p>
+      My interest is the development of interfaces which unlock more productive human-machine relationships and enhance our ability to solve complex problems. My research focuses on haptic interfaces for Augmented and Virtual Reality.
+    </p>
+    <p>
+      I've received my Bachelors in Electrical and Computer Engineering from Oregon State University in 2016 and a Masters in Robotics from the Johns Hopkins University in 2023. In the 4 years between, I was designing audio interfaces for conference rooms and large meeting spaces.
+    </p>
+    `,
+    research: [],
+    links: [
+      // { text: 'University of Stuttgart website', url: '' },
+      { text: 'LinkedIn', url: 'https://www.linkedin.com/in/jubartels/' },
+      { text: 'Personal website', url: 'https://janulrichbartels.com/' },
+
+    ],
+    projects: []
+  },
+
+  {
     name: 'Jonas Haischt',
     title: 'Jonas Haischt, M.Sc.',
     path: 'jonas_haischt',
@@ -502,23 +524,6 @@ export const memberConfig = [
     projects: []
   },
 
-  // // TODO:
-  // {
-  //   name: 'Jan Ulrich Bartels',
-  //   title: 'Jan Ulrich Bartels, M.Sc.',
-  //   path: 'jan_ulrich_bartels',
-  //   bio: ``,
-  //   research: [],
-  //   links: [
-  //     // { text: 'University of Stuttgart website', url: '' },
-  //     { text: 'LinkedIn', url: 'https://www.linkedin.com/in/jubartels/' },
-  //     { text: 'Personal website', url: 'https://janulrichbartels.com/' },
-
-  //   ],
-  //   projects: []
-  // },
-
-  // TODO:
   {
     name: 'Vindhya Singh',
     title: 'Vindhya Singh, M.Sc.',
