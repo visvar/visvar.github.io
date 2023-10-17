@@ -39,7 +39,7 @@ const headerAndNav = `
  * @param {'.'|'..'} [path=.] either '.' for index.html or '..' for others
  * @returns {string} HTML code
  */
-function htmlHead (title, path = '.') {
+function htmlHead(title, path = '.') {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,7 +73,7 @@ csv
 /**
  * Creates all HTML pages
  */
-async function createPages () {
+async function createPages() {
   console.log(`${publications.length} publications`)
   // Sort by date descending, so newest at top of page
   publications.sort((a, b) => a.Date > b.Date ? -1 : 1
@@ -105,7 +105,7 @@ async function createPages () {
 /**
  * Creates HTML from the CSV data
  */
-function createMainPageHtml (publications) {
+function createMainPageHtml(publications) {
   const html = `${htmlHead(pageTitle)}
 <body>
   <a class="anchor" name="top"></a>
@@ -142,7 +142,7 @@ function createMainPageHtml (publications) {
 /**
  * Creates HTML from the CSV data
  */
-function createMemberPageHtml (member, publications) {
+function createMemberPageHtml(member, publications) {
   const title = `${member.title} | ${pageTitle}`
   const html = `${htmlHead(title, '..')}
 <body>
@@ -200,7 +200,7 @@ function createMemberPageHtml (member, publications) {
  * @param {boolean} [isMember=false] is this a member page? (affects paths)
  * @returns {string} HTML
  */
-function createPublicationsHtml (publications, isMember = false) {
+function createPublicationsHtml(publications, isMember = false) {
   const p = isMember ? '..' : '.'
   return publications.map((pub, i) => {
     const key = pub['Key (e.g. for file names)']
@@ -277,7 +277,7 @@ function createPublicationsHtml (publications, isMember = false) {
 /**
  * Creates the page for a single publication
  */
-function createPublicationPageHtml (pub) {
+function createPublicationPageHtml(pub) {
   const key = pub['Key (e.g. for file names)']
   const year = pub.Date.slice(0, 4)
   const url1 = pub['Publisher URL (official)']
@@ -319,24 +319,30 @@ function createPublicationPageHtml (pub) {
             <div class="pubPageContent">
               ${imageExists ? `<img id="image${key}" src="../img/${key}.png"/>` : ''}
               <div>
-                <b>Venue.</b> ${venueLink(venue, '..')} (${year}) ${pub['Type']}
-              </div>
-              <div>
-                <b>Authors.</b> ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
-              </div>
-              <div>
-                <b>Materials.</b>
-                ${url1 && url1 !== '' ? `<a href="${url1}" target="_blank">${urlText(url1)}</a>` : ''}
-                ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank">${urlText(url2)}</a>` : ''}
-                ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
-                ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
-                ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
-              </div>
-              ${pub['Abstract'] ? `<div class="abstract"><b>Abstract.</b> ${pub['Abstract']}</div>` : ''}
-              ${pub.bibtex ? `<div class="bibtex"><textarea>${formatBibtex(key, pub.bibtex)}</textarea></div>` : ''}
-              ${pub['Acknowledgements'] ? `<div class="abstract"><b>Acknowledgements.</b> ${pub['Acknowledgements']}</div>` : ''}
-              ${pub.notes ? `<div>${pub.notes}</div>` : ''}
-              <img class="qr" src="../qr/${key}.png"/>
+                <div>
+                  <b>Authors.</b> ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
+                </div>
+                <div>
+                  <b>Venue.</b> ${venueLink(venue, '..')} (${year}) ${pub['Type']}
+                </div>
+                ${pub.Type !== '' ? `
+                <div>
+                  <b>Type.</b> ${pub.Type}
+                </div>
+                `: ''}
+                <div>
+                  <b>Materials.</b>
+                  ${url1 && url1 !== '' ? `<a href="${url1}" target="_blank">${urlText(url1)}</a>` : ''}
+                  ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank">${urlText(url2)}</a>` : ''}
+                  ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
+                  ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
+                  ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
+                </div>
+                ${pub['Abstract'] ? `<div class="abstract"><b>Abstract.</b> ${pub['Abstract']}</div>` : ''}
+                ${pub.bibtex ? `<div class="bibtex"><textarea>${formatBibtex(key, pub.bibtex)}</textarea></div>` : ''}
+                ${pub['Acknowledgements'] ? `<div class="abstract"><b>Acknowledgements.</b> ${pub['Acknowledgements']}</div>` : ''}
+                ${pub.notes ? `<div>${pub.notes}</div>` : ''}
+                <img class="qr" src="../qr/${key}.png"/>
             </div>
           </article>
         </div>
@@ -350,7 +356,7 @@ function createPublicationPageHtml (pub) {
 /**
  * For each venue in venues.js, create page with its information
  */
-function createVenuePages (venueMap) {
+function createVenuePages(venueMap) {
   for (const venue of venueMap.values()) {
     const title = `${venue.short} | ${pageTitle}`
     const html = `${htmlHead(title, '..')}
@@ -382,7 +388,7 @@ function createVenuePages (venueMap) {
  * For "submission target", look up venues.js and link to the venue page if it exists
  * @param {*} venueShort
  */
-function venueLink (venueShort, path = '.') {
+function venueLink(venueShort, path = '.') {
   venueShort = venueShort.trim()
   if (venueMap.has(venueShort)) {
     const venue = venueMap.get(venueShort)
@@ -401,7 +407,7 @@ function venueLink (venueShort, path = '.') {
  * @param {string} url url
  * @returns {string} link text
  */
-function urlText (url) {
+function urlText(url) {
   const u = url.toLowerCase()
   if (u.includes('doi.org')) { return 'DOI' }
   if (u.includes('acm.org')) { return 'ACM' }
@@ -423,7 +429,7 @@ function urlText (url) {
  * @param {string} key pub key (for debugging logs)
  * @param {string} bibtexString bibtex string
  */
-function formatBibtex (key, bibtexString) {
+function formatBibtex(key, bibtexString) {
   try {
     const formatted = tidy(bibtexString, {
       omit: ['address', 'location', 'isbn', 'timestamp'],
@@ -449,7 +455,7 @@ function formatBibtex (key, bibtexString) {
  *
  * @param {object[]} publications publication data
  */
-async function createQRCodes (publications) {
+async function createQRCodes(publications) {
   let count = 0
   const dir = "./qr"
   // const logo = readFileSync("./qr/_qrbg.png")
@@ -501,7 +507,7 @@ async function createQRCodes (publications) {
  * Logs missing and extra files to the console as warnings
  * @param {object[]} publications publication data
  */
-function reportMissingOrExtraFiles (publications) {
+function reportMissingOrExtraFiles(publications) {
   // for each missing file we want to know who is responsible
   const memberNames = new Set(memberConfig.map(d => d.name))
   const getResp = (pub) => {
@@ -590,7 +596,7 @@ function reportMissingOrExtraFiles (publications) {
  * @param {string} path file path
  * @param {string} newContent the new content that would be written to the file
  */
-function updateFile (path, newContent) {
+function updateFile(path, newContent) {
   if (!existsSync(path)) {
     writeFileSync(path, newContent)
     return

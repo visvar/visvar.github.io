@@ -199,7 +199,7 @@ img.avatar {
 }
 
 
-/* Publications */
+/* Publications on other pages */
 .paper {
   margin-bottom: 0px;
   display: grid;
@@ -264,7 +264,7 @@ img.avatar {
   text-align: center;
 }
 
-.pubPageContent>div {
+.pubPageContent div {
   margin-top: 10px;
 }
 
@@ -272,6 +272,7 @@ img.avatar {
   width: 50%;
   max-height: 400px;
   margin: auto;
+  /* margin-bottom: 20px; */
   border-radius: 3px;
 }
 
