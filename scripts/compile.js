@@ -6,8 +6,10 @@ import { venueMap } from '../venues.js'
 import pkg from 'bibtex-tidy'
 const { tidy } = pkg
 
-
+// log venues not defined in venues.js to the console
 const reportUnknownVenues = false
+// log resource URLs not defined in urlText() to the console
+const reportUnknownUrls = false
 
 /**
  * This will be added to every .html page
@@ -239,7 +241,7 @@ function createPublicationsHtml(publications, isMember = false) {
   <div class="paper" id="paper${key}">
     ${imageExists
         ? `
-      <a href="${pageUrl}/pub/${key}.html" target="_blank">
+      <a href="${p}/pub/${key}.html" target="_blank">
         <img
           class="publicationImage"
           loading="lazy"
@@ -250,7 +252,7 @@ function createPublicationsHtml(publications, isMember = false) {
       }
     <div class="metaData ${imageExists ? '' : 'noImage'}">
       <h3>
-        <a href="${pageUrl}/pub/${key}.html" target="_blank">
+        <a href="${p}/pub/${key}.html" target="_blank">
         ${pub['Title']}
         </a>
       </h3>
@@ -317,7 +319,10 @@ function createPublicationPageHtml(pub) {
           <article><a class="anchor" name="publications"></a>
             <h1>${pub.Title}</h1>
             <div class="pubPageContent">
-              ${imageExists ? `<img id="image${key}" src="../img/${key}.png"/>` : ''}
+              ${imageExists ? `
+              <a href="../img/${key}.png" target="_blank" title="show image full size">
+                <img id="image${key}" src="../img/${key}.png"/>
+              </a>` : ''}
               <div>
                 <div>
                   <b>Authors.</b> ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
@@ -355,6 +360,8 @@ function createPublicationPageHtml(pub) {
 
 /**
  * For each venue in venues.js, create page with its information
+ *
+ * @param {Map} venueMap see venues.js
  */
 function createVenuePages(venueMap) {
   for (const venue of venueMap.values()) {
@@ -369,8 +376,9 @@ function createVenuePages(venueMap) {
             <h1>${venue.name} (${venue.short})</h1>
             <div class="pubPageContent">
               ${venue.publisher.length ? `<div>Publisher: ${venue.publisher}<div>` : ''}
+              ${venue.type.length ? `<div>Type: ${venue.type}<div>` : ''}
               <div>
-                ${venue.url ? `<a href="${venue.url}" target="_blank">official website</a>` : ''}
+                ${venue.url.length ? `<a href="${venue.url}" target="_blank">official website</a>` : ''}
                 ${venue.resources.map(d => `<a href="${d.url}" target="_blank">${d.label}</a>`).join('')}
               </div>
             </div>
@@ -418,7 +426,9 @@ function urlText(url) {
   if (u.includes('springer.com')) { return 'Springer' }
   if (u.includes('wiley.com')) { return 'Wiley' }
   if (u.includes('degruyter.com')) { return 'De Gruyter' }
-  // console.log('unknown url', url)
+  if (reportUnknownUrls) {
+    console.log('unknown url', url)
+  }
   return 'link'
 }
 
