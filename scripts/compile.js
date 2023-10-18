@@ -76,13 +76,30 @@ csv
  * Creates all HTML pages
  */
 async function createPages() {
-  console.log(`${publications.length} publications`)
+  // console.log(`${publications.length} publications`)
   // Sort by date descending, so newest at top of page
   publications.sort((a, b) => a.Date > b.Date ? -1 : 1
   )
-  // Main page
-  createMainPageHtml(publications)
   // Member / author pages
+  memberConfig
+    .sort((a, b) => {
+      // people with role first
+      if (a.role && !b.role) {
+        return -1
+      } else if (!a.role && b.role) {
+        return 1
+      }
+      // profs before postdocs
+      if (a.role && b.role) {
+        if (a.role === 'professor' && b.role === 'postdoc') {
+          return -1;
+        } else if (a.role === 'postdoc' && b.role === 'professor') {
+          return 1
+        }
+      }
+      // otherwise (no roles) sort by name
+      return a.name < b.name ? -1 : 1
+    })
   for (const member of memberConfig) {
     const authoredPubs = publications.filter(d =>
       d['First Author'].includes(member.name)
@@ -90,6 +107,8 @@ async function createPages() {
     )
     createMemberPageHtml(member, authoredPubs)
   }
+  // Main page
+  createMainPageHtml(publications, memberConfig)
   // Publication pages
   for (const pub of publications) {
     createPublicationPageHtml(pub)
@@ -107,7 +126,7 @@ async function createPages() {
 /**
  * Creates HTML from the CSV data
  */
-function createMainPageHtml(publications) {
+function createMainPageHtml(publications, memberConfig) {
   const html = `${htmlHead(pageTitle)}
 <body>
   <a class="anchor" name="top"></a>
