@@ -6,6 +6,10 @@ import { venueMap } from '../venues.js'
 import pkg from 'bibtex-tidy'
 const { tidy } = pkg
 
+// report missing info for publications
+const reportMissingInfo = false
+// report when pdf is only given as link but not file
+const reportPdfFileMissing = false
 // log venues not defined in venues.js to the console
 const reportUnknownVenues = false
 // log resource URLs not defined in urlText() to the console
@@ -120,7 +124,7 @@ async function createPages() {
   // Create missing QR codes
   await createQRCodes(publications)
   // Detect missing and extra files
-  reportMissingOrExtraFiles(publications)
+  reportMissingOrExtraInfo(publications)
 }
 
 /**
@@ -536,7 +540,7 @@ async function createQRCodes(publications) {
  * Logs missing and extra files to the console as warnings
  * @param {object[]} publications publication data
  */
-function reportMissingOrExtraFiles(publications) {
+function reportMissingOrExtraInfo(publications) {
   // for each missing file we want to know who is responsible
   const memberNames = new Set(memberConfig.map(d => d.name))
   const getResp = (pub) => {
@@ -548,25 +552,43 @@ function reportMissingOrExtraFiles(publications) {
     }
     return ''
   }
-  // missing files
+
   let missing = []
   for (const pub of publications) {
     const key = pub['Key (e.g. for file names)']
+    // missing publication info
+    if (reportMissingInfo) {
+      if (pub['Submission Target'] === '') {
+        missing.push([`${key} info: submission target`, getResp(pub)])
+      }
+      if (pub['Type'] === '') {
+        missing.push([`${key} info: type`, getResp(pub)])
+      }
+      if (pub['Abstract'] === '') {
+        missing.push([`${key} info: abstract`, getResp(pub)])
+      }
+      if (pub['bibtex'] === '') {
+        missing.push([`${key} info: bixtex`, getResp(pub)])
+      }
+    }
+    // missing files
     // publication teaser images
     if (!allImages.has(`${key}.png`)) { missing.push([`${key}.png (teaser)`, getResp(pub)]) }
     // publication PDF
     let pdf = pub['PDF URL (public)']
-    if ((!pdf || pdf === "") && !allPdfs.has(`${key}.pdf`)) { missing.push([`${key}.pdf (publication)`, getResp(pub)]) }
+    if ((!pdf || pdf === "") && !allPdfs.has(`${key}.pdf`)) {
+      // no link AND no file
+      missing.push([`${key}.pdf (publication)`, getResp(pub)])
+    } else if (reportPdfFileMissing && !allPdfs.has(`${key}.pdf`)) {
+      missing.push([`${key}.pdf (publication, no file - only link)`, getResp(pub)])
+    }
   }
   if (missing.length > 0) {
     missing.sort((a, b) => a[1] < b[1] ? -1 : 1)
-    console.log(`\nmissing files:`)
+    console.log(`\nmissing info/files:`)
     let last = ''
     for (const [file, member] of missing) {
-      if (last !== member) {
-        console.log('  ' + member)
-      }
-      console.log('    ' + file)
+      last !== member ? console.log('  ' + member) : console.log('    ' + file)
       last = member
     }
   }
@@ -585,7 +607,7 @@ function reportMissingOrExtraFiles(publications) {
     console.log(`\nextra files:\n  ${extra.sort().join("\n  ")}`)
   }
   if (missing.length > 0 || extra.length > 0) {
-    console.log('\nlook inside the following folders depending on file type:\n.pdf   pdf/\n.png   img/\n.html  pub/')
+    console.log('\nfill in missing info in Papers.xlsx\nfor files, look inside the following folders depending on file type:\n.pdf   pdf/\n.png   img/\n.html  pub/')
   }
   // missing member info
   console.log()
