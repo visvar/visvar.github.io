@@ -209,7 +209,7 @@ function createMemberPageHtml(member, publications) {
       </article>
       <article> <a class="anchor" name="publications"></a>
         <h1>Publications</h1>
-        ${createPublicationsHtml(publications, true)}
+        ${createPublicationsHtml(publications, member)}
       </article>
     </div>
   </main>
@@ -223,11 +223,11 @@ function createMemberPageHtml(member, publications) {
  * Creates HTML for an Array of publications extracted from the CSV
  *
  * @param {object[]} publications publications
- * @param {boolean} [isMember=false] is this a member page? (affects paths)
+ * @param {object} [member=null] member config or null for main page? (affects paths)
  * @returns {string} HTML
  */
-function createPublicationsHtml(publications, isMember = false) {
-  const p = isMember ? '..' : '.'
+function createPublicationsHtml(publications, member = null) {
+  const p = member ? '..' : '.'
   return publications.map((pub, i) => {
     const key = pub['Key (e.g. for file names)']
     const image = `${p}/img/small/${key}.png`
@@ -258,6 +258,11 @@ function createPublicationsHtml(publications, isMember = false) {
     } else {
       suppl = `${p}/suppl/${key}.zip`
     }
+    const authors = [
+      ...pub['First Author'].split(',').map(d => d.trim()).filter(d => d.length),
+      ...pub['Other Authors'].split(',').map(d => d.trim()).filter(d => d.length)
+    ]
+    const authString = authors.map(d => d === member?.name ? `<b>${d}</b>` : d).join(', ')
 
     return `
   ${i === 0 || year !== publications[i - 1]['Date'].slice(0, 4)
@@ -281,7 +286,7 @@ function createPublicationsHtml(publications, isMember = false) {
         </a>
       </h3>
       <div>
-        ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
+        ${authString}
       </div>
       <div>
         ${venueLink(venue, p)} (${year}) ${pub['Type']}

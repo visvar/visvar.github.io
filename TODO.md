@@ -1,5 +1,6 @@
 # TODO
 
+- in publication lists, add links for authors who belong to visvar, link to author page
 - Allow arbitrary file endings, as long as base name equals publication key, especially for images and videos
 - Allow multiple videos
 
