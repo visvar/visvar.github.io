@@ -9,7 +9,7 @@ const { tidy } = pkg
 // report missing info for publications
 const reportMissingInfo = false
 // report when pdf is only given as link but not file
-const reportPdfFileMissing = false
+const reportPdfFileMissing = true
 // log venues not defined in venues.js to the console
 const reportUnknownVenues = false
 // log resource URLs not defined in urlText() to the console
@@ -78,12 +78,13 @@ csv
 
 /**
  * Creates all HTML pages
- */
+*/
 async function createPages() {
-  // console.log(`${publications.length} publications`)
+  console.log(`${publications.length} publications`)
+  console.log(allPdfs.size + ' pdfs')
+  console.log(allImages.size + ' teasers')
   // Sort by date descending, so newest at top of page
-  publications.sort((a, b) => a.Date > b.Date ? -1 : 1
-  )
+  publications.sort((a, b) => a.Date > b.Date ? -1 : 1)
   // Member / author pages
   memberConfig
     .sort((a, b) => {
@@ -576,11 +577,11 @@ function reportMissingOrExtraInfo(publications) {
     if (!allImages.has(`${key}.png`)) { missing.push([`${key}.png (teaser)`, getResp(pub)]) }
     // publication PDF
     let pdf = pub['PDF URL (public)']
-    if ((!pdf || pdf === "") && !allPdfs.has(`${key}.pdf`)) {
+    if ((!pdf || pdf.trim() === '') && !allPdfs.has(`${key}.pdf`)) {
       // no link AND no file
       missing.push([`${key}.pdf (publication)`, getResp(pub)])
     } else if (reportPdfFileMissing && !allPdfs.has(`${key}.pdf`)) {
-      missing.push([`${key}.pdf (publication, no file - only link)`, getResp(pub)])
+      missing.push([`${key}.pdf (no pdf file - only link)`, getResp(pub)])
     }
   }
   if (missing.length > 0) {
@@ -588,7 +589,10 @@ function reportMissingOrExtraInfo(publications) {
     console.log(`\nmissing info/files:`)
     let last = ''
     for (const [file, member] of missing) {
-      last !== member ? console.log('  ' + member) : console.log('    ' + file)
+      if (last !== member) {
+        console.log('  ' + member)
+      }
+      console.log('    ' + file)
       last = member
     }
   }
