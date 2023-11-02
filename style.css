@@ -19,13 +19,14 @@ h3 {
   color: var(--textColor2);
 }
 
-a {
-  text-decoration: none;
-}
-
 a,
 a:visited {
   color: var(--linkColor);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 h3 a,
@@ -255,9 +256,7 @@ img.avatar {
 
 .metaData a {
   padding-right: 6px;
-  text-decoration: none;
 }
-
 
 /* Publication page */
 .pubPageContent {

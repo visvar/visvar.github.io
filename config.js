@@ -11,7 +11,7 @@ export const pageTitle = 'VISVAR Research Group, University of Stuttgart'
  *
  * {string} name: the same name as used on the publication dataset
  * {string} title: name with academic title(s)
- * {string} role: professor, postdoc (ommitted for phds)
+ * {string} role: professor, postdoc (ommitted for phds) TODO: alumni?
  * {string} path: the filename used for about/ and img/people/
  * {string} bio: bio description
  * {string[]} research: list of research interests
@@ -200,22 +200,29 @@ export const memberConfig = [
     path: 'frank_heyen',
     bio: `
     <p>
-      My research focuses on data-driven music visualization, mainly to support music students and teachers.
-      For example, see <a href="https://vis2020-ieee.ipostersessions.com/default.aspx?s=82-F0-FF-F9-29-B9-B4-7F-FE-F3-A9-1D-4A-B7-4F-32" target="_blank" rel="noreferrer">this poster</a>
-      (<a href="../pdf/heyen2020supporting.pdf" target="_blank" rel="noreferrer">PDF</a>) and
-      <a href="../pdf/heyen2022datadriven.pdf" target="_blank" rel="noreferrer">paper</a>
-      (<a href="https://doi.org/10.48550/arxiv.2203.13320" target="_blank" rel="noreferrer">DOI</a>,
-      <a href="../video/heyen2022datadriven.mp4" target="_blank" rel="noreferrer">video</a>)
-      for how collecting and visualizing training data can help musicians learn their instruments more efficiently.
-      <a href="../pdf/rau2021visual.pdf" target="_blank" rel="noreferrer">Another poster</a>
-      demonstrates visualization-supported collaboration between
-      user and AI for composition.
-    </p>
-    <p>
-      Future work: Leverage
-      <a href="../pdf/heyen2022cellovis.pdf" target="_blank" rel="noreferrer">VR/AR, motion capturing</a>,
-      and ML/AI to achieve better and more situated visual
-      support for musicians.
+      My research focuses on data-driven music visualization that supports students and teachers.
+      For example, augmented and alternative
+      <a href="../pub/heyen2023visual.html" target="_blank" rel="noreferrer">
+      sheet music notation</a>
+      helps reading and understanding a piece more quickly.
+      <a href="../pub/heyen2022datadriven.html" target="_blank" rel="noreferrer">
+      Collecting and visualizing practice data</a>
+      supports musicians in learning their instruments more efficiently.
+
+      Besides audio and MIDI, such practice data may include
+      <a href="../pub/heyen2022cellovis.html" target="_blank" rel="noreferrer">
+      motion capture</a>
+      of the musician.
+      To make analysis more immersive and increase the visual connection to the instrument, visualization can be displayed in
+      <a href="../pub/heyen2022cellovis.html" target="_blank" rel="noreferrer">
+      virtual</a> and
+      <a href="../pub/heyen2022augmented.html" target="_blank" rel="noreferrer">
+      augmented reality</a>.
+
+      My collaborations include work on visualization for
+      <a href="../pub/rau2022visualization.html" target="_blank" rel="noreferrer">
+      human-AI composing
+      </a>.
     </p>
     `,
     research: ['Visualization &amp; visual analytics', 'Visual music analysis', 'Immersive &amp; situated analytics', 'VR/AR', 'HCI'],
@@ -242,12 +249,15 @@ export const memberConfig = [
       I have a background in media informatics and human-computer interaction.
       During my master's thesis at Ludwig Maximilian Universität München, I dedicated my research to developing technical solutions that facilitate seamless communication between VR users and non-VR users in a co-located setting.
       Currently, as a doctoral candidate, my focus is on exploring novel interaction concepts and creating prototypes for collaborative creative tasks in immersive environments.
+
       My investigations revolve around human-AI collaboration and leverage extended reality (XR) technologies such as VR, AR, and MR.
     </p>
     `,
     research: ['HCI', 'Human-AI', 'VR/AR/MR'],
     links: [
-      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Park-00004/' }
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Park-00004/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=n5RobrsAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0009-0006-4877-2255' },
     ],
     projects: []
   },
