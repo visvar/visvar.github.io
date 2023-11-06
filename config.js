@@ -221,8 +221,7 @@ export const memberConfig = [
 
       My collaborations include work on visualization for
       <a href="../pub/rau2022visualization.html" target="_blank" rel="noreferrer">
-      human-AI composing
-      </a>.
+      human-AI composing</a>.
     </p>
     `,
     research: ['Visualization &amp; visual analytics', 'Visual music analysis', 'Immersive &amp; situated analytics', 'VR/AR', 'HCI'],
