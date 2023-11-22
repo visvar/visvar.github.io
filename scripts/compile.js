@@ -112,8 +112,9 @@ async function createPages () {
     )
     createMemberPageHtml(member, authoredPubs)
   }
-  // Main page
+  // Main page and imprint
   createMainPageHtml(publications, memberConfig)
+  createImprint()
   // Publication pages
   for (const pub of publications) {
     createPublicationPageHtml(pub)
@@ -158,11 +159,34 @@ function createMainPageHtml (publications, memberConfig) {
         <h1>Publications</h1>
         ${createPublicationsHtml(publications)}
       </article>
+      <div style="text-align: center">
+        <a href="imprint.html">Imprint / Legal Notice</a>
+      </div>
     </div>
   </main>
 </body>
 </html>`
   updateFile('./index.html', html)
+}
+
+/**
+ * Creates HTML for the imprint
+ */
+function createImprint () {
+  const html = `${htmlHead(pageTitle)}
+<body>
+  <a class="anchor" name="top"></a>
+  <main>
+    ${headerAndNav}
+    <div>
+      <article>
+        ${readFileSync('./imprint_config.html')}
+      </article>
+    </div>
+  </main>
+</body>
+</html>`
+  updateFile('./imprint.html', html)
 }
 
 /**
@@ -292,11 +316,11 @@ function createPublicationsHtml (publications, member = null) {
         ${venueLink(venue, p)} (${year}) ${pub['Type']}
       </div>
       <div>
-        ${url1 && url1 !== '' ? `<a href="${url1}" target="_blank">${urlText(url1)}</a>` : ''}
-        ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank">${urlText(url2)}</a>` : ''}
-        ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
-        ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
-        ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
+        ${url1 && url1 !== '' ? `<a href="${url1}" target="_blank" rel="noreferrer">${urlText(url1)}</a>` : ''}
+        ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">${urlText(url2)}</a>` : ''}
+        ${pdfExists ? `<a href="${pdf}" target="_blank" rel="noreferrer">PDF</a>` : ''}
+        ${videoExists ? `<a href="${video}" target="_blank" rel="noreferrer">video</a>` : ''}
+        ${supplExists ? `<a href="${suppl}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
         ${pub.notes ? `<div>${pub.notes}</div>` : ''}
       </div>
     </div>
@@ -366,11 +390,11 @@ function createPublicationPageHtml (pub) {
                 `: ''}
                 <div>
                   <b>Materials.</b>
-                  ${url1 && url1 !== '' ? `<a href="${url1}" target="_blank">${urlText(url1)}</a>` : ''}
-                  ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank">${urlText(url2)}</a>` : ''}
-                  ${pdfExists ? `<a href="${pdf}" target="_blank">PDF</a>` : ''}
-                  ${videoExists ? `<a href="${video}" target="_blank">video</a>` : ''}
-                  ${supplExists ? `<a href="${suppl}" target="_blank">supplemental</a>` : ''}
+                  ${url1 && url1 !== '' ? `<a href="${url1}" target="_blank" rel="noreferrer">${urlText(url1)}</a>` : ''}
+                  ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">${urlText(url2)}</a>` : ''}
+                  ${pdfExists ? `<a href="${pdf}" target="_blank" rel="noreferrer">PDF</a>` : ''}
+                  ${videoExists ? `<a href="${video}" target="_blank" rel="noreferrer">video</a>` : ''}
+                  ${supplExists ? `<a href="${suppl}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
                 </div>
                 ${pub['Abstract'] ? `<div class="abstract"><b>Abstract.</b> ${pub['Abstract']}</div>` : ''}
                 ${pub.bibtex ? `<div class="bibtex"><textarea>${formatBibtex(key, pub.bibtex)}</textarea></div>` : ''}
@@ -407,8 +431,8 @@ function createVenuePages (venueMap) {
               ${venue.publisher.length ? `<div>Publisher: ${venue.publisher}<div>` : ''}
               ${venue.type.length ? `<div>Type: ${venue.type}<div>` : ''}
               <div>
-                ${venue.url.length ? `<a href="${venue.url}" target="_blank">official website</a>` : ''}
-                ${venue.resources.map(d => `<a href="${d.url}" target="_blank">${d.label}</a>`).join('')}
+                ${venue.url.length ? `<a href="${venue.url}" target="_blank" rel="noreferrer">official website</a>` : ''}
+                ${venue.resources.map(d => `<a href="${d.url}" target="_blank" rel="noreferrer">${d.label}</a>`).join('')}
               </div>
             </div>
           </article>

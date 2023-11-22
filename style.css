@@ -429,7 +429,8 @@ img.avatar {
   .aboutusFurtherInfo {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    column-gap: 32px;
+    row-gap: 2px;
   }
 
   img.avatar {
