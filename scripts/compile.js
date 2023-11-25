@@ -15,51 +15,68 @@ const reportUnknownVenues = false
 // log resource URLs not defined in urlText() to the console
 const reportUnknownUrls = false
 
+
 /**
- * This will be added to every .html page
+ * Generates the HTML <head> of a page
+ * @param {string} title page title for <title>
+ * @param {'.'|'..'} [path=.] either '.' for index.html or '..' for others
+ * @returns {string} HTML code
+*/
+function htmlHead (title, path = '.') {
+  return `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=500, initial-scale=1">
+    <title>${title}</title>
+    <link rel="stylesheet" href="${path}/style.css">
+    <link rel="shortcut icon" href="${path}/img/misc/favicon.png">
+    <link rel="icon" type="image/png" href="${path}/img/favicon.png" sizes="256x256">
+    <link rel="apple-touch-icon" sizes="256x256" href="${path}/img/favicon.png">
+  </head>
+  `
+}
+
+/**
+ * Generates the HTML header of a page
+ * @param {'.'|'..'} [path=.] either '.' for index.html or '..' for others
+ * @returns {string} HTML code
  */
-const headerAndNav = `
+function headerAndNav (path = '.') {
+  return `
 <div>
   <header>
     <div>
-      <a href="${pageUrl}/">
-        <img class="logo" src="${pageUrl}/img/misc/visvar_logo.svg" />
+      <a href="${path}/index.html">
+        <img class="logo" src="${path}/img/misc/visvar_logo.svg" />
       </a>
     </div>
     <div>
       <nav>
       <ul>
-        <li><a href="${pageUrl}/#aboutus">about VISVAR</a></li>
-        <li><a href="${pageUrl}/#publications">publications</a></li>
-        <li><a href="${pageUrl}/#members">members</a></li>
+        <li><a href="${path}/index.html#aboutus">about VISVAR</a></li>
+        <li><a href="${path}/index.html#publications">publications</a></li>
+        <li><a href="${path}/index.html#members">members</a></li>
       </ul>
       </nav>
     </div>
   </header>
 </div>
 `
+}
 
 /**
- * Generates the HTML head of a page
- * @param {string} title page title for <title>
+ * Generates the HTML footer of a page
  * @param {'.'|'..'} [path=.] either '.' for index.html or '..' for others
  * @returns {string} HTML code
  */
-function htmlHead (title, path = '.') {
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=500, initial-scale=1">
-  <title>${title}</title>
-  <link rel="stylesheet" href="${path}/style.css">
-  <link rel="shortcut icon" href="${path}/img/misc/favicon.png">
-  <link rel="icon" type="image/png" href="${path}/img/favicon.png" sizes="256x256">
-  <link rel="apple-touch-icon" sizes="256x256" href="${path}/img/favicon.png">
-</head>
+function footer (path = '.') {
+  return `
+<div style="text-align: center">
+  <a href="${path}/imprint.html">Imprint / Legal Notice</a>
+</div>
 `
 }
-
 
 const allImages = new Set(readdirSync("img"))
 const allQRs = new Set(readdirSync("qr"))
@@ -67,6 +84,8 @@ const allPdfs = new Set(readdirSync("pdf"))
 const allVideos = new Set(readdirSync("video"))
 const allSuppl = new Set(readdirSync("suppl"))
 const allPub = new Set(readdirSync("pub"))
+
+const nameMemberMap = new Map(memberConfig.map(d => [d.name, d]))
 
 // Main loop
 const publications = []
@@ -137,7 +156,7 @@ function createMainPageHtml (publications, memberConfig) {
 <body>
   <a class="anchor" name="top"></a>
   <main>
-    ${headerAndNav}
+    ${headerAndNav()}
     <div>
       <article><a class="anchor" name="aboutus"></a>
         ${readFileSync('./aboutus.html')}
@@ -159,9 +178,7 @@ function createMainPageHtml (publications, memberConfig) {
         <h1>Publications</h1>
         ${createPublicationsHtml(publications)}
       </article>
-      <div style="text-align: center">
-        <a href="imprint.html">Imprint / Legal Notice</a>
-      </div>
+      ${footer()}
     </div>
   </main>
 </body>
@@ -177,7 +194,7 @@ function createImprint () {
 <body>
   <a class="anchor" name="top"></a>
   <main>
-    ${headerAndNav}
+    ${headerAndNav('.')}
     <div>
       <article>
         ${readFileSync('./imprint_config.html')}
@@ -198,7 +215,7 @@ function createMemberPageHtml (member, publications) {
 <body>
   <a class="anchor" name="top"></a>
   <main>
-    ${headerAndNav}
+    ${headerAndNav('..')}
     <div>
       <article><a class="anchor" name="aboutus"></a>
         <h1>${member.title}</h1>
@@ -235,6 +252,7 @@ function createMemberPageHtml (member, publications) {
         <h1>Publications</h1>
         ${createPublicationsHtml(publications, member)}
       </article>
+      ${footer('..')}
     </div>
   </main>
 </body>
@@ -286,7 +304,16 @@ function createPublicationsHtml (publications, member = null) {
       ...pub['First Author'].split(',').map(d => d.trim()).filter(d => d.length),
       ...pub['Other Authors'].split(',').map(d => d.trim()).filter(d => d.length)
     ]
-    const authString = authors.map(d => d === member?.name ? `<b>${d}</b>` : d).join(', ')
+    const authorHtml = authors.map(d => {
+      // if this is the author's member page, make them bold
+      const text = d === member?.name ? `<b>${d}</b>` : d
+      // if author is a group member, link to their page
+      if (nameMemberMap.has(d)) {
+        return `<a href="${p}/members/${nameMemberMap.get(d).path}.html" target="_blank">${text}</a>`
+      }
+      return text
+    }).join(', ')
+
 
     return `
   ${i === 0 || year !== publications[i - 1]['Date'].slice(0, 4)
@@ -309,13 +336,13 @@ function createPublicationsHtml (publications, member = null) {
         ${pub['Title']}
         </a>
       </h3>
-      <div>
-        ${authString}
+      <div class="authors">
+        ${authorHtml}
       </div>
       <div>
         ${venueLink(venue, p)} (${year}) ${pub['Type']}
       </div>
-      <div>
+      <div class="links">
         ${url1 && url1 !== '' ? `<a href="${url1}" target="_blank" rel="noreferrer">${urlText(url1)}</a>` : ''}
         ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">${urlText(url2)}</a>` : ''}
         ${pdfExists ? `<a href="${pdf}" target="_blank" rel="noreferrer">PDF</a>` : ''}
@@ -367,7 +394,7 @@ function createPublicationPageHtml (pub) {
     <body>
       <a class="anchor" name="top"></a>
       <main>
-        ${headerAndNav}
+        ${headerAndNav('..')}
         <div>
           <article><a class="anchor" name="publications"></a>
             <h1>${pub.Title}</h1>
@@ -403,6 +430,7 @@ function createPublicationPageHtml (pub) {
                 <img class="qr" src="../qr/${key}.png"/>
             </div>
           </article>
+          ${footer('..')}
         </div>
       </main>
     </body>
@@ -423,7 +451,7 @@ function createVenuePages (venueMap) {
     <body>
       <a class="anchor" name="top"></a>
       <main>
-        ${headerAndNav}
+        ${headerAndNav('..')}
         <div>
           <article>
             <h1>${venue.name} (${venue.short})</h1>
@@ -436,6 +464,7 @@ function createVenuePages (venueMap) {
               </div>
             </div>
           </article>
+          ${footer('..')}
         </div>
       </main>
     </body>
@@ -555,7 +584,6 @@ async function createQRCodes (publications) {
     writeFileSync(path, buffer)
     count++
   }
-  // console.log(`\nCreated ${count} new QRs`)
   // Look for orphan QR code PNGs
   allQRs.delete('.gitkeep')
   allQRs.delete('_qrbg.png')

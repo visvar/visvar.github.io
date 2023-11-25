@@ -5,6 +5,18 @@
   --linkColor: rgb(33, 117, 191);
 }
 
+a,
+a:visited {
+  color: var(--linkColor);
+  text-decoration: none;
+}
+
+a.anchor {
+  position: relative;
+  top: -70px;
+  visibility: hidden;
+}
+
 h1 {
   margin: 18px 0;
   text-align: center;
@@ -19,11 +31,6 @@ h3 {
   color: var(--textColor2);
 }
 
-a,
-a:visited {
-  color: var(--linkColor);
-  text-decoration: none;
-}
 
 a:hover {
   text-decoration: underline;
@@ -34,11 +41,6 @@ h3 a:visited {
   color: var(--textColor2);
 }
 
-a.anchor {
-  position: relative;
-  top: -70px;
-  visibility: hidden;
-}
 
 body,
 main {
@@ -68,7 +70,7 @@ header h1 {
   text-align: left;
 }
 
-
+/* nav */
 nav {
   margin-top: 20px;
   padding-left: 10px;
@@ -110,35 +112,6 @@ article {
   padding-bottom: 40px;
 }
 
-section {
-  background-color: #333;
-  border-radius: 5px;
-  padding: 10px 20px 30px 20px;
-}
-
-section.heading {
-  grid-area: span 1 / span 2;
-  margin-top: 20px;
-  padding: 0 5px;
-  text-align: center;
-}
-
-section.span2 {
-  grid-area: span 1 / span 2;
-}
-
-
-section a,
-section a:visited {
-  color: var(--linkColor);
-}
-
-/* Icons in links */
-section a i {
-  color: #eee;
-  margin: 0 6px;
-}
-
 /* Main page member list */
 .memberList {
   max-width: 620px;
@@ -150,6 +123,7 @@ section a i {
 }
 
 .memberList img.avatar {
+  border-radius: 50%;
   box-shadow: #bbb 1px 1px 15px;
 }
 
@@ -169,8 +143,9 @@ section a i {
   text-align: justify;
 }
 
-img.avatar {
+.avatarAndBio img.avatar {
   border-radius: 50%;
+  box-shadow: #bbb 1px 1px 15px;
 }
 
 .furtherInfo {
@@ -202,7 +177,7 @@ img.avatar {
 
 /* Publications on other pages */
 .paper {
-  margin-bottom: 0px;
+  margin-bottom: 0;
   display: grid;
   border-radius: 10px;
   padding: 10px;
@@ -214,7 +189,6 @@ img.avatar {
   margin-bottom: 8px;
   font-size: 15px;
   font-weight: 600;
-  cursor: pointer;
 }
 
 .paper img.publicationImage {
@@ -223,8 +197,6 @@ img.avatar {
   width: 100%;
   border-radius: 3px;
   box-shadow: #888 1px 1px 10px;
-  cursor: pointer;
-  /* transition: all 500ms; */
 }
 
 .paper img.publicationImage {
@@ -232,13 +204,13 @@ img.avatar {
   width: 128px;
 }
 
-.metaData {
+.paper .metaData {
   padding-left: 15px;
   font-size: 0.95em;
   color: var(--textColor2);
 }
 
-.metaData.noImage {
+.paper .metaData.noImage {
   grid-area: span 1 / span 2;
   margin-left: 132px;
 }
@@ -247,15 +219,16 @@ img.avatar {
   margin-bottom: 8px;
 }
 
-.publication {
-  margin-right: 5px;
-  padding: 0 4px 1px 4px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.paper .metaData .links a {
+  padding-right: 8px;
 }
 
-.metaData a {
-  padding-right: 6px;
+.paper .metaData div.authors a {
+  color: inherit;
+}
+
+.paper .metaData div.authors b {
+  font-weight: 600;
 }
 
 /* Publication page */
@@ -331,10 +304,6 @@ img.avatar {
     grid-template-columns: auto;
   }
 
-  section {
-    grid-area: span 1 / span 2;
-  }
-
   .memberList img.avatar {
     width: 64px;
     height: 64px;
@@ -370,10 +339,6 @@ img.avatar {
 
   article {
     grid-template-columns: 1fr 1fr;
-  }
-
-  section {
-    grid-area: span 1 / span 1;
   }
 
   a.anchor {
@@ -415,10 +380,6 @@ img.avatar {
 
   article {
     grid-template-columns: 1fr 1fr;
-  }
-
-  section {
-    grid-area: span 1 / span 1;
   }
 
   a.anchor {
