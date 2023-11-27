@@ -314,17 +314,38 @@ export const memberConfig = [
     path: 'jonas_haischt',
     bio: `
     <p>
-      I am Jonas Haischt, an external Ph.D. student at Mercedes-Benz AG, Virtual Reality Center in Sindelfingen, and
-      supervised by the Visualization Research Center of the University of Stuttgart (VISUS). As part of my research,
-      I focus on <i>Usable Tracking</i>. The prime example of Usable Tracking is Object Tracking, as it is usually
-      easy to use. However, in many cases, Object Tracking might not work and other tracking technologies have to be
+    I am Jonas Haischt, an external Ph.D. student at Mercedes-Benz AG, Virtual Reality Center in Sindelfingen, and
+    supervised by the Visualization Research Center of the University of Stuttgart (VISUS). As part of my research,
+    I focus on <i>Usable Tracking</i>. The prime example of Usable Tracking is Object Tracking, as it is usually
+    easy to use. However, in many cases, Object Tracking might not work and other tracking technologies have to be
       utilized. Available techniques are often not as trivial as Object Tracking. Making these techniques accessible
       to all kinds of users is what Usable Tracking aims for.
-    </p>
-    `,
+      </p>
+      `,
     research: ['Tracking for VR/AR', 'HCI'],
     links: [
       { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Haischt/' }
+    ],
+    projects: []
+  },
+
+  {
+    name: 'Jonas Vogelsang',
+    title: 'Jonas Vogelsang, M.Sc.',
+    path: 'jonas_vogelsang',
+    bio: `
+      <p>
+      I'm a Ph.D. candidate at the VISUS (Visualisierungsinstitut der Universität Stuttgart), specializing in Human-Robot Interaction (HRI), Augmented Reality (AR), and Situated Visualization. I earned my Master's degree in Computer Science from the University of Stuttgart, providing a solid foundation for my current research interests.
+      </p>
+      <p>
+      My work revolves around the practical intersections of HRI, AR, and Situated Visualization. Based at VISUS, I'm focused on contributing insights to these evolving technologies. Let's explore the potential of these fields together in shaping a tech-driven future.
+      </p>
+      `,
+    research: ['Human-Robot Interaction', 'Augmented Reality', 'Situated Visualization'],
+    links: [
+      // { text: 'University of Stuttgart website', url: '' }
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=QANzDJgAAAAJ' },
+      { text: 'LinkedIn', url: 'https://www.linkedin.com/in/jonas-vogelsang/' },
     ],
     projects: []
   },

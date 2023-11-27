@@ -74,6 +74,17 @@ const venues = [
     ]
   },
   {
+    short: 'TOCHI',
+    name: 'Transactions on Computer-Human Interaction',
+    publisher: 'ACM',
+    type: 'journal',
+    url: 'https://dl.acm.org/journal/tochi',
+    resources: [],
+    topics: [
+      'HCI'
+    ]
+  },
+  {
     short: 'MuC',
     name: 'Mensch und Computer',
     publisher: 'ACM',
