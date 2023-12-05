@@ -635,16 +635,21 @@ function reportMissingOrExtraInfo (publications) {
     }
     // missing files
     // publication teaser images
-    if (!allImages.has(`${key}.png`)) { missing.push([`${key}.png (teaser)`, getResp(pub)]) }
-    // publication PDF
-    let pdf = pub['PDF URL (public)']
-    if ((!pdf || pdf.trim() === '') && !allPdfs.has(`${key}.pdf`)) {
-      // no link AND no file
-      missing.push([`${key}.pdf (publication)`, getResp(pub)])
-    } else if (reportPdfFileMissing && !allPdfs.has(`${key}.pdf`)) {
-      missing.push([`${key}.pdf (no pdf file - only link)`, getResp(pub)])
+    if (!allImages.has(`${key}.png`)) {
+      missing.push([`${key}.png (teaser)`, getResp(pub)])
+    }
+    // publication PDF, not necessary for datasets
+    if (pub['Type'] !== 'Dataset') {
+      let pdf = pub['PDF URL (public)']
+      if ((!pdf || pdf.trim() === '') && !allPdfs.has(`${key}.pdf`)) {
+        // no link AND no file
+        missing.push([`${key}.pdf (publication)`, getResp(pub)])
+      } else if (reportPdfFileMissing && !allPdfs.has(`${key}.pdf`)) {
+        missing.push([`${key}.pdf (no pdf file - only link)`, getResp(pub)])
+      }
     }
   }
+  // create report
   if (missing.length > 0) {
     missing.sort((a, b) => a[1] < b[1] ? -1 : 1)
     console.log(`\nmissing info/files:`)
