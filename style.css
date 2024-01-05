@@ -112,6 +112,7 @@ article {
   padding-bottom: 40px;
 }
 
+
 /* Main page member list */
 .memberList {
   max-width: 620px;
@@ -131,6 +132,15 @@ article {
 .memberList a:hover {
   color: var(--textColor);
 }
+
+.memberList a>div {
+  height: 30px;
+  font-size: 13.5px;
+}
+
+
+
+
 
 /* About pages */
 .avatarAndBio {
@@ -272,7 +282,11 @@ article {
 
 
 
-/* Responsiveness */
+
+
+/*
+ * Responsiveness
+ */
 @media (min-width: 0px) {
 
   /* phone layout */
@@ -397,5 +411,11 @@ article {
   img.avatar {
     width: 256px;
     height: 256px;
+  }
+
+  /* Member list with pictures */
+  .memberList {
+    max-width: 100%;
+    grid-template-columns: repeat(5, 1fr);
   }
 }

@@ -179,13 +179,14 @@ export const memberConfig = [
     path: 'christian_krauter',
     bio: `
     <p>
-      My research interests cover Human-Computer Interaction (HCI), information visualization, and Augmented and Virtual Reality (AR/VR), which I aim to combine during my PhD studies.
-      I acquired my Bachelor's in media informatics and my Master's in computer science here at the University of Stuttgart.
-      My previous work covered notification placement in VR (bachelor thesis, <a href="https://doi.org/10.1145/3311350.3347190" target="_blank" rel="noreferrer">link</a>), an immersive social distancing VR demo (<a href="https://doi.org/10.1145/3473856.3474031" target="_blank" rel="noreferrer">link</a>, <a href="https://visvar.github.io/pdf/krauter2021muc.pdf" target="_blank" rel="noreferrer">pdf</a>), and a smart chair for sitting posture recognition and feedback (master thesis).
+    My research interests cover Human-Computer Interaction (HCI), information visualization, and Augmented and Virtual Reality (AR/VR), which I aim to combine during my PhD studies.
+    I acquired my Bachelor's in media informatics and my Master's in computer science here at the University of Stuttgart.
+    My previous work covered notification placement in VR (bachelor thesis, <a href="https://doi.org/10.1145/3311350.3347190" target="_blank" rel="noreferrer">link</a>), an immersive social distancing VR demo (<a href="https://doi.org/10.1145/3473856.3474031" target="_blank" rel="noreferrer">link</a>, <a href="https://visvar.github.io/pdf/krauter2021muc.pdf" target="_blank" rel="noreferrer">pdf</a>), and a smart chair for sitting posture recognition and feedback (master thesis).
     </p>
     `,
     research: ['HCI', 'AR/ VR', 'Information Visualization'],
     links: [
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Krauter-00001/' },
       { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=sNDlSbkAAAAJ' },
       { text: 'ORCID', url: 'https://orcid.org/0000-0002-9787-0816' },
       { text: 'ResearchGate', url: 'https://www.researchgate.net/profile/Christian-Krauter-2' },
@@ -292,10 +293,10 @@ export const memberConfig = [
     path: 'jan_ulrich_bartels',
     bio: `
     <p>
-      My interest is the development of interfaces which unlock more productive human-machine relationships and enhance our ability to solve complex problems. My research focuses on haptic interfaces for Augmented and Virtual Reality.
+    My interest is the development of interfaces which unlock more productive human-machine relationships and enhance our ability to solve complex problems. My research focuses on haptic interfaces for Augmented and Virtual Reality.
     </p>
     <p>
-      I've received my Bachelors in Electrical and Computer Engineering from Oregon State University in 2016 and a Masters in Robotics from the Johns Hopkins University in 2023. In the 4 years between, I was designing audio interfaces for conference rooms and large meeting spaces.
+    I've received my Bachelors in Electrical and Computer Engineering from Oregon State University in 2016 and a Masters in Robotics from the Johns Hopkins University in 2023. In the 4 years between, I was designing audio interfaces for conference rooms and large meeting spaces.
     </p>
     `,
     research: [],
@@ -318,13 +319,15 @@ export const memberConfig = [
     supervised by the Visualization Research Center of the University of Stuttgart (VISUS). As part of my research,
     I focus on <i>Usable Tracking</i>. The prime example of Usable Tracking is Object Tracking, as it is usually
     easy to use. However, in many cases, Object Tracking might not work and other tracking technologies have to be
-      utilized. Available techniques are often not as trivial as Object Tracking. Making these techniques accessible
-      to all kinds of users is what Usable Tracking aims for.
+    utilized. Available techniques are often not as trivial as Object Tracking. Making these techniques accessible
+    to all kinds of users is what Usable Tracking aims for.
       </p>
       `,
     research: ['Tracking for VR/AR', 'HCI'],
     links: [
-      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Haischt/' }
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Haischt/' },
+      { text: 'Google Scholar', url: ' https://scholar.google.de/citations?user=XA7lsOMAAAAJ' },
+      { text: 'ORCID', url: '0000-0002-2494-5143' },
     ],
     projects: []
   },
@@ -343,7 +346,7 @@ export const memberConfig = [
       `,
     research: ['Human-Robot Interaction', 'Augmented Reality', 'Situated Visualization'],
     links: [
-      // { text: 'University of Stuttgart website', url: '' }
+      { text: 'University of Stuttgart website', url: 'https://www.vis.uni-stuttgart.de/en/institute/team/Vogelsang/' },
       { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=QANzDJgAAAAJ' },
       { text: 'LinkedIn', url: 'https://www.linkedin.com/in/jonas-vogelsang/' },
     ],
@@ -515,7 +518,8 @@ export const memberConfig = [
       { text: 'ORCID', url: 'https://orcid.org/0000-0002-2732-6276' }
     ],
     projects: [
-      { text: 'digit@L', url: 'https://www.project.uni-stuttgart.de/digital/en/' }
+      { text: 'digit@L', url: 'https://www.project.uni-stuttgart.de/digital/en/' },
+      { text: 'SimTech', url: 'https://www.simtech.uni-stuttgart.de/' }
     ]
   },
 
