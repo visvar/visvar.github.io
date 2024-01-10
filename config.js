@@ -348,6 +348,7 @@ export const memberConfig = [
     links: [
       { text: 'University of Stuttgart website', url: 'https://www.vis.uni-stuttgart.de/en/institute/team/Vogelsang/' },
       { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=QANzDJgAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0009-0007-0563-8707' },
       { text: 'LinkedIn', url: 'https://www.linkedin.com/in/jonas-vogelsang/' },
     ],
     projects: []
