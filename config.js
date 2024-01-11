@@ -568,7 +568,9 @@ export const memberConfig = [
     bio: ``,
     research: ['Visualization', 'VR/AR'],
     links: [
-      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Rau-00005/' }
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Rau-00005/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=Yi_QVJ8AAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0002-3310-9163' }
     ],
     projects: []
   },
