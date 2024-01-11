@@ -152,6 +152,18 @@ async function createPages () {
  * Creates HTML from the CSV data
  */
 function createMainPageHtml (publications, memberConfig) {
+  // pictures of members and links to their pages
+  // for prof and postdocs, show titles
+  const memberList = memberConfig.map(member => `
+  <div>
+    <a href="./members/${member.path}.html">
+      <img class="avatar" src="./img/people/small/${member.path}.jpg" loading="lazy" />
+      <div>
+        ${['professor', 'postdoc'].includes(member.role) ? member.title : member.name}
+      </div>
+    </a>
+  </div>
+  `).join('\n')
   const html = `${htmlHead(pageTitle)}
 <body>
   <a class="anchor" name="top"></a>
@@ -164,14 +176,7 @@ function createMainPageHtml (publications, memberConfig) {
       <article> <a class="anchor" name="members"></a>
         <h1>Members</h1>
         <div class="memberList">
-          ${memberConfig.map(member => `
-            <div>
-              <a href="./members/${member.path}.html">
-                <img class="avatar" src="./img/people/small/${member.path}.jpg" loading="lazy" />
-                <div>${member.name}</div>
-              </a>
-            </div>
-            `).join('\n')}
+          ${memberList}
         </div>
       </article>
       <article> <a class="anchor" name="publications"></a>

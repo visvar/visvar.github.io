@@ -62,25 +62,30 @@ export const memberConfig = [
 
   // Post-doc
   {
-    name: 'Quynh Quang Ngo',
-    title: 'Quynh Quang Ngo, Ph.D.',
+    name: 'Alexander Achberger',
+    title: 'Alexander Achberger, Ph.D.',
     role: 'postdoc',
-    path: 'quynh_quang_ngo',
+    path: 'alexander_achberger',
     bio: `
     <p>
-      Quynh conducts research in the field of visualization.
-      His recent research interests include dimensionality reduction techniques, data transformation, graph layout, and applying machine learning to visualization.
-      He is also interested in studying the potential novel hybrid techniques among different fields of visual computing, such as visualization, eye-tracking, and virtual/augmented reality.
+      I am a postdoctoral researcher at VISUS (Visualization Research Center, University of Stuttgart), specializing in haptic feedback in Virtual Reality (VR).
+      I completed my doctoral studies within the framework of an industry-academic collaboration with Mercedes-Benz AG and VISUS.
+      During this period, I explored the integration of haptic feedback research into practical applications.
+    </p>
+    <p>
+      My research involved the development of new haptic feedback devices tailored for automotive engineering VR tasks.
+      I delved into the challenges of integrating these devices into the daily workflow of engineers.
+      Currently, my focus extends beyond automotive engineering, encompassing other domains such as the entertainment industry.
+    </p>
+    <p>
+    In addition to haptic feedback, my research interests include general human-computer interaction, VR, and AR.
     </p>
     `,
-    research: ['Visualization', 'Machine learning', 'Dimensionality reduction', 'Graph layout', 'VR/AR'],
+    research: ['HCI', 'Haptics', 'VR/AR'],
     links: [
-      {
-        text: "University of Stuttgart website",
-        url: "https://www.visus.uni-stuttgart.de/en/institute/team/Ngo-00001/"
-      },
-      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=qwIOAYAAAAAJ' },
-      { text: "ORCID", url: 'https://orcid.org/0000-0001-5254-1480' }
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Achberger/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=V3QAjFsAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0002-2226-6593' }
     ],
     projects: []
   },
@@ -112,6 +117,29 @@ export const memberConfig = [
     ],
     projects: []
   },
+  {
+    name: 'Quynh Quang Ngo',
+    title: 'Quynh Quang Ngo, Ph.D.',
+    role: 'postdoc',
+    path: 'quynh_quang_ngo',
+    bio: `
+    <p>
+      Quynh conducts research in the field of visualization.
+      His recent research interests include dimensionality reduction techniques, data transformation, graph layout, and applying machine learning to visualization.
+      He is also interested in studying the potential novel hybrid techniques among different fields of visual computing, such as visualization, eye-tracking, and virtual/augmented reality.
+    </p>
+    `,
+    research: ['Visualization', 'Machine learning', 'Dimensionality reduction', 'Graph layout', 'VR/AR'],
+    links: [
+      {
+        text: "University of Stuttgart website",
+        url: "https://www.visus.uni-stuttgart.de/en/institute/team/Ngo-00001/"
+      },
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=qwIOAYAAAAAJ' },
+      { text: "ORCID", url: 'https://orcid.org/0000-0001-5254-1480' }
+    ],
+    projects: []
+  },
 
   // Ph.D.s
   {
@@ -137,20 +165,6 @@ export const memberConfig = [
     projects: [
       { text: 'IntCDC', url: 'https://www.intcdc.uni-stuttgart.de' }
     ]
-  },
-
-  {
-    name: 'Alexander Achberger',
-    title: 'Alexander Achberger, M.Sc.',
-    path: 'alexander_achberger',
-    bio: ``,
-    research: ['HCI', 'Haptics'],
-    links: [
-      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Achberger/' },
-      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=V3QAjFsAAAAJ' },
-      { text: 'ORCID', url: 'https://orcid.org/0000-0002-2226-6593' }
-    ],
-    projects: []
   },
 
   {
