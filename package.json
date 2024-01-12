@@ -21,7 +21,7 @@
     "awesome-qr": "2.1.5-rc.0",
     "fast-csv": "^4.3.6",
     "image-js": "^1.0.0-alpha.3",
-    "npm-check-updates": "^16.14.11",
+    "npm-check-updates": "^16.14.12",
     "xlsx": "^0.18.5",
     "bibtex-tidy": "^1.11.0"
   },

@@ -584,7 +584,7 @@ export const memberConfig = [
       I am an IMPRS-IS Ph.D. scholar jointly supervised by Dr. Ksenia Keplinger (leader of the "Organizational Leadership & Diversity" research group) at the Max Planck Institute for Intelligent Systems and Dr. Michael Sedlmair (leader of the "Visualization and Virtual/Augmented Reality" research group) at the University of Stuttgart. I completed my M.Sc. degree in Informatics from the Technical University of Munich in the year 2020, specializing in the intersection of Machine Learning/Deep Learning and Natural Language Processing.
     </p>
     <p>
-      I have worked as a Data Scientist in an inter-disciplinary environment, working in close collaboration with social scientists, journalists, and geo-political experts on tasks such as sentiment and stance detection, analyzing the propagation of fake news and language traits (toxicity and hate speech) among social media users, to name a few. I am interested in exploratory data analysis in a multi-modal setting which can be adapted across domains and organizations to foster healthier working environments.
+      I am interested in exploratory data analysis in a multi-modal setting which can be adapted across domains and organizations to foster healthier working environments.
     </p>
     `,
     research: [
@@ -592,7 +592,8 @@ export const memberConfig = [
     ],
     links: [
       // { text: 'University of Stuttgart website', url: '' },
-      // { text: 'LinkedIn', url: 'https://www.linkedin.com/in/vindhya-singh-44663762' },
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=o5m76F4AAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0009-0008-6919-1673' }
 
     ],
     projects: []
