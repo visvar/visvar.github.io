@@ -247,7 +247,7 @@ export const memberConfig = [
       { text: 'DBLP', url: 'https://dblp.uni-trier.de/pid/276/2843.html' },
       { text: 'arXiv', url: 'https://arxiv.org/a/heyen_f_1.html' },
       { text: 'Personal website', url: 'https://fheyen.github.io/' },
-      { text: 'Observable notebooks', url: 'https://observablehq.com/@fheyen?tab=notebooks' },
+      { text: 'Observable notebooks', url: 'https://observablehq.com/@fheyen?direction=desc&sort=likes' },
     ],
     projects: [
       { text: 'CyberValley - InstruData', url: 'https://www.visus.uni-stuttgart.de/en/projects/cvrf-instrudata/' }
@@ -478,7 +478,7 @@ export const memberConfig = [
     <p>
       My research focuses on visualization for dimensionality reduction, especially the comparison between
       different techniques.
-      I developed and maintain two open source JavaScript libraries for dimensionality reduction
+      I developed and maintain two open-source JavaScript libraries for dimensionality reduction
       (<a href="https://github.com/saehm/DruidJS" target="_blank" rel="noreferrer">DruidJS</a>) and scatterplot gridification
       (<a href="https://github.com/saehm/hagrid" target="_blank" rel="noreferrer">Hagrid</a>).
       Besides more serious research, I occasionally explore ways to create <a
@@ -491,7 +491,7 @@ export const memberConfig = [
       { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=bufQgtsAAAAJ' },
       { text: 'ORCID', url: 'https://orcid.org/0000-0003-0395-2448' },
       { text: 'Personal website', url: 'https://renecutura.eu/' },
-      { text: 'Observable notebooks', url: 'https://observablehq.com/@saehrimnir?tab=notebooks' }
+      { text: 'Observable notebooks', url: 'https://observablehq.com/@saehrimnir?direction=desc&sort=likes' }
     ],
     projects: []
   },
