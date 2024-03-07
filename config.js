@@ -621,7 +621,8 @@ export const memberConfig = [
     links: [
       { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Yu-00009/' },
       { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=9anpRnwAAAAJ' },
-      { text: 'ORCID', url: 'https://orcid.org/0000-0002-4249-1755' }
+      { text: 'ORCID', url: 'https://orcid.org/0000-0002-4249-1755' },
+      { text: 'Personal website', url: 'https://xxxhhhyxy.github.io' }
     ],
     projects: []
   },
