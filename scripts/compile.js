@@ -7,13 +7,13 @@ import pkg from 'bibtex-tidy'
 const { tidy } = pkg
 
 // report missing info for publications
-const reportMissingInfo = false
+const REPORT_MISSING_INFO = false
 // report when pdf is only given as link but not file
-const reportPdfFileMissing = false
+const REPORT_MISSING_PDF_FILES = false
 // log venues not defined in venues.js to the console
-const reportUnknownVenues = false
+const REPORT_UNKNOWN_VENUES = false
 // log resource URLs not defined in urlText() to the console
-const reportUnknownUrls = false
+const REPORT_UNKNOWN_URLS = false
 
 
 /**
@@ -22,7 +22,7 @@ const reportUnknownUrls = false
  * @param {'.'|'..'} [path=.] either '.' for index.html or '..' for others
  * @returns {string} HTML code
 */
-function htmlHead (title, path = '.') {
+function htmlHead(title, path = '.') {
   return `<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -42,7 +42,7 @@ function htmlHead (title, path = '.') {
  * @param {'.'|'..'} [path=.] either '.' for index.html or '..' for others
  * @returns {string} HTML code
  */
-function headerAndNav (path = '.') {
+function headerAndNav(path = '.') {
   return `
 <div>
   <header>
@@ -70,7 +70,7 @@ function headerAndNav (path = '.') {
  * @param {'.'|'..'} [path=.] either '.' for index.html or '..' for others
  * @returns {string} HTML code
  */
-function footer (path = '.') {
+function footer(path = '.') {
   return `
 <div style="text-align: center">
   <a href="${path}/imprint.html">Imprint / Legal Notice</a>
@@ -98,7 +98,7 @@ csv
 /**
  * Creates all HTML pages
 */
-async function createPages () {
+async function createPages() {
   console.log(`${publications.length} publications`)
   console.log(allPdfs.size + ' pdfs')
   console.log(allImages.size + ' teasers')
@@ -151,7 +151,7 @@ async function createPages () {
 /**
  * Creates HTML from the CSV data
  */
-function createMainPageHtml (publications, memberConfig) {
+function createMainPageHtml(publications, memberConfig) {
   // pictures of members and links to their pages
   // for prof and postdocs, show titles
   const memberList = memberConfig.map(member => `
@@ -194,7 +194,7 @@ function createMainPageHtml (publications, memberConfig) {
 /**
  * Creates HTML for the imprint
  */
-function createImprint () {
+function createImprint() {
   const html = `${htmlHead(pageTitle)}
 <body>
   <a class="anchor" name="top"></a>
@@ -214,7 +214,7 @@ function createImprint () {
 /**
  * Creates HTML from the CSV data
  */
-function createMemberPageHtml (member, publications) {
+function createMemberPageHtml(member, publications) {
   const title = `${member.title} | ${pageTitle}`
   const html = `${htmlHead(title, '..')}
 <body>
@@ -273,7 +273,7 @@ function createMemberPageHtml (member, publications) {
  * @param {object} [member=null] member config or null for main page? (affects paths)
  * @returns {string} HTML
  */
-function createPublicationsHtml (publications, member = null) {
+function createPublicationsHtml(publications, member = null) {
   const p = member ? '..' : '.'
   return publications.map((pub, i) => {
     const key = pub['Key (e.g. for file names)']
@@ -364,7 +364,7 @@ function createPublicationsHtml (publications, member = null) {
 /**
  * Creates the page for a single publication
  */
-function createPublicationPageHtml (pub) {
+function createPublicationPageHtml(pub) {
   const key = pub['Key (e.g. for file names)']
   const year = pub.Date.slice(0, 4)
   const url1 = pub['Publisher URL (official)']
@@ -449,7 +449,7 @@ function createPublicationPageHtml (pub) {
  *
  * @param {Map} venueMap see venues.js
  */
-function createVenuePages (venueMap) {
+function createVenuePages(venueMap) {
   for (const venue of venueMap.values()) {
     const title = `${venue.short} | ${pageTitle}`
     const html = `${htmlHead(title, '..')}
@@ -483,13 +483,13 @@ function createVenuePages (venueMap) {
  * For "submission target", look up venues.js and link to the venue page if it exists
  * @param {*} venueShort
  */
-function venueLink (venueShort, path = '.') {
+function venueLink(venueShort, path = '.') {
   venueShort = venueShort.trim()
   if (venueMap.has(venueShort)) {
     const venue = venueMap.get(venueShort)
     return `<a href="${path}/venue/${venue.pageUrl}.html" target="_blank" title="${venue.name}">${venueShort}</a>`
   } else {
-    if (reportUnknownVenues && path === '.' && venueShort !== '') {
+    if (REPORT_UNKNOWN_VENUES && path === '.' && venueShort !== '') {
       console.log('unknown venue', venueShort)
     }
     return venueShort
@@ -502,7 +502,7 @@ function venueLink (venueShort, path = '.') {
  * @param {string} url url
  * @returns {string} link text
  */
-function urlText (url) {
+function urlText(url) {
   const u = url.toLowerCase()
   if (u.includes('doi.org')) { return 'DOI' }
   if (u.includes('acm.org')) { return 'ACM' }
@@ -514,7 +514,7 @@ function urlText (url) {
   if (u.includes('wiley.com')) { return 'Wiley' }
   if (u.includes('degruyter.com')) { return 'De Gruyter' }
   if (u.includes('univie.ac.at')) { return 'Uni Vienna' }
-  if (reportUnknownUrls) {
+  if (REPORT_UNKNOWN_URLS) {
     console.log('unknown url', url)
   }
   return 'link'
@@ -527,7 +527,7 @@ function urlText (url) {
  * @param {string} key pub key (for debugging logs)
  * @param {string} bibtexString bibtex string
  */
-function formatBibtex (key, bibtexString) {
+function formatBibtex(key, bibtexString) {
   try {
     const formatted = tidy(bibtexString, {
       omit: ['address', 'location', 'isbn', 'timestamp'],
@@ -553,7 +553,7 @@ function formatBibtex (key, bibtexString) {
  *
  * @param {object[]} publications publication data
  */
-async function createQRCodes (publications) {
+async function createQRCodes(publications) {
   let count = 0
   const dir = "./qr"
   // const logo = readFileSync("./qr/_qrbg.png")
@@ -604,7 +604,7 @@ async function createQRCodes (publications) {
  * Logs missing and extra files to the console as warnings
  * @param {object[]} publications publication data
  */
-function reportMissingOrExtraInfo (publications) {
+function reportMissingOrExtraInfo(publications) {
   // for each missing file we want to know who is responsible
   const memberNames = new Set(memberConfig.map(d => d.name))
   const getResp = (pub) => {
@@ -621,7 +621,7 @@ function reportMissingOrExtraInfo (publications) {
   for (const pub of publications) {
     const key = pub['Key (e.g. for file names)']
     // missing publication info
-    if (reportMissingInfo) {
+    if (REPORT_MISSING_INFO) {
       if (pub['Submission Target'] === '') {
         missing.push([`${key} info: submission target`, getResp(pub)])
       }
@@ -635,7 +635,7 @@ function reportMissingOrExtraInfo (publications) {
         missing.push([`${key} info: abstract`, getResp(pub)])
       }
       if (pub['bibtex'] === '') {
-        missing.push([`${key} info: bixtex`, getResp(pub)])
+        missing.push([`${key} info: bibtex`, getResp(pub)])
       }
     }
     // missing files
@@ -649,7 +649,7 @@ function reportMissingOrExtraInfo (publications) {
       if ((!pdf || pdf.trim() === '') && !allPdfs.has(`${key}.pdf`)) {
         // no link AND no file
         missing.push([`${key}.pdf (publication)`, getResp(pub)])
-      } else if (reportPdfFileMissing && !allPdfs.has(`${key}.pdf`)) {
+      } else if (REPORT_MISSING_PDF_FILES && !allPdfs.has(`${key}.pdf`)) {
         missing.push([`${key}.pdf (no pdf file - only link)`, getResp(pub)])
       }
     }
@@ -722,7 +722,7 @@ function reportMissingOrExtraInfo (publications) {
  * @param {string} path file path
  * @param {string} newContent the new content that would be written to the file
  */
-function updateFile (path, newContent) {
+function updateFile(path, newContent) {
   if (!existsSync(path)) {
     writeFileSync(path, newContent)
     return
