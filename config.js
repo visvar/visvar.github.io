@@ -200,6 +200,7 @@ export const memberConfig = [
     `,
     research: ['HCI', 'AR/ VR', 'Information Visualization'],
     links: [
+      { text: 'Website', url: 'https://www.chriskrauter.de/' },
       { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Krauter-00001/' },
       { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=sNDlSbkAAAAJ' },
       { text: 'ORCID', url: 'https://orcid.org/0000-0002-9787-0816' },
