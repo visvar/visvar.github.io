@@ -566,14 +566,20 @@ export const memberConfig = [
     name: 'Tobias Rau',
     title: 'Tobias Rau, M.Sc.',
     path: 'tobias_rau',
-    bio: ``,
+    bio: `
+    <p>
+      My research focuses on hybrid analysis on desktop and in augmented reality for chemical structure simulations (see <a href="https://charpack.github.io/" target="_blank" rel="noreferrer">charpack.github.io</a>).
+      This project is part of the <a href="https://www.simtech.uni-stuttgart.de/exc/" target="_blank" rel="noreferrer">Cluster of Excellence EXC 2075 "Data-Integrated Simulation Science (SimTech)"</a> of the University of Stuttgart and a joint effort of the <a href="https://www.itheoc.uni-stuttgart.de/" target="_blank" rel="noreferrer">Institute for Theoretical Chemistry</a> and the <a href="https://www.visus.uni-stuttgart.de/en/" target="_blank" rel="noreferrer">Visualization Research Center (VISUS)</a>.
+    </p>`,
     research: ['Visualization', 'VR/AR'],
     links: [
       { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Rau-00005/' },
       { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=Yi_QVJ8AAAAJ' },
       { text: 'ORCID', url: 'https://orcid.org/0000-0002-3310-9163' }
     ],
-    projects: []
+    projects: [
+      { text: 'Cluster of Excellence EXC 2075 "Data-Integrated Simulation Science (SimTech)', url: 'https://www.simtech.uni-stuttgart.de/exc/' }
+    ]
   },
 
   {
