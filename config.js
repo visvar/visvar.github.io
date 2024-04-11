@@ -314,12 +314,17 @@ export const memberConfig = [
     I've received my Bachelors in Electrical and Computer Engineering from Oregon State University in 2016 and a Masters in Robotics from the Johns Hopkins University in 2023. In the 4 years between, I was designing audio interfaces for conference rooms and large meeting spaces.
     </p>
     `,
-    research: [],
+    research: [
+      'Human-Computer Interaction (HCI)',
+      'Haptics',
+      'Mixed Reality'
+    ],
     links: [
       // { text: 'University of Stuttgart website', url: '' },
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=d-wuTzgAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0001-7624-2653' },
       { text: 'LinkedIn', url: 'https://www.linkedin.com/in/jubartels/' },
       { text: 'Personal website', url: 'https://janulrichbartels.com/' },
-
     ],
     projects: []
   },
@@ -386,7 +391,7 @@ export const memberConfig = [
     links: [
       { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Angerbauer/' },
       { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=cTB460QAAAAJ' },
-      { text: 'ORCID', url: 'https://orcid.org/0000-0002-1126-5288' }
+      { text: 'ORCID', url: 'https://orcid.org/0000-0002-1126-5288' },
     ],
     projects: []
   },
