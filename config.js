@@ -168,9 +168,9 @@ export const memberConfig = [
   },
 
   {
-    name: 'Carlos-Victor Quijano-Chavez',
-    title: 'Carlos-Victor Quijano-Chavez, M.Sc.',
-    path: 'carlos-victor_quijano-chavez',
+    name: 'Carlos Quijano-Chavez',
+    title: 'Carlos Quijano-Chavez, M.Sc.',
+    path: 'carlos_quijano-chavez',
     bio: `
     <p>
     Currently, I'm a PhD student at the University of Stuttgart.

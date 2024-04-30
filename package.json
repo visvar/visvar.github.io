@@ -19,11 +19,11 @@
   "license": "",
   "devDependencies": {
     "awesome-qr": "2.1.5-rc.0",
-    "fast-csv": "^4.3.6",
+    "fast-csv": "^5.0.1",
     "image-js": "^1.0.0-alpha.3",
-    "npm-check-updates": "^16.14.12",
+    "npm-check-updates": "^16.14.20",
     "xlsx": "^0.18.5",
-    "bibtex-tidy": "^1.11.0"
+    "bibtex-tidy": "^1.13.0"
   },
   "dependencies": {}
 }
