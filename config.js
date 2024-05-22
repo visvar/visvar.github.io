@@ -11,7 +11,7 @@ export const pageTitle = 'VISVAR Research Group, University of Stuttgart'
  *
  * {string} name: the same name as used on the publication dataset
  * {string} title: name with academic title(s)
- * {string} role: professor, postdoc (ommitted for phds) TODO: alumni?
+ * {string} role: professor, postdoc (ommitted for phds), alumnus
  * {string} path: the filename used for about/ and img/people/
  * {string} bio: bio description
  * {string[]} research: list of research interests
@@ -92,7 +92,7 @@ export const memberConfig = [
   {
     name: 'Benjamin Lee',
     title: 'Benjamin Lee, Ph.D.',
-    role: 'postdoc',
+    role: 'alumnus',
     path: 'benjamin_lee',
     bio: `
     <p>
@@ -237,7 +237,7 @@ export const memberConfig = [
 
       My collaborations include work on visualization for
       <a href="../pub/rau2022visualization.html" target="_blank" rel="noreferrer">
-      human-AI composing</a>.
+      human-AI composing</a> and participating in the <a href="https://www.visual-computing.org/2024/05/15/dr4et-hackathon-dimensionality-reductions-for-eye-tracking/"  target="_blank" rel="noreferrer">DR4ET hackathon</a>.
     </p>
     `,
     research: ['Visualization &amp; visual analytics', 'Visual music analysis', 'Immersive &amp; situated analytics', 'VR/AR', 'HCI'],
@@ -251,7 +251,7 @@ export const memberConfig = [
       { text: 'Observable notebooks', url: 'https://observablehq.com/@fheyen?direction=desc&sort=likes' },
     ],
     projects: [
-      { text: 'CyberValley - InstruData', url: 'https://www.visus.uni-stuttgart.de/en/projects/cvrf-instrudata/' }
+      { text: 'CyberValley - InstruData', url: 'https://www.visus.uni-stuttgart.de/en/projects/cvrf-instrudata/' },
     ]
   },
 

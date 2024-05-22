@@ -154,16 +154,20 @@ async function createPages() {
 function createMainPageHtml(publications, memberConfig) {
   // pictures of members and links to their pages
   // for prof and postdocs, show titles
-  const memberList = memberConfig.map(member => `
+  const getMemberHtml = (config) => {
+    return config.map(member => `
   <div>
     <a href="./members/${member.path}.html">
       <img class="avatar" src="./img/people/small/${member.path}.jpg" loading="lazy" />
       <div>
-        ${['professor', 'postdoc'].includes(member.role) ? member.title : member.name}
+        ${['professor', 'postdoc', 'alumnus'].includes(member.role) ? member.title : member.name}
       </div>
     </a>
   </div>
   `).join('\n')
+  }
+  const memberList = getMemberHtml(memberConfig.filter(d => d.role !== 'alumnus'))
+  const alumniList = getMemberHtml(memberConfig.filter(d => d.role === 'alumnus'))
   const html = `${htmlHead(pageTitle)}
 <body>
   <a class="anchor" name="top"></a>
@@ -176,7 +180,11 @@ function createMainPageHtml(publications, memberConfig) {
       <article> <a class="anchor" name="members"></a>
         <h1>Members</h1>
         <div class="memberList">
-          ${memberList}
+        ${memberList}
+        </div>
+        <h1>Alumni</h1>
+        <div class="memberList">
+          ${alumniList}
         </div>
       </article>
       <article> <a class="anchor" name="publications"></a>
