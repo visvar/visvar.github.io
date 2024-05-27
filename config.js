@@ -18,7 +18,8 @@ export const pageTitle = 'VISVAR Research Group, University of Stuttgart'
  * {string[]} links: links as {text:string, url:string} objects
  * {string[]} projects: projects as {text:string, url:string} objects
  *
- * Sorted by name, except for the group leader who goes first
+ * Sorted by leader, postdocs, phds, alumni
+ * Then sorted by name
  */
 export const memberConfig = [
   // Leader
@@ -86,34 +87,6 @@ export const memberConfig = [
       { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Achberger/' },
       { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=V3QAjFsAAAAJ' },
       { text: 'ORCID', url: 'https://orcid.org/0000-0002-2226-6593' }
-    ],
-    projects: []
-  },
-  {
-    name: 'Benjamin Lee',
-    title: 'Benjamin Lee, Ph.D.',
-    role: 'alumnus',
-    path: 'benjamin_lee',
-    bio: `
-    <p>
-      My research revolves around the field of Immersive Analytics: the use of virtual and/or augmented reality technologies to support visual data exploration and presentation.
-      In particular, my work has investigated how 2D surfaces can be used inside of an immersive 3D space to facilitate (collaborative) visual analysis and data understanding.
-    </p>
-    <p>
-      I submitted my PhD at the <a href="https://www.monash.edu/it/hcc/dvia-lab" target="_blank" rel="noreferrer">Data Visualisation and Immersive Analytics Lab</a>, Monash University.
-      My supervisors were Prof. Tim Dwyer (main), A/Prof. Bernhard Jenny, Dr. Maxime Cordeil, and Dr. Arnaud Prouzeau.
-      </p>
-      `,
-    research: ['Data visualization', 'Immersive analytics', 'Collaborative analysis', 'VR/AR'],
-    links: [
-      {
-        text: "University of Stuttgart website",
-        url: "https://www.visus.uni-stuttgart.de/en/institute/team/Lee-00006/"
-      },
-      { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=oJUHhu4AAAAJ' },
-      { text: "ORCID", url: 'https://orcid.org/0000-0002-1171-4741' },
-      { text: 'Personal website', url: 'https://benjaminchlee.github.io/' },
-      { text: 'YouTube', url: 'https://www.youtube.com/@benjaminchlee' },
     ],
     projects: []
   },
@@ -316,11 +289,13 @@ export const memberConfig = [
     `,
     research: [
       'Human-Computer Interaction (HCI)',
+      'Human-Robot Interaction (HRI)',
       'Haptics',
       'Mixed Reality'
     ],
     links: [
-      // { text: 'University of Stuttgart website', url: '' },
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/team/Bartels-00002/' },
+      { text: 'Max Planck Institute website', url: 'https://is.mpg.de/person/jub' },
       { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=d-wuTzgAAAAJ' },
       { text: 'ORCID', url: 'https://orcid.org/0000-0001-7624-2653' },
       { text: 'LinkedIn', url: 'https://www.linkedin.com/in/jubartels/' },
@@ -593,17 +568,17 @@ export const memberConfig = [
     path: 'vindhya_singh',
     bio: `
     <p>
-      I am an IMPRS-IS Ph.D. scholar jointly supervised by Dr. Ksenia Keplinger (leader of the "Organizational Leadership & Diversity" research group) at the Max Planck Institute for Intelligent Systems and Dr. Michael Sedlmair (leader of the "Visualization and Virtual/Augmented Reality" research group) at the University of Stuttgart. I completed my M.Sc. degree in Informatics from the Technical University of Munich in the year 2020, specializing in the intersection of Machine Learning/Deep Learning and Natural Language Processing.
+    I am an IMPRS-IS Ph.D. scholar jointly supervised by Dr. Ksenia Keplinger (leader of the "Organizational Leadership & Diversity" research group) at the Max Planck Institute for Intelligent Systems and Dr. Michael Sedlmair (leader of the "Visualization and Virtual/Augmented Reality" research group) at the University of Stuttgart. I completed my M.Sc. degree in Informatics from the Technical University of Munich in the year 2020, specializing in the intersection of Machine Learning/Deep Learning and Natural Language Processing.
     </p>
     <p>
-      I am interested in exploratory data analysis in a multi-modal setting which can be adapted across domains and organizations to foster healthier working environments.
+    I am interested in exploratory data analysis in a multi-modal setting which can be adapted across domains and organizations to foster healthier working environments.
     </p>
     `,
     research: [
       'HCI'
     ],
     links: [
-      // { text: 'University of Stuttgart website', url: '' },
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/team/Singh-00003/' },
       { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=o5m76F4AAAAJ' },
       { text: 'ORCID', url: 'https://orcid.org/0009-0008-6919-1673' }
 
@@ -635,6 +610,78 @@ export const memberConfig = [
       { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=9anpRnwAAAAJ' },
       { text: 'ORCID', url: 'https://orcid.org/0000-0002-4249-1755' },
       { text: 'Personal website', url: 'https://xxxhhhyxy.github.io' }
+    ],
+    projects: []
+  },
+  // alumni
+  {
+    name: 'Benjamin Lee',
+    title: 'Benjamin Lee, Ph.D.',
+    role: 'alumnus',
+    path: 'benjamin_lee',
+    bio: `
+    <p>
+    My research revolves around the field of Immersive Analytics: the use of virtual and/or augmented reality technologies to support visual data exploration and presentation.
+    In particular, my work has investigated how 2D surfaces can be used inside of an immersive 3D space to facilitate (collaborative) visual analysis and data understanding.
+    </p>
+    <p>
+    I submitted my PhD at the <a href="https://www.monash.edu/it/hcc/dvia-lab" target="_blank" rel="noreferrer">Data Visualisation and Immersive Analytics Lab</a>, Monash University.
+    My supervisors were Prof. Tim Dwyer (main), A/Prof. Bernhard Jenny, Dr. Maxime Cordeil, and Dr. Arnaud Prouzeau.
+    </p>
+    `,
+    research: ['Data visualization', 'Immersive analytics', 'Collaborative analysis', 'VR/AR'],
+    links: [
+      {
+        text: "University of Stuttgart website",
+        url: "https://www.visus.uni-stuttgart.de/en/institute/team/Lee-00006/"
+      },
+      { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=oJUHhu4AAAAJ' },
+      { text: "ORCID", url: 'https://orcid.org/0000-0002-1171-4741' },
+      { text: 'Personal website', url: 'https://benjaminchlee.github.io/' },
+      { text: 'YouTube', url: 'https://www.youtube.com/@benjaminchlee' },
+    ],
+    projects: []
+  },
+  {
+    name: 'Magdalena Schwarzl',
+    title: 'Magdalena Schwarzl, M.Sc.',
+    role: 'alumnus',
+    path: 'magdalena_schwarzl',
+    bio: `
+    <p>
+    Magdalena Schwarzl studied computer science, first at the University of Vienna specializing in "Scientific Computing" (bachelor) and then at the University of Utah, USA specializing in "Data Visualization and Computer Graphics" (master). From January to December 2019 she worked as a doctoral researcher in Prof. Dr. Michael Sedlmair's lab group at the Visualization Research Center of the University of Stuttgart (VISUS). Her dissertation topic concerned visualization in augmented and virtual reality. Sadly,
+    <a href="https://www.vis.uni-stuttgart.de/aktuelles/news/Nachruf-auf-ehemalige-VISUS-Doktorandin-Magdalena-Schwarzl/" target="_blank" rel="noreferrer">
+    Magdalena passed away
+    </a>
+    on June 22nd 2022 after a long-lasting sickness.
+    </p>
+    `,
+    research: [],
+    links: [
+      {
+        text: "University of Stuttgart website",
+        url: "https://www.visus.uni-stuttgart.de/en/team/Schwarzl/"
+      }
+    ],
+    projects: []
+  },
+  {
+    name: 'Cristina Morariu',
+    title: 'Cristina Morariu, M.Sc.',
+    role: 'alumnus',
+    path: 'cristina_morariu',
+    bio: `
+    <p>
+    Cristina Morariu studied computer science with a focus on "Scientific Computing" (bachelor) at the University of Vienna and followed by a master degree specializing in "Operational Research with Data Science" at the University of Edinburgh. Her focus lied on visual perception and dimensionality reduction. Due to personal reasons, Cristina had to leave VISUS in 2022. She is now working as a data scientist at Amazon in London.
+    </p>
+    `,
+    research: [],
+    links: [
+      {
+        text: "University of Stuttgart website",
+        url: "https://www.visus.uni-stuttgart.de/en/team/Morariu/"
+      },
+      { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=S-jkoHAAAAAJ' },
     ],
     projects: []
   },

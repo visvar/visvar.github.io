@@ -1,6 +1,6 @@
 import { createReadStream, readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs'
 import csv from 'fast-csv'
-import { AwesomeQR } from 'awesome-qr'
+import QRCode from 'qrcode'
 import { publicationSheet, pageUrl, pageTitle, memberConfig } from '../config.js'
 import { venueMap } from '../venues.js'
 import pkg from 'bibtex-tidy'
@@ -238,12 +238,14 @@ function createMemberPageHtml(member, publications) {
             <div class="bio">${member.bio}</div>
           </div>
           <div class="furtherInfo">
+          ${member.research.length === 0 ? '' : `
             <div>
               <h2>Research Interests</h2>
               <ul>
                 <li>${member.research.join("</li>\n<li>")}</li>
               </ul>
             </div>
+            `}
             <div>
               <h2>Links</h2>
               <ul>
@@ -264,6 +266,9 @@ function createMemberPageHtml(member, publications) {
       <article> <a class="anchor" name="publications"></a>
         <h1>Publications</h1>
         ${createPublicationsHtml(publications, member)}
+        <div style="text-align: center">
+          <img class="qr" src="../qr/${member.path}.png"/>
+        </div>
       </article>
       ${footer('..')}
     </div>
@@ -564,15 +569,15 @@ function formatBibtex(key, bibtexString) {
 async function createQRCodes(publications) {
   let count = 0
   const dir = "./qr"
-  // const logo = readFileSync("./qr/_qrbg.png")
-  const qrParams = {
-    size: 420,
+  const options = {
+    color: {
+      dark: '#444',  // dots
+      light: '#0000' // transparent background
+    },
+    errorCorrectionLevel: 'Q',
+    scale: 12,
     margin: 0,
-    colorDark: '#333',
-    // logoImage: logo,
-    // logoScale: 0.33,
-    // logoMargin: 8,
-    // logoCornerRadius: 70
+
   }
   const expectedQRs = []
   // For publications
@@ -583,8 +588,7 @@ async function createQRCodes(publications) {
     // Check if QR code image already exists
     if (existsSync(path)) { continue }
     const url = `${pageUrl}/pub/${key}.html`
-    const buffer = await new AwesomeQR({ ...qrParams, text: url }).draw()
-    writeFileSync(path, buffer)
+    QRCode.toFile(path, url, options)
     count++
   }
   // For people
@@ -593,13 +597,11 @@ async function createQRCodes(publications) {
     expectedQRs.push(`${m.path}.png`)
     if (existsSync(path)) { continue }
     const url = `${pageUrl}/members/${m.path}.html`
-    const buffer = await new AwesomeQR({ ...qrParams, text: url }).draw()
-    writeFileSync(path, buffer)
+    QRCode.toFile(path, url, options)
     count++
   }
   // Look for orphan QR code PNGs
   allQRs.delete('.gitkeep')
-  allQRs.delete('_qrbg.png')
   for (const path of expectedQRs) {
     allQRs.delete(path)
   }
@@ -696,6 +698,10 @@ function reportMissingOrExtraInfo(publications) {
   console.log()
   let missingInfo = false
   for (const member of memberConfig) {
+    if (member.role && member.role === 'alumnus') {
+      // ignore alumni
+      continue
+    }
     if (member.bio === '') {
       console.log(`${member.name} is missing a bio`)
       missingInfo = true

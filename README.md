@@ -93,7 +93,7 @@ Make sure the filenames equal the `path` in the config and only contain ASCII ch
 
 ## Used Libraries
 
-- [awesome-qr](https://github.com/sumimakito/Awesome-qr.js) for QR codes
+- [qrcode](https://github.com/soldair/node-qrcode) for QR codes
 - [fast-csv](https://github.com/C2FO/fast-csv) for parsing .csv
 - [image-js](https://github.com/image-js/image-js) for image resizing for thumbnails (`npm run resizePeople`, `npm run resizeThumbs`)
 - [npm-check-updates](https://github.com/raineorshine/npm-check-updates) for updating packages (`npm run upd`)

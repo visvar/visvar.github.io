@@ -70,6 +70,11 @@ header h1 {
   text-align: left;
 }
 
+article {
+  margin: 0 5px 5px 5px;
+  padding-bottom: 40px;
+}
+
 /* nav */
 nav {
   margin-top: 20px;
@@ -107,10 +112,13 @@ nav a:hover {
   color: var(--linkColor);
 }
 
-article {
-  margin: 0 5px 5px 5px;
-  padding-bottom: 40px;
+
+/* QR codes */
+article img.qr {
+  width: 140px;
+  margin: 30px auto;
 }
+
 
 
 /* Main page member list */
@@ -264,8 +272,8 @@ article {
 
 .pubPageContent textarea {
   width: 90%;
-  min-height: 200px;
-  max-height: 400px;
+  min-height: 120px;
+  max-height: 300px;
   border: 10px solid #f8f8f8;
   border-radius: 10px;
   background: #fcfcfc;
@@ -275,10 +283,7 @@ article {
   padding: 0 3px;
 }
 
-.pubPageContent img.qr {
-  width: 140px;
-  margin: 30px;
-}
+
 
 
 
