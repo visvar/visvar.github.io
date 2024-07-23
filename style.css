@@ -1,5 +1,5 @@
 * {
-  --textColor: #222;
+  --textColor: #333;
   --textColor2: #555;
   --bodyBgColor: #fff;
   --linkColor: rgb(33, 117, 191);
@@ -213,8 +213,8 @@ article img.qr {
   grid-area: span 1 / span 2;
   margin: 4px 0 15px 0;
   width: 100%;
-  border-radius: 3px;
-  box-shadow: #888 1px 1px 10px;
+  border-radius: 4px;
+  box-shadow: #ccc 0 0 12px;
 }
 
 .paper img.publicationImage {
