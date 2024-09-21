@@ -395,18 +395,6 @@ export const memberConfig = [
   },
 
   {
-    name: 'Melissa Reinelt',
-    title: 'Melissa Reinelt, M.Sc.',
-    path: 'melissa_reinelt',
-    bio: ``,
-    research: [],
-    links: [
-      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Reinelt/' }
-    ],
-    projects: []
-  },
-
-  {
     name: 'Natalie Hube',
     title: 'Natalie Hube, M.Sc.',
     path: 'natalie_hube',
@@ -662,6 +650,18 @@ export const memberConfig = [
         text: "University of Stuttgart website",
         url: "https://www.visus.uni-stuttgart.de/en/team/Schwarzl/"
       }
+    ],
+    projects: []
+  },
+  {
+    name: 'Melissa Reinelt',
+    title: 'Melissa Reinelt, M.Sc.',
+    role: 'alumnus',
+    path: 'melissa_reinelt',
+    bio: ``,
+    research: [],
+    links: [
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Reinelt/' }
     ],
     projects: []
   },
