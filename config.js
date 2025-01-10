@@ -531,6 +531,23 @@ export const memberConfig = [
   },
 
   {
+    name: 'Tessa M. W. Talsma',
+    title: 'Tessa M. W. Talsma, M.Sc.',
+    path: 'tessa_talsma',
+    bio: `
+    <p>
+
+    </p>`,
+    research: ['Human Computer Interaction', 'Automotive', 'Motion Perception', 'Driving Simulator', 'Virtual Reality'],
+    links: [
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/team/Talsma/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=nMzn54MAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0001-9653-8283' }
+    ],
+    projects: []
+  },
+
+  {
     name: 'Tobias Rau',
     title: 'Tobias Rau, M.Sc.',
     path: 'tobias_rau',
