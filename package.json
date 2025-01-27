@@ -21,7 +21,7 @@
     "bibtex-tidy": "^1.14.0",
     "fast-csv": "^5.0.2",
     "image-js": "^1.0.0-alpha.3",
-    "npm-check-updates": "^17.1.13",
+    "npm-check-updates": "^17.1.14",
     "xlsx": "^0.18.5"
   },
   "dependencies": {
