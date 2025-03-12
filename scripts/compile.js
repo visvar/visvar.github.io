@@ -183,7 +183,7 @@ function createMainPageHtml(publications, memberConfig) {
         ${memberList}
         </div>
         <h1>Alumni</h1>
-        <div class="memberList">
+        <div class="memberList alumni">
           ${alumniList}
         </div>
       </article>

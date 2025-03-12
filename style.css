@@ -136,6 +136,10 @@ article img.qr {
   box-shadow: #bbb 1px 1px 15px;
 }
 
+.memberList.alumni img.avatar {
+  filter: sepia(50%);
+}
+
 .memberList a,
 .memberList a:hover {
   color: var(--textColor);
