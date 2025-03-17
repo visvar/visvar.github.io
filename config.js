@@ -90,29 +90,6 @@ export const memberConfig = [
     ],
     projects: []
   },
-  {
-    name: 'Quynh Quang Ngo',
-    title: 'Quynh Quang Ngo, Ph.D.',
-    role: 'postdoc',
-    path: 'quynh_quang_ngo',
-    bio: `
-    <p>
-      Quynh conducts research in the field of visualization.
-      His recent research interests include dimensionality reduction techniques, data transformation, graph layout, and applying machine learning to visualization.
-      He is also interested in studying the potential novel hybrid techniques among different fields of visual computing, such as visualization, eye-tracking, and virtual/augmented reality.
-    </p>
-    `,
-    research: ['Visualization', 'Machine learning', 'Dimensionality reduction', 'Graph layout', 'VR/AR'],
-    links: [
-      {
-        text: "University of Stuttgart website",
-        url: "https://www.visus.uni-stuttgart.de/en/institute/team/Ngo-00001/"
-      },
-      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=qwIOAYAAAAAJ' },
-      { text: "ORCID", url: 'https://orcid.org/0000-0001-5254-1480' }
-    ],
-    projects: []
-  },
 
   // Ph.D.s
   {
@@ -591,33 +568,7 @@ export const memberConfig = [
     projects: []
   },
 
-  {
-    name: 'Xingyao Yu',
-    title: 'Xingyao Yu, M.Sc.',
-    path: 'xingyao_yu',
-    bio: `
-    <p>
-      I am Xingyao Yu, a Ph.D. student in Visualization Research Center (VISUS) at University of Stuttgart and
-      at Stuttgart Center of Simulation Science (SimTech).
-      I got my Bachelor's degree in Applied Physics and Master's degree in Optical Engineering, both at
-      Beijing Institute of Technology.
-    </p>
-    <p>
-      My research interests include wearable interaction, virtual reality, and augmented reality.
-      Specifically, I have been working on the motion guidance process and biomechanical visualization in
-      VR/AR environments.
-      Future work: Leverage VR/AR and ML/AI for this purpose.
-    </p>
-    `,
-    research: ['VR/AR', 'Immersive &amp; on-body visualization', 'HCI'],
-    links: [
-      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Yu-00009/' },
-      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=9anpRnwAAAAJ' },
-      { text: 'ORCID', url: 'https://orcid.org/0000-0002-4249-1755' },
-      { text: 'Personal website', url: 'https://xxxhhhyxy.github.io' }
-    ],
-    projects: []
-  },
+
   // alumni
   {
     name: 'Benjamin Lee',
@@ -644,6 +595,26 @@ export const memberConfig = [
       { text: "ORCID", url: 'https://orcid.org/0000-0002-1171-4741' },
       { text: 'Personal website', url: 'https://benjaminchlee.github.io/' },
       { text: 'YouTube', url: 'https://www.youtube.com/@benjaminchlee' },
+    ],
+    projects: []
+  },
+  {
+    name: 'Cristina Morariu',
+    title: 'Cristina Morariu, M.Sc.',
+    role: 'alumnus',
+    path: 'cristina_morariu',
+    bio: `
+    <p>
+    Cristina Morariu studied computer science with a focus on "Scientific Computing" (bachelor) at the University of Vienna and followed by a master degree specializing in "Operational Research with Data Science" at the University of Edinburgh. Her focus lied on visual perception and dimensionality reduction. Due to personal reasons, Cristina had to leave VISUS in 2022. She is now working as a data scientist at Amazon in London.
+    </p>
+    `,
+    research: [],
+    links: [
+      {
+        text: "University of Stuttgart website",
+        url: "https://www.visus.uni-stuttgart.de/en/team/Morariu/"
+      },
+      { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=S-jkoHAAAAAJ' },
     ],
     projects: []
   },
@@ -682,23 +653,56 @@ export const memberConfig = [
     ],
     projects: []
   },
+
   {
-    name: 'Cristina Morariu',
-    title: 'Cristina Morariu, M.Sc.',
+    name: 'Quynh Quang Ngo',
+    title: 'Quynh Quang Ngo, Ph.D.',
+    // role: 'postdoc',
     role: 'alumnus',
-    path: 'cristina_morariu',
+    path: 'quynh_quang_ngo',
     bio: `
     <p>
-    Cristina Morariu studied computer science with a focus on "Scientific Computing" (bachelor) at the University of Vienna and followed by a master degree specializing in "Operational Research with Data Science" at the University of Edinburgh. Her focus lied on visual perception and dimensionality reduction. Due to personal reasons, Cristina had to leave VISUS in 2022. She is now working as a data scientist at Amazon in London.
+      Quynh conducts research in the field of visualization.
+      His recent research interests include dimensionality reduction techniques, data transformation, graph layout, and applying machine learning to visualization.
+      He is also interested in studying the potential novel hybrid techniques among different fields of visual computing, such as visualization, eye-tracking, and virtual/augmented reality.
     </p>
     `,
-    research: [],
+    research: ['Visualization', 'Machine learning', 'Dimensionality reduction', 'Graph layout', 'VR/AR'],
     links: [
       {
         text: "University of Stuttgart website",
-        url: "https://www.visus.uni-stuttgart.de/en/team/Morariu/"
+        url: "https://www.visus.uni-stuttgart.de/en/institute/team/Ngo-00001/"
       },
-      { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=S-jkoHAAAAAJ' },
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=qwIOAYAAAAAJ' },
+      { text: "ORCID", url: 'https://orcid.org/0000-0001-5254-1480' }
+    ],
+    projects: []
+  },
+  {
+    name: 'Xingyao Yu',
+    title: 'Xingyao Yu, M.Sc.',
+    role: 'alumnus',
+    path: 'xingyao_yu',
+    bio: `
+    <p>
+      I am Xingyao Yu, a Ph.D. student in Visualization Research Center (VISUS) at University of Stuttgart and
+      at Stuttgart Center of Simulation Science (SimTech).
+      I got my Bachelor's degree in Applied Physics and Master's degree in Optical Engineering, both at
+      Beijing Institute of Technology.
+    </p>
+    <p>
+      My research interests include wearable interaction, virtual reality, and augmented reality.
+      Specifically, I have been working on the motion guidance process and biomechanical visualization in
+      VR/AR environments.
+      Future work: Leverage VR/AR and ML/AI for this purpose.
+    </p>
+    `,
+    research: ['VR/AR', 'Immersive &amp; on-body visualization', 'HCI'],
+    links: [
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Yu-00009/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=9anpRnwAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0002-4249-1755' },
+      { text: 'Personal website', url: 'https://xxxhhhyxy.github.io' }
     ],
     projects: []
   },
