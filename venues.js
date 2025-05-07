@@ -490,6 +490,17 @@ const venues = [
       'optimization'
     ]
   },
+  {
+    short: 'ICPE',
+    name: 'International Conference on Performance Engineering',
+    publisher: 'ACM/SPEC',
+    type: 'conference',
+    url: 'https://icpe.spec.org/',
+    resources: [],
+    topics: [
+      'performance engineering'
+    ]
+  },
 ]
 
 export const venueMap = new Map(venues.map(d => [

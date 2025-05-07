@@ -461,6 +461,29 @@ export const memberConfig = [
   },
 
   {
+    name: 'Samuel Beck',
+    title: 'Samuel Beck, M.Sc.',
+    path: 'samuel_beck',
+    bio: `
+    <p>
+      My research interests include information visualization and visual analytics in general, focusing on visual analysis of cultural heritage data and sports visualization in particular.
+      I obtained my master's degree in Software Engineering from the University of Stuttgart in 2020.
+      My previous work covers visual curation, analysis, and narration of cultural heritage objects and biographies, and a visualization framework for planning and assessing formation dance choreographies.
+      My current research investigates novel ways to facilitate formation dance practice with augmented reality methods.
+    </p>
+    `,
+    research: ['Information Visualization', 'Visual Analytics', 'VR/AR'],
+    links: [
+      { text: 'University of Stuttgart website', url: 'https://www.vis.uni-stuttgart.de/en/team/Beck-00004' },
+      { text: 'Google Scholar', url: 'https://scholar.google.de/citations?&user=Ksiy8oMAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0003-0596-6333' }
+    ],
+    projects: [
+      { text: 'InTaVia', url: 'https://www.vis.uni-stuttgart.de/en/research/projects/eu-intavia/' },
+    ]
+  },
+
+  {
     name: 'Sebastian Rigling',
     title: 'Sebastian Rigling, M.Sc.',
     path: 'sebastian_rigling',
