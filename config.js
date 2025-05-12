@@ -90,6 +90,24 @@ export const memberConfig = [
     ],
     projects: []
   },
+  {
+    name: 'Sophie Sadler',
+    title: 'Sophie Sadler, Ph.D.',
+    role: 'postdoc',
+    path: 'sophie_sadler',
+    bio: `
+    <p>
+      I am a postdoctoral researcher at VISUS (Visualization Research Center, University of Stuttgart), conducting research relating to visualization of high-dimensional data and dimensionality reduction. I completed my PhD at Swansea University, studying explainable artificial intelligence (XAI), often through the use of visual analytics, and often on problems where data is graph or network-based (e.g. social networks). I also spent a substantial portion of my PhD working in the Core Data Science group at Meta and was previously an AI Resident at Microsoft Research Cambridge.
+    </p>
+    `,
+    research: ['Visualization', 'Dimensionality Reduction', 'Machine Learning'],
+    links: [
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/team/Sadler/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=MZtjY2YAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0001-9896-9079' }
+    ],
+    projects: []
+  },
 
   // Ph.D.s
   {
