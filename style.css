@@ -2,7 +2,7 @@
   --textColor: #333;
   --textColor2: #555;
   --bodyBgColor: #fff;
-  --linkColor: rgb(33, 117, 191);
+  --linkColor: rgb(0, 65, 145);
 }
 
 a,
@@ -21,7 +21,7 @@ h1 {
   margin: 18px 0;
   text-align: center;
   font-size: 28px;
-  color: var(--linkColor)
+  color: var(--textColor2)
 }
 
 h2,
@@ -31,7 +31,6 @@ h3 {
   color: var(--textColor2);
 }
 
-
 a:hover {
   text-decoration: underline;
 }
@@ -40,7 +39,6 @@ h3 a,
 h3 a:visited {
   color: var(--textColor2);
 }
-
 
 body,
 main {
@@ -74,6 +72,10 @@ article {
   margin: 0 5px 5px 5px;
   padding-bottom: 40px;
 }
+
+
+
+
 
 /* nav */
 nav {
@@ -113,11 +115,16 @@ nav a:hover {
 }
 
 
+
+
+
 /* QR codes */
 article img.qr {
   width: 140px;
   margin: 30px auto;
 }
+
+
 
 
 
@@ -190,11 +197,17 @@ article img.qr {
   margin-left: -15px;
 }
 
+
+
+
+
 /* Year headings */
 .yearHeading {
   text-align: center;
   border-bottom: 2px solid #eee;
 }
+
+
 
 
 /* Publications on other pages */
@@ -253,6 +266,9 @@ article img.qr {
   font-weight: 600;
 }
 
+
+
+
 /* Publication page */
 .pubPageContent {
   text-align: center;
@@ -293,12 +309,17 @@ article img.qr {
 
 
 
+
 /*
  * Responsiveness
  */
+
+
+
+
+/* phone layout */
 @media (min-width: 0px) {
 
-  /* phone layout */
   main {
     grid-template-columns: auto;
     max-width: 960px;
@@ -338,9 +359,12 @@ article img.qr {
   }
 }
 
+
+
+
+/* tablet layout */
 @media (min-width: 720px) {
 
-  /* tablet layout */
   main {
     grid-template-columns: 250px auto;
     margin-top: 0;
@@ -379,9 +403,12 @@ article img.qr {
   }
 }
 
+
+
+
+/* desktop layout */
 @media (min-width: 1020px) {
 
-  /* desktop layout */
   main {
     grid-template-columns: 250px auto;
     margin-top: 0;
@@ -409,6 +436,10 @@ article img.qr {
     top: -5px;
   }
 
+
+
+
+
   /* Main page about infos */
   .aboutusFurtherInfo {
     display: grid;
@@ -421,6 +452,10 @@ article img.qr {
     width: 256px;
     height: 256px;
   }
+
+
+
+
 
   /* Member list with pictures */
   .memberList {
