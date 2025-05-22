@@ -30,9 +30,9 @@ function htmlHead(title, path = '.') {
     <meta name="viewport" content="width=500, initial-scale=1">
     <title>${title}</title>
     <link rel="stylesheet" href="${path}/style.css">
-    <link rel="shortcut icon" href="${path}/img/misc/favicon.png">
-    <link rel="icon" type="image/png" href="${path}/img/favicon.png" sizes="256x256">
-    <link rel="apple-touch-icon" sizes="256x256" href="${path}/img/favicon.png">
+    <link rel="shortcut icon" href="${path}/assets/img/misc/favicon.png">
+    <link rel="icon" type="image/png" href="${path}/assets/img/misc/favicon.png" sizes="256x256">
+    <link rel="apple-touch-icon" sizes="256x256" href="${path}/assets/img/misc/favicon.png">
   </head>
   `
 }
@@ -48,15 +48,15 @@ function headerAndNav(path = '.') {
   <header>
     <div>
       <a href="${path}/index.html">
-        <img class="logo" src="${path}/img/misc/visvar_logo.svg" />
+        <img class="logo" src="${path}/assets/img/misc/visvar_logo.svg" />
       </a>
     </div>
     <div>
       <nav>
       <ul>
-        <li><a href="${path}/index.html#aboutus">about VISVAR</a></li>
-        <li><a href="${path}/index.html#publications">publications</a></li>
+        <li><a href="${path}/index.html#aboutus">about us</a></li>
         <li><a href="${path}/index.html#members">members</a></li>
+        <li><a href="${path}/index.html#publications">publications</a></li>
       </ul>
       </nav>
     </div>
@@ -78,12 +78,13 @@ function footer(path = '.') {
 `
 }
 
-const allImages = new Set(readdirSync("img"))
-const allQRs = new Set(readdirSync("qr"))
-const allPdfs = new Set(readdirSync("pdf"))
-const allVideos = new Set(readdirSync("video"))
-const allSuppl = new Set(readdirSync("suppl"))
-const allPub = new Set(readdirSync("pub"))
+const allTeasers = new Set(readdirSync("assets/img/teaser"))
+const allPeopleImages = new Set(readdirSync("assets/img/people"))
+const allQRs = new Set(readdirSync("assets/img/qr"))
+const allPdfs = new Set(readdirSync("assets/pdf"))
+const allVideos = new Set(readdirSync("assets/video"))
+const allSuppl = new Set(readdirSync("assets/suppl"))
+const allPubHTML = new Set(readdirSync("pub"))
 
 const nameMemberMap = new Map(memberConfig.map(d => [d.name, d]))
 
@@ -101,7 +102,7 @@ csv
 async function createPages() {
   console.log(`${publications.length} publications`)
   console.log(allPdfs.size + ' pdfs')
-  console.log(allImages.size + ' teasers')
+  console.log(allTeasers.size + ' teasers')
   // Sort by date descending, so newest at top of page
   publications.sort((a, b) => a.Date > b.Date ? -1 : 1)
   // Member / author pages
@@ -158,7 +159,7 @@ function createMainPageHtml(publications, memberConfig) {
     return config.map(member => `
   <div>
     <a href="./members/${member.path}.html">
-      <img class="avatar" src="./img/people/small/${member.path}.jpg" loading="lazy" />
+      <img class="avatar" src="./assets/img/people/small/${allPeopleImages.has(`${member.path}.jpg`) ? member.path : 'placeholder'}.jpg" loading="lazy" />
       <div>
         ${['professor', 'postdoc', 'alumnus'].includes(member.role) ? member.title : member.name}
       </div>
@@ -234,7 +235,7 @@ function createMemberPageHtml(member, publications) {
         <h1>${member.title}</h1>
         <div class="aboutMember">
           <div class="avatarAndBio">
-            <img class="avatar" src="../img/people/${member.path}.jpg" />
+            <img class="avatar" src="../assets/img/people/small/${allPeopleImages.has(`${member.path}.jpg`) ? member.path : 'placeholder'}.jpg" />
             <div class="bio">${member.bio}</div>
           </div>
           <div class="furtherInfo">
@@ -267,7 +268,7 @@ function createMemberPageHtml(member, publications) {
         <h1>Publications</h1>
         ${createPublicationsHtml(publications, member)}
         <div style="text-align: center">
-          <img class="qr" src="../qr/${member.path}.png"/>
+          <img class="qr" src="../assets/img/qr/${member.path}.png"/>
         </div>
       </article>
       ${footer('..')}
@@ -290,33 +291,33 @@ function createPublicationsHtml(publications, member = null) {
   const p = member ? '..' : '.'
   return publications.map((pub, i) => {
     const key = pub['Key (e.g. for file names)']
-    const image = `${p}/img/small/${key}.png`
+    const image = `${p}/assets/img/teaser/small/${key}.png`
     const year = pub.Date.slice(0, 4)
     const url1 = pub['Publisher URL (official)']
     const url2 = pub['url2']
     const venue = pub['Submission Target']
-    const imageExists = allImages.has(`${key}.png`)
+    const imageExists = allTeasers.has(`${key}.png`)
     // PDF, video, and supplemental might be a link instead of file
     let pdf = pub['PDF URL (public)']
     let pdfExists = allPdfs.has(`${key}.pdf`)
     if (!pdfExists && pdf && pdf !== '') {
       pdfExists = true
     } else {
-      pdf = `${p}/pdf/${key}.pdf`
+      pdf = `${p}/assets/pdf/${key}.pdf`
     }
     let video = pub.Video
     let videoExists = allVideos.has(`${key}.mp4`)
     if (!videoExists && video && video !== '') {
       videoExists = true
     } else {
-      video = `${p}/video/${key}.mp4`
+      video = `${p}/assets/video/${key}.mp4`
     }
     let suppl = pub.Supplemental
     let supplExists = allSuppl.has(`${key}.zip`)
     if (!supplExists && suppl && suppl !== '') {
       supplExists = true
     } else {
-      suppl = `${p}/suppl/${key}.zip`
+      suppl = `${p}/assets/suppl/${key}.zip`
     }
     const authors = [
       ...pub['First Author'].split(',').map(d => d.trim()).filter(d => d.length),
@@ -383,21 +384,21 @@ function createPublicationPageHtml(pub) {
   const url1 = pub['Publisher URL (official)']
   const url2 = pub['url2']
   const venue = pub['Submission Target']
-  const imageExists = allImages.has(`${key}.png`)
+  const imageExists = allTeasers.has(`${key}.png`)
   // PDF, video, and supplemental might be a link instead of file
   let pdf = pub['PDF URL (public)']
   let pdfExists = allPdfs.has(`${key}.pdf`)
   if (!pdfExists && pdf && pdf !== '') {
     pdfExists = true
   } else {
-    pdf = `../pdf/${key}.pdf`
+    pdf = `../assets/pdf/${key}.pdf`
   }
   let video = pub.Video
   let videoExists = allVideos.has(`${key}.mp4`)
   if (!videoExists && video && video !== '') {
     videoExists = true
   } else {
-    video = `../video/${key}.mp4`
+    video = `../assets/video/${key}.mp4`
   }
   let suppl = pub.Supplemental
   let supplExists = allSuppl.has(`${key}.zip`)
@@ -418,8 +419,8 @@ function createPublicationPageHtml(pub) {
             <h1>${pub.Title}</h1>
             <div class="pubPageContent">
               ${imageExists ? `
-              <a href="../img/${key}.png" target="_blank" title="show image full size">
-                <img id="image${key}" src="../img/${key}.png"/>
+              <a href="../assets/img/teaser/${key}.png" target="_blank" title="show image full size">
+                <img id="image${key}" src="../assets/img/teaser/${key}.png"/>
               </a>` : ''}
               <div>
                 <div>
@@ -445,7 +446,7 @@ function createPublicationPageHtml(pub) {
                 ${pub.bibtex ? `<div class="bibtex"><textarea>${formatBibtex(key, pub.bibtex)}</textarea></div>` : ''}
                 ${pub['Acknowledgements'] ? `<div class="abstract"><b>Acknowledgements.</b> ${pub['Acknowledgements']}</div>` : ''}
                 ${pub.notes ? `<div>${pub.notes}</div>` : ''}
-                <img class="qr" src="../qr/${key}.png"/>
+                <img class="qr" src="../assets/img/qr/${key}.png"/>
             </div>
           </article>
           ${footer('..')}
@@ -568,7 +569,7 @@ function formatBibtex(key, bibtexString) {
  */
 async function createQRCodes(publications) {
   let count = 0
-  const dir = "./qr"
+  const dir = "./assets/img/qr"
   const options = {
     color: {
       dark: '#444',  // dots
@@ -650,7 +651,7 @@ function reportMissingOrExtraInfo(publications) {
     }
     // missing files
     // publication teaser images
-    if (!allImages.has(`${key}.png`)) {
+    if (!allTeasers.has(`${key}.png`)) {
       missing.push([`${key}.png (teaser)`, getResp(pub)])
     }
     // publication PDF, not necessary for datasets
@@ -680,7 +681,7 @@ function reportMissingOrExtraInfo(publications) {
   // extra files
   let extra = []
   const allKeys = new Set(publications.map(d => d['Key (e.g. for file names)']))
-  const allFiles = [...allImages, ...allPdfs, ...allVideos, ...allSuppl, ...allPub]
+  const allFiles = [...allTeasers, ...allPdfs, ...allVideos, ...allSuppl, ...allPubHTML]
   const ignore = new Set(["small", "people", "misc"])
   for (const f of allFiles) {
     const key = f.slice(0, f.lastIndexOf("."))
@@ -704,6 +705,10 @@ function reportMissingOrExtraInfo(publications) {
     }
     if (member.bio === '') {
       console.log(`${member.name} is missing a bio`)
+      missingInfo = true
+    }
+    if (!allPeopleImages.has(member.path + '.jpg')) {
+      console.log(`${member.name} is missing an image`)
       missingInfo = true
     }
     if (member.research.length === 0) {
