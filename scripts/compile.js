@@ -106,25 +106,6 @@ async function createPages() {
   // Sort by date descending, so newest at top of page
   publications.sort((a, b) => a.Date > b.Date ? -1 : 1)
   // Member / author pages
-  memberConfig
-    .sort((a, b) => {
-      // people with role first
-      if (a.role && !b.role) {
-        return -1
-      } else if (!a.role && b.role) {
-        return 1
-      }
-      // profs before postdocs
-      if (a.role && b.role) {
-        if (a.role === 'professor' && b.role === 'postdoc') {
-          return -1
-        } else if (a.role === 'postdoc' && b.role === 'professor') {
-          return 1
-        }
-      }
-      // otherwise (no roles) sort by name
-      return a.name < b.name ? -1 : 1
-    })
   for (const member of memberConfig) {
     const authoredPubs = publications.filter(d =>
       d['First Author'].includes(member.name)
@@ -161,14 +142,62 @@ function createMainPageHtml(publications, memberConfig) {
     <a href="./members/${member.path}.html">
       <img class="avatar" src="./assets/img/people/small/${allPeopleImages.has(`${member.path}.jpg`) ? member.path : 'placeholder'}.jpg" loading="lazy" />
       <div>
-        ${['professor', 'postdoc', 'alumnus'].includes(member.role) ? member.title : member.name}
+        ${['professor', 'postdoc', 'associatedpostdoc', 'alumnusphd', 'alumnuspostdoc'].includes(member.role) ? member.title : member.name}
       </div>
     </a>
   </div>
   `).join('\n')
   }
-  const memberList = getMemberHtml(memberConfig.filter(d => d.role !== 'alumnus'))
-  const alumniList = getMemberHtml(memberConfig.filter(d => d.role === 'alumnus'))
+
+  const memberList = getMemberHtml(memberConfig.filter(d => d.role === 'professor' | d.role === 'postdoc' | d.role === 'phd').sort((a, b) => {
+    // sorting rules
+    if (a.role === 'professor' && b.role === 'postdoc') {
+      return -1
+    } else if (a.role === 'postdoc' && b.role === 'professor') {
+      return 1
+    }
+
+    if (a.role === 'professor' && b.role === 'phd') {
+      return -1
+    } else if (a.role === 'phd' && b.role === 'professor') {
+      return 1
+    }
+
+    if (a.role === 'postdoc' && b.role === 'phd') {
+      return -1
+    } else if (a.role === 'phd' && b.role === 'postdoc') {
+      return 1
+    }
+
+    // otherwise (same role) sort by name
+    return a.name < b.name ? -1 : 1
+  }))
+
+
+  const associatedList = getMemberHtml(memberConfig.filter(d => d.role === 'associatedpostdoc' | d.role === 'associatedphd').sort((a, b) => {
+    // sorting rules
+    if (a.role === 'associatedpostdoc' && b.role === 'associatedphd') {
+      return -1
+    } if (a.role === 'associatedphd' && b.role === 'associatedpostdoc') {
+      return 1
+    }
+
+    // otherwise (same roles) sort by name
+    return a.name < b.name ? -1 : 1
+  }))
+
+
+  const alumniList = getMemberHtml(memberConfig.filter(d => d.role === 'alumnuspostdoc' | d.role === 'alumnusphd').sort((a, b) => {
+    // sorting rules
+    if (a.role === 'alumnuspostdoc' && b.role === 'alumnusphd') {
+      return -1
+    } if (a.role === 'alumnusphd' && b.role === 'alumnuspostdoc') {
+      return 1
+    }
+    // otherwise (same roles) sort by name
+    return a.name < b.name ? -1 : 1
+  }))
+
   const html = `${htmlHead(pageTitle)}
 <body>
   <a class="anchor" name="top"></a>
@@ -183,6 +212,14 @@ function createMainPageHtml(publications, memberConfig) {
         <div class="memberList">
         ${memberList}
         </div>
+        </article>
+        <article>
+        <h1>Associated Members</h1>
+        <div class="memberList">
+          ${associatedList}
+        </div>
+        </article>
+        <article>
         <h1>Alumni</h1>
         <div class="memberList alumni">
           ${alumniList}
@@ -699,7 +736,7 @@ function reportMissingOrExtraInfo(publications) {
   console.log()
   let missingInfo = false
   for (const member of memberConfig) {
-    if (member.role && member.role === 'alumnus') {
+    if (member.role && member.role.includes('alumnus')) {
       // ignore alumni
       continue
     }
