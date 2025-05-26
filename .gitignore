@@ -4,6 +4,5 @@ package-lock.json
 
 test
 
-*.xlsx
 *.csv
 pnpm-lock.yaml
