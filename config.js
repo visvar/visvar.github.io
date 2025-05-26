@@ -618,6 +618,33 @@ export const memberConfig = [
     projects: []
   },
 
+  // associated postdocs
+  // associated phds
+  {
+    name: 'Fairouz Grioui',
+    title: 'Fairouz Grioui, M.Sc.',
+    role: 'associatedphd',
+    path: 'fairouz_grioui',
+    bio: `
+    <p>
+    My research focuses on the study of small-scale visualizations on wearable devices along with interaction techniques for mobile contexts.
+    </p>
+    <p>
+    I completed my Master’s degree in Human-Computer Interaction at the University of Paris-Saclay in France.
+    Currently, I am pursuing my Ph.D. at the University of Stuttgart.
+    In my previous work I explored micro visualization reading under locomotion such as while <a href="https://doi.org/10.1109/VIS55277.2024.00017" target="_blank" rel="noreferrer">walking and jogging</a> or <a href="http://doi.org/10.5220/0011665500003417" target="_blank" rel="noreferrer">playing a tennis-like game in VR</a>), and in motion to assist patients with (<a href="http://doi.org/10.2312/evp.20241090" target="_blank" rel="noreferrer">wrist rehabilitation exercises at home</a>).
+    </p>
+    `,
+    research: ['Micro Visualization', 'Mobile Visualization', 'Information Visualization', 'HCI', 'AR/VR'],
+    links: [
+      { text: 'University of Stuttgart website', url: 'https://www.vis.uni-stuttgart.de/team/Grioui/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=1hOQxBIAAAAJ&hl=de&oi=ao' },
+      { text: 'ORCID', url: 'https://orcid.org/0009-0001-7358-6749' },
+      { text: 'ResearchGate', url: 'https://www.researchgate.net/profile/Fairouz-Grioui' },
+      { text: 'LinkedIn', url: 'https://www.linkedin.com/in/fayrouzgrioui/' }
+    ],
+    projects: []
+  },
 
   // alumni posdocs
   {
