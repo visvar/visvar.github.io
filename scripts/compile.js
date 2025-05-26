@@ -48,7 +48,7 @@ function headerAndNav(path = '.') {
   <header>
     <div>
       <a href="${path}/index.html">
-        <img class="logo" src="${path}/assets/img/misc/visvar_logo.svg" />
+        <img class="logo" src="${path}/assets/img/misc/hci.svg" />
       </a>
     </div>
     <div>

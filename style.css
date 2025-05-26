@@ -1,6 +1,6 @@
 * {
-  --textColor: #333;
-  --textColor2: #555;
+  --textColor: #363636;
+  --textColor2: #363636;
   --bodyBgColor: #fff;
   --linkColor: rgb(0, 65, 145);
 }
@@ -18,9 +18,10 @@ a.anchor {
 }
 
 h1 {
-  margin: 18px 0;
+  margin-top: 0;
+  margin-bottom: 18px;
   text-align: center;
-  font-size: 28px;
+  font-size: 40px;
   color: var(--textColor2)
 }
 
@@ -143,9 +144,11 @@ article img.qr {
   box-shadow: #bbb 1px 1px 15px;
 }
 
-.memberList.alumni img.avatar {
+/*
+memberList.alumni img.avatar {
   filter: sepia(50%);
 }
+*/
 
 .memberList a,
 .memberList a:hover {
@@ -327,12 +330,13 @@ article img.qr {
   }
 
   header {
+    position: fixed;
     padding-top: 0;
     width: 100%;
   }
 
   header .logo {
-    width: 40px;
+    width: 50px;
   }
 
   header>div,
@@ -371,12 +375,14 @@ article img.qr {
   }
 
   header {
+    position: fixed;
     padding-top: 20px;
     width: 220px;
   }
 
   header .logo {
-    width: 200px;
+    padding: 0 20px;
+    width: 180px;
   }
 
   header>div,
@@ -415,6 +421,7 @@ article img.qr {
   }
 
   header {
+    position: fixed;
     padding-top: 20px;
     width: 220px;
   }

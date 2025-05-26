@@ -1,7 +1,7 @@
 // Page configuration
 export const publicationSheet = './Papers.csv'
 export const pageUrl = 'https://visvar.github.io'
-export const pageTitle = 'VISVAR Research Group, University of Stuttgart'
+export const pageTitle = 'HCI Stuttgart'
 
 /**
  * Member configuration
