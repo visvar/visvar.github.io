@@ -43,7 +43,7 @@ h3 a:visited {
 
 body,
 main {
-  min-width: 500px;
+  min-width: 0px;
   margin: 0;
   background-color: var(--bodyBgColor);
   color: var(--textColor);
@@ -361,6 +361,13 @@ memberList.alumni img.avatar {
     width: 128px;
     height: 128px;
   }
+
+  /* Member list with pictures */
+  .memberList {
+    max-width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
 }
 
 
@@ -406,6 +413,12 @@ memberList.alumni img.avatar {
   img.avatar {
     width: 192px;
     height: 192px;
+  }
+
+  /* Member list with pictures */
+  .memberList {
+    max-width: 100%;
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 

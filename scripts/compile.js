@@ -27,7 +27,7 @@ function htmlHead(title, path = '.') {
   <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=500, initial-scale=1">
+    <meta name="viewport" content="width=100%, initial-scale=1">
     <title>${title}</title>
     <link rel="stylesheet" href="${path}/style.css">
     <link rel="shortcut icon" href="${path}/assets/img/misc/favicon.png">
