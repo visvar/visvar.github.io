@@ -5,7 +5,7 @@ export const pageTitle = 'VISVAR Research Group, University of Stuttgart'
 
 /**
  * Member configuration
- * Please keep members sorted: professor, then postdocs, then phds;
+ * Please keep members sorted: professor, then postdocs, then phds, then associated (postdocs, phds), then alumni (postdocs, phds);
  * members of the same sole sorted by first name alphabetically.
  * All fields may contain HTML
  *
@@ -18,7 +18,7 @@ export const pageTitle = 'VISVAR Research Group, University of Stuttgart'
  * {string[]} links: links as {text:string, url:string} objects
  * {string[]} projects: projects as {text:string, url:string} objects
  *
- * Sorted by leader, postdocs, phds, alumni
+ * Sorted by leader, postdocs, phds, associated postdocs, associated phds, alumni postdocs, alumni phds
  * Then sorted by name
  */
 export const memberConfig = [
@@ -61,7 +61,7 @@ export const memberConfig = [
     projects: []
   },
 
-  // Post-doc
+  // Postdocs
   {
     name: 'Alexander Achberger',
     title: 'Alexander Achberger, Ph.D.',
@@ -109,10 +109,11 @@ export const memberConfig = [
     projects: []
   },
 
-  // Ph.D.s
+  // Phds
   {
     name: 'Aimee Sousa Calepso',
     title: 'Aimee Sousa Calepso, M.Sc.',
+    role: 'phd',
     path: 'aimee_sousa_calepso',
     bio: `
     <p>
@@ -134,10 +135,10 @@ export const memberConfig = [
       { text: 'IntCDC', url: 'https://www.intcdc.uni-stuttgart.de' }
     ]
   },
-
   {
     name: 'Carlos Quijano-Chavez',
     title: 'Carlos Quijano-Chavez, M.Sc.',
+    role: 'phd',
     path: 'carlos_quijano-chavez',
     bio: `
     <p>
@@ -154,10 +155,10 @@ export const memberConfig = [
     ],
     projects: []
   },
-
   {
     name: 'Christian Krauter',
     title: 'Christian Krauter, M.Sc.',
+    role: 'phd',
     path: 'christian_krauter',
     bio: `
     <p>
@@ -183,10 +184,10 @@ export const memberConfig = [
     ],
     projects: []
   },
-
   {
     name: 'Frank Heyen',
     title: 'Frank Heyen, M.Sc.',
+    role: 'phd',
     path: 'frank_heyen',
     bio: `
     <p>
@@ -228,10 +229,10 @@ export const memberConfig = [
       { text: 'CyberValley - InstruData', url: 'https://www.visus.uni-stuttgart.de/en/projects/cvrf-instrudata/' },
     ]
   },
-
   {
     name: 'Hyerim Park',
     title: 'Hyerim Park, M.Sc.',
+    role: 'phd',
     path: 'hyerim_park',
     bio: `
     <p>
@@ -250,10 +251,10 @@ export const memberConfig = [
     ],
     projects: []
   },
-
   {
     name: 'Jan Krieglstein',
     title: 'Dipl.-Ing. Jan Krieglstein',
+    role: 'phd',
     path: 'jan_krieglstein',
     bio: `
     <p>
@@ -275,10 +276,10 @@ export const memberConfig = [
     ],
     projects: []
   },
-
   {
     name: 'Jan Ulrich Bartels',
     title: 'Jan Ulrich Bartels, M.Sc.',
+    role: 'phd',
     path: 'jan_ulrich_bartels',
     bio: `
     <p>
@@ -308,6 +309,7 @@ export const memberConfig = [
   {
     name: 'Jonas Haischt',
     title: 'Jonas Haischt, M.Sc.',
+    role: 'phd',
     path: 'jonas_haischt',
     bio: `
     <p>
@@ -327,10 +329,10 @@ export const memberConfig = [
     ],
     projects: []
   },
-
   {
     name: 'Jonas Vogelsang',
     title: 'Jonas Vogelsang, M.Sc.',
+    role: 'phd',
     path: 'jonas_vogelsang',
     bio: `
       <p>
@@ -349,10 +351,10 @@ export const memberConfig = [
     ],
     projects: []
   },
-
   {
     name: 'Katrin Angerbauer',
     title: 'Katrin Angerbauer, M.Sc.',
+    role: 'phd',
     path: 'katrin_angerbauer',
     bio: `
     <p>
@@ -371,10 +373,10 @@ export const memberConfig = [
     ],
     projects: []
   },
-
   {
     name: 'Markus Wieland',
     title: 'Markus Wieland, M.Sc.',
+    role: 'phd',
     path: 'markus_wieland',
     bio: `
     <p>
@@ -387,6 +389,7 @@ export const memberConfig = [
     `,
     research: ['HCI', 'Accessibility', 'Cognitive Ergonomics', 'Human Factors', 'VR/AR'],
     links: [
+      { text: 'Website', url: 'https://www.markuswieland.net/' },
       { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Wieland-00007/' },
       { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=3Ya8r3gAAAAJ' },
       { text: 'ORCID', url: 'https://orcid.org/0000-0002-1936-0474' },
@@ -394,10 +397,10 @@ export const memberConfig = [
     ],
     projects: []
   },
-
   {
     name: 'Natalie Hube',
     title: 'Natalie Hube, M.Sc.',
+    role: 'phd',
     path: 'natalie_hube',
     bio: `
     <p>
@@ -419,10 +422,10 @@ export const memberConfig = [
     ],
     projects: []
   },
-
   {
     name: 'Nina Doerr',
     title: 'Nina Doerr, M.Sc.',
+    role: 'phd',
     path: 'nina_doerr',
     bio: `
     <p>
@@ -439,10 +442,10 @@ export const memberConfig = [
     ],
     projects: []
   },
-
   {
     name: 'Rene Cutura',
     title: 'Rene Cutura, M.Sc.',
+    role: 'phd',
     path: 'rene_cutura',
     bio: `
     <p>
@@ -465,10 +468,10 @@ export const memberConfig = [
     ],
     projects: []
   },
-
   {
     name: 'Ruben Bauer',
     title: 'Ruben Bauer, M.Sc.',
+    role: 'phd',
     path: 'ruben_bauer',
     bio: `
     <p>
@@ -483,10 +486,10 @@ export const memberConfig = [
     ],
     projects: []
   },
-
   {
     name: 'Samuel Beck',
     title: 'Samuel Beck, M.Sc.',
+    role: 'phd',
     path: 'samuel_beck',
     bio: `
     <p>
@@ -506,10 +509,10 @@ export const memberConfig = [
       { text: 'InTaVia', url: 'https://www.vis.uni-stuttgart.de/en/research/projects/eu-intavia/' },
     ]
   },
-
   {
     name: 'Sebastian Rigling',
     title: 'Sebastian Rigling, M.Sc.',
+    role: 'phd',
     path: 'sebastian_rigling',
     bio: `
     <p>
@@ -530,10 +533,10 @@ export const memberConfig = [
       { text: 'SimTech', url: 'https://www.simtech.uni-stuttgart.de/' }
     ]
   },
-
   {
     name: 'Simeon Rau',
     title: 'Simeon Rau, M.Sc.',
+    role: 'phd',
     path: 'simeon_rau',
     bio: `
     <p>
@@ -553,10 +556,10 @@ export const memberConfig = [
     ],
     projects: []
   },
-
   {
     name: 'Tessa M. W. Talsma',
     title: 'Tessa M. W. Talsma, M.Sc.',
+    role: 'phd',
     path: 'tessa_talsma',
     bio: `
     <p>
@@ -570,10 +573,10 @@ export const memberConfig = [
     ],
     projects: []
   },
-
   {
     name: 'Tobias Rau',
     title: 'Tobias Rau, M.Sc.',
+    role: 'phd',
     path: 'tobias_rau',
     bio: `
     <p>
@@ -590,10 +593,10 @@ export const memberConfig = [
       { text: 'Cluster of Excellence EXC 2075 "Data-Integrated Simulation Science (SimTech)', url: 'https://www.simtech.uni-stuttgart.de/exc/' }
     ]
   },
-
   {
     name: 'Vindhya Singh',
     title: 'Vindhya Singh, M.Sc.',
+    role: 'phd',
     path: 'vindhya_singh',
     bio: `
     <p>
@@ -616,11 +619,11 @@ export const memberConfig = [
   },
 
 
-  // alumni
+  // alumni posdocs
   {
     name: 'Benjamin Lee',
     title: 'Benjamin Lee, Ph.D.',
-    role: 'alumnus',
+    role: 'alumnuspostdoc',
     path: 'benjamin_lee',
     bio: `
     <p>
@@ -646,9 +649,34 @@ export const memberConfig = [
     projects: []
   },
   {
+    name: 'Quynh Quang Ngo',
+    title: 'Quynh Quang Ngo, Ph.D.',
+    role: 'alumnuspostdoc',
+    path: 'quynh_quang_ngo',
+    bio: `
+    <p>
+      Quynh conducts research in the field of visualization.
+      His recent research interests include dimensionality reduction techniques, data transformation, graph layout, and applying machine learning to visualization.
+      He is also interested in studying the potential novel hybrid techniques among different fields of visual computing, such as visualization, eye-tracking, and virtual/augmented reality.
+    </p>
+    `,
+    research: ['Visualization', 'Machine learning', 'Dimensionality reduction', 'Graph layout', 'VR/AR'],
+    links: [
+      {
+        text: "University of Stuttgart website",
+        url: "https://www.visus.uni-stuttgart.de/en/institute/team/Ngo-00001/"
+      },
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=qwIOAYAAAAAJ' },
+      { text: "ORCID", url: 'https://orcid.org/0000-0001-5254-1480' }
+    ],
+    projects: []
+  },
+  
+  // alumni phds
+  {
     name: 'Cristina Morariu',
     title: 'Cristina Morariu, M.Sc.',
-    role: 'alumnus',
+    role: 'alumnusphd',
     path: 'cristina_morariu',
     bio: `
     <p>
@@ -668,7 +696,7 @@ export const memberConfig = [
   {
     name: 'Magdalena Schwarzl',
     title: 'Magdalena Schwarzl, M.Sc.',
-    role: 'alumnus',
+    role: 'alumnusphd',
     path: 'magdalena_schwarzl',
     bio: `
     <p>
@@ -691,7 +719,7 @@ export const memberConfig = [
   {
     name: 'Melissa Reinelt',
     title: 'Melissa Reinelt, M.Sc.',
-    role: 'alumnus',
+    role: 'alumnusphd',
     path: 'melissa_reinelt',
     bio: ``,
     research: [],
@@ -700,35 +728,10 @@ export const memberConfig = [
     ],
     projects: []
   },
-
-  {
-    name: 'Quynh Quang Ngo',
-    title: 'Quynh Quang Ngo, Ph.D.',
-    // role: 'postdoc',
-    role: 'alumnus',
-    path: 'quynh_quang_ngo',
-    bio: `
-    <p>
-      Quynh conducts research in the field of visualization.
-      His recent research interests include dimensionality reduction techniques, data transformation, graph layout, and applying machine learning to visualization.
-      He is also interested in studying the potential novel hybrid techniques among different fields of visual computing, such as visualization, eye-tracking, and virtual/augmented reality.
-    </p>
-    `,
-    research: ['Visualization', 'Machine learning', 'Dimensionality reduction', 'Graph layout', 'VR/AR'],
-    links: [
-      {
-        text: "University of Stuttgart website",
-        url: "https://www.visus.uni-stuttgart.de/en/institute/team/Ngo-00001/"
-      },
-      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=qwIOAYAAAAAJ' },
-      { text: "ORCID", url: 'https://orcid.org/0000-0001-5254-1480' }
-    ],
-    projects: []
-  },
   {
     name: 'Xingyao Yu',
     title: 'Xingyao Yu, M.Sc.',
-    role: 'alumnus',
+    role: 'alumnusphd',
     path: 'xingyao_yu',
     bio: `
     <p>
