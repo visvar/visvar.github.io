@@ -705,7 +705,8 @@ function reportMissingOrExtraInfo(publications) {
   // create report
   if (missing.length > 0) {
     missing.sort((a, b) => a[1] < b[1] ? -1 : 1)
-    console.log(`\nmissing info/files:`)
+    console.log(`\n\n\nmissing information and files:`)
+    console.log(`\npublications:`)
     let last = ''
     for (const [file, member] of missing) {
       if (last !== member) {
@@ -730,44 +731,47 @@ function reportMissingOrExtraInfo(publications) {
     console.log(`\nextra files:\n  ${extra.sort().join("\n  ")}`)
   }
   if (missing.length > 0 || extra.length > 0) {
-    console.log('\nfill in missing info in Papers.xlsx\nfor files, look inside the following folders depending on file type:\n.pdf   pdf/\n.png   img/\n.html  pub/')
+    console.log('\n  fill in missing info in\n    Papers.xlsx\n  put the missing files in:\n    .pdf   assets/pdf/\n    .png   assets/img/teaser/\n    .html  pub/')
   }
+
+  console.log(`\n\nmembers:`)
   // missing member info
-  console.log()
   let missingInfo = false
   for (const member of memberConfig) {
+    let missingForMember = []
     if (member.role && member.role.includes('alumnus')) {
       // ignore alumni
       continue
     }
     if (member.bio === '') {
-      console.log(`${member.name} is missing a bio`)
-      missingInfo = true
+      missingForMember.push('a bio')
     }
     if (!allPeopleImages.has(member.path + '.jpg')) {
-      console.log(`${member.name} is missing an image`)
-      missingInfo = true
+      missingForMember.push('a profile picture')
     }
     if (member.research.length === 0) {
-      console.log(`${member.name} is missing research interests`)
-      missingInfo = true
+      missingForMember.push('research interests')
     }
     const links = member.links.map(d => d.text)
     if (!links.includes('University of Stuttgart website')) {
-      console.log(`${member.name} is missing a Uni link`)
-      missingInfo = true
+      missingForMember.push('a Uni link')
     }
     if (!links.includes('ORCID')) {
-      console.log(`${member.name} is missing an ORCID link`)
-      missingInfo = true
+      missingForMember.push('an ORCID link')
     }
     if (!links.includes('Google Scholar')) {
-      console.log(`${member.name} is missing a scholar link`)
+      missingForMember.push('a scholar link')
+    }
+    if (missingForMember.length > 0) {
       missingInfo = true
+      console.log(`  ${member.name} is missing`)
+      missingForMember.forEach(element => {
+        console.log('    ' + element)
+      });
     }
   }
   if (missingInfo) {
-    console.log('\nadd missing info in config.js')
+    console.log('\n  add missing info in\n    config.js\n  add missing profile pictures in\n    assets/img/people')
   }
 }
 
