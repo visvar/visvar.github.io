@@ -734,9 +734,9 @@ function reportMissingOrExtraInfo(publications) {
     console.log('\n  fill in missing info in\n    Papers.xlsx\n  put the missing files in:\n    .pdf   assets/pdf/\n    .png   assets/img/teaser/\n    .html  pub/')
   }
 
-  console.log(`\n\nmembers:`)
   // missing member info
   let missingInfo = false
+  let firstPrint = true
   for (const member of memberConfig) {
     let missingForMember = []
     if (member.role && member.role.includes('alumnus')) {
@@ -763,6 +763,10 @@ function reportMissingOrExtraInfo(publications) {
       missingForMember.push('a scholar link')
     }
     if (missingForMember.length > 0) {
+      if (firstPrint) {
+        console.log(`\n\nmembers:`)
+        firstPrint = false
+      }
       missingInfo = true
       console.log(`  ${member.name} is missing`)
       missingForMember.forEach(element => {
