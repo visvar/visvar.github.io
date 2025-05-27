@@ -172,6 +172,9 @@ export const memberConfig = [
     <p>
     Please contact me if you are interested in thesis writing or collaboration opportunities or have any questions about my research. I look forward to hearing from you.
     </p>
+    <p>
+    Picture: Universität Stuttgart / Uli Regenscheit.
+    </p>
     `,
     research: ['HCI', 'AR/ VR', 'Information Visualization'],
     links: [
@@ -258,10 +261,10 @@ export const memberConfig = [
     path: 'jan_krieglstein',
     bio: `
     <p>
-    I'm a research associate at Fraunhofer Institute for Manifacturing Engineering and Automation IPA in Stuttgart.
-    My research focuses on skill-based robot programming using Extended Reality techniques and devices.
+    My research focuses how to support industrial robot programming with techniques of extended reality.
     A proof of concept paper for robot programming using a Mixed Reality user interface can be found <a href="https://ieeexplore.ieee.org/abstract/document/10161095" target="_blank" rel="noreferrer">here</a> and a video <a href="https://www.youtube.com/watch?v=VL1_hjB78pQ" target="_blank" rel="noreferrer">here</a>.
-    Future work will focus on evaluating the benefits of Mixed Reality for robot programming in a user study and further development of helpful XR-features for robot programming.
+    To incorporate XR into today’s robot programming workflow, we evaluated a hybrid user interface consisting of a classical desktop interface and AR visualization in an expert user study here.
+    Furthermore, I want to explore how classical robot teaching can be supported by AR/XR.
     </p>
     `,
     research: [
@@ -619,6 +622,31 @@ export const memberConfig = [
   },
 
   // associated postdocs
+  {
+    name: 'Tanja Blascheck',
+    title: 'Dr. Tanja Blascheck',
+    role: 'associatedpostdoc',
+    path: 'tanja_blascheck',
+    bio: `
+    <p>
+    Tanja Blascheck is a Margarete-von-Wrangell Fellow and works at the Institute for Visualization and Interactive Systems at the University of Stuttgart. She received her Ph.D. degree in Computer Science from the University of Stuttgart, Germany, in 2017. She was a PostDoc at Aviz, INRIA, France, and during a research stay visited the University of Calgary in Alberta, Canada.
+    </p>
+    <p>
+    Her main research areas are information visualization, visual analytics, human-computer interaction, and mixed reality. She focuses on evaluation, perception, and development of novel hardware especially in the context of wearable and mobile devices such as smartwatches, fitness bands, smartrings, and augmented reality headsets.
+    </p>
+    <p>
+    Picture: Max Kovalenko, SimTech.
+    </p>
+    `,
+    research: ['Information Visualization', 'HCI', 'AR/ VR', 'Wearable Devices', 'Micro Visualization', 'Evaluation'],
+    links: [
+      { text: 'University of Stuttgart website', url: 'https://www.vis.uni-stuttgart.de/team/Blascheck/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=-MKDCgIAAAAJ&hl' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0003-4002-4499' },
+    ],
+    projects: []
+  },
+
   // associated phds
   {
     name: 'Fairouz Grioui',
