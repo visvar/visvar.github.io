@@ -25,6 +25,10 @@ h1 {
   color: var(--textColor2)
 }
 
+h1.title {
+  font-size: 40px;
+}
+
 h2,
 h3 {
   margin-top: 25px;
