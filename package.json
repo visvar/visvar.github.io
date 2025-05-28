@@ -27,5 +27,5 @@
   "dependencies": {
     "qrcode": "^1.5.4"
   },
-  "packageManager": "pnpm@8.9.0+sha1.01c55344d677f3b481c6bb6ffba9a6b3c6dbd91d"
+  "packageManager": "pnpm@10.11.0"
 }

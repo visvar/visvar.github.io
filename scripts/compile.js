@@ -272,7 +272,7 @@ function createMemberPageHtml(member, publications) {
         <h1>${member.title}</h1>
         <div class="aboutMember">
           <div class="avatarAndBio">
-            <img class="avatar" src="../assets/img/people/small/${allPeopleImages.has(`${member.path}.jpg`) ? member.path : 'placeholder'}.jpg" />
+            <img class="avatar" src="../assets/img/people/${allPeopleImages.has(`${member.path}.jpg`) ? member.path : 'placeholder'}.jpg" />
             <div class="bio">${member.bio}</div>
           </div>
           <div class="furtherInfo">
@@ -771,7 +771,7 @@ function reportMissingOrExtraInfo(publications) {
       console.log(`  ${member.name} is missing`)
       missingForMember.forEach(element => {
         console.log('    ' + element)
-      });
+      })
     }
   }
   if (missingInfo) {
