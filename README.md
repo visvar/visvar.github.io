@@ -1,12 +1,19 @@
 # HCI Stuttgart Homepage
 
-[visvar.github.io](https://visvar.github.io/)
+Hello, this is the repository for the webpage of the Human-Computer Interaction group at the University of Stuttgart headed by Michael Sedlmair.
+If you are a (associated / alumnus) member and want to contribute, please **first read this readme**. If you have any questions, please ask @fheyen or @ChristianKrauter.
+
+The live version of this webpage can be found here: [visvar.github.io](https://visvar.github.io/).
 
 ## Adding Content
 
 Only change files in the below folders, nothing else!
 
-After a change, compile the website as described below for changes to take effect, or ask @fheyen or @ChristianKrauter.
+After adding new content, there are two general options:
+1. Compile it yourself (prefered)
+   - Compile the webpage and push your changes (Ask @fheyen or @ChristianKrauter to make you a contributor).
+2. Only update the content
+   - Create a pull request and I will update the live page at a later point.
 
 ### "About" Page
 
@@ -18,7 +25,8 @@ Member information is configured inside [config.js](./config.js).
 ### Media Assets
 
 Media names must match the publication's key in the table.
-The pattern usually is lastnameYearKeyword (example: heyen2020clavis).
+The pattern is lastnameYearFirstWord (example: heyen2020clavis).
+**The smaller thumbnail versions of images are generated automatically.**
 
 - [assets/img](./assets/img/) for images
   - [assets/img/teaser/](./assets/img/teaser/) for publication teasers (must be .png)
@@ -48,6 +56,11 @@ You will still need to reload the page (e.g., press (CTRL) F5) in the browser to
 Fast compile: If publications, images, etc., did not change, you can run `npm run compile` to only re-compile the HTML.
 
 ## Deployment / Publishing
+
+If git shows that files changed, but without any actual changes, the problem is likely line endings.
+To fix this, please adjust your git settings as follows (-global is optional):
+
+`git config --global core.autocrlf input`
 
 Simply do a git commit and push, e.g., run
 
