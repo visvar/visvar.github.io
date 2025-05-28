@@ -214,7 +214,7 @@ function createMainPageHtml(publications, memberConfig) {
         </div>
         </article>
         <article>
-        <h1>Associated Members</h1>
+        <h1>Associated Researchers</h1>
         <div class="memberList">
           ${associatedList}
         </div>

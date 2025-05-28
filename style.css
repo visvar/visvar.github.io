@@ -140,19 +140,15 @@ article img.qr {
   display: grid;
   row-gap: 20px;
   text-align: center;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, 20%);
+  justify-content: center;
+  justify-items: center;
 }
 
 .memberList img.avatar {
   border-radius: 50%;
   box-shadow: #bbb 1px 1px 15px;
 }
-
-/*
-memberList.alumni img.avatar {
-  filter: sepia(50%);
-}
-*/
 
 .memberList a,
 .memberList a:hover {
@@ -369,7 +365,7 @@ memberList.alumni img.avatar {
   /* Member list with pictures */
   .memberList {
     max-width: 100%;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, 30%);
   }
 
 }
@@ -422,7 +418,7 @@ memberList.alumni img.avatar {
   /* Member list with pictures */
   .memberList {
     max-width: 100%;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, 25%);
   }
 }
 
@@ -460,10 +456,6 @@ memberList.alumni img.avatar {
     top: -5px;
   }
 
-
-
-
-
   /* Main page about infos */
   .aboutusFurtherInfo {
     display: grid;
@@ -477,13 +469,9 @@ memberList.alumni img.avatar {
     height: 256px;
   }
 
-
-
-
-
   /* Member list with pictures */
   .memberList {
     max-width: 100%;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, 20%);
   }
 }
