@@ -6,3 +6,4 @@ test
 
 *.csv
 pnpm-lock.yaml
+~*.xlsx
