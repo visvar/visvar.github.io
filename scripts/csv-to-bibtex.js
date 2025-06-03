@@ -73,9 +73,16 @@ async function createBibTex() {
         const month = pub.Date.slice(6, 7)
         const url1 = pub['Publisher URL (official)']
         const url2 = pub['url2']
+        const pdf = pub['PDF URL (public)']
         const venue = pub['Submission Target']
         const notes = pub['notes']
-        const abstract = pub['abstract']
+        const video = pub['Video']
+        const video2 = pub['Video2']
+        const suppl = pub['Supplemental']
+        const acks = pub['Acknowledgements']
+        const funding = pub['funding']
+
+        const abstract = pub['Abstract']
         const doi = url1.includes('doi.org') ? url1 : ''
 
         // create full bibtex
@@ -100,21 +107,63 @@ async function createBibTex() {
             bibString = bibString.substring(0, bibString.lastIndexOf('}'))
         }
 
-        if (doi) {
+        if (!bibString.includes('month =')) {
+            bibString += `\n  month = {${month}},`
+        }
+
+        if (!bibString.includes('doi') && doi) {
             bibString += `\n  doi = {${doi}},`
         }
-        bibString += `\n  month = {${month}},`
-        if (url2 || (url1 && !doi)) {
-            bibString += `\n  url = {${url2 ?? url1}},`
+
+        if (!bibString.includes('url =')) {
+            if ((url1 && !doi)) {
+                bibString += `\n  url = {${url1}},`
+                if (url2) {
+                    bibString += `\n  url2 = {${url2}},`
+                }
+            } else if (url2) {
+                bibString += `\n  url = {${url2}},`
+            }
         }
+
         if (notes) {
             bibString += `\n  note = {${notes}},`
         }
+
+        if (video) {
+            bibString += `\n  video = {${video}},`
+        }
+
+        if (video2) {
+            bibString += `\n  video2 = {${video2}},`
+        }
+
+        if (suppl) {
+            bibString += `\n  suppl = {${suppl}},`
+        }
+
+        if (acks) {
+            bibString += `\n  acks = {${acks}},`
+        }
+
+        if (funding) {
+            bibString += `\n  funding = {${funding}},`
+        }
+
+        if (pdf) {
+            bibString += `\n  pdf = {${pdf}},`
+        }
+
         bibString += `\n  series = {${venue}},`
         // TODO: check if abstract already in bibtex
-        bibString += `\n  abstract = {${abstract}},`
+        if (!bibString.includes('Abstract')) {
+            bibString += `\n  abstract = {${abstract}},`
+        }
+
+        // close bibtex
         bibString += `\n}\n\n\n`
         console.log(bibString)
+        
         // const bibtex = formatBibtex(pub.Key, bibString)
         // console.log(bibtex)
 
