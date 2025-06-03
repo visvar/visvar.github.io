@@ -66,6 +66,7 @@ async function createBibTex() {
     publications.sort((a, b) => a.Date > b.Date ? -1 : 1).map(pub => {
 
         // get data from csv
+        let bibString = pub['bibtex'] || ''
         const key = pub['Key (e.g. for file names)']
         const title = pub['Title']
         const year = pub.Date.slice(0, 4)
@@ -75,7 +76,6 @@ async function createBibTex() {
         const venue = pub['Submission Target']
         const notes = pub['notes']
         const abstract = pub['abstract']
-        let bibString = pub['bibtex'] || ''
         const doi = url1.includes('doi.org') ? url1 : ''
 
         // create full bibtex
