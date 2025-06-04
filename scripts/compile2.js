@@ -108,14 +108,14 @@ function main() {
 
     // TODO: new bibtex version
     const bib = new bibtex()
-    const bibObject = bib.getBibAsObject('./temp_bibtex.bib')
+    const bibObject = bib.getBibAsObject('./bibliography.bib')
     // console.log(JSON.stringify(bibObject, null, 4))
 
 
     for (const entry of bibObject) {
       const key = entry.key
       console.log(key)
-      console.log(entry)
+      // console.log(entry)
       const data = entry.data
 
 
@@ -150,6 +150,7 @@ function main() {
         bibtex,
       }
       console.log(pub)
+
 
       // publications.push(pub)
 
