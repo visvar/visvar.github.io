@@ -4,8 +4,12 @@ import QRCode from 'qrcode'
 import { publicationSheet, pageUrl, pageTitle, memberConfig } from '../config.js'
 import pkg from 'bibtex-tidy'
 const { tidy } = pkg
-import pkg2 from 'bibtex'
-const { parseBibFile, normalizeFieldValue } = pkg2
+import bibtex from "@hygull/bibtex"
+
+
+// TODO: remove once we transitioned
+const USE_NEW_BIBXTEX_METHOD = true
+
 
 // report missing info for publications
 const REPORT_MISSING_INFO = false
@@ -87,77 +91,75 @@ const nameMemberMap = new Map(memberConfig.map(d => [d.name, d]))
 
 const publications = []
 
+
+
 // Main loop
-// TODO: old CSV version
-const stream = createReadStream(publicationSheet)
-csv
-  .parseStream(stream, { headers: true })
-  .on('data', data => data.Title !== '' && publications.push(data))
-  .on('end', createPages)
-
-// TODO: new bibtex version
-// TODO: maybe better to use https://citation.js.org/api/0.7/
-// import { parseBibFile, normalizeFieldValue } from "bibtex"
-
 function main() {
+  if (!USE_NEW_BIBXTEX_METHOD) {
 
-  const bibFile = parseBibFile(`
-    @InProceedings{realscience,
-    author    = {Marteen Fredrik Adriaan ding de la Trumppert and مهدي N\\"allen and henQuq, jr, Mathize},
-    title     = {You Won't Believe This Proof That {P} \\gtreqqless {NP} Using Super-{T}uring Computation Near Big Black Holes},
-    booktitle = {Book of Qeq},
-    month     = {September},
-    year      = {2001},
-    address   = {Dordrecht},
-    publisher = {Willems Uitgeverij},
-    url       = {https://github.com/digitalheir/},
-    pages     = {6--9}
+    // TODO: old CSV version
+    const stream = createReadStream(publicationSheet)
+    csv
+      .parseStream(stream, { headers: true })
+      .on('data', data => data.Title !== '' && publications.push(data))
+      .on('end', createPages)
+
+  } else {
+
+    // TODO: new bibtex version
+    const bib = new bibtex()
+    const bibObject = bib.getBibAsObject('./temp_bibtex.bib')
+    // console.log(JSON.stringify(bibObject, null, 4))
+
+
+    for (const entry of bibObject) {
+      const key = entry.key
+      console.log(key)
+      console.log(entry)
+      const data = entry.data
+
+
+      // TODO: warn if no month given
+      let month = data.month ?? 0
+      month = month.length === 1 ? `0${month}` : month
+
+      // for the bibtex displayed on the page,
+      // remove custom fields like video and make the bibtex pretty
+      // TODO: in formatBibtex, add all fields to remove
+      const bibCode = bib.getBibCodeFromObject(entry)
+      const bibtex = formatBibtex(key, bibCode)
+
+      const pub = {
+        key,
+        ...entry.data,
+        "Title": data.title,
+        "Submission Target": data.booktitle ?? data.journal,
+        "Date": `${data.year}-${month}`,
+        "First Author": '',
+        "Other Authors": '',
+        "Publisher URL (official)": data.doi,
+        // "url2": ,
+        // "PDF URL (public)": '',
+        // "Video": '',
+        // "Video2": '',
+        // "Supplemental": get(entry, 'suppl'),
+        // "Acknowledgements": get(entry, 'ack'),
+        // "Abstract": get(entry, 'abstract'),
+        // "notes": get(entry, 'notes'),
+        // "funding": get(entry, 'funding'),
+        bibtex,
+      }
+      console.log(pub)
+
+      // publications.push(pub)
+
+
+
+
+      // TODO:
+      // createPages()
     }
-    `)
-
-  console.log(bibFile)
-
-  const get = (entry, key) => normalizeFieldValue(entry.getField(key))
-
-  for (const key in bibFile.entries$) {
-    console.log(key)
-
-    const entry = bibFile
-      .getEntry(key)
-
-
-    let month = get(entry, 'month')
-    month = month.length === 1 ? `0${month}` : month
-
-    const pub = {
-      "Title": get(entry, 'title'),
-      "Submission Target": get(entry, 'booktitle'),
-      "Date": `${get(entry, 'year')}-${month}`,
-      "First Author": '',
-      "Other Authors": '',
-      "Key (e.g. for file names)": key,
-      "Publisher URL (official)": get(entry, 'doi'),
-      "url2": get(entry, 'url2'),
-      "PDF URL (public)": '',
-      "Video": '',
-      "Video2": '',
-      "Supplemental": get(entry, 'suppl'),
-      "Acknowledgements": get(entry, 'ack'),
-      "Abstract": get(entry, 'abstract'),
-      "bibtex": get(entry, 'bibtex'),
-      "notes": get(entry, 'notes'),
-      "funding": get(entry, 'funding')
-    }
-    console.log(pub)
-
-    publications.push(pub)
   }
-
-
-
-
-  // TODO:
-  // createPages()
 }
 main()
 
@@ -706,7 +708,7 @@ function reportMissingOrExtraInfo(publications) {
     console.log(`\nextra files:\n  ${extra.sort().join("\n  ")}`)
   }
   if (missing.length > 0 || extra.length > 0) {
-    console.log('\n  fill in missing info in\n    Papers.xlsx\n  put the missing files in:\n    .pdf   assets/pdf/\n    .png   assets/img/teaser/\n    .html  pub/')
+    console.log('\nput the missing files in:\n    .pdf   assets/pdf/\n    .png   assets/img/teaser/\n    .html  pub/')
   }
 
   // missing member info

@@ -23,10 +23,8 @@
     "fast-csv": "^5.0.2",
     "image-js": "^1.0.0-alpha.3",
     "npm-check-updates": "^18.0.1",
-    "xlsx": "^0.18.5"
-  },
-  "dependencies": {
-    "bibtex": "^0.9.0",
+    "xlsx": "^0.18.5",
+    "@hygull/bibtex": "^1.1.23",
     "qrcode": "^1.5.4"
   }
 }
