@@ -1,0 +1,43 @@
+Example publication entry for bibliography.bib
+
+// the usual information depending on your publication type
+
+@article{smiley2021madeaxis, // BibTeX type has to be correct; key has to be of the format <lastname-of-first-author><year><first-word-of-title {<increasing number (2,3,...), if necessary>}
+    title        = {The MADE-Axis: A Modular Actuated Device to Embody the Axis of a Data Dimension},
+    author       = {Smiley, Jim and Lee, Benjamin and Tandon, Siddhant and Cordeil, Maxime and Besan\c{c}on, Lonni and Knibbe, Jarrod and Jenny, Bernhard and Dwyer, Tim},
+    year         = {2021},
+    month        = {nov},
+    journal      = {Proc. ACM Hum.-Comput. Interact.},
+    booktitle    = {},
+    publisher    = {Association for Computing Machinery},
+    series       = {ISS},
+    editor       = {},
+    howpublished = {},
+    venue        = {},
+    issue        = {},
+    copyright    = {},
+    doi          = {10.1145/3488546},
+    issn         = {0167-7055},
+    archiveprefix = {},
+    eprint       = {},
+    eprinttype   = {},
+    articleno    = {501},
+    pages        = {1--23},
+    numpages     = {23},
+    keywords     = {data visualization, embodied interfaces},
+    volume       = {5},
+    number       = {ISS},
+    organization = {},
+    url          = {}, // URL, but NOT doi-url
+    abstract     = {Tangible controls-especially sliders and rotary knobs-have been explored in a wide range of interactive applications for desktop and immersive environments. Studies have shown that they support greater precision and provide proprioceptive benefits, such as support for eyes-free interaction. However, such controls tend to be expressly designed for specific applications. We draw inspiration from a bespoke controller for immersive data visualisation, but decompose this design into a simple, wireless, composable unit featuring two actuated sliders and a rotary encoder. Through these controller units, we explore the interaction opportunities around actuated sliders; supporting precise selection, infinite scrolling, adaptive data representations, and rich haptic feedback; all within a mode-less interaction space. We demonstrate the controllers' use for simple, ad hoc desktop interaction,before moving on to more complex, multi-dimensional interactions in VR and AR. We show that the flexibility and composability of these actuated controllers provides an emergent design space which covers the range of interactive dynamics for visual analysis. In a user study involving pairs performing collaborative visual analysis tasks in mixed-reality, our participants were able to easily compose rich visualisations, make insights and discuss their findings.},
+    
+// our extra stuff   
+    note         = {Honourable Mention Award}, // can be used for regular notes, but also for awards. Will be displayed on the website
+    url2         = {Additional url},
+    acks         = {Acknowledgements of you paper},
+    funding      = {Funding information of your papaer},
+    video        = {Link to a video of/ for your paper},
+    video2       = {Link to another video of/ for your paper},
+    pdf          = {Link to a publicly available PDF},
+    suppl        = {Link to the supplemental material},
+}

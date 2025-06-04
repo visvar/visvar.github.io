@@ -6,7 +6,3 @@ test
 
 pnpm-lock.yaml
 ~*.xlsx
-
-
-# temp file for table to bibtex transition
-temp_bibtex.bib
