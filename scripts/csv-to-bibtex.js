@@ -4,9 +4,6 @@
  * run from project root with `node scripts/csv-to-bibtex.js`
  *
  * TODO:
- * - [ ] parse bibtex into something we can work with, maybe use https://github.com/digitalheir/bibtex-js
- * - [ ] integrate urls, date, key into bibtex
- * - [ ] insert doi, abstract *if missing*
  * - [ ] remove this script after the migration is done
  * - [ ] remove the old table
  */
@@ -20,33 +17,33 @@ import pkg from 'bibtex-tidy'
 const { tidy } = pkg
 
 
-// /**
-//  * Formats bibtex for more beautiful and uniform display
-//  *
-//  * @see https://github.com/FlamingTempura/bibtex-tidy
-//  * @param {string} key pub key (for debugging logs)
-//  * @param {string} bibtexString bibtex string
-//  */
-// function formatBibtex(key, bibtexString) {
-//     try {
-//         const formatted = tidy(bibtexString, {
-//             omit: ['address', 'location', 'isbn', 'timestamp'],
-//             curly: true,
-//             space: 4,
-//             align: 13,
-//             stripEnclosingBraces: true,
-//             sortFields: true,
-//             removeEmptyFields: true,
-//             lowercase: true
-//         })
-//         return formatted.bibtex
-//     } catch (e) {
-//         // console.log(e);
-//         console.warn(`Invalid bibtex for pub with key ${key}`)
-//         console.log(bibtexString)
-//         return bibtexString
-//     }
-// }
+/**
+ * Formats bibtex for more beautiful and uniform display
+ *
+ * @see https://github.com/FlamingTempura/bibtex-tidy
+ * @param {string} key pub key (for debugging logs)
+ * @param {string} bibtexString bibtex string
+ */
+function formatBibtex(key, bibtexString) {
+    try {
+        const formatted = tidy(bibtexString, {
+            omit: ['address', 'location', 'isbn', 'timestamp'],
+            curly: true,
+            space: 4,
+            align: 14,
+            stripEnclosingBraces: true,
+            sortFields: true,
+            removeEmptyFields: true,
+            lowercase: true
+        })
+        return formatted.bibtex
+    } catch (e) {
+        // console.log(e);
+        console.warn(`Invalid bibtex for pub with key ${key}`)
+        console.log(bibtexString)
+        return bibtexString
+    }
+}
 
 // Main loop
 const publications = []
@@ -88,7 +85,6 @@ async function createBibTex() {
         // create full bibtex
         // console.log(bibString)
 
-        // TODO: handle missing bibtex
         if (!bibString) {
             console.warn(`Missing bibtex for pub with key ${key} and title ${title}`)
             bibString = `\n% AUTO-CREATED BIBTEX FOR PUB WITH TITLE ${title}\n`
@@ -105,6 +101,10 @@ async function createBibTex() {
             bibString = bibString.replace(oldKey, key)
 
             bibString = bibString.substring(0, bibString.lastIndexOf('}'))
+        }
+
+        if (!bibString.endsWith(',')) {
+            bibString += ','
         }
 
         if (!bibString.includes('month =')) {
@@ -155,20 +155,20 @@ async function createBibTex() {
         }
 
         bibString += `\n  series = {${venue}},`
-        // TODO: check if abstract already in bibtex
-        if (!bibString.includes('Abstract')) {
+        if (!bibString.includes('abstract') && !bibString.includes('Abstract')) {
             bibString += `\n  abstract = {${abstract}},`
         }
 
         // close bibtex
         bibString += `\n}\n\n\n`
-        console.log(bibString)
         
-        // const bibtex = formatBibtex(pub.Key, bibString)
-        // console.log(bibtex)
+        // format
+        bibString = formatBibtex(pub.Key, bibString)
+        console.log(bibString)
 
         completeBibtex.push(bibString)
     })
-    writeFileSync('./temp_bibtex.bib', completeBibtex.join('\n\n'), 'utf8')
+    
+    writeFileSync('./bibliography.bib', completeBibtex.join('\n\n'), 'utf8')
     console.log('Bibtex file created: temp_bibtex.bib')
 }
