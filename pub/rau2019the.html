@@ -62,7 +62,20 @@
                   <a href="../suppl/rau2019the.zip" target="_blank" rel="noreferrer">supplemental</a>
                 </div>
                 <div class="abstract"><b>Abstract.</b> Large-scale computer simulations generate data at rates that necessitate visual analysis tools to run in situ. The distribution of work on and across nodes of a supercomputer is crucial to utilize compute resources as efficiently as possible. In this paper, we study two work distribution problems in the context of in situ visualization and jointly assess the performance impact of different variants. First, especially for simulations involving heterogeneous loads across their domain, dynamic load balancing can significantly reduce simulation run times. However, the adjustment of the domain partitioning associated with this also has a direct impact on visualization performance. The exact impact of this side effect is largely unclear a priori as generally different criteria are used for balancing simulation and visualization load. Second, on node level, the adequate allocation of threads to simulation or visualization tasks minimizes the performance drain of the simulation while also enabling timely visualization results. In our case study, we jointly study both work distribution aspects with the visualization framework MegaMol coupled in situ on node level to the molecular dynamics simulation ls1 Mardyn on Stampede2 at TACC.</div>
-                
+                <div class="bibtex"><textarea>@inproceedings{10.1145/3364228.3364233,
+    title        = {The impact of work distribution on in situ visualization: a case study},
+    author       = {Rau, Tobias and Gralka, Patrick and Fernandes, Oliver and Reina, Guido and Frey, Steffen and Ertl, Thomas},
+    year         = {2019},
+    booktitle    = {Proceedings of the Workshop on In Situ Infrastructures for Enabling Extreme-Scale Analysis and Visualization},
+    publisher    = {Association for Computing Machinery},
+    series       = {ISAV '19},
+    pages        = {17–22},
+    doi          = {10.1145/3364228.3364233},
+    abstract     = {Large-scale computer simulations generate data at rates that necessitate visual analysis tools to run in situ. The distribution of work on and across nodes of a supercomputer is crucial to utilize compute resources as efficiently as possible. In this paper, we study two work distribution problems in the context of in situ visualization and jointly assess the performance impact of different variants. First, especially for simulations involving heterogeneous loads across their domain, dynamic load balancing can significantly reduce simulation run times. However, the adjustment of the domain partitioning associated with this also has a direct impact on visualization performance. The exact impact of this side effect is largely unclear a priori as generally different criteria are used for balancing simulation and visualization load. Second, on node level, the adequate allocation of threads to simulation or visualization tasks minimizes the performance drain of the simulation while also enabling timely visualization results. In our case study, we jointly study both work distribution aspects with the visualization framework MegaMol coupled in situ on node level to the molecular dynamics simulation ls1 Mardyn on Stampede2 at TACC.},
+    numpages     = {6},
+    keywords     = {visualization, load balancing, distributed rendering, HPC}
+}
+</textarea></div>
                 
                 
                 <img class="qr" src="../assets/img/qr/rau2019the.png"/>
