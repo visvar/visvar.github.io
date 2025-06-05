@@ -6,11 +6,6 @@ import pkg from 'bibtex-tidy'
 const { tidy } = pkg
 import bibtex from "@hygull/bibtex"
 
-
-// TODO: remove once we transitioned
-const USE_NEW_BIBXTEX_METHOD = true
-
-
 // report missing info for publications
 const REPORT_MISSING_INFO = false
 // report when pdf is only given as link but not file
@@ -89,91 +84,34 @@ const allPubHTML = new Set(readdirSync("pub"))
 
 const nameMemberMap = new Map(memberConfig.map(d => [d.name, d]))
 
-const publications = []
+// Load data
+const bib = new bibtex()
+const publications = bib.getBibAsObject('./bibliography.bib')
 
-
-
-// Main loop
-function main() {
-  if (!USE_NEW_BIBXTEX_METHOD) {
-
-    // TODO: old CSV version
-    const stream = createReadStream(publicationSheet)
-    csv
-      .parseStream(stream, { headers: true })
-      .on('data', data => data.Title !== '' && publications.push(data))
-      .on('end', createPages)
-
-  } else {
-
-    // TODO: new bibtex version
-    const bib = new bibtex()
-    const bibObject = bib.getBibAsObject('./bibliography.bib')
-    // console.log(JSON.stringify(bibObject, null, 4))
-
-
-    for (const entry of bibObject) {
-      const key = entry.key
-      console.log(key)
-      // console.log(entry)
-      const data = entry.data
-
-
-      // TODO: warn if no month given
-      let month = data.month ?? 0
-      month = month.length === 1 ? `0${month}` : month
-
-      // for the bibtex displayed on the page,
-      // remove custom fields like video and make the bibtex pretty
-      // TODO: in formatBibtex, add all fields to remove
-      const bibCode = bib.getBibCodeFromObject(entry)
-      const bibtex = formatBibtex(key, bibCode)
-
-      const pub = {
-        key,
-        ...entry.data,
-        "Title": data.title,
-        "Submission Target": data.booktitle ?? data.journal,
-        "Date": `${data.year}-${month}`,
-        "First Author": '',
-        "Other Authors": '',
-        "Publisher URL (official)": data.doi,
-        // "url2": ,
-        // "PDF URL (public)": '',
-        // "Video": '',
-        // "Video2": '',
-        // "Supplemental": get(entry, 'suppl'),
-        // "Acknowledgements": get(entry, 'ack'),
-        // "Abstract": get(entry, 'abstract'),
-        // "notes": get(entry, 'notes'),
-        // "funding": get(entry, 'funding'),
-        bibtex,
-      }
-      console.log(pub)
-
-
-      // publications.push(pub)
-
-
-
-
-      // TODO:
-      // createPages()
-    }
-  }
-}
-main()
-
+createPages()
 
 /**
- * Creates all HTML pages
+ * Creates all HTML pages TODO: Adapt to bibtex object
 */
 async function createPages() {
   console.log(`${publications.length} publications`)
   console.log(allPdfs.size + ' pdfs')
   console.log(allTeasers.size + ' teasers')
+
+
+
+
   // Sort by date descending, so newest at top of page
-  publications.sort((a, b) => a.Date > b.Date ? -1 : 1)
+  publications.sort((a, b) => {
+    if (parseInt(a['data']['year']) !== parseInt(b['data']['year'])) return parseInt(b['data']['year']) - parseInt(a['data']['year']);
+    return parseInt(b['data']['month']) - parseInt(a['data']['month'])
+  });
+
+  console.log(JSON.stringify(publications, null, 4))
+
+  // TODO convert stuff
+  exit()
+
   // Member / author pages
   for (const member of memberConfig) {
     const authoredPubs = publications.filter(d =>
@@ -182,17 +120,19 @@ async function createPages() {
     )
     createMemberPageHtml(member, authoredPubs)
   }
+
   // Main page and imprint
   createMainPageHtml(publications, memberConfig)
   createImprint()
+
   // Publication pages
   for (const pub of publications) {
     createPublicationPageHtml(pub)
   }
-  // Export papers.json
-  updateFile('papers.json', JSON.stringify(publications))
+
   // Create missing QR codes
   await createQRCodes(publications)
+
   // Detect missing and extra files
   reportMissingOrExtraInfo(publications)
 }
@@ -567,10 +507,10 @@ function createPublicationPageHtml(pub) {
 function formatBibtex(key, bibtexString) {
   try {
     const formatted = tidy(bibtexString, {
-      omit: ['address', 'location', 'isbn', 'timestamp'],
+      omit: ['abstract', 'acks', 'address', 'note', 'pdf', 'suppl', 'url2', 'video', 'video2'],
       curly: true,
       space: 4,
-      align: 13,
+      align: 14,
       stripEnclosingBraces: true,
       sortFields: true,
       removeEmptyFields: true,
