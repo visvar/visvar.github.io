@@ -10,24 +10,22 @@
 
 
 
-import { createReadStream, readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs'
+import { createReadStream, writeFileSync, unlink } from 'node:fs'
 import csv from 'fast-csv'
-import { publicationSheet, pageUrl, pageTitle, memberConfig } from '../config.js'
+import { publicationSheet } from '../config.js'
 import pkg from 'bibtex-tidy'
 const { tidy } = pkg
-
+import bibtex from '@hygull/bibtex'
 
 /**
  * Formats bibtex for more beautiful and uniform display
  *
  * @see https://github.com/FlamingTempura/bibtex-tidy
- * @param {string} key pub key (for debugging logs)
  * @param {string} bibtexString bibtex string
  */
-function formatBibtex(key, bibtexString) {
+function formatBibtex(bibtexString) {
     try {
         const formatted = tidy(bibtexString, {
-            omit: ['address', 'location', 'isbn', 'timestamp'],
             curly: true,
             space: 4,
             align: 14,
@@ -38,27 +36,26 @@ function formatBibtex(key, bibtexString) {
         })
         return formatted.bibtex
     } catch (e) {
-        // console.log(e);
-        console.warn(`Invalid bibtex for pub with key ${key}`)
-        console.log(bibtexString)
-        return bibtexString
+        console.warn('Invalid bibtex')
+        throw e
     }
 }
 
 // Main loop
 const publications = []
+// create bib object
+const bib = new bibtex();
 const stream = createReadStream(publicationSheet)
 csv
     .parseStream(stream, { headers: true })
     .on('data', data => data.Title !== '' && publications.push(data))
     .on('end', createBibTex)
 
-/**
- * Creates all HTML pages
-*/
+
 async function createBibTex() {
     const completeBibtex = []
     console.log(`${publications.length} publications`)
+    let count = 0
     // Sort by date descending, so newest at top of page
     publications.sort((a, b) => a.Date > b.Date ? -1 : 1).map(pub => {
 
@@ -78,97 +75,146 @@ async function createBibTex() {
         const suppl = pub['Supplemental']
         const acks = pub['Acknowledgements']
         const funding = pub['funding']
-
         const abstract = pub['Abstract']
-        const doi = url1.includes('doi.org') ? url1 : ''
+        const doi = url1.includes('doi') ? url1 : ''
 
-        // create full bibtex
-        // console.log(bibString)
+        // activate for easier tracking of conversion problems
+        /*
+        count += 1
+        console.log()
+        console.log(count)
+        console.log(key)
+        console.log(title)
+        */
 
-        if (!bibString) {
-            console.warn(`Missing bibtex for pub with key ${key} and title ${title}`)
-            bibString = `\n% AUTO-CREATED BIBTEX FOR PUB WITH TITLE ${title}\n`
-            bibString += `\n% ADAPT CITATION TYPE AND CHECK ALL FIELDS ${title}\n`
-            bibString += `@misc{${key},\n  year=${year}`
-            const authors = [
-                ...pub['First Author'].split(',').map(d => d.trim()).filter(d => d.length),
-                ...pub['Other Authors'].split(',').map(d => d.trim()).filter(d => d.length)
-            ]
-            bibString += `\n  author=${authors.join(', ')}`
-        } else {
-            // fix key
-            const oldKey = bibString.substring(bibString.indexOf('{') + 1, bibString.indexOf(','))
-            bibString = bibString.replace(oldKey, key)
-
-            bibString = bibString.substring(0, bibString.lastIndexOf('}'))
+        // handle excel function-prevention-prefix
+        if (bibString.startsWith("'")) {
+            bibString = bibString.substring(1);
         }
 
-        if (!bibString.endsWith(',')) {
-            bibString += ','
+        // write bibtex to temp file bc package wants it like that
+        writeFileSync("tmp.bib", bibString)
+        
+        // convert bibtex text to object
+        const bibArr = bib.getBibAsObject('tmp.bib');
+
+        // fill bibtex
+        bibArr['key'] = key
+        bibArr['data']['author'] = pub['First Author'] + ', ' + pub['Other Authors']
+
+        if (!bibArr['data']['title']) {
+            bibArr['data']['title'] = title
         }
 
-        if (!bibString.includes('month =')) {
-            bibString += `\n  month = {${month}},`
+        if (!bibArr['data']['year']) {
+            bibArr['data']['year'] = year
         }
 
-        if (!bibString.includes('doi') && doi) {
-            bibString += `\n  doi = {${doi}},`
+        if (!bibArr['data']['month']) {
+            bibArr['data']['month'] = month
         }
 
-        if (!bibString.includes('url =')) {
-            if ((url1 && !doi)) {
-                bibString += `\n  url = {${url1}},`
-                if (url2) {
-                    bibString += `\n  url2 = {${url2}},`
-                }
-            } else if (url2) {
-                bibString += `\n  url = {${url2}},`
+        if (doi) {
+            bibArr['data']['doi'] = doi
+        }
+
+        if (bibArr['data']['doi']) {
+            if (!bibArr['data']['doi'].includes('doi')) {
+                console.log();
+                console.log(title)
+                console.log('has doi without link')
+            }
+        }
+        // We have too many where no doi exists
+        /*else {
+            console.log();
+            console.log(title)
+            console.log('is missing a doi')
+        }*/
+
+        // Safe URLs only if they are not doi 
+        if (url1 && !url1.includes('doi')) {
+            bibArr['data']['url'] = url1
+        }
+
+        // Fill url before url2
+        if (url2) {
+            if (!url1 || url1.includes('doi')) {
+                bibArr['data']['url'] = url2
+            } else {
+                bibArr['data']['url2'] = url2
+            }
+
+        }
+
+        // Append custom notes to existing notes
+        if (notes) {
+            if (bibArr['data']['notes']) {
+                console.log('notes already in ' + key)
+                bibArr['data']['notes'] += '\n'
+                bibArr['data']['notes'] += notes
+
+            } else {
+                bibArr['data']['notes'] = notes
             }
         }
 
-        if (notes) {
-            bibString += `\n  note = {${notes}},`
-        }
+        // Add our custom stuff
 
         if (video) {
-            bibString += `\n  video = {${video}},`
+            bibArr['data']['video'] = video
         }
 
         if (video2) {
-            bibString += `\n  video2 = {${video2}},`
+            bibArr['data']['video2'] = video2
         }
 
         if (suppl) {
-            bibString += `\n  suppl = {${suppl}},`
+            bibArr['data']['suppl'] = suppl
         }
 
         if (acks) {
-            bibString += `\n  acks = {${acks}},`
+            bibArr['data']['acks'] = acks
         }
 
         if (funding) {
-            bibString += `\n  funding = {${funding}},`
+            bibArr['data']['funding'] = funding
         }
 
         if (pdf) {
-            bibString += `\n  pdf = {${pdf}},`
+            bibArr['data']['pdf'] = pdf
         }
 
-        bibString += `\n  series = {${venue}},`
-        if (!bibString.includes('abstract') && !bibString.includes('Abstract')) {
-            bibString += `\n  abstract = {${abstract}},`
+        if (venue) {
+            bibArr['data']['series'] = venue
         }
 
-        // close bibtex
-        bibString += `\n}\n\n\n`
-        
-        // format
-        bibString = formatBibtex(pub.Key, bibString)
-        console.log(bibString)
+        if (abstract) {
+            bibArr['data']['abstract'] = abstract
+        }
 
-        completeBibtex.push(bibString)
+        // try converting to catch error
+        let bibCode = bib.getBibCodeFromObject(bibArr, 3);
+        bibCode = formatBibtex(bibCode)
+
+        completeBibtex.push(bibArr)
     })
+
+    // Delete temporary bib file
+    unlink('tmp.bib', (err) => {
+        if (err) throw err;
+    });
+
+    // save json to check errors
+    writeFileSync('./bibliography.json', JSON.stringify(completeBibtex, null, 4), 'utf8')
+
+    // convert to bibtex string
+    let bibCode = bib.getBibCodeFromObject(completeBibtex, 3)
+
+    // format
+    bibCode = formatBibtex(bibCode)
     
-    writeFileSync('./bibliography.bib', completeBibtex.join('\n\n'), 'utf8')
-    console.log('Bibtex file created: temp_bibtex.bib')
+    // safe bibtex
+    writeFileSync('./bibliography.bib', bibCode, 'utf8')
+    //console.log(bibCode)    
 }
