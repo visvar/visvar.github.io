@@ -149,13 +149,13 @@ async function createBibTex() {
 
         // Append custom notes to existing notes
         if (notes) {
-            if (bibArr['data']['notes']) {
+            if (bibArr['data']['note']) {
                 console.log('notes already in ' + key)
-                bibArr['data']['notes'] += '\n'
-                bibArr['data']['notes'] += notes
+                bibArr['data']['note'] += '\n'
+                bibArr['data']['note'] += notes
 
             } else {
-                bibArr['data']['notes'] = notes
+                bibArr['data']['note'] = notes
             }
         }
 

@@ -220,7 +220,7 @@
             "keywords": "Music;Artificial intelligence;Analytical models;Data visualization;Data models;Visual analytics;Aerospace electronics;Training;Generative AI;Computational modeling;Music composition;human-AI;comparative visualization;glyphs;similarity;design study",
             "doi": "https://doi.org/10.1109/TVCG.2025.3539779",
             "month": "2",
-            "notes": "<a href=\"https://www.replicabilitystamp.org/#https-github-com-visvar-maicov2\" target=\"_blank\" rel=\"noreferrer\">\r\n   <img style=\"width: 20px; height: 20px; vertical-align: middle;\" alt=\"stamp icon\" src=\"../assets/img/misc/stamp.png\">\r\n    Graphics Replicability Stamp\r\n</a>",
+            "note": "<a href=\"https://www.replicabilitystamp.org/#https-github-com-visvar-maicov2\" target=\"_blank\" rel=\"noreferrer\">\r\n   <img style=\"width: 20px; height: 20px; vertical-align: middle;\" alt=\"stamp icon\" src=\"../assets/img/misc/stamp.png\">\r\n    Graphics Replicability Stamp\r\n</a>",
             "suppl": "https://github.com/visvar/MAICoV2",
             "series": "TVCG",
             "abstract": "We contribute a design study on using visual analytics for AI-assisted music composition. The main result is the interface MAICO (Music AI Co-creativity), which allows composers and other music creators to interactively generate, explore, select, edit, and compare samples from generative music models. MAICO is based on the idea of visual parameter space analysis and supports the simultaneous analysis of hundreds of short samples of symbolic music from multiple models, displaying them in different metric- and similarity-based layouts. We developed and evaluated MAICO together with a professional composer who actively used it for five months to create, among other things, a composition for the Biennale Arte 2024 in Venice, which was recorded by the Munich Symphonic Orchestra. We discuss our design choices and lessons learned from this endeavor to support Human-AI co-creativity with visual analytics."
@@ -815,12 +815,11 @@
         "entryType": "misc",
         "key": "fan2023virtual",
         "data": {
-            "title": "irtual Reality Training for Nosocomial Infections Prevention",
+            "title": "Virtual Reality Training for Nosocomial Infections Prevention",
             "author": "Mengjie Fan, Shaoxing Zhang, Xintian Zhao, Xingyao Yu, Liang Zhou",
             "year": 2023,
-            "mont": 10,
+            "month": 10,
             "url": "https://virtual.ieeevis.org/year/2023/poster_v-vis-posters-1080.html",
-            "month": "0",
             "series": "VIS",
             "abstract": "Nosocomial infections (or healthcare-associated infections) can greatly affect public health. The prevention and control of nosocomial infections rely on effective training of medical personnel on the correct use of personal prevention equipment (PPE). We introduce a virtual reality (VR) method that simulates the real environment of a hospital and supports repeated immersive practice of PPE donning\r\nand doffing. A VR prototype is created and receives positive feedback from a domain expert. The effectiveness of our method will be evaluated in a comparative user study."
         }
@@ -1376,7 +1375,7 @@
             "doi": "https://doi.org/10.5281/zenodo.7316618",
             "venue": "Bengaluru, India",
             "url": "https://ismir2022program.ismir.net/poster_217.html",
-            "notes": "Best Paper Award Nomination",
+            "note": "Best Paper Award Nomination",
             "suppl": "https://github.com/visvar/vis-ai-comp",
             "acks": "This work was funded by the Cyber Valley Research Fund\r\nand the Artificial Intelligence Software Academy (AISA).",
             "series": "ISMIR",
@@ -1878,7 +1877,7 @@
             "location": "New Orleans, LA, USA",
             "series": "CHI",
             "month": "4",
-            "notes": "Honourable Mention Award",
+            "note": "Honourable Mention Award",
             "video": "https://www.youtube.com/watch?v=jjB99Ruc5gY",
             "suppl": "https://dl.acm.org/doi/abs/10.1145/3491102.3501859#sec-supp"
         }
@@ -2039,7 +2038,7 @@
             "articleno": 501,
             "numpages": 23,
             "keywords": "data visualization, embodied interfaces",
-            "notes": "Honourable Mention Award",
+            "note": "Honourable Mention Award",
             "video": "https://www.youtube.com/watch?v=ILZlecsvUbw",
             "suppl": "https://dl.acm.org/doi/abs/10.1145/3488546#sec-supp",
             "series": "ISS"
@@ -2125,11 +2124,10 @@
             "author": "Joscha Eirich, Jakob Bonart, Dominik Jäckle, Michael Sedlmair, Ute Schmid, Kai Fischbach, Tobias Schreck, Jürgen Bernard",
             "title": "IRVINE: A Design Study on Analyzing Correlation Patterns of Electrical Engines",
             "journal": "IEEE Trans. Visualization and Computer Graphics (TVCG, Proc. VIS 2021)",
-            "note": "To appear. Best paper award",
             "doi": "https://doi.org/10.1109/TVCG.2021.3114797",
             "year": 2021,
             "month": "9",
-            "notes": "Best Paper Award",
+            "note": "Best Paper Award",
             "series": "TVCG",
             "abstract": "In this design study, we present IRVINE, a Visual Analytics (VA) system, which facilitates the analysis of acoustic data to detect and understand previously unknown errors in the manufacturing of electrical engines. In serial manufacturing processes, signatures from acoustic data provide valuable information on how the relationship between multiple produced engines serves to detect and understand previously unknown errors. To analyze such signatures, IRVINE leverages interactive clustering and data labeling techniques, allowing users to analyze clusters of engines with similar signatures, drill down to groups of engines, and select an engine of interest. Furthermore, IRVINE allows to assign labels to engines and clusters and annotate the cause of an error in the acoustic raw measurement of an engine. Since labels and annotations represent valuable knowledge, they are conserved in a knowledge database to be available for other stakeholders. We contribute a design study, where we developed IRVINE in four main iterations with engineers from a company in the automotive sector. To validate IRVINE, we conducted a field study with six domain experts. Our results suggest a high usability and usefulness of IRVINE as part of the improvement of a real-world manufacturing process. Specifically, with IRVINE domain experts were able to label and annotate produced electrical engines more than 30% faster."
         }
@@ -2228,11 +2226,7 @@
             "pages": "593--596",
             "doi": "https://doi.org/10.1145/3473856.3474031",
             "isbn": "978-1-4503-8645-6",
-            "abstract": "The world is still under the influence of the COVID-19 pandemic. Even though vaccines are deployed as rapidly as possible, it is still necessary to use other measures to reduce the spread of the virus. Measures such as social distancing or wearing a mask receive a lot of criticism. Therefore, we want to demonstrate a serious game to help the players understand these measures better and show them why they are still necessary. The player of the game has to avoid other agents to keep their risk of a COVID-19 infection low. The game uses Virtual Reality through a Head-Mounted-Display to deliver an immersive and enjoyable experience. Gamification elements are used to engage the user with the game while they explore various environments. We also implemented visualizations that help the user with social distancing.",
-            "bibtex_show": "true",
-            "preview": "krauter2021Don\\_teaser.png",
-            "pdf": "krauter2021Don.pdf",
-            "video": "https://www.doi.org/10.1145/3473856.3474031"
+            "abstract": "The world is still under the influence of the COVID-19 pandemic. Even though vaccines are deployed as rapidly as possible, it is still necessary to use other measures to reduce the spread of the virus. Measures such as social distancing or wearing a mask receive a lot of criticism. Therefore, we want to demonstrate a serious game to help the players understand these measures better and show them why they are still necessary. The player of the game has to avoid other agents to keep their risk of a COVID-19 infection low. The game uses Virtual Reality through a Head-Mounted-Display to deliver an immersive and enjoyable experience. Gamification elements are used to engage the user with the game while they explore various environments. We also implemented visualizations that help the user with social distancing."
         }
     },
     {
@@ -2573,7 +2567,7 @@
             "doi": "https://doi.org/10.1109/TVCG.2020.3030435",
             "ISSN": "1941-0506",
             "month": "Feb,",
-            "notes": "Honourable Mention Award",
+            "note": "Honourable Mention Award",
             "video": "https://www.youtube.com/watch?v=XmYNISBjL_Q",
             "series": "VIS"
         }
@@ -3090,7 +3084,6 @@
             "pages": "199--211",
             "doi": "https://doi.org/10.1145/3311350.3347190",
             "isbn": "978-1-4503-6688-5",
-            "bibtex_show": "true",
             "abstract": "Virtual reality (VR) is commonly used for entertainment applications but is also increasingly employed for a large number of use cases such as digital prototyping or training workers. Here, VR is key to present an immersive secondary world. VR enables experiences that are close to reality, regardless of time and place. However, highly immersive VR can result in missing digital information from the real world, such as important notifications. For efficient notification presentation in VR, it is necessary to understand how notifications should be integrated in VR without breaking the immersion. Thus, we conducted a study with 24 participants to investigate notification placement in VR while playing games, learning, and solving problems. We compared placing notifications using a Head-Up Display, On-Body, Floating, and In-Situ in open, semi-open, and closed VR environments. We found significant effects of notification placement and task on how notifications are perceived in VR. Insights from our study inform the design of VR applications that support digital notifications.",
             "video": "https://dl.acm.org/doi/10.1145/3311350.3347190"
         }
@@ -4610,7 +4603,7 @@
             "pages": "2431-2440",
             "doi": "https://doi.org/10.1109/TVCG.2012.213",
             "month": "0",
-            "notes": "Honorable Mention for Best Paper Award",
+            "note": "Honorable Mention for Best Paper Award",
             "suppl": "http://www.cs.ubc.ca/labs/imager/tr/2012/dsm/",
             "series": "TVCG",
             "abstract": "Design studies are an increasingly popular form of problem-driven visualization research, yet there is little guidance available about how to do them effectively. In this paper we reflect on our combined experience of conducting twenty-one design studies, as well as reading and reviewing many more, and on an extensive literature review of other field work methods and methodologies. Based on this foundation we provide definitions, propose a methodological framework, and provide practical guidance for conducting design studies. We define a design study as a project in which visualization researchers analyze a specific real-world problem faced by domain experts, design a visualization system that supports solving this problem, validate the design, and reflect about lessons learned in order to refine visualization design guidelines. We characterize two axes - a task clarity axis from fuzzy to crisp and an information location axis from the domain expert's head to the computer - and use these axes to reason about design study contributions, their suitability, and uniqueness from other approaches. The proposed methodological framework consists of 9 stages: learn, winnow, cast, discover, design, implement, deploy, reflect, and write. For each stage we provide practical guidance and outline potential pitfalls. We also conducted an extensive literature survey of related methodological approaches that involve a significant amount of qualitative field work, and compare design study methodology to that of ethnography, grounded theory, and action research."
@@ -4774,7 +4767,7 @@
             "location": "Atlanta, Georgia",
             "series": "CHI BELIV",
             "month": "4",
-            "notes": "Best Paper Award"
+            "note": "Best Paper Award"
         }
     },
     {
@@ -4903,7 +4896,7 @@
             "doi": "https://doi.org/10.1260/147807709788549402",
             "abstract": "The Old Library of Trinity College Dublin, built in 1732, is an internationally renowned research library. In recent decades it has also become a major tourist attraction in Dublin, with the display of the Book of Kells within the Old Library now drawing over half a million visitors per year. The Preservation and Conservation Department of the Library has raised concerns about the impact of the environment on the collection. The location of the building in the city centre, large visitor numbers, and the conditions within the  building are putting the collection at risk. In developing a strategic plan to find solutions to these problems, the department has been assessing and documenting the current situation. This paper introduces ongoing work on a system to visualise the collected data, which includes: dust levels and dispersion, internal and external temperature and relative humidity levels, and visitor numbers in the Old Library. We are developing a user interface for which the data, originally stored in various file formats, is consolidated in a database which can be explored using a 3D virtual reconstruction of the Old Library. With this novel technique, it is also possible to compare and assess the relationships between the various datasets in context.",
             "month": "1",
-            "notes": "Best Paper Award",
+            "note": "Best Paper Award",
             "series": "VSMM"
         }
     },
