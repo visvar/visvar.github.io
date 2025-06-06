@@ -1,0 +1,43 @@
+{
+  "name": "@hygull/bibtex",
+  "version": "1.1.23",
+  "description": "Get details about BibTeX (.bib) syntax, available ENTRY types and many more using Node APIs.  ",
+  "main": "index.js",
+  "scripts": {
+    "test": "./test/run_tests.bat",
+    "getBibTeXTemplateFor": "node ./test/test_getBibTeXTemplateFor.js",
+    "getEntryTypeDescription": "node ./test/test_getEntryTypeDescription.js",
+    "getEntryTypeFields": "node ./test/test_getEntryTypeFields.js",
+    "getEntryTypeFieldsDescription": "node ./test/test_getEntryTypeFieldsDescription.js",
+    "getEntryTypes": "node ./test/test_getEntryTypes.js",
+    "getFields": "node ./test/test_getFields.js",
+    "getFormFor": "node ./test/test_getFormFor.js",
+    "getSpecificEntryTypeFields": "node ./test/test_getSpecificEntryTypeFields.js",
+    "getBibAsObject": "node ./test/test_getBibAsObject.js",
+    "getBibCodeFromObject": "node ./test/test_getBibCodeFromObject.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hygull/bibtex.git"
+  },
+  "keywords": [
+    "Node.js",
+    "BibTeX",
+    "TeX",
+    "LaTeX",
+    "MikTeX",
+    "PdfLateX",
+    "latexmk",
+    "form"
+  ],
+  "author": "Rishikesh Agrawani",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hygull/bibtex/issues"
+  },
+  "homepage": "https://github.com/hygull/bibtex#readme",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  }
+}
