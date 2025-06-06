@@ -95,13 +95,11 @@ Make sure the filenames equal the `path` in the config and only contain ASCII ch
 - members/: compiled member pages
 - pub/: compiled publication pages
 - scripts/: compile scripts
-- venues/: compiles venue pages
 - aboutus.html: main page content
 - config.js member information
 - index.html: compiled main page
 - Papers.xlsx: publication database
 - style.css: page styles
-- venues.js venue information
 
 ## Dependency Update
 

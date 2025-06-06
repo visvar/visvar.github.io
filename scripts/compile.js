@@ -2,7 +2,6 @@ import { createReadStream, readFileSync, writeFileSync, readdirSync, existsSync 
 import csv from 'fast-csv'
 import QRCode from 'qrcode'
 import { publicationSheet, pageUrl, pageTitle, memberConfig } from '../config.js'
-import { venueMap } from '../venues.js'
 import pkg from 'bibtex-tidy'
 const { tidy } = pkg
 
@@ -10,10 +9,6 @@ const { tidy } = pkg
 const REPORT_MISSING_INFO = false
 // report when pdf is only given as link but not file
 const REPORT_MISSING_PDF_FILES = false
-// log venues not defined in venues.js to the console
-const REPORT_UNKNOWN_VENUES = false
-// log resource URLs not defined in urlText() to the console
-const REPORT_UNKNOWN_URLS = false
 
 
 /**
@@ -120,10 +115,6 @@ async function createPages() {
   for (const pub of publications) {
     createPublicationPageHtml(pub)
   }
-  // Venue pages
-  createVenuePages(venueMap)
-  // Export papers.json
-  updateFile('papers.json', JSON.stringify(publications))
   // Create missing QR codes
   await createQRCodes(publications)
   // Detect missing and extra files
@@ -396,7 +387,7 @@ function createPublicationsHtml(publications, member = null) {
         ${authorHtml}
       </div>
       <div>
-        ${venueLink(venue, p)} (${year}) ${pub['Type']}
+        ${venue} (${year})
       </div>
       <div class="links">
         ${url1 && url1 !== '' ? `<a href="${url1}" target="_blank" rel="noreferrer">${urlText(url1)}</a>` : ''}
@@ -464,11 +455,10 @@ function createPublicationPageHtml(pub) {
                   <b>Authors.</b> ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
                 </div>
                 <div>
-                  <b>Venue.</b> ${venueLink(venue, '..')} (${year}) ${pub['Type']}
                 </div>
                 ${pub.Type !== '' ? `
                 <div>
-                  <b>Type.</b> ${pub.Type}
+                  <b>Venue.</b> ${venue} (${year})
                 </div>
                 `: ''}
                 <div>
@@ -493,82 +483,6 @@ function createPublicationPageHtml(pub) {
     </html>`
   const outFile = `./pub/${pub['Key (e.g. for file names)']}.html`
   updateFile(outFile, html)
-}
-
-/**
- * For each venue in venues.js, create page with its information
- *
- * @param {Map} venueMap see venues.js
- */
-function createVenuePages(venueMap) {
-  for (const venue of venueMap.values()) {
-    const title = `${venue.short} | ${pageTitle}`
-    const html = `${htmlHead(title, '..')}
-    <body>
-      <a class="anchor" name="top"></a>
-      <main>
-        ${headerAndNav('..')}
-        <div>
-          <article>
-            <h1>${venue.name} (${venue.short})</h1>
-            <div class="pubPageContent">
-              ${venue.publisher.length ? `<div>Publisher: ${venue.publisher}<div>` : ''}
-              ${venue.type.length ? `<div>Type: ${venue.type}<div>` : ''}
-              <div>
-                ${venue.url.length ? `<a href="${venue.url}" target="_blank" rel="noreferrer">official website</a>` : ''}
-                ${venue.resources.map(d => `<a href="${d.url}" target="_blank" rel="noreferrer">${d.label}</a>`).join('')}
-              </div>
-            </div>
-          </article>
-          ${footer('..')}
-        </div>
-      </main>
-    </body>
-    </html>`
-    const outFile = `./venue/${venue.pageUrl}.html`
-    updateFile(outFile, html)
-  }
-}
-
-/**
- * For "submission target", look up venues.js and link to the venue page if it exists
- * @param {*} venueShort
- */
-function venueLink(venueShort, path = '.') {
-  venueShort = venueShort.trim()
-  if (venueMap.has(venueShort)) {
-    const venue = venueMap.get(venueShort)
-    return `<a href="${path}/venue/${venue.pageUrl}.html" target="_blank" title="${venue.name}">${venueShort}</a>`
-  } else {
-    if (REPORT_UNKNOWN_VENUES && path === '.' && venueShort !== '') {
-      console.log('unknown venue', venueShort)
-    }
-    return venueShort
-  }
-}
-
-/**
- * Chooses a different link text depending on the URL's domain.
- *
- * @param {string} url url
- * @returns {string} link text
- */
-function urlText(url) {
-  const u = url.toLowerCase()
-  if (u.includes('doi.org')) { return 'DOI' }
-  if (u.includes('acm.org')) { return 'ACM' }
-  if (u.includes('ieee.org')) { return 'IEEE' }
-  if (u.includes('eg.org')) { return 'Eurographics' }
-  if (u.includes('arxiv.org')) { return 'arXiv' }
-  if (u.includes('ismir.net')) { return 'ISMIR' }
-  if (u.includes('springer.com')) { return 'Springer' }
-  if (u.includes('wiley.com')) { return 'Wiley' }
-  if (u.includes('degruyter.com')) { return 'De Gruyter' }
-  if (u.includes('univie.ac.at')) { return 'Uni Vienna' }
-  if (REPORT_UNKNOWN_URLS) {
-    console.log('unknown url', url)
-  }
-  return 'link'
 }
 
 /**
