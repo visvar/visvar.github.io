@@ -950,7 +950,7 @@
         "key": "achberger2023moving",
         "data": {
             "title": "Moving Haptics Research into Practice: Four Case Studies from Automotive Engineering",
-            "author": "Alexander Achberger, ",
+            "author": "Alexander Achberger",
             "year": "2023",
             "doi": "http://dx.doi.org/10.18419/opus-13903",
             "school": "University of Example",
@@ -4206,7 +4206,7 @@
         "entryType": "inproceedings",
         "key": "sedlmair2016beliv",
         "data": {
-            "author": "Michael Sedlmair, ",
+            "author": "Michael Sedlmair",
             "title": "Design Study Contributions Come in Different Guises: Seven Guiding Scenarios",
             "year": "2016",
             "isbn": 9781450348188,
@@ -4806,7 +4806,7 @@
             "month": "10",
             "title": "Visual Analysis of In-Car Communication Networks",
             "year": "2010",
-            "author": "Michael Sedlmair, ",
+            "author": "Michael Sedlmair",
             "school": "LMU",
             "url": "http://nbn-resolving.de/urn:nbn:de:bvb:19-124488",
             "keywords": "Visualization, Visual Analytics, Automotive, In-Car Networks",
@@ -4986,7 +4986,7 @@
         "key": "sedlmair2008led",
         "data": {
             "title": "MSCar: Enhancing Message Sequence Charts with Interactivity for Analysing (Automotive) Communication Sequences",
-            "author": "Michael Sedlmair, ",
+            "author": "Michael Sedlmair",
             "year": "2008",
             "journal": "Electronic Communications of the EASST",
             "volume": 13,

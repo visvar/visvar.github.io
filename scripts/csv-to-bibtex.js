@@ -8,8 +8,6 @@
  * - [ ] remove the old table
  */
 
-
-
 import { createReadStream, writeFileSync, unlink } from 'node:fs'
 import csv from 'fast-csv'
 import { publicationSheet } from '../config.js'
@@ -101,7 +99,11 @@ async function createBibTex() {
 
         // fill bibtex
         bibArr['key'] = key
-        bibArr['data']['author'] = pub['First Author'] + ', ' + pub['Other Authors']
+        bibArr['data']['author'] = pub['First Author']
+
+        if (pub['Other Authors']) {
+            bibArr['data']['author'] += ', ' + pub['Other Authors']
+        }
 
         bibArr['data']['title'] = title
 
