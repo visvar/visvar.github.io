@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "npm run resizePeople && npm run resizeThumbs  && npm run tocsv && npm run compile",
+    "start": "npm run resizePeople && npm run resizeThumbs && npm run compile",
     "topng": "node ./scripts/image-to-png.js",
     "resizePeople": "node ./scripts/image-resizer.js assets/img/people 256",
     "resizeThumbs": "node ./scripts/image-resizer.js assets/img/teaser 256",
