@@ -32,7 +32,8 @@ function formatBibtex(bibtexString) {
             stripEnclosingBraces: true,
             sortFields: true,
             removeEmptyFields: true,
-            lowercase: true
+            lowercase: true,
+            escape: false
         })
         return formatted.bibtex
     } catch (e) {
@@ -64,7 +65,7 @@ async function createBibTex() {
         const key = pub['Key (e.g. for file names)']
         const title = pub['Title']
         const year = pub.Date.slice(0, 4)
-        const month = pub.Date.slice(6, 7)
+        const month = pub.Date.slice(5, 7)
         const url1 = pub['Publisher URL (official)']
         const url2 = pub['url2']
         const pdf = pub['PDF URL (public)']
@@ -94,7 +95,7 @@ async function createBibTex() {
 
         // write bibtex to temp file bc package wants it like that
         writeFileSync("tmp.bib", bibString)
-        
+
         // convert bibtex text to object
         const bibArr = bib.getBibAsObject('tmp.bib');
 
@@ -102,17 +103,10 @@ async function createBibTex() {
         bibArr['key'] = key
         bibArr['data']['author'] = pub['First Author'] + ', ' + pub['Other Authors']
 
-        if (!bibArr['data']['title']) {
-            bibArr['data']['title'] = title
-        }
+        bibArr['data']['title'] = title
 
-        if (!bibArr['data']['year']) {
-            bibArr['data']['year'] = year
-        }
-
-        if (!bibArr['data']['month']) {
-            bibArr['data']['month'] = month
-        }
+        bibArr['data']['year'] = year
+        bibArr['data']['month'] = month
 
         if (doi) {
             bibArr['data']['doi'] = doi
@@ -125,12 +119,6 @@ async function createBibTex() {
                 console.log('has doi without link')
             }
         }
-        // We have too many where no doi exists
-        /*else {
-            console.log();
-            console.log(title)
-            console.log('is missing a doi')
-        }*/
 
         // Safe URLs only if they are not doi 
         if (url1 && !url1.includes('doi')) {
@@ -186,7 +174,7 @@ async function createBibTex() {
         }
 
         if (venue) {
-            bibArr['data']['series'] = venue
+            bibArr['data']['venue'] = venue
         }
 
         if (abstract) {
@@ -197,6 +185,7 @@ async function createBibTex() {
         let bibCode = bib.getBibCodeFromObject(bibArr, 3);
         bibCode = formatBibtex(bibCode)
 
+        // combine entries
         completeBibtex.push(bibArr)
     })
 
@@ -213,8 +202,7 @@ async function createBibTex() {
 
     // format
     bibCode = formatBibtex(bibCode)
-    
+
     // safe bibtex
     writeFileSync('./bibliography.bib', bibCode, 'utf8')
-    //console.log(bibCode)    
 }
