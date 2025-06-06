@@ -1,15 +1,17 @@
-import { createReadStream, readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs'
-import csv from 'fast-csv'
+import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs'
 import QRCode from 'qrcode'
 import { publicationSheet, pageUrl, pageTitle, memberConfig } from '../config.js'
 import pkg from 'bibtex-tidy'
 const { tidy } = pkg
+import bibtex from "@hygull/bibtex"
 
 // report missing info for publications
-const REPORT_MISSING_INFO = false
+const REPORT_MISSING_INFO = true
 // report when pdf is only given as link but not file
-const REPORT_MISSING_PDF_FILES = false
+const REPORT_MISSING_PDF_FILES = true
 
+const allowedMissingPDF = ['ling2021visimages']
+const allowedMissingDOI = ['park2025design', 'talsma2024towards', 'fan2023virtual', 'zhang20233d', 'heyen2022postermidicontroller', 'rau2021visual', 'heyen2020supporting', 'hube2018the', 'cutura2018viscoder', 'aigner2018valid', 'oppermann2017bikesharingatlas', 'calero-valdez2017framework', 'müller2017a', 'rudkowsy2017sentiment', 'jenny2017incivility', 'krone2017from', 'rau2017challenges', 'sacha2016esann', 'hube2016virtual', 'niederer2016ffh', 'torsneyweir2015decision', 'sedlmair2012tr', 'sedlmair2011auto', 'baur2010infovisHS', 'isenberg2010covis', 'ruhland2009ijac', 'sedlmair2008cscw']
 
 /**
  * Generates the HTML <head> of a page
@@ -83,13 +85,11 @@ const allPubHTML = new Set(readdirSync("pub"))
 
 const nameMemberMap = new Map(memberConfig.map(d => [d.name, d]))
 
-// Main loop
-const publications = []
-const stream = createReadStream(publicationSheet)
-csv
-  .parseStream(stream, { headers: true })
-  .on('data', data => data.Title !== '' && publications.push(data))
-  .on('end', createPages)
+// Load data
+const bib = new bibtex()
+const publications = bib.getBibAsObject('./bibliography.bib')
+
+createPages()
 
 /**
  * Creates all HTML pages
@@ -98,25 +98,31 @@ async function createPages() {
   console.log(`${publications.length} publications`)
   console.log(allPdfs.size + ' pdfs')
   console.log(allTeasers.size + ' teasers')
+
   // Sort by date descending, so newest at top of page
-  publications.sort((a, b) => a.Date > b.Date ? -1 : 1)
+  publications.sort((a, b) => {
+    if (parseInt(a['data']['year']) !== parseInt(b['data']['year'])) return parseInt(b['data']['year']) - parseInt(a['data']['year']);
+    return parseInt(b['data']['month']) - parseInt(a['data']['month'])
+  });
+
   // Member / author pages
   for (const member of memberConfig) {
-    const authoredPubs = publications.filter(d =>
-      d['First Author'].includes(member.name)
-      || d['Other Authors'].includes(member.name)
-    )
+    const authoredPubs = publications.filter(d => d['data']['author'].includes(member.name))
     createMemberPageHtml(member, authoredPubs)
   }
+
   // Main page and imprint
   createMainPageHtml(publications, memberConfig)
   createImprint()
+
   // Publication pages
   for (const pub of publications) {
     createPublicationPageHtml(pub)
   }
+
   // Create missing QR codes
   await createQRCodes(publications)
+
   // Detect missing and extra files
   reportMissingOrExtraInfo(publications)
 }
@@ -317,40 +323,48 @@ function createMemberPageHtml(member, publications) {
  */
 function createPublicationsHtml(publications, member = null) {
   const p = member ? '..' : '.'
+
   return publications.map((pub, i) => {
-    const key = pub['Key (e.g. for file names)']
+    const key = pub['key']
     const image = `${p}/assets/img/teaser/small/${key}.png`
-    const year = pub.Date.slice(0, 4)
-    const url1 = pub['Publisher URL (official)']
-    const url2 = pub['url2']
-    const venue = pub['Submission Target']
+    const year = pub['data']['year']
+    const doi = pub['data']['doi']
+    const url = pub['data']['url']
+    const url2 = pub['data']['url2']
+    const venue = pub['data']['venue']
     const imageExists = allTeasers.has(`${key}.png`)
+
     // PDF, video, and supplemental might be a link instead of file
-    let pdf = pub['PDF URL (public)']
+    let pdf = pub['data']['pdf']
     let pdfExists = allPdfs.has(`${key}.pdf`)
-    if (!pdfExists && pdf && pdf !== '') {
+    if (!pdfExists && pdf) {
       pdfExists = true
     } else {
       pdf = `${p}/assets/pdf/${key}.pdf`
     }
-    let video = pub.Video
+
+    let video = pub['data']['video']
     let videoExists = allVideos.has(`${key}.mp4`)
-    if (!videoExists && video && video !== '') {
+    if (!videoExists && video) {
       videoExists = true
     } else {
       video = `${p}/assets/video/${key}.mp4`
     }
-    let suppl = pub.Supplemental
+    let videoExists2 = false
+    let video2 = pub['data']['video2']
+    if (video2) {
+      videoExists2 = true
+    }
+
+    let suppl = pub['data']['suppl']
     let supplExists = allSuppl.has(`${key}.zip`)
-    if (!supplExists && suppl && suppl !== '') {
+    if (!supplExists && suppl) {
       supplExists = true
     } else {
       suppl = `${p}/assets/suppl/${key}.zip`
     }
-    const authors = [
-      ...pub['First Author'].split(',').map(d => d.trim()).filter(d => d.length),
-      ...pub['Other Authors'].split(',').map(d => d.trim()).filter(d => d.length)
-    ]
+
+    const authors = pub['data']['author'].split(',').map(d => d.trim())//.filter(d => d.length)
     const authorHtml = authors.map(d => {
       // if this is the author's member page, make them bold
       const text = d === member?.name ? `<b>${d}</b>` : d
@@ -361,9 +375,8 @@ function createPublicationsHtml(publications, member = null) {
       return text
     }).join(', ')
 
-
     return `
-  ${i === 0 || year !== publications[i - 1]['Date'].slice(0, 4)
+  ${i === 0 || year !== publications[i - 1]['data']['year']
         ? `<h2 class="yearHeading">${year}</h2>` : ''}
   <div class="paper" id="paper${key}">
     ${imageExists
@@ -380,7 +393,7 @@ function createPublicationsHtml(publications, member = null) {
     <div class="metaData ${imageExists ? '' : 'noImage'}">
       <h3>
         <a href="${p}/pub/${key}.html" target="_blank">
-        ${pub['Title']}
+        ${pub['data']['title']}
         </a>
       </h3>
       <div class="authors">
@@ -390,12 +403,14 @@ function createPublicationsHtml(publications, member = null) {
         ${venue} (${year})
       </div>
       <div class="links">
-        ${url1 && url1 !== '' ? `<a href="${url1}" target="_blank" rel="noreferrer">${urlText(url1)}</a>` : ''}
-        ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">${urlText(url2)}</a>` : ''}
+        ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI</a>` : ''}
+        ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
+        ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link</a>` : ''}
         ${pdfExists ? `<a href="${pdf}" target="_blank" rel="noreferrer">PDF</a>` : ''}
         ${videoExists ? `<a href="${video}" target="_blank" rel="noreferrer">video</a>` : ''}
+        ${videoExists2 ? `<a href="${video2}" target="_blank" rel="noreferrer">video</a>` : ''}
         ${supplExists ? `<a href="${suppl}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
-        ${pub.notes ? `<div>${pub.notes}</div>` : ''}
+        ${pub['data']['note'] ? `<div>${pub['data']['note']}</div>` : ''}
       </div>
     </div>
   </div>
@@ -407,36 +422,47 @@ function createPublicationsHtml(publications, member = null) {
  * Creates the page for a single publication
  */
 function createPublicationPageHtml(pub) {
-  const key = pub['Key (e.g. for file names)']
-  const year = pub.Date.slice(0, 4)
-  const url1 = pub['Publisher URL (official)']
-  const url2 = pub['url2']
-  const venue = pub['Submission Target']
+  const key = pub['key']
+  const year = pub['data']['year']
+  const doi = pub['data']['doi']
+  const url = pub['data']['url']
+  const url2 = pub['data']['url2']
+  const venue = pub['data']['venue']
   const imageExists = allTeasers.has(`${key}.png`)
+
   // PDF, video, and supplemental might be a link instead of file
-  let pdf = pub['PDF URL (public)']
+  let pdf = pub['data']['pdf']
   let pdfExists = allPdfs.has(`${key}.pdf`)
-  if (!pdfExists && pdf && pdf !== '') {
+  if (!pdfExists && pdf) {
     pdfExists = true
   } else {
     pdf = `../assets/pdf/${key}.pdf`
   }
-  let video = pub.Video
+
+  let video = pub['data']['video']
   let videoExists = allVideos.has(`${key}.mp4`)
-  if (!videoExists && video && video !== '') {
+  if (!videoExists && video) {
     videoExists = true
   } else {
     video = `../assets/video/${key}.mp4`
   }
-  let suppl = pub.Supplemental
+  let videoExists2 = false
+  let video2 = pub['data']['video2']
+  if (video2) {
+    videoExists2 = true
+  }
+
+  let suppl = pub['data']['suppl']
   let supplExists = allSuppl.has(`${key}.zip`)
-  if (!supplExists && suppl && suppl !== '') {
+  if (!supplExists && suppl) {
     supplExists = true
   } else {
-    suppl = `../suppl/${key}.zip`
+    suppl = `../assets/suppl/${key}.zip`
   }
+
+  // TODO: Add badge to bibtex (just a name, e.g., BestPaper), add badge after title
   // Create HTML
-  const title = `${pub.Title} | ${pageTitle}`
+  const title = `${pub['data']['title']} | ${pageTitle}`
   const html = `${htmlHead(title, '..')}
     <body>
       <a class="anchor" name="top"></a>
@@ -444,7 +470,7 @@ function createPublicationPageHtml(pub) {
         ${headerAndNav('..')}
         <div>
           <article><a class="anchor" name="publications"></a>
-            <h1>${pub.Title}</h1>
+            <h1>${title}</h1>
             <div class="pubPageContent">
               ${imageExists ? `
               <a href="../assets/img/teaser/${key}.png" target="_blank" title="show image full size">
@@ -452,27 +478,24 @@ function createPublicationPageHtml(pub) {
               </a>` : ''}
               <div>
                 <div>
-                  <b>Authors.</b> ${pub['First Author']}${pub['Other Authors'] !== '' ? ',' : ''} ${pub['Other Authors']}
+                  <b>Authors.</b> ${pub['data']['author']}
                 </div>
-                <div>
-                </div>
-                ${pub.Type !== '' ? `
                 <div>
                   <b>Venue.</b> ${venue} (${year})
                 </div>
-                `: ''}
                 <div>
                   <b>Materials.</b>
-                  ${url1 && url1 !== '' ? `<a href="${url1}" target="_blank" rel="noreferrer">${urlText(url1)}</a>` : ''}
-                  ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">${urlText(url2)}</a>` : ''}
+                  ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI</a>` : ''}
+                  ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
+                  ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link</a>` : ''}
                   ${pdfExists ? `<a href="${pdf}" target="_blank" rel="noreferrer">PDF</a>` : ''}
                   ${videoExists ? `<a href="${video}" target="_blank" rel="noreferrer">video</a>` : ''}
+                  ${videoExists2 ? `<a href="${video2}" target="_blank" rel="noreferrer">video</a>` : ''}
                   ${supplExists ? `<a href="${suppl}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
                 </div>
-                ${pub['Abstract'] ? `<div class="abstract"><b>Abstract.</b> ${pub['Abstract']}</div>` : ''}
-                ${pub.bibtex ? `<div class="bibtex"><textarea>${formatBibtex(key, pub.bibtex)}</textarea></div>` : ''}
-                ${pub['Acknowledgements'] ? `<div class="abstract"><b>Acknowledgements.</b> ${pub['Acknowledgements']}</div>` : ''}
-                ${pub.notes ? `<div>${pub.notes}</div>` : ''}
+                ${pub['data']['abstract'] ? `<div class="abstract"><b>Abstract.</b> ${pub['data']['abstract']}</div>` : ''}
+                ${`<div class="bibtex"><textarea>${formatBibtex(pub['key'], bib.getBibCodeFromObject(pub, 3))}</textarea></div>`}
+                ${pub['data']['acks'] ? `<div class="abstract"><b>Acknowledgements.</b> ${pub['data']['acks']}</div>` : ''}
                 <img class="qr" src="../assets/img/qr/${key}.png"/>
             </div>
           </article>
@@ -481,7 +504,7 @@ function createPublicationPageHtml(pub) {
       </main>
     </body>
     </html>`
-  const outFile = `./pub/${pub['Key (e.g. for file names)']}.html`
+  const outFile = `./pub/${pub['key']}.html`
   updateFile(outFile, html)
 }
 
@@ -495,20 +518,19 @@ function createPublicationPageHtml(pub) {
 function formatBibtex(key, bibtexString) {
   try {
     const formatted = tidy(bibtexString, {
-      omit: ['address', 'location', 'isbn', 'timestamp'],
+      omit: ['abstract', 'acks', 'address', 'note', 'pdf', 'suppl', 'url2', 'venue', 'video', 'video2'],
       curly: true,
       space: 4,
-      align: 13,
+      align: 14,
       stripEnclosingBraces: true,
       sortFields: true,
       removeEmptyFields: true,
-      lowercase: true
+      lowercase: true,
     })
     return formatted.bibtex
   } catch (e) {
     // console.log(e);
     console.warn(`Invalid bibtex for pub with key ${key}`)
-    console.log(bibtexString)
     return bibtexString
   }
 }
@@ -529,12 +551,12 @@ async function createQRCodes(publications) {
     errorCorrectionLevel: 'Q',
     scale: 12,
     margin: 0,
-
   }
   const expectedQRs = []
+
   // For publications
   for (const pub of publications) {
-    const key = pub['Key (e.g. for file names)']
+    const key = pub['key']
     const path = `${dir}/${key}.png`
     expectedQRs.push(`${key}.png`)
     // Check if QR code image already exists
@@ -543,6 +565,7 @@ async function createQRCodes(publications) {
     QRCode.toFile(path, url, options)
     count++
   }
+
   // For people
   for (const m of memberConfig) {
     const path = `${dir}/${m.path}.png`
@@ -552,7 +575,8 @@ async function createQRCodes(publications) {
     QRCode.toFile(path, url, options)
     count++
   }
-  // Look for orphan QR code PNGs
+
+  // Look for orphan QR code PNGsf
   allQRs.delete('.gitkeep')
   for (const path of expectedQRs) {
     allQRs.delete(path)
@@ -570,7 +594,7 @@ function reportMissingOrExtraInfo(publications) {
   // for each missing file we want to know who is responsible
   const memberNames = new Set(memberConfig.map(d => d.name))
   const getResp = (pub) => {
-    const authors = [pub['First Author'], ...pub['Other Authors'].split(', ')]
+    const authors = pub['data']['author'].split(', ')
     for (const author of authors) {
       if (memberNames.has(author)) {
         return author
@@ -579,47 +603,51 @@ function reportMissingOrExtraInfo(publications) {
     return ''
   }
 
+  let missingPublicationInfo = false
+
   let missing = []
   for (const pub of publications) {
-    const key = pub['Key (e.g. for file names)']
+    const key = pub['key']
+
     // missing publication info
     if (REPORT_MISSING_INFO) {
-      if (pub['Submission Target'] === '') {
-        missing.push([`${key} info: submission target`, getResp(pub)])
+      if (pub['data']['venue'] === '') {
+        missingPublicationInfo = true
+        missing.push([`${key} info: venue`, getResp(pub)])
       }
-      if (pub['Type'] === '') {
-        missing.push([`${key} info: type`, getResp(pub)])
-      }
-      if (pub['Publisher URL (official)'] === '') {
-        missing.push([`${key} info: publisher url`, getResp(pub)])
-      }
-      if (pub['Abstract'] === '') {
+      if (pub['data']['abstract'] === '') {
+        missingPublicationInfo = true
         missing.push([`${key} info: abstract`, getResp(pub)])
       }
-      if (pub['bibtex'] === '') {
-        missing.push([`${key} info: bibtex`, getResp(pub)])
+      if (!pub['data']['doi']) {
+        missingPublicationInfo = true
+        if (!allowedMissingDOI.includes(key)) {
+          missing.push([`${key} info: doi`, getResp(pub)])
+        }
+      } else if (pub['data']['doi'].includes('arxiv')) {
+        missing.push([`${key} info: doi is arxiv, please update asap`, getResp(pub)])
       }
     }
+
     // missing files
     // publication teaser images
     if (!allTeasers.has(`${key}.png`)) {
       missing.push([`${key}.png (teaser)`, getResp(pub)])
     }
     // publication PDF, not necessary for datasets
-    if (pub['Type'] !== 'Dataset') {
-      let pdf = pub['PDF URL (public)']
-      if ((!pdf || pdf.trim() === '') && !allPdfs.has(`${key}.pdf`)) {
-        // no link AND no file
-        missing.push([`${key}.pdf (publication)`, getResp(pub)])
-      } else if (REPORT_MISSING_PDF_FILES && !allPdfs.has(`${key}.pdf`)) {
-        missing.push([`${key}.pdf (no pdf file - only link)`, getResp(pub)])
-      }
-    }
+    let pdf = pub['data']['pdf']
+    if ((!pdf) && !allPdfs.has(`${key}.pdf`) && !allowedMissingPDF.includes(key)) {
+      // no link AND no file
+      missing.push([`${key}.pdf (publication)`, getResp(pub)])
+    } /*else if (REPORT_MISSING_PDF_FILES && !allPdfs.has(`${key}.pdf`) && !allowedMissingPDF.includes(key)) {
+      missing.push([`${key}.pdf (no pdf file - only link)`, getResp(pub)])
+    }*/
   }
+
   // create report
   if (missing.length > 0) {
     missing.sort((a, b) => a[1] < b[1] ? -1 : 1)
-    console.log(`\n\n\nmissing information and files:`)
+    console.log(`\nmissing information and files:`)
     console.log(`\npublications:`)
     let last = ''
     for (const [file, member] of missing) {
@@ -630,11 +658,13 @@ function reportMissingOrExtraInfo(publications) {
       last = member
     }
   }
+
   // extra files
   let extra = []
-  const allKeys = new Set(publications.map(d => d['Key (e.g. for file names)']))
+  const allKeys = new Set(publications.map(d => d['key']))
   const allFiles = [...allTeasers, ...allPdfs, ...allVideos, ...allSuppl, ...allPubHTML]
   const ignore = new Set(["small", "people", "misc"])
+
   for (const f of allFiles) {
     const key = f.slice(0, f.lastIndexOf("."))
     if (!allKeys.has(key) && !ignore.has(f)) {
@@ -645,7 +675,10 @@ function reportMissingOrExtraInfo(publications) {
     console.log(`\nextra files:\n  ${extra.sort().join("\n  ")}`)
   }
   if (missing.length > 0 || extra.length > 0) {
-    console.log('\n  fill in missing info in\n    Papers.xlsx\n  put the missing files in:\n    .pdf   assets/pdf/\n    .png   assets/img/teaser/\n    .html  pub/')
+    if (missingPublicationInfo) {
+      console.log('\nput missing publication information in:\n    bibliography.bib')
+    }
+    console.log('\nput the missing files in:\n    .pdf   assets/pdf/\n    .png   assets/img/teaser/')
   }
 
   // missing member info
