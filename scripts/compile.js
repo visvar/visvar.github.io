@@ -410,7 +410,6 @@ function createPublicationsHtml(publications, member = null) {
         ${videoExists ? `<a href="${video}" target="_blank" rel="noreferrer">video</a>` : ''}
         ${videoExists2 ? `<a href="${video2}" target="_blank" rel="noreferrer">video</a>` : ''}
         ${supplExists ? `<a href="${suppl}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
-        ${pub['data']['note'] ? `<div>${pub['data']['note']}</div>` : ''}
       </div>
     </div>
   </div>
@@ -496,6 +495,7 @@ function createPublicationPageHtml(pub) {
                 ${pub['data']['abstract'] ? `<div class="abstract"><b>Abstract.</b> ${pub['data']['abstract']}</div>` : ''}
                 ${`<div class="bibtex"><textarea>${formatBibtex(pub['key'], bib.getBibCodeFromObject(pub, 3))}</textarea></div>`}
                 ${pub['data']['acks'] ? `<div class="abstract"><b>Acknowledgements.</b> ${pub['data']['acks']}</div>` : ''}
+                ${pub['data']['note'] ? `<div>${pub['data']['note']}</div>` : ''}
                 <img class="qr" src="../assets/img/qr/${key}.png"/>
             </div>
           </article>
