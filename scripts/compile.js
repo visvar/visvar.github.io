@@ -458,7 +458,7 @@ function createPublicationPageHtml(pub) {
 
   // TODO: Add badge to bibtex (just a name, e.g., BestPaper), add badge after title
   // Create HTML
-  const title = `${pub['data']['title']} | ${pageTitle}`
+  const title = `${pub['data']['title']}`
   const html = `${htmlHead(title, '..')}
     <body>
       <a class="anchor" name="top"></a>
