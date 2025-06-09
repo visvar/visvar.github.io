@@ -390,7 +390,7 @@ function createPublicationsHtml(publications, member = null) {
     <div class="metaData ${imageExists ? '' : 'noImage'}">
       <h3>
         <a href="${p}/pub/${key}.html" target="_blank">
-        ${pub['data']['title']}
+        ${pub['data']['badge'] ? `<img style="height:1em; width:auto; vertical-align: sub;" src="./assets/img/badges/${pub['data']['badge']}.png"/> ` : ''}${pub['data']['title']}
         </a>
       </h3>
       <div class="authors">
@@ -458,7 +458,8 @@ function createPublicationPageHtml(pub) {
 
   // TODO: Add badge to bibtex (just a name, e.g., BestPaper), add badge after title
   // Create HTML
-  const title = `${pub['data']['title']}`
+  const title = `${pub['data']['title']}${pub['data']['badge'] ? ` <img style="height:1em; width:auto; vertical-align: sub;" src="../assets/img/badges/${pub['data']['badge']}.png"/>` : ''}`
+
   const html = `${htmlHead(title, '..')}
     <body>
       <a class="anchor" name="top"></a>
@@ -492,7 +493,9 @@ function createPublicationPageHtml(pub) {
                 ${pub['data']['abstract'] ? `<div class="abstract"><b>Abstract.</b> ${pub['data']['abstract']}</div>` : ''}
                 ${`<div class="bibtex"><textarea>${formatBibtex(pub['key'], bib.getBibCodeFromObject(pub, 3))}</textarea></div>`}
                 ${pub['data']['acks'] ? `<div class="abstract"><b>Acknowledgements.</b> ${pub['data']['acks']}</div>` : ''}
-                ${pub['data']['note'] ? `<div>${pub['data']['note']}</div>` : ''}
+                ${pub['data']['note'] ? `<div>${pub['data']['note']}
+                  ${pub['data']['badge'] ? `<img style="height:1em; width:auto; vertical-align: sub;" src="../assets/img/badges/${pub['data']['badge']}.png"/>` : ''}
+                </div>` : ''}
                 <img class="qr" src="../assets/img/qr/${key}.png"/>
             </div>
           </article>
@@ -515,7 +518,7 @@ function createPublicationPageHtml(pub) {
 function formatBibtex(key, bibtexString) {
   try {
     const formatted = tidy(bibtexString, {
-      omit: ['abstract', 'acks', 'address', 'note', 'pdf', 'suppl', 'url2', 'venue', 'video', 'video2'],
+      omit: ['abstract', 'acks', 'address', 'badge', 'note', 'pdf', 'suppl', 'url2', 'venue', 'video', 'video2'],
       curly: true,
       space: 4,
       align: 14,
