@@ -1,86 +1,152 @@
 # HCI Stuttgart Homepage
 
 Hello, this is the repository for the webpage of the Human-Computer Interaction group at the University of Stuttgart headed by Michael Sedlmair.
-If you are a (associated / alumnus) member and want to contribute, please **first read this readme**. If you have any questions, please ask @fheyen or @ChristianKrauter.
+
+If you are a (associated / alumnus) member and want to contribute, please **first read this readme**.
+
+If you have any questions, feedback, or feature suggestions, please ask @fheyen or @ChristianKrauter.
 
 The live version of this webpage can be found here: [visvar.github.io](https://visvar.github.io/).
 
-## Adding Content
+# How to Add Content and Update the Webpage
 
-Only change files in the below folders, nothing else!
+Only change files as described below folders, nothing else!
 
 After adding new content, there are two general options:
-1. Compile it yourself (prefered)
-   - Compile the webpage and push your changes (Ask @fheyen or @ChristianKrauter to make you a contributor).
+1. Update the wepage yourself (prefered)
+   1. Add your changes
+   2. [Compile](#compiling) the page yourself 
 2. Only update the content
-   - Create a pull request and I will update the live page at a later point.
+   1. Add your changes
+   2. Create a pull request with your changes.
+   3. Your changes will take effect on the next compile run by anyone.
 
-### "About" Page
+## Update the "About" Page
 
 The main page is inside `aboutus.html`.
-Member information is configured inside [config.js](./config.js).
 
-*(Do not change anything in `members/`, `pub/` or `index.html`!)*
+## Add Publications
 
-### Media Assets
+Publications are stored in the `bibliography.bib` file
 
-Media names must match the publication's key in the table.
-The pattern is lastnameYearFirstWord (example: heyen2020clavis).
-**The smaller thumbnail versions of images are generated automatically.**
+### General:
+- You <ins>can use Unicode</ins> (e.g., é, â, ..) but **NOT** LaTeX (e.g., \c{c}, \\"{a})
+- Add as much information as possible
+- Clean your entry as if you are writing a paper
+- `Always add a teaser.` If your paper does not have any pictures: **Add a screenshot of the first page with title and authors**, like [xiao2024systemati](https://visvar.github.io/pub/xiao2024systematic.html)
 
-- [assets/img](./assets/img/) for images
-  - [assets/img/teaser/](./assets/img/teaser/) for publication teasers (must be .png)
-  - [assets/img/people/](./assets/img/people/) for members (must be .jpg)
+### Some rules:
+
+`citation key`
+- The pattern for keys is <ins>\<lastname>\<Year>\<FirstWord></ins> (example: heyen2020clavis).
+  - Add an increasing number (2,3,...), if necessary for uniqueness 
+
+`author`
+- Enter authors as <ins>firstname lastname, ...</ins>, **NOT** 'lastname, firstname; ...'
+  - Author names of members must be identical to those in `config.js`
+
+`year` and `month`
+- Use year and month, not date
+- Add <ins>month in numbers</ins>, not names or abbrevations
+
+`doi`
+- Enter the full doi URL, not just the DOI (i.e., https://doi.org/<your.doi.here>)
+
+`url`
+- Add any additional URL, but **NOT the doi again!**
+
+`url2`
+- You can add another link for or about your publication. Not the DOI again, though.
+
+`venue`
+- Please fill a short version of the publication venue here whether it is a journal or conference paper and wheter that information is already in  'journal', 'booktitle', or 'series'.
+
+`badge`
+- Adding one of the following values will display the respective badge next to the publication's title on the main page and its page
+  - **bestpaper, honorablemention, nomination, reproducibility**
+  - Please also write a small sentence about the badge at the end of `note` to have context on the publications page. E.g., 'Received an honorable mention award'. The badge will also be displayed there.
+
+`note`
+- You can add any note here and it will be displayed on the page of your publication
+
+`video` and `video2`
+- If there are videos available online you can add the links to them here. Please fill video before video2
+
+`pdf`
+- Only have a link to your pdf? Add it here.
+
+`suppl`
+- Only have a link to your supplemental material? Add it here.
+
+`abstract`
+- Add your abstract **without any formatting, newlines, or LaTeX commands!**
+
+`acks`
+- You can add your acknowledgements here to be displayed on the publications page
+
+`funding`
+- You can add funding information here to be displayed on the publications page
+
+### Assets
+
+**Media names must match the publication's key** in `bibliography.bib`.
+
+- [assets/img/teaser/](./assets/img/teaser/) for publication teasers (must be .png)
 - [assets/pdf/](./assets/pdf/) for PDFs.
-- [assets/suppl/](./assets/suppl/) for supplemental (must be .zip).
+- [assets/suppl/](./assets/suppl/) for supplemental material (must be .zip).
 - [assets/video/](./assets/video/) for videos (must be .mp4).
 
-### Papers
+## Adding new Members
 
-- Update the `Papers.xlsx` file
-  - Make sure that the authors names of members are written in the same way (Especially no 'lastname, firstname; ...' but `firstname lastname, ...`
-  - Do NOT put the first author in the column 'Other Authors', but only in the column 'First Author'
-  - Add as much information as possible (also abstract, acknowledgments, and bibtex)
-  - Take the automatically generated key for additional files (teaser, etc.)
-  - `Always add a teaser.` If your paper does not have any pictures: `Add a screenshot of the first page with title and authors`, like [xiao2024systemati](https://visvar.github.io/pub/xiao2024systematic.html)
+Member information is stored in `config.js`
+- Insert the new member in the correct position.
+  - First, there are <ins>regular members</ins> with the order: Professors, then Post-Docs, then Ph.D.s
+  - Second, come <ins>associated members</ins> with the same order: Professors, then Post-Docs, then Ph.D.s
+  - Finally, there are <ins>alumni</ins> with the same order: Professors, then Post-Docs, then Ph.D.s
+    - Alumni roles are as they were while they last worked in the group.
+  - Members of each category are sorted alphabetically by first name.
+- Add as much information as possible. You can take a look at the other member pages for inspiration/ guidance.
+- `path` may only contain ASCII characters
+- `role` may only be one of **professor, postdoc, phd, associatedpostdoc, associatedphd, alumnuspostdoc, alumnusphd**
+- Add a picture in [assets/img/people/](./assets/img/people/) (must be .jpg)
+  - The name has to be **\<path\>.jpg**
+  - **The smaller thumbnail versions of images are generated automatically.**
 
-## Compiling
+## Compiling and Publishing
+
+**Without compiling, the live website will not update.**
+
+### Compiling
 
 If not done yet, install packages with `npm i` (you obviously need [Node.js and npm](https://nodejs.org/en/) to be installed).
 
-Before compiling, make sure the local version of the repository and the `Papers.xlsx` are both up to date.
+Before compiling, make sure the local version of the repository is up to date.
 
 `npm start` starts the compiler.
-You will still need to reload the page (e.g., press (CTRL) F5) in the browser to see changes!
+
+After compiling you can inspect the local version by opening `index.html` in a browser.
+You will need to reload the page (e.g., press (CTRL) F5) in the browser to see changes!
 
 Fast compile: If publications, images, etc., did not change, you can run `npm run compile` to only re-compile the HTML.
 
-## Deployment / Publishing
+### Publishing
 
 If git shows that files changed, but without any actual changes, the problem is likely line endings.
 To fix this, please adjust your git settings as follows (-global is optional):
 
 `git config --global core.autocrlf input`
 
-Simply do a git commit and push, e.g., run
+Ask @fheyen or @ChristianKrauter to make you a contributor.
+
+To publish changes simply do a git commit and push, e.g., run
 
 - `git add .`
 - `git commit -m "some useful commit message"`
 - `git push`
 
-## Adding new Members
+# Repository Information
 
-- Add information in [config.js](./config.js)
-   - Insert the new member in the correct position.
-      - First, there are `regular members` with the order: Professors, then Post-Docs, then Ph.D.s
-      - Second, come `associated members` with the same order: Professors, then Post-Docs, then Ph.D.s
-      - Finally, there are `alumni` with the same order: Professors, then Post-Docs, then Ph.D.s
-      - Members of each category are sorted alphabetically by first name.
-- Add a picture in [assets/img/people/](./assets/img/people/)
-
-Make sure the filenames equal the `path` in the config and only contain ASCII characters.
-
-## Repository Structure
+## Structure
 
 - assets/: all assets
   - img/: images
@@ -108,9 +174,8 @@ Make sure the filenames equal the `path` in the config and only contain ASCII ch
 
 ## Used Libraries
 
-- [qrcode](https://github.com/soldair/node-qrcode) for QR codes
-- [fast-csv](https://github.com/C2FO/fast-csv) for parsing .csv
+- [bibtex](https://github.com/hygull/bibtex) for parsing bibtex (modified local version with a bug fix)
+- [bibtex-tidy](https://github.com/FlamingTempura/bibtex-tidy) for more beautiful bibtex
 - [image-js](https://github.com/image-js/image-js) for image resizing for thumbnails (`npm run resizePeople`, `npm run resizeThumbs`)
 - [npm-check-updates](https://github.com/raineorshine/npm-check-updates) for updating packages (`npm run upd`)
-- [xlsx](https://github.com/SheetJS/sheetjs) for converting .xlsx to .csv `npm run tocsv`
-- [bibtex-tidy](https://github.com/FlamingTempura/bibtex-tidy) for more beautiful bibtex
+- [qrcode](https://github.com/soldair/node-qrcode) for QR codes
