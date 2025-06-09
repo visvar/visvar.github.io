@@ -115,8 +115,8 @@ export const memberConfig = [
 
   // Phds
   {
-    name: 'Aimee Sousa Calepso',
-    title: 'Aimee Sousa Calepso, M.Sc.',
+    name: 'Aimée Sousa Calepso',
+    title: 'Aimée Sousa Calepso, M.Sc.',
     role: 'phd',
     path: 'aimee_sousa_calepso',
     bio: `
