@@ -9,7 +9,6 @@
     "topng": "node ./scripts/image-to-png.js",
     "resizePeople": "node ./scripts/image-resizer.js assets/img/people 256",
     "resizeThumbs": "node ./scripts/image-resizer.js assets/img/teaser 256",
-    "tocsv": "node ./scripts/table-to-csv.js",
     "compile": "node ./scripts/compile.js",
     "checklinks": "node ./scripts/check-broken-links.js",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,10 +19,8 @@
   "devDependencies": {
     "@hygull/bibtex": "file:local_modules/bibtex",
     "bibtex-tidy": "^1.14.0",
-    "fast-csv": "^5.0.2",
     "image-js": "^1.0.0-alpha.3",
     "npm-check-updates": "^18.0.1",
-    "qrcode": "^1.5.4",
-    "xlsx": "^0.18.5"
+    "qrcode": "^1.5.4"
   }
 }
