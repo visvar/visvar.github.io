@@ -176,9 +176,6 @@ export const memberConfig = [
     <p>
     Please contact me if you are interested in thesis writing or collaboration opportunities or have any questions about my research. I look forward to hearing from you.
     </p>
-    <p>
-    Picture: Universität Stuttgart / Uli Regenscheit.
-    </p>
     `,
     research: ['HCI', 'AR/ VR', 'Information Visualization'],
     links: [
