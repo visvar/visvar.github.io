@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs'
 import QRCode from 'qrcode'
-import { publicationSheet, pageUrl, pageTitle, memberConfig } from '../config.js'
+import { pageUrl, pageTitle, allowedMissingPDF, allowedMissingDOI, memberConfig } from '../config.js'
 import pkg from 'bibtex-tidy'
 const { tidy } = pkg
 import bibtex from "@hygull/bibtex"
@@ -9,9 +9,6 @@ import bibtex from "@hygull/bibtex"
 const REPORT_MISSING_INFO = true
 // report when pdf is only given as link but not file
 const REPORT_MISSING_PDF_FILES = true
-
-const allowedMissingPDF = ['ling2021visimages']
-const allowedMissingDOI = ['park2025design', 'talsma2024towards', 'fan2023virtual', 'zhang20233d', 'heyen2022postermidicontroller', 'rau2021visual', 'heyen2020supporting', 'hube2018the', 'cutura2018viscoder', 'aigner2018valid', 'oppermann2017bikesharingatlas', 'calero-valdez2017framework', 'müller2017a', 'rudkowsy2017sentiment', 'jenny2017incivility', 'krone2017from', 'rau2017challenges', 'sacha2016esann', 'hube2016virtual', 'niederer2016ffh', 'torsneyweir2015decision', 'sedlmair2012tr', 'sedlmair2011auto', 'baur2010infovisHS', 'isenberg2010covis', 'ruhland2009ijac', 'sedlmair2008cscw']
 
 /**
  * Generates the HTML <head> of a page
