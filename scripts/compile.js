@@ -345,7 +345,7 @@ function createPublicationsHtml(publications, member = null) {
     <div class="metaData ${imageExists ? '' : 'noImage'}">
       <h3>
         <a href="${p}/pub/${key}.html" target="_blank">
-        ${pub['data']['badge'] ? `<img style="height:1em; width:auto; vertical-align: sub;" src="./assets/img/badges/${pub['data']['badge']}.png"/> ` : ''}${pub['data']['title']}
+        ${pub['data']['badge'] ? `<img style="height:1em; width:auto; vertical-align: sub;" src="${p}/assets/img/badges/${pub['data']['badge']}.png"/> ` : ''}${pub['data']['title']}
         </a>
       </h3>
       <div class="authors">
