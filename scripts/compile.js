@@ -1,14 +1,12 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs'
 import QRCode from 'qrcode'
-import { pageUrl, pageTitle, allowedMissingPDF, allowedMissingDOI, memberConfig } from '../config.js'
+import { pageUrl, pageTitle, allowedMissingPDF, allowedArxiv, allowedMissingDOI, memberConfig } from '../config.js'
 import pkg from 'bibtex-tidy'
 const { tidy } = pkg
 import bibtex from "@hygull/bibtex"
 
-// report missing info for publications
-const REPORT_MISSING_INFO = true
 // report when pdf is only given as link but not file
-const REPORT_MISSING_PDF_FILES = true
+// const REPORT_MISSING_PDF_FILES = true
 
 /**
  * Generates the HTML <head> of a page
@@ -86,15 +84,45 @@ const nameMemberMap = new Map(memberConfig.map(d => [d.name, d]))
 const bib = new bibtex()
 const publications = bib.getBibAsObject('./bibliography.bib')
 
+// Check the most important stuff
+publications.forEach(pub => {
+  if (!pub['data']['author'] || pub['data']['author'] === '') {
+    console.log(`Publication ${pub['key']} is missing author(s)`)
+    console.log('Compile panic')
+    process.exit()
+  }
+  if (!pub['data']['title'] || pub['data']['title'] === '') {
+    console.log(`Publication ${pub['key']} is missing a title`)
+    console.log('Compile panic')
+    process.exit()
+  }
+  if (!pub['data']['year'] || pub['data']['year'] === '') {
+    console.log(`Publication ${pub['key']} is missing a year`)
+    console.log('Compile panic')
+    process.exit()
+  }
+  if (!pub['data']['month'] || pub['data']['month'] === '') {
+    console.log(`Publication ${pub['key']} is missing a month`)
+    console.log('Compile panic')
+    process.exit()
+  } else if (!/^\d+$/.test(pub['data']['month'])) {
+    console.log(`Publication ${pub['key']}'s month is not numeric`)
+    console.log('Compile panic')
+    process.exit()
+  }
+});
+
 createPages()
 
 /**
  * Creates all HTML pages
 */
 async function createPages() {
-  console.log(`${publications.length} publications`)
-  console.log(allPdfs.size + ' pdfs')
-  console.log(allTeasers.size + ' teasers')
+  console.log('\n\n')
+  console.log('Stats:')
+  console.log(`  ${publications.length} publications`)
+  console.log(`  ${allPdfs.size} pdfs`)
+  console.log(`  ${allTeasers.size} teasers`)
 
   // Sort by date descending, so newest at top of page
   publications.sort((a, b) => {
@@ -552,13 +580,11 @@ async function createQRCodes(publications) {
     scale: 12,
     margin: 0,
   }
-  const expectedQRs = []
 
   // For publications
   for (const pub of publications) {
     const key = pub['key']
     const path = `${dir}/${key}.png`
-    expectedQRs.push(`${key}.png`)
     // Check if QR code image already exists
     if (existsSync(path)) { continue }
     const url = `${pageUrl}/pub/${key}.html`
@@ -569,20 +595,10 @@ async function createQRCodes(publications) {
   // For people
   for (const m of memberConfig) {
     const path = `${dir}/${m.path}.png`
-    expectedQRs.push(`${m.path}.png`)
     if (existsSync(path)) { continue }
     const url = `${pageUrl}/members/${m.path}.html`
     QRCode.toFile(path, url, options)
     count++
-  }
-
-  // Look for orphan QR code PNGsf
-  allQRs.delete('.gitkeep')
-  for (const path of expectedQRs) {
-    allQRs.delete(path)
-  }
-  if (allQRs.size > 0) {
-    console.log(`\nextra QR code images:\n  ${[...allQRs].join("\n  ")}`)
   }
 }
 
@@ -603,41 +619,82 @@ function reportMissingOrExtraInfo(publications) {
     return ''
   }
 
-  let missingPublicationInfo = false
+  // Extra files
+  let extra = []
+  const allKeys = new Set(publications.map(d => d['key']))
+  const allFiles = [...allTeasers, ...allPdfs, ...allVideos, ...allSuppl, ...allPubHTML]
+  const ignore = new Set(["small", "people", "misc"])
+  for (const f of allFiles) {
+    const key = f.slice(0, f.lastIndexOf("."))
+    if (!allKeys.has(key) && !ignore.has(f)) {
+      extra.push(f)
+    }
+  }
+  // QR codes
+  for (const pub of publications) {
+    const key = pub['key']
+    allQRs.delete(`${key}.png`)
+  }
+  for (const m of memberConfig) {
+    allQRs.delete(`${m.path}.png`)
+  }
+  allQRs.delete('.gitkeep')
+  for (const qr of allQRs) {
+    extra.push(qr)
+  }
+  // Print missing report
+  if (extra.length > 0) {
+    console.log(`\n\nextra files:\n  ${extra.sort().join("\n  ")}`)
+  }
 
+  // Missing
+  let missingPublicationInfo = false
+  let missingFiles = false
   let missing = []
+
   for (const pub of publications) {
     const key = pub['key']
 
     // missing publication info
-    if (REPORT_MISSING_INFO) {
-      if (pub['data']['venue'] === '') {
+    if (!pub['data']['doi'] || pub['data']['doi'] === '') {
+      if (!allowedMissingDOI.includes(key)) {
         missingPublicationInfo = true
-        missing.push([`${key} info: venue`, getResp(pub)])
+        missing.push([`${key} doi`, getResp(pub)])
       }
-      if (pub['data']['abstract'] === '') {
+    } else {
+      if (!pub['data']['doi'].includes('http')) {
         missingPublicationInfo = true
-        missing.push([`${key} info: abstract`, getResp(pub)])
+        missing.push([`${key} doi is not a link`, getResp(pub)])
       }
-      if (!pub['data']['doi']) {
+      if (pub['data']['doi'].includes('arxiv') && !allowedArxiv.includes(key)) {
         missingPublicationInfo = true
-        if (!allowedMissingDOI.includes(key)) {
-          missing.push([`${key} info: doi`, getResp(pub)])
-        }
-      } else if (pub['data']['doi'].includes('arxiv')) {
-        missing.push([`${key} info: doi is arxiv, please update asap`, getResp(pub)])
+        missing.push([`${key} doi is arxiv`, getResp(pub)])
       }
+    }
+    if (!pub['data']['venue'] || pub['data']['venue'] === '') {
+      missingPublicationInfo = true
+      missing.push([`${key} venue`, getResp(pub)])
+    }
+    if (!pub['data']['abstract'] | pub['data']['abstract'] === '') {
+      missingPublicationInfo = true
+      missing.push([`${key} abstract`, getResp(pub)])
+    }
+    if (pub['data']['badge'] && !pub['data']['note']) {
+      missingPublicationInfo = true
+      missing.push([`${key} please add info about the badge in the note`, getResp(pub)])
     }
 
     // missing files
     // publication teaser images
     if (!allTeasers.has(`${key}.png`)) {
+      missingFiles = true
       missing.push([`${key}.png (teaser)`, getResp(pub)])
     }
     // publication PDF, not necessary for datasets
     let pdf = pub['data']['pdf']
     if ((!pdf) && !allPdfs.has(`${key}.pdf`) && !allowedMissingPDF.includes(key)) {
       // no link AND no file
+      missingFiles = true
       missing.push([`${key}.pdf (publication)`, getResp(pub)])
     } /*else if (REPORT_MISSING_PDF_FILES && !allPdfs.has(`${key}.pdf`) && !allowedMissingPDF.includes(key)) {
       missing.push([`${key}.pdf (no pdf file - only link)`, getResp(pub)])
@@ -647,8 +704,7 @@ function reportMissingOrExtraInfo(publications) {
   // create report
   if (missing.length > 0) {
     missing.sort((a, b) => a[1] < b[1] ? -1 : 1)
-    console.log(`\nmissing information and files:`)
-    console.log(`\npublications:`)
+    console.log(`\n\nmissing information and files:`)
     let last = ''
     for (const [file, member] of missing) {
       if (last !== member) {
@@ -657,28 +713,12 @@ function reportMissingOrExtraInfo(publications) {
       console.log('    ' + file)
       last = member
     }
-  }
-
-  // extra files
-  let extra = []
-  const allKeys = new Set(publications.map(d => d['key']))
-  const allFiles = [...allTeasers, ...allPdfs, ...allVideos, ...allSuppl, ...allPubHTML]
-  const ignore = new Set(["small", "people", "misc"])
-
-  for (const f of allFiles) {
-    const key = f.slice(0, f.lastIndexOf("."))
-    if (!allKeys.has(key) && !ignore.has(f)) {
-      extra.push(f)
-    }
-  }
-  if (extra.length > 0) {
-    console.log(`\nextra files:\n  ${extra.sort().join("\n  ")}`)
-  }
-  if (missing.length > 0 || extra.length > 0) {
     if (missingPublicationInfo) {
-      console.log('\nput missing publication information in:\n    bibliography.bib')
+      console.log('\n  put missing publication information in:\n    bibliography.bib')
     }
-    console.log('\nput the missing files in:\n    .pdf   assets/pdf/\n    .png   assets/img/teaser/')
+    if (missingFiles) {
+      console.log('\n  put missing files in:\n    .pdf   assets/pdf/\n    .png   assets/img/teaser/')
+    }
   }
 
   // missing member info
@@ -690,28 +730,39 @@ function reportMissingOrExtraInfo(publications) {
       // ignore alumni
       continue
     }
+    if (member.title === '') {
+      missingForMember.push('a title')
+    }
+    if (member.role === '') {
+      missingForMember.push('a role')
+    }
+    if (member.path === '') {
+      missingForMember.push('a path')
+    }
     if (member.bio === '') {
       missingForMember.push('a bio')
-    }
-    if (!allPeopleImages.has(member.path + '.jpg')) {
-      missingForMember.push('a profile picture')
     }
     if (member.research.length === 0) {
       missingForMember.push('research interests')
     }
     const links = member.links.map(d => d.text)
     if (!links.includes('University of Stuttgart website')) {
-      missingForMember.push('a Uni link')
+      missingForMember.push('a University link')
     }
     if (!links.includes('ORCID')) {
       missingForMember.push('an ORCID link')
     }
     if (!links.includes('Google Scholar')) {
-      missingForMember.push('a scholar link')
+      missingForMember.push('a Google Scholar link')
     }
+    if (!allPeopleImages.has(member.path + '.jpg')) {
+      missingForMember.push('a profile picture')
+    }
+
+    // create report
     if (missingForMember.length > 0) {
       if (firstPrint) {
-        console.log(`\n\nmembers:`)
+        console.log(`\n\nmissing member information:`)
         firstPrint = false
       }
       missingInfo = true
