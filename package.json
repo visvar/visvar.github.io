@@ -1,6 +1,6 @@
 {
   "name": "visvar.github.io",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "HCI Stuttgart website",
   "main": "index.js",
   "type": "module",
