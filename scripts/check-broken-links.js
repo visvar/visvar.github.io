@@ -9,9 +9,7 @@ csv
   .on('data', data => data.Title !== '' && publications.push(data))
   .on('end', check)
 
-
-
-async function check () {
+async function check() {
   const links = [...getPubLinks(), ...getMemberLinks()]
 
   console.log(`checking ${links.length} links`)
@@ -37,8 +35,7 @@ async function check () {
   }
 }
 
-
-function getPubLinks () {
+function getPubLinks() {
   const links = []
   for (const pub of publications) {
     Object.keys(pub).forEach((key) => {
@@ -54,10 +51,7 @@ function getPubLinks () {
   return links
 }
 
-/**
- * TODO:
- */
-function getMemberLinks () {
+function getMemberLinks() {
   const links = []
   for (const m of memberConfig) {
     for (const link of m.links) {
@@ -70,13 +64,12 @@ function getMemberLinks () {
   return links
 }
 
-
 /**
  * https://www.freecodecamp.org/news/how-to-validate-urls-in-javascript/
  * @param {*} string
  * @returns
  */
-function isValidUrl (string) {
+function isValidUrl(string) {
   try {
     new URL(string)
     return true

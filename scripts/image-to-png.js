@@ -2,7 +2,6 @@ import { readdirSync } from 'fs'
 import path from 'path'
 import { Image } from 'image-js'
 
-
 convert()
 
 async function convert() {

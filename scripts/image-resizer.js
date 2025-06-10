@@ -2,7 +2,6 @@ import { readdirSync } from 'fs'
 import path from 'path'
 import { readSync, writeSync } from 'image-js'
 
-
 // Using alpha of image-js to able to use interpolation
 // See https://github.com/image-js/image-js/issues/496#issuecomment-583258046
 // https://github.com/image-js/image-js/issues/496#issuecomment-583483759
@@ -18,7 +17,7 @@ const targetWidth = +process.argv[3]
 
 rescale(directory, targetWidth)
 
-async function rescale (directory, targetWidth) {
+async function rescale(directory, targetWidth) {
   console.log(`image-resizer.js, dir=${directory} width=${targetWidth}`)
   const files = readdirSync(directory)
   let noChange = 0

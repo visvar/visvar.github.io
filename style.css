@@ -1,3 +1,8 @@
+/*
+ *
+ * Basics
+ *
+ */
 * {
   --textColor: #363636;
   --textColor2: #363636;
@@ -78,11 +83,11 @@ article {
   padding-bottom: 40px;
 }
 
-
-
-
-
-/* nav */
+/*
+ *
+ * Nav
+ *
+ */
 nav {
   margin-top: 20px;
   padding-left: 10px;
@@ -119,21 +124,21 @@ nav a:hover {
   color: var(--linkColor);
 }
 
-
-
-
-
-/* QR codes */
+/*
+ *
+ * QR codes
+ *
+ */
 article img.qr {
   width: 140px;
   margin: 30px auto;
 }
 
-
-
-
-
-/* Main page member list */
+/*
+ *
+ * Main page member list
+ *
+ */
 .memberList {
   max-width: 620px;
   margin: auto;
@@ -160,11 +165,11 @@ article img.qr {
   font-size: 13.5px;
 }
 
-
-
-
-
-/* About pages */
+/*
+ *
+ * About pages
+ *
+ */
 .avatarAndBio {
   display: grid;
   grid-template-columns: auto auto;
@@ -200,20 +205,21 @@ article img.qr {
   margin-left: -15px;
 }
 
-
-
-
-
-/* Year headings */
+/*
+ *
+ * Year headings
+ *
+ */
 .yearHeading {
   text-align: center;
   border-bottom: 2px solid #eee;
 }
 
-
-
-
-/* Publications on other pages */
+/*
+ *
+ * Publications on other pages
+ *
+ */
 .paper {
   margin-bottom: 0;
   display: grid;
@@ -269,10 +275,11 @@ article img.qr {
   font-weight: 600;
 }
 
-
-
-
-/* Publication page */
+/*
+ *
+ * Publication pages
+ *
+ */
 .pubPageContent {
   text-align: center;
 }
@@ -285,7 +292,6 @@ article img.qr {
   width: 50%;
   max-height: 400px;
   margin: auto;
-  /* margin-bottom: 20px; */
   border-radius: 3px;
 }
 
@@ -306,19 +312,11 @@ article img.qr {
   padding: 0 3px;
 }
 
-
-
-
-
-
-
-
 /*
+ *
  * Responsiveness
+ *
  */
-
-
-
 
 /* phone layout */
 @media (min-width: 0px) {
@@ -367,11 +365,7 @@ article img.qr {
     max-width: 100%;
     grid-template-columns: repeat(auto-fit, 30%);
   }
-
 }
-
-
-
 
 /* tablet layout */
 @media (min-width: 720px) {
@@ -421,9 +415,6 @@ article img.qr {
     grid-template-columns: repeat(auto-fit, 25%);
   }
 }
-
-
-
 
 /* desktop layout */
 @media (min-width: 1020px) {
