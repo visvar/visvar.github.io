@@ -297,15 +297,23 @@ function createPublicationsHtml(publications, member = null) {
 
     let video = pub['data']['video']
     let videoExists = allVideos.has(`${key}.mp4`)
+    let videoEmbed = false
     if (!videoExists && video) {
       videoExists = true
+      if (video.includes("youtube.com/embed")) {
+        videoEmbed = true
+      }
     } else {
       video = `${p}/assets/video/${key}.mp4`
     }
     let videoExists2 = false
     let video2 = pub['data']['video2']
+    let videoEmbed2 = false
     if (video2) {
       videoExists2 = true
+      if (video2.includes("youtube.com/embed")) {
+        videoEmbed2 = true
+      }
     }
 
     let suppl = pub['data']['suppl']
@@ -359,9 +367,9 @@ function createPublicationsHtml(publications, member = null) {
         ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
         ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link</a>` : ''}
         ${pdfExists ? `<a href="${pdf}" target="_blank" rel="noreferrer">PDF</a>` : ''}
-        ${videoExists ? `<a href="${video}" target="_blank" rel="noreferrer">video</a>` : ''}
-        ${videoExists2 ? `<a href="${video2}" target="_blank" rel="noreferrer">video</a>` : ''}
         ${supplExists ? `<a href="${suppl}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
+        ${videoExists ? videoEmbed ? `<a href="https://www.youtube.com/watch?v=${video.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video</a>` : `<a href="${video}" target="_blank" rel="noreferrer">video</a>` : ''}
+        ${videoExists2 ? videoEmbed2 ? `<a href="https://www.youtube.com/watch?v=${video2.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video</a>` : `<a href="${video2}" target="_blank" rel="noreferrer">video</a>` : ''}
       </div>
     </div>
   </div>
@@ -392,15 +400,23 @@ function createPublicationPageHtml(pub) {
 
   let video = pub['data']['video']
   let videoExists = allVideos.has(`${key}.mp4`)
+  let videoEmbed = false
   if (!videoExists && video) {
     videoExists = true
+    if (video.includes("youtube.com/embed")) {
+      videoEmbed = true
+    }
   } else {
     video = `../assets/video/${key}.mp4`
   }
   let videoExists2 = false
   let video2 = pub['data']['video2']
+  let videoEmbed2 = false
   if (video2) {
     videoExists2 = true
+    if (video2.includes("youtube.com/embed")) {
+      videoEmbed2 = true
+    }
   }
 
   let suppl = pub['data']['suppl']
@@ -439,9 +455,9 @@ function createPublicationPageHtml(pub) {
                   ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
                   ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link</a>` : ''}
                   ${pdfExists ? `<a href="${pdf}" target="_blank" rel="noreferrer">PDF</a>` : ''}
-                  ${videoExists ? `<a href="${video}" target="_blank" rel="noreferrer">video</a>` : ''}
-                  ${videoExists2 ? `<a href="${video2}" target="_blank" rel="noreferrer">video</a>` : ''}
                   ${supplExists ? `<a href="${suppl}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
+                  ${videoExists ? videoEmbed ? `<p><iframe width="560" height="315" src="${video}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>` : `<a href="${video}" target="_blank" rel="noreferrer">video</a>` : ''}
+                  ${videoExists2 ? videoEmbed2 ? `<p><iframe width="560" height="315" src="${video2}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>` : `<a href="${video2}" target="_blank" rel="noreferrer">video</a>` : ''}
                 </div>
                 ${pub['data']['abstract'] ? `<div class="abstract"><b>Abstract.</b> ${pub['data']['abstract']}</div>` : ''}
                 ${`<div class="bibtex"><textarea>${formatBibtex(pub['key'], bib.getBibCodeFromObject(pub, 3))}</textarea></div>`}

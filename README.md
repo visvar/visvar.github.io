@@ -71,6 +71,11 @@ Publications are stored in the `bibliography.bib` file
 
 `video` and `video2`
 - If there are videos available online you can add the links to them here. Please fill video before video2
+- Embedding youtube videos
+  - To embed a youtube video, you have to enter the embedding link.
+  - You get that by clicking on 'sharing' on youtube and selecting 'embed'.
+  - Then, **only copy the link** into video/video2. The link looks like ```https://www.youtube.com/embed/<id>?si=<another id>```.
+  - Do <ins>NOT</ins> copy the whole embedding code.
 
 `pdf`
 - Only have a link to your pdf? Add it here.
