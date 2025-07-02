@@ -103,6 +103,31 @@ export const memberConfig = [
     projects: []
   },
   {
+    name: 'Elias Elmquist',
+    title: 'Elias Elmquist, Ph.D.',
+    role: 'postdoc',
+    path: 'elias_elmquist',
+    bio: `
+    <p>
+      I am a postdoctoral researcher at VISUS (Visualization Research Center, University of Stuttgart), conducting research on the creation of audiovisual data representations through the integration of visualization and sonification, the method of using sound to convey information. Sonification and can be used as a complement to visualization to convey additional information, or to present the same data through another perceptual modality, which could make it easier to understand and appreciate the information.
+    </p>
+    <p>  
+      I completed my doctoral studies at Linköping University, where I integrated sonification and visualization in different domains, such as astronomy and air traffic control. This research was conducted in a human-centered manner by collaborating with visualization developers and domain experts throughout the design process of the sonification. The sonifications were integrated with the environment where the accompanied visualization was displayed to create a realistic proof-of-concept of the design. The environment was also often used as the evaluation platform for conducting evaluations with the users of the visualization to evaluate the contribution of the sonification in an ecologically valid manner.
+    </p> 
+    <p>   
+      My postdoctoral project involves to extend my research into applications in extended reality, and utilize audiovisual integration in other domains.
+    </p>
+    `,
+    research: ['Sonification', 'Audiovisual integration', 'Visualization', 'VR/AR'],
+    links: [
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/team/Elmquist/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.com.au/citations?user=m-DjCWMAAAAJ&hl' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0001-5874-6356' },
+      { text: 'LinkedIn', url: 'https://www.linkedin.com/in/elias-elmq/' }
+    ],
+    projects: []
+  },
+  {
     name: 'Sophie Sadler',
     title: 'Sophie Sadler, Ph.D.',
     role: 'postdoc',
