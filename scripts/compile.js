@@ -67,8 +67,8 @@ async function createPages() {
   console.log('\n\n')
   console.log('Stats:')
   console.log(`  ${publications.length} publications`)
+  console.log(`  ${allTeasers.size - 1} teasers`) // -1 for the 'small' folder
   console.log(`  ${allPdfs.size} pdfs`)
-  console.log(`  ${allTeasers.size} teasers`)
 
   // Sort by date descending, so newest at top of page
   publications.sort((a, b) => {
