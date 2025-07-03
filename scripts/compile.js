@@ -577,7 +577,7 @@ function createImprint() {
  */
 function reportMissingOrExtraInfo(publications) {
   // For each missing file we want to know who is responsible
-  const memberNames = new Set(memberConfig.map(d => d.name))
+  const memberNames = new Set(memberConfig.filter(d => d.role === 'professor' | d.role === 'postdoc' | d.role === 'phd' | d.role === 'associatedpostdoc' | d.role === 'associatedphd').map(d => d.name))
   const getResp = (pub) => {
     const authors = pub['data']['author'].split(', ')
     for (const author of authors) {
@@ -585,7 +585,13 @@ function reportMissingOrExtraInfo(publications) {
         return author
       }
     }
-    return ''
+    const alumniNames = new Set(memberConfig.filter(d => d.role === 'alumnuspostdoc' | d.role === 'alumnusphd').map(d => d.name))
+    for (const author of authors) {
+      if (alumniNames.has(author)) {
+        return author
+      }
+    }
+    return 'no author found'
   }
 
   // Extra files
