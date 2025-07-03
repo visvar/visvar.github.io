@@ -635,7 +635,7 @@ function reportMissingOrExtraInfo(publications) {
         missingPublicationInfo = true
         missing.push([`${key} doi is not a link`, getResp(pub)])
       }
-      if (pub['data']['doi'].includes('arxiv') && !allowedArxiv.includes(key)) {
+      if (pub['data']['doi'].toLowerCase().includes('arxiv') && !allowedArxiv.includes(key)) {
         missingPublicationInfo = true
         missing.push([`${key} doi is arxiv`, getResp(pub)])
       }
