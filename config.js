@@ -173,26 +173,6 @@ export const memberConfig = [
     ]
   },
   {
-    name: 'Carlos Quijano-Chavez',
-    title: 'Carlos Quijano-Chavez, M.Sc.',
-    role: 'phd',
-    path: 'carlos_quijano-chavez',
-    bio: `
-    <p>
-    Currently, I'm a PhD student at the University of Stuttgart.
-    I obtained my MSc degree in Computer Science at the Federal University of Rio Grande do Sul (UFRGS) in Porto Alegre, Brazil.
-    My research focuses on applying engaging, embodied display and interaction techniques for data visualization and visual analytics in immersive environments.
-    </p>
-    `,
-    research: ['HCI', 'Visualization'],
-    links: [
-      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Quijano-Chavez/' },
-      { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=3_fYPGQAAAAJ' },
-      { text: 'ORCID', url: 'https://orcid.org/0000-0001-9129-5366' },
-    ],
-    projects: []
-  },
-  {
     name: 'Christian Krauter',
     title: 'Christian Krauter, M.Sc.',
     role: 'phd',
@@ -682,6 +662,26 @@ export const memberConfig = [
   },
 
   // associated phds
+  {
+    name: 'Carlos Quijano-Chavez',
+    title: 'Carlos Quijano-Chavez, M.Sc.',
+    role: 'associatedphd',
+    path: 'carlos_quijano-chavez',
+    bio: `
+    <p>
+    Currently, I'm a PhD student at the University of Stuttgart.
+    I obtained my MSc degree in Computer Science at the Federal University of Rio Grande do Sul (UFRGS) in Porto Alegre, Brazil.
+    My research focuses on applying engaging, embodied display and interaction techniques for data visualization and visual analytics in immersive environments.
+    </p>
+    `,
+    research: ['HCI', 'Visualization'],
+    links: [
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Quijano-Chavez/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=3_fYPGQAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0001-9129-5366' },
+    ],
+    projects: []
+  },
   {
     name: 'Fairouz Grioui',
     title: 'Fairouz Grioui, M.Sc.',
