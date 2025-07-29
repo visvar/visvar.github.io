@@ -5,9 +5,6 @@ import pkg from 'bibtex-tidy'
 const { tidy } = pkg
 import bibtex from "@hygull/bibtex"
 
-// Report when pdf is only given as link but not as a file
-// const REPORT_MISSING_PDF_FILES = true
-
 // Load files
 const allTeasers = new Set(readdirSync("assets/img/teaser"))
 const allPeopleImages = new Set(readdirSync("assets/img/people"))
@@ -622,10 +619,30 @@ function reportMissingOrExtraInfo(publications) {
     console.log(`\n\nextra files:\n  ${extra.sort().join("\n  ")}`)
   }
 
-  // Other missing files and information
+  // Missing files and information
   let missingPublicationInfo = false
   let missingFiles = false
-  let missing = []
+  let missingData = {}
+
+  // Function to add an item to one of the two lists for a given key
+  function addMissing(member, list, item) {
+    if (!missingData[member]) {
+      // Initialize the key with two empty lists if it doesn't exist
+      missingData[member] = {
+        personal: [],
+        publication: []
+      };
+    }
+
+    // Add the item to the specified list
+    if (list === 'personal') {
+      missingData[member].personal.push(item);
+    } else if (list === 'publication') {
+      missingData[member].publication.push(item);
+    } else {
+      console.error("Invalid list:", list);
+    }
+  }
 
   for (const pub of publications) {
     const key = pub['key']
@@ -634,121 +651,120 @@ function reportMissingOrExtraInfo(publications) {
     if (!pub['data']['doi'] || pub['data']['doi'] === '') {
       if (!allowedMissingDOI.includes(key)) {
         missingPublicationInfo = true
-        missing.push([`${key} doi`, getResp(pub)])
+        addMissing(getResp(pub), 'publication', `${key} doi`)
       }
     } else {
       if (!pub['data']['doi'].includes('http')) {
         missingPublicationInfo = true
-        missing.push([`${key} doi is not a link`, getResp(pub)])
+        addMissing(getResp(pub), 'publication', `${key} doi is not a link`)
       }
       if (pub['data']['doi'].toLowerCase().includes('arxiv') && !allowedArxiv.includes(key)) {
         missingPublicationInfo = true
-        missing.push([`${key} doi is arxiv`, getResp(pub)])
+        addMissing(getResp(pub), 'publication', `${key} doi is arxiv`)
       }
     }
     if (!pub['data']['venue'] || pub['data']['venue'] === '') {
       missingPublicationInfo = true
-      missing.push([`${key} venue`, getResp(pub)])
+      addMissing(getResp(pub), 'publication', `${key} venue`)
     }
     if (!pub['data']['abstract'] | pub['data']['abstract'] === '') {
       missingPublicationInfo = true
-      missing.push([`${key} abstract`, getResp(pub)])
+      addMissing(getResp(pub), 'publication', `${key} abstract`)
     }
     if (pub['data']['badge'] && !pub['data']['note']) {
       missingPublicationInfo = true
-      missing.push([`${key} please add info about the badge in the note`, getResp(pub)])
+      addMissing(getResp(pub), 'publication', `${key} please add info about the badge in the note`)
     }
 
     // Missing files
     // Publication teaser images
     if (!allTeasers.has(`${key}.png`)) {
       missingFiles = true
-      missing.push([`${key}.png (teaser)`, getResp(pub)])
+      addMissing(getResp(pub), 'publication', `${key}.png (teaser)`)
     }
     // Publication PDF
     let pdf = pub['data']['pdf']
     if ((!pdf) && !allPdfs.has(`${key}.pdf`) && !allowedMissingPDF.includes(key)) {
       // No link AND no file
       missingFiles = true
-      missing.push([`${key}.pdf (publication)`, getResp(pub)])
-    } /*else if (REPORT_MISSING_PDF_FILES && !allPdfs.has(`${key}.pdf`) && !allowedMissingPDF.includes(key)) {
-      missing.push([`${key}.pdf (no pdf file - only link)`, getResp(pub)])
-    }*/
-  }
-
-  // Create missing files and infornmation report
-  if (missing.length > 0) {
-    missing.sort((a, b) => a[1] < b[1] ? -1 : 1)
-    console.log(`\n\nmissing information and files:`)
-    let last = ''
-    for (const [file, member] of missing) {
-      if (last !== member) {
-        console.log('  ' + member)
-      }
-      console.log('    ' + file)
-      last = member
-    }
-    if (missingPublicationInfo) {
-      console.log('\n  put missing publication information in:\n    bibliography.bib')
-    }
-    if (missingFiles) {
-      console.log('\n  put missing files in:\n    .pdf   assets/pdf/\n    .png   assets/img/teaser/')
+      addMissing(getResp(pub), 'publication', `${key}.pdf (publication)`)
     }
   }
 
   // Missing member info
   let missingInfo = false
-  let firstPrint = true
   for (const member of memberConfig) {
-    let missingForMember = []
     if (member.role && member.role.includes('alumnus')) {
       // Ignore alumni
       continue
     }
     if (member.title === '') {
-      missingForMember.push('a title')
+      missingInfo = true
+      addMissing(member.name, 'personal', 'a title')
     }
     if (member.role === '') {
-      missingForMember.push('a role')
+      missingInfo = true
+      addMissing(member.name, 'personal', 'a role')
     }
     if (member.path === '') {
-      missingForMember.push('a path')
+      missingInfo = true
+      addMissing(member.name, 'personal', 'a path')
     }
     if (member.bio === '') {
-      missingForMember.push('a bio')
+      missingInfo = true
+      addMissing(member.name, 'personal', 'a bio')
     }
     if (member.research.length === 0) {
-      missingForMember.push('research interests')
+      missingInfo = true
+      addMissing(member.name, 'personal', 'research interests')
     }
     const links = member.links.map(d => d.text)
     if (!links.includes('University of Stuttgart website')) {
-      missingForMember.push('a University link')
+      missingInfo = true
+      addMissing(member.name, 'personal', 'a University link')
     }
     if (!links.includes('ORCID')) {
-      missingForMember.push('an ORCID link')
+      missingInfo = true
+      addMissing(member.name, 'personal', 'an ORCID link')
     }
     if (!links.includes('Google Scholar')) {
-      missingForMember.push('a Google Scholar link')
+      missingInfo = true
+      addMissing(member.name, 'personal', 'a Google Scholar link')
     }
     if (!allPeopleImages.has(member.path + '.jpg')) {
-      missingForMember.push('a profile picture')
+      missingInfo = true
+      addMissing(member.name, 'personal', 'a profile picture')
+    }
+  }
+
+  // Create Report
+  console.log(`\n\n\nmissing files and information:\n`)
+  for (const [member, value] of Object.entries(missingData)) {
+    console.log(member)
+
+    if (value.publication.length > 0) {
+      console.log('  Publications:')
+      value.publication.forEach(info => {
+        console.log('    ' + info)
+      })
     }
 
-    // Create report
-    if (missingForMember.length > 0) {
-      if (firstPrint) {
-        console.log(`\n\nmissing member information:`)
-        firstPrint = false
-      }
-      missingInfo = true
-      console.log(`  ${member.name} is missing`)
-      missingForMember.forEach(element => {
-        console.log('    ' + element)
+    if (value.personal.length > 0) {
+      console.log('  Profile:')
+      value.personal.forEach(info => {
+        console.log('    ' + info)
       })
     }
   }
+
+  if (missingPublicationInfo) {
+    console.log('\nadd missing publication information in:\n  bibliography.bib')
+  }
+  if (missingFiles) {
+    console.log("\nput missing...\n  PDF's in assets/pdf/\n  PNG's in assets/img/teaser/")
+  }
   if (missingInfo) {
-    console.log('\n  add missing info in\n    config.js\n  add missing profile pictures in\n    assets/img/people')
+    console.log('\nadd missing personal info in\n  config.js\nput missing profile pictures in\n  assets/img/people')
   }
 }
 
