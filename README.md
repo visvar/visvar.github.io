@@ -127,14 +127,17 @@ If not done yet, install packages with `npm i` (you obviously need [Node.js and 
 
 Before compiling, make sure the local version of the repository is up to date.
 
-`npm start` starts the compiler.
-
-**Read the output of the script. Missing files and information will be printed there**
-
-After compiling you can inspect the local version by opening `index.html` in a browser.
+`npm start`
+- starts compiling the whole webpage
+- **Read the output of the script. Missing files and information will be printed there**
+- After compiling you can inspect the local version by opening `index.html` in a browser.
 You will need to reload the page (e.g., press (CTRL) F5) in the browser to see changes!
 
-Fast compile: If publications, images, etc., did not change, you can run `npm run compile` to only re-compile the HTML.
+`npm start -- email`
+- compiles the webpage, but the information about missing files and information will be formatted as emails to copy and paste. 
+
+`npm run compile`
+- can be run for a fast compile of the HTML if publications, images, etc., did not change.
 
 ### Publishing
 

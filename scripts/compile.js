@@ -5,6 +5,17 @@ import pkg from 'bibtex-tidy'
 const { tidy } = pkg
 import bibtex from "@hygull/bibtex"
 
+let printEmails = false
+const argument = process.argv[2]
+
+if (argument) {
+  if (argument === 'email') {
+    printEmails = true
+  } else {
+    console.log("Received invalid argument:", argument)
+  }
+}
+
 // Load files
 const allTeasers = new Set(readdirSync("assets/img/teaser"))
 const allPeopleImages = new Set(readdirSync("assets/img/people"))
@@ -738,33 +749,64 @@ function reportMissingOrExtraInfo(publications) {
   }
 
   // Create Report
-  console.log(`\n\n\nmissing files and information:\n`)
-  for (const [member, value] of Object.entries(missingData)) {
-    console.log(member)
+  if (printEmails) {
+    console.log(`\n\n\nEmails for missing files and information:\n\n`)
+    for (const [member, value] of Object.entries(missingData)) {
+      console.log('Hi ' + member)
+      console.log("\nThis is a friendly notice/ reminder that there is some information missing on the HCI website from your:\n")
 
-    if (value.publication.length > 0) {
-      console.log('  Publications:')
-      value.publication.forEach(info => {
-        console.log('    ' + info)
-      })
+      if (value.publication.length > 0) {
+        if (value.publication.length > 1) {
+          console.log('Publications:')
+        } else {
+          console.log('Publication:')
+        }
+        value.publication.forEach(info => {
+          console.log('  ' + info)
+        })
+      }
+
+      if (value.personal.length > 0) {
+        console.log('Profile:')
+        value.personal.forEach(info => {
+          console.log('  ' + info)
+        })
+      }
+
+      console.log("\nPlease update the information/ upload the files as described in the readme")
+      console.log("https://github.com/visvar/visvar.github.io/blob/main/README.md) as soon as possible.")
+      console.log("\nIf you have a question or encounter any problems, please reach out to me.")
+      console.log("\n\n\n\n")
+    }
+  } else {
+    console.log(`\n\n\nmissing files and information:\n`)
+    for (const [member, value] of Object.entries(missingData)) {
+      console.log(member)
+
+      if (value.publication.length > 0) {
+        console.log('  Publications:')
+        value.publication.forEach(info => {
+          console.log('    ' + info)
+        })
+      }
+
+      if (value.personal.length > 0) {
+        console.log('  Profile:')
+        value.personal.forEach(info => {
+          console.log('    ' + info)
+        })
+      }
     }
 
-    if (value.personal.length > 0) {
-      console.log('  Profile:')
-      value.personal.forEach(info => {
-        console.log('    ' + info)
-      })
+    if (missingPublicationInfo) {
+      console.log('\nadd missing publication information in:\n  bibliography.bib')
     }
-  }
-
-  if (missingPublicationInfo) {
-    console.log('\nadd missing publication information in:\n  bibliography.bib')
-  }
-  if (missingFiles) {
-    console.log("\nput missing...\n  PDF's in assets/pdf/\n  PNG's in assets/img/teaser/")
-  }
-  if (missingInfo) {
-    console.log('\nadd missing personal info in\n  config.js\nput missing profile pictures in\n  assets/img/people')
+    if (missingFiles) {
+      console.log("\nput missing...\n  PDF's in assets/pdf/\n  PNG's in assets/img/teaser/")
+    }
+    if (missingInfo) {
+      console.log('\nadd missing personal info in\n  config.js\nput missing profile pictures in\n  assets/img/people')
+    }
   }
 }
 
