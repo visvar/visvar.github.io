@@ -775,7 +775,7 @@ function reportMissingOrExtraInfo(publications) {
       }
 
       console.log("\nPlease update the information/ upload the files as described in the readme")
-      console.log("https://github.com/visvar/visvar.github.io/blob/main/README.md) as soon as possible.")
+      console.log("(https://github.com/visvar/visvar.github.io/blob/main/README.md) as soon as possible.")
       console.log("\nIf you have a question or encounter any problems, please reach out to me.")
       console.log("\n\n\n\n")
     }
