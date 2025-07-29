@@ -750,7 +750,8 @@ function reportMissingOrExtraInfo(publications) {
 
   // Create Report
   if (printEmails) {
-    console.log(`\n\n\nEmails for missing files and information:\n\n`)
+    console.log(`\n\n\nEmails for missing files and information:`)
+    console.log(`\n\n\nNotification/ Reminder: Missing Information on the HCI website\n\n\n`)
     for (const [member, value] of Object.entries(missingData)) {
       console.log('Hi ' + member)
       console.log("\nThis is a friendly notice/ reminder that there is some information missing on the HCI website from your:\n")
