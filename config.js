@@ -322,7 +322,23 @@ export const memberConfig = [
     ],
     projects: []
   },
-
+  {
+    name: 'Janet Mazur',
+    title: 'Janet Mazur, M.Sc.',
+    role: 'phd',
+    path: 'janet_mazur',
+    bio:`
+    <p>
+    In my research, I focus on <i>VR Driving Simulation</i> and how immersion and realism can be enhanced by adding G-Force feedback. I am an external Ph.D. student from Mercedes-Benz AG, Virtual Reality Center, and supervised by the Visualization Research Center of the University of Stuttgart (VISUS).
+    <p>
+    `,
+    research: ['VR/AR', 'HCI', 'Driving Simulation', 'Robotics'],
+    links: [
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=c6-2mpQAAAAJ&hl=de'},
+      { text: 'ORCID', url: '0009-0001-4480-1438' },
+    ],
+    projects: []
+  },
   {
     name: 'Jonas Haischt',
     title: 'Jonas Haischt, M.Sc.',
