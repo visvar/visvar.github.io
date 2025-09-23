@@ -60,6 +60,15 @@ publications.forEach(pub => {
   }
 });
 
+// Sort by year and month descending, then title ascending
+publications.sort((a, b) => {
+  if (parseInt(a['data']['year']) !== parseInt(b['data']['year']))
+    return parseInt(b['data']['year']) - parseInt(a['data']['year']);
+  else if (parseInt(b['data']['month']) !== parseInt(a['data']['month']))
+    return parseInt(b['data']['month']) - parseInt(a['data']['month'])
+  return a['data']['title'].localeCompare(b['data']['title'])
+});
+
 createPages()
 
 /*
@@ -77,12 +86,6 @@ async function createPages() {
   console.log(`  ${publications.length} publications`)
   console.log(`  ${allTeasers.size - 1} teasers`) // -1 for the 'small' folder
   console.log(`  ${allPdfs.size} pdfs`)
-
-  // Sort by date descending, so newest at top of page
-  publications.sort((a, b) => {
-    if (parseInt(a['data']['year']) !== parseInt(b['data']['year'])) return parseInt(b['data']['year']) - parseInt(a['data']['year']);
-    return parseInt(b['data']['month']) - parseInt(a['data']['month'])
-  });
 
   // Member / author pages
   for (const member of memberConfig) {
