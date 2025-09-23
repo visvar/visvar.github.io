@@ -4,7 +4,7 @@ Hello, this is the repository for the webpage of the Human-Computer Interaction 
 
 If you are a (associated / alumnus) member and want to contribute, please **first read this readme**.
 
-If you have any questions, feedback, or feature suggestions, please ask @fheyen or @ChristianKrauter.
+If you have any questions, feedback, or feature suggestions, please @ChristianKrauter.
 
 The live version of this webpage can be found here: [visvar.github.io](https://visvar.github.io/).
 
@@ -15,7 +15,7 @@ Only change files as described below folders, nothing else!
 After adding new content, there are two general options:
 1. Update the wepage yourself (prefered)
    1. Add your changes
-   2. [Compile](#compiling) the page yourself 
+   2. [Compile](#compiling) the page yourself
 2. Only update the content
    1. Add your changes
    2. Create a pull request with your changes.
@@ -33,13 +33,13 @@ Publications are stored in the `bibliography.bib` file
 - You <ins>can use Unicode</ins> (e.g., é, â, ..) but **NOT** LaTeX (e.g., \c{c}, \\"{a})
 - Add as much information as possible
 - Clean your entry as if you are writing a paper
-- `Always add a teaser.` If your paper does not have any pictures: **Add a screenshot of the first page with title and authors**, like [xiao2024systemati](https://visvar.github.io/pub/xiao2024systematic.html)
+- `Always add a teaser.` If your paper does not have any pictures: **Add a screenshot of the first page with title and authors**, like [xiao2024systematic](https://visvar.github.io/pub/xiao2024systematic.html)
 
 ### Some rules:
 
 `citation key`
 - The pattern for keys is <ins>\<lastname>\<Year>\<FirstWord></ins> (example: heyen2020clavis).
-  - Add an increasing number (2,3,...), if necessary for uniqueness 
+  - Add an increasing number (2,3,...), if necessary for uniqueness
 
 `author`
 - Enter authors as <ins>firstname lastname, ...</ins>, **NOT** 'lastname, firstname; ...'
@@ -47,7 +47,7 @@ Publications are stored in the `bibliography.bib` file
 
 `year` and `month`
 - Use year and month, not date
-- Add <ins>month in numbers</ins>, not names or abbrevations
+- Add <ins>month in numbers</ins>, not names or abbrevations (January = 1)
 
 `doi`
 - Enter the full doi URL, not just the DOI (i.e., https://doi.org/<your.doi.here>)
@@ -134,7 +134,7 @@ Before compiling, make sure the local version of the repository is up to date.
 You will need to reload the page (e.g., press (CTRL) F5) in the browser to see changes!
 
 `npm start -- email`
-- compiles the webpage, but the information about missing files and information will be formatted as emails to copy and paste. 
+- compiles the webpage, but the information about missing files and information will be formatted as emails to copy and paste.
 
 `npm run compile`
 - can be run for a fast compile of the HTML if publications, images, etc., did not change.
@@ -146,7 +146,7 @@ To fix this, please adjust your git settings as follows (-global is optional):
 
 `git config --global core.autocrlf input`
 
-Ask @fheyen or @ChristianKrauter to make you a contributor.
+Ask @ChristianKrauter to make you a contributor.
 
 To publish changes simply do a git commit and push, e.g., run
 
@@ -163,7 +163,7 @@ To publish changes simply do a git commit and push, e.g., run
     - misc/: logo, etc.
     - people/: member pictures
     - qr/: QR code PNGs for all publication pages
-    - teaser/: publication teasers   
+    - teaser/: publication teasers
     - **/small: thumbnails
   - pdf/: publication pdfs
   - suppl/: supplemental material
