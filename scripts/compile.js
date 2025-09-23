@@ -30,7 +30,9 @@ const nameMemberMap = new Map(memberConfig.map(d => [d.name, d]))
 
 // Load publications
 const bib = new bibtex()
-const publications = bib.getBibAsObject('./bibliography.bib')
+const pubs_group = bib.getBibAsObject('./bibliography_group.bib')
+const pubs_prior = bib.getBibAsObject('./bibliography_prior.bib')
+const publications = pubs_group.concat(pubs_prior)
 
 // Check the most important stuff
 publications.forEach(pub => {
@@ -58,6 +60,24 @@ publications.forEach(pub => {
     console.log('Compile panic')
     process.exit()
   }
+});
+
+// Sort by year and month descending, then title ascending
+pubs_group.sort((a, b) => {
+  if (parseInt(a['data']['year']) !== parseInt(b['data']['year']))
+    return parseInt(b['data']['year']) - parseInt(a['data']['year']);
+  else if (parseInt(b['data']['month']) !== parseInt(a['data']['month']))
+    return parseInt(b['data']['month']) - parseInt(a['data']['month'])
+  return a['data']['title'].localeCompare(b['data']['title'])
+});
+
+// Sort by year and month descending, then title ascending
+pubs_prior.sort((a, b) => {
+  if (parseInt(a['data']['year']) !== parseInt(b['data']['year']))
+    return parseInt(b['data']['year']) - parseInt(a['data']['year']);
+  else if (parseInt(b['data']['month']) !== parseInt(a['data']['month']))
+    return parseInt(b['data']['month']) - parseInt(a['data']['month'])
+  return a['data']['title'].localeCompare(b['data']['title'])
 });
 
 // Sort by year and month descending, then title ascending
@@ -89,12 +109,13 @@ async function createPages() {
 
   // Member / author pages
   for (const member of memberConfig) {
-    const authoredPubs = publications.filter(d => d['data']['author'].includes(member.name))
-    createMemberPageHtml(member, authoredPubs)
+    const authoredPubsGroup = pubs_group.filter(d => d['data']['author'].includes(member.name))
+    const authoredPubsPrior = pubs_prior.filter(d => d['data']['author'].includes(member.name))
+    createMemberPageHtml(member, authoredPubsGroup, authoredPubsPrior)
   }
 
   // Main page and imprint
-  createMainPageHtml(publications, memberConfig)
+  createMainPageHtml(pubs_group, memberConfig)
   createImprint()
 
   // Publication pages
@@ -220,9 +241,9 @@ function createMainPageHtml(publications, memberConfig) {
 /**
  * Creates member page HTML
  */
-function createMemberPageHtml(member, publications) {
+function createMemberPageHtml(member, authoredPubsGroup, authoredPubsPrior) {
   const title = `${member.title} | ${pageTitle}`
-  const html = `${htmlHead(title, '..')}
+  var html = `${htmlHead(title, '..')}
 <body>
   <a class="anchor" name="top"></a>
   <main>
@@ -260,10 +281,24 @@ function createMemberPageHtml(member, publications) {
             `}
           </div>
         </div>
-      </article>
+      </article>`
+
+  if (authoredPubsGroup.length > 0) {
+    html += `
       <article> <a class="anchor" name="publications"></a>
         <h1>Publications</h1>
-        ${createPublicationsHtml(publications, member)}
+        ${createPublicationsHtml(authoredPubsGroup, member)}
+      </article>`
+  }
+  if (authoredPubsPrior.length > 0) {
+    html += `
+      <article>
+        <h1>Former Publications</h1>
+        ${createPublicationsHtml(authoredPubsPrior, member)}
+      </article>`
+  }
+  html += `
+      <article>
         <div style="text-align: center">
           <img class="qr" src="../assets/img/qr/${member.path}.png"/>
         </div>
