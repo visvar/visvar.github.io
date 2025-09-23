@@ -28,7 +28,11 @@ The main page is inside `aboutus.html`.
 
 ## Add Publications
 
-Publications are stored in the `bibliography.bib` file
+Publications are stored in **two files** depending on the authors' affiliation with the group at the time of publication: 
+- `bibliography_group.bib`
+  - published during group-membership
+- `bibliography_prior.bib`
+  - published prior to joining the group
 
 ### General:
 - You <ins>can use Unicode</ins> (e.g., é, â, ..) but **NOT** LaTeX (e.g., \c{c}, \\"{a})
@@ -95,7 +99,7 @@ Publications are stored in the `bibliography.bib` file
 
 ### Assets
 
-**Media names must match the publication's key** in `bibliography.bib`.
+**Media names must match the publication's key** in the bibliography file.
 
 - [assets/img/teaser/](./assets/img/teaser/) for publication teasers (must be .png)
 - [assets/pdf/](./assets/pdf/) for PDFs.
@@ -161,6 +165,7 @@ To publish changes simply do a git commit and push, e.g., run
 
 - assets/: all assets
   - img/: images
+    - badges/: images for awards etc.
     - misc/: logo, etc.
     - people/: member pictures
     - qr/: QR code PNGs for all publication pages
@@ -173,10 +178,14 @@ To publish changes simply do a git commit and push, e.g., run
 - pub/: compiled publication pages
 - scripts/: compile scripts
 - aboutus.html: main page content
+- bibliography_group.bib: publications
+- bibliography_prior.bib: publications (prior to group association)
 - config.js member information
 - index.html: compiled main page
-- Papers.xlsx: publication database
+- package.json: npm specifications
+- readme.md: this file
 - style.css: page styles
+- todo.md: open to-dos for the page
 
 ## Dependency Update
 
@@ -189,4 +198,4 @@ To publish changes simply do a git commit and push, e.g., run
 - [bibtex-tidy](https://github.com/FlamingTempura/bibtex-tidy) for more beautiful bibtex
 - [image-js](https://github.com/image-js/image-js) for image resizing for thumbnails (`npm run resizePeople`, `npm run resizeThumbs`)
 - [npm-check-updates](https://github.com/raineorshine/npm-check-updates) for updating packages (`npm run upd`)
-- [qrcode](https://github.com/soldair/node-qrcode) for QR codes
+- [qrcode](https://github.com/soldair/node-qrcode) to generate QR codes
