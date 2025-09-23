@@ -15,7 +15,8 @@ Only change files as described below folders, nothing else!
 After adding new content, there are two general options:
 1. Update the wepage yourself (prefered)
    1. Add your changes
-   2. [Compile](#compiling) the page yourself
+   2. Make sure to run `npm i` to install/ update the used packages.
+   3. [Compile](#compiling) the page yourself
 2. Only update the content
    1. Add your changes
    2. Create a pull request with your changes.
@@ -123,9 +124,9 @@ Member information is stored in `config.js`
 
 ### Compiling
 
-If not done yet, install packages with `npm i` (you obviously need [Node.js and npm](https://nodejs.org/en/) to be installed).
+Always run `npm i` to install or update packages (you need to have [Node.js and npm](https://nodejs.org/en/) installed).
 
-Before compiling, make sure the local version of the repository is up to date.
+Before compiling, make sure the local version of the repository is up to date (`git pull`).
 
 `npm start`
 - starts compiling the whole webpage
