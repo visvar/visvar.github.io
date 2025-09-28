@@ -673,6 +673,7 @@ export const memberConfig = [
       { text: 'University of Stuttgart website', url: 'https://www.vis.uni-stuttgart.de/team/Blascheck/' },
       { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=-MKDCgIAAAAJ&hl' },
       { text: 'ORCID', url: 'https://orcid.org/0000-0003-4002-4499' },
+      { text: 'A complete list of publications', url: 'https://www.vis.uni-stuttgart.de/team/Blascheck/' },
     ],
     projects: []
   },
