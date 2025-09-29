@@ -308,8 +308,16 @@ article img.qr {
   background: #fcfcfc;
 }
 
-.pubPageContent a {
+.pubPageContent div.materials a {
   padding: 0 3px;
+}
+
+.pubPageContent div.authors a {
+  color: inherit;
+}
+
+.pubPageContent b {
+  font-weight: 700;
 }
 
 /*

@@ -330,6 +330,8 @@ function createPublicationsHtml(publications, member = null) {
     const url = pub['data']['url']
     const url2 = pub['data']['url2']
     const venue = pub['data']['venue']
+    const footNoteIndices = pub['data']['footnoteindices']
+    const footnoteText = pub['data']['footnotetext']
     const imageExists = allTeasers.has(`${key}.png`)
 
     // PDF, video, and supplemental might be a link instead of file
@@ -370,10 +372,20 @@ function createPublicationsHtml(publications, member = null) {
       suppl = `${p}/assets/suppl/${key}.zip`
     }
 
+    var footNoteIndicesList = []
+    if (footNoteIndices) {
+      footNoteIndicesList = footNoteIndices.split(',').map(Number)
+    }
+
     const authors = pub['data']['author'].split(',').map(d => d.trim())
-    const authorHtml = authors.map(d => {
+    const authorHtml = authors.map((d, i) => {
       // If this is the author's member page, make them bold
-      const text = d === member?.name ? `<b>${d}</b>` : d
+      var text = ''
+      if (footNoteIndicesList.includes(i)) {
+        text = d === member?.name ? `<b>${d}*</b>` : `${d}*`
+      } else {
+        text = d === member?.name ? `<b>${d}</b>` : `${d}`
+      }
       // If author is a group member, link to their page
       if (nameMemberMap.has(d)) {
         return `<a href="${p}/members/${nameMemberMap.get(d).path}.html" target="_blank">${text}</a>`
@@ -405,6 +417,7 @@ function createPublicationsHtml(publications, member = null) {
       <div class="authors">
         ${authorHtml}
       </div>
+        ${footNoteIndices ? `<div>*${footnoteText}</div>` : ''}
       <div>
         ${venue} (${year})
       </div>
@@ -433,6 +446,8 @@ function createPublicationPageHtml(pub) {
   const url = pub['data']['url']
   const url2 = pub['data']['url2']
   const venue = pub['data']['venue']
+  const footNoteIndices = pub['data']['footnoteindices']
+  const footnoteText = pub['data']['footnotetext']
   const imageExists = allTeasers.has(`${key}.png`)
 
   // PDF, video, and supplemental might be a link instead of file
@@ -473,6 +488,24 @@ function createPublicationPageHtml(pub) {
     suppl = `../assets/suppl/${key}.zip`
   }
 
+  var footNoteIndicesList = []
+  if (footNoteIndices) {
+    footNoteIndicesList = footNoteIndices.split(',').map(Number)
+  }
+
+  const authors = pub['data']['author'].split(',').map(d => d.trim())
+  const authorHtml = authors.map((d, i) => {
+    // If this is the author's member page, make them bold
+    var text = ''
+    text = footNoteIndicesList.includes(i) ? `${d}*` : `${d}`
+
+    // If author is a group member, link to their page
+    if (nameMemberMap.has(d)) {
+      return `<a href="../members/${nameMemberMap.get(d).path}.html" target="_blank">${text}</a>`
+    }
+    return text
+  }).join(', ')
+
   const title = `${pub['data']['title']}${pub['data']['badge'] ? ` <img style="height:1em; width:auto; vertical-align: sub;" src="../assets/img/badges/${pub['data']['badge']}.png"/>` : ''}`
 
   const html = `${htmlHead(title, '..')}
@@ -489,13 +522,14 @@ function createPublicationPageHtml(pub) {
                 <img id="image${key}" src="../assets/img/teaser/${key}.png"/>
               </a>` : ''}
               <div>
-                <div>
-                  <b>Authors.</b> ${pub['data']['author']}
+                <div class="authors">
+                  <b>Authors.</b> ${authorHtml}
                 </div>
+                  ${footNoteIndices ? `<div>*${footnoteText}</div>` : ''}
                 <div>
                   <b>Venue.</b> ${venue} (${year})
                 </div>
-                <div>
+                <div class="materials">
                   <b>Materials.</b>
                   ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI</a>` : ''}
                   ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
@@ -859,7 +893,7 @@ function reportMissingOrExtraInfo(publications) {
 function formatBibtex(key, bibtexString) {
   try {
     const formatted = tidy(bibtexString, {
-      omit: ['abstract', 'acks', 'address', 'badge', 'note', 'pdf', 'suppl', 'url2', 'venue', 'video', 'video2'],
+      omit: ['abstract', 'acks', 'address', 'badge', 'note', 'pdf', 'suppl', 'url2', 'venue', 'video', 'video2', 'footnoteindices', 'footnotetext'],
       curly: true,
       space: 4,
       align: 14,
