@@ -129,9 +129,14 @@ nav a:hover {
  * QR codes
  *
  */
-article img.qr {
+
+.qrcontainer {
+  text-align: center;
+}
+
+.qrcontainer .qrimage {
   width: 140px;
-  margin: 30px auto;
+  margin-top: 30px;
 }
 
 /*
@@ -288,8 +293,8 @@ article img.qr {
   margin-top: 10px;
 }
 
-.pubPageContent img {
-  width: 50%;
+.pubPageContent img.teaser {
+  width: 75%;
   max-height: 400px;
   margin: auto;
   border-radius: 3px;

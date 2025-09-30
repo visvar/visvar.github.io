@@ -299,8 +299,9 @@ function createMemberPageHtml(member, authoredPubsGroup, authoredPubsPrior) {
   }
   html += `
       <article>
-        <div style="text-align: center">
-          <img class="qr" src="../assets/img/qr/${member.path}.png"/>
+        <div class="qrcontainer">
+          <div class="qrtitle">Link to this page:</div>
+          <img class="qrimage" src="../assets/img/qr/${member.path}.png"/>
         </div>
       </article>
       ${footer('..')}
@@ -519,7 +520,7 @@ function createPublicationPageHtml(pub) {
             <div class="pubPageContent">
               ${imageExists ? `
               <a href="../assets/img/teaser/${key}.png" target="_blank" title="show image full size">
-                <img id="image${key}" src="../assets/img/teaser/${key}.png"/>
+                <img class="teaser" id="image${key}" src="../assets/img/teaser/${key}.png"/>
               </a>` : ''}
               <div>
                 <div class="authors">
@@ -545,7 +546,10 @@ function createPublicationPageHtml(pub) {
                 ${pub['data']['note'] ? `<div>${pub['data']['note']}
                   ${pub['data']['badge'] ? `<img style="height:1em; width:auto; vertical-align: sub;" src="../assets/img/badges/${pub['data']['badge']}.png"/>` : ''}
                 </div>` : ''}
-                <img class="qr" src="../assets/img/qr/${key}.png"/>
+                <div class="qrcontainer">
+                  <div class="qrtitle">Link to this page:</div>
+                  <img class="qrimage" src="../assets/img/qr/${key}.png"/>
+                </div>
             </div>
           </article>
           ${footer('..')}
