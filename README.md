@@ -37,7 +37,7 @@ Publications are stored in **two files** depending on the authors' affiliation w
 ### General:
 - You <ins>can use Unicode</ins> (e.g., é, â, ..) but **NOT** LaTeX (e.g., \c{c}, \\"{a})
 - Add as much information as possible
-- Clean your entry as if you are writing a paper
+- **Clean up** your entry as you would for the references in a camera-ready paper
 - `Always add a teaser.` If your paper does not have any pictures: **Add a screenshot of the first page with title and authors**, like [xiao2024systematic](https://visvar.github.io/pub/xiao2024systematic.html)
 
 ### Some rules:
@@ -49,6 +49,13 @@ Publications are stored in **two files** depending on the authors' affiliation w
 `author`
 - Enter authors as <ins>firstname lastname, ...</ins>, **NOT** 'lastname, firstname; ...'
   - Author names of members must be identical to those in `config.js`
+
+`footnoteindices` and `footnotetext`
+- Use for author footnotes, e.g., co-first authorship
+- `footnoteindices`: add position of authors with a footnote (starts at 0)
+  - e.g., {0,1} for first and second author
+- `footnotetext`: add text to be shown
+  - e.g., {contributed equally}
 
 `year` and `month`
 - Use year and month, not date
