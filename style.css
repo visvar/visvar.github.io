@@ -294,7 +294,7 @@ nav a:hover {
 }
 
 .pubPageContent img.teaser {
-  width: 75%;
+  max-width: 75%;
   max-height: 400px;
   margin: auto;
   border-radius: 3px;
