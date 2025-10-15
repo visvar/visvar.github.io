@@ -249,6 +249,56 @@
     venue           = {ICRA},
     abstract        = {Skill-based programming has proven to be advantageous for assembly tasks, but still requires expert knowledge, especially for force-controlled applications. However, it is error-prone due to the multitude of parameters, e.g. different coordinate frames and either position-, velocity- or force-controlled motions on the axes of a frame. We propose a mixed reality based solution, which systematically visualizes the geometric constraints of advanced high-level skills directly in the real-world robotic environment and provides a user interface to create applications efficiently and safely in mixed reality. Therefore, state-machine information is also visualized, and a holographic digital twin allows the user to ad-hoc validate the program via force-enabled simulation. The approach is evaluated on a top hat rail mounting task, proving the capability of the system to handle advanced assembly programming tasks efficiently and tangibly.}
 }
+@inproceedings{yao2018modeling,
+    title         = {Modeling and Sliding Mode Control of a Fully-actuated Multirotor with Tilted Propellers},
+    author        = {Chao Yao, Jan Krieglstein, Klaus Janschek},
+    booktitle     = {IFAC-PapersOnLine},
+    volume        = {51},
+    number        = {22},
+    pages         = {115--120},
+    year          = {2018},
+    month         = {08},
+    publisher     = {Elsevier},
+    venue         = {SYROCO},
+    doi           = {https://doi.org/10.1016/j.ifacol.2018.11.527},
+    abstract      = {This paper presents modeling and control of a fully-actuated hexarotor. With tilted propellers, the full pose of the unmanned aerial vehicle (UAV) can be controlled independently, and the vehicle is able to exert full wrench on the environment for aerial manipulation tasks. Based on modeling of the propeller aerodynamics, the vehicle dynamics and the brushless DC-Motors, a robust integral sliding mode control including chattering avoidance is proposed. A detailed performance analysis of the integral sliding mode control is presented and compared with PID control with exact feedback linearization using numerical simulations. The performance assessment of step response, disturbance response and trajectory tracking has shown, that the proposed controller demonstrates robustness for a fully-actuated hexarotor with tilted propellers under realistic operational conditions with noisy state estimation and tolerating parameter uncertainties.}
+}
+@article{acemoglu20205g,
+    title         = {5G Robotic Telesurgery: Remote Transoral Laser Microsurgeries on a Cadaver},
+    author        = {Alperen Acemoglu, Jan Krieglstein, Darwin G Caldwell, Francesco Mora, Luca Guastini, Matteo Trimarchi, Alessandro Vinciguerra, Andrea Luigi Camillo Carobbio, Juljana Hysenbelli, Marco Delsanto, Ottavia Barboni, Sabrina Baggioni, Giorgio Peretti, Leonardo S Mattos},
+    journal       = {IEEE Transactions on Medical Robotics and Bionics},
+    volume        = {2},
+    number        = {4},
+    pages         = {511-518},
+    year          = {2020},
+    month         = {11},
+    venue         = {IEEE Transactions on Medical Robotics and Bionics},
+    doi           = {https://doi.org/10.1109/TMRB.2020.3033007},
+    abstract      = {Robotic telesurgery is a new concept in surgical care that has gained relevance over the past two decades. Now, with the introduction of 5G mobile networks, this concept is becoming practical. Here, we report that surgeons successfully performed complex transoral laser microsurgeries on the vocal cords of an adult human cadaver located 15 km away from them. This was possible thanks to a high bandwidth and ultra-low latency 5G telecommunication system, which allowed for precise remote control of robotic instruments and full HD ( 1920x1280  pixels) 3D visualization of the surgical site. During the operation, the mean video transmission latency was 102±9 ms with the maximum latency being 140 ms, but this was observed during less than 1% of the operation time. This latency did not cause any deterioration in surgeons’ performance. Our results demonstrate that surgical expertise can be exploited and shared efficiently using the new 5G telecommunication standard. This is critical for highly specialized operations such as the microsurgeries demonstrated here, which require surgical expertise that are not widely available. Therefore, the possibility to operate from a distance can bring significant benefits to healthcare systems, reducing costs and enhancing treatment quality for patients. In addition, it makes telementoring a reality, allowing expert surgeons to be present virtually in multiple operating rooms to guide and train less experienced colleagues.}
+}
+@article{acemoglu2020operating,
+    title         = {Operating From a Distance: Robotic Vocal Cord 5G Telesurgery on a Cadaver},
+    author        = {Alperen Acemoglu, Giorgio Peretti, Matteo Trimarchi, Juljana Hysenbelli, Jan Krieglstein, Andre Geraldes, Nikhil Deshpande, Pierre Marie Vincent Ceysens, Darwin G Caldwell, Marco Delsanto, Ottavia Barboni, Tommaso Vio, Sabrina Baggioni, Alessandro Vinciguerra, Elettra Oleari, Alberto Sanna, Andrea Luigi Camillo Carobbio, Luca Guastini, Francesco Mora, Leonardo S Mattos},
+    journal       = {Annals of Internal Medicine},
+    volume        = {173},
+    number        = {11},
+    pages         = {940-941},
+    year          = {2020},
+    month         = {07},
+    venue         = {Annals of Internal Medicine},
+    doi           = {https://doi.org/10.7326/M20-0418}
+}
+@inproceedings{odabasi2025learning,
+    title         = {Learning Machine Tending from Demonstration with Multimodal LLMs},
+    author        = {Çağatay Odabaşı, Jochen Lindermayr, Jan Krieglstein, Kisa Predrag},
+    booktitle     = {2025 IEEE International Conference on Automation Science and Engineering (CASE)},
+    pages         = {1569--1576},
+    year          = {2025},
+    month         = {08},
+    venue         = {CASE},
+    doi           = {https://doi.org/10.1109/CASE58245.2025.11163852},
+    abstract      = {Driven by the need for increased efficiency and flexibility in manufacturing, particularly in demanding sectors like semiconductor production, this paper presents a framework for intuitive robot programming using multimodal Large Language Models (mLLMs). Our methodology enables robot programming through human demonstration, using AR glasses to capture video, audio narration, and hand poses of an operator performing a machine tending task. This multimodal data is processed by an mLLM, which segments the demonstration temporally, transcribes narration, assigns low-level robot skills from a predefined library, provides reasoning for these assignments, and identifies interacted objects. Crucially, hand poses and pose of the robot according to the machine (via QR codes) are used to parameterize the selected skills, ensuring accurate translation to the robot’s workspace. These parameterized skills are then automatically compiled into executable programs for a UR5e robot on a mobile base. Experimental evaluation in a machine tending scenario demonstrated high accuracy, with a median positional error of less than 4 cm between the robot’s executed actions (e.g., Press Button) and the corresponding physical locations of those interaction points in the environment. Although the framework allows high level of automation, its transparent, multi-stage design also allows for operator corrections, further enhancing precision.}
+}
 @inproceedings{zhang20233d,
     title           = {3D Hapkit: A Low-Cost, Open-Source, 3-DOF Haptic Device Based on the Delta Parallel Mechanism},
     author          = {Han Zhang, Jan Ulrich Bartels, Jeremy Brown},
