@@ -151,6 +151,8 @@ You will need to reload the page (e.g., press (CTRL) F5) in the browser to see c
 `npm run compile`
 - can be run for a fast compile of the HTML if publications, images, etc., did not change.
 
+Compiling not working, weird output? Check if you have [Microsoft HPC Pack installed, containing another node.exe](https://stackoverflow.com/a/29579878)
+
 ### Publishing
 
 If git shows that files changed, but without any actual changes, the problem is likely line endings.
