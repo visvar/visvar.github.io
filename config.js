@@ -334,6 +334,7 @@ export const memberConfig = [
     `,
     research: ['VR/AR', 'HCI', 'Driving Simulation', 'Robotics'],
     links: [
+      { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/team/Mazur-00001/' },
       { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=c6-2mpQAAAAJ&hl=de'},
       { text: 'ORCID', url: '0009-0001-4480-1438' },
     ],
