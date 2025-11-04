@@ -21,6 +21,7 @@
     "bibtex-tidy": "^1.14.0",
     "image-js": "^1.0.0",
     "npm-check-updates": "^18.3.0",
-    "qrcode": "^1.5.4"
+    "qrcode": "^1.5.4",
+    "pdf-lib": "^1.17.1"
   }
 }
