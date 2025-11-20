@@ -1,6 +1,6 @@
 # HCI Stuttgart Homepage
 
-Hello, this is the repository for the webpage of the Human-Computer Interaction group at the University of Stuttgart headed by Michael Sedlmair.
+Hello, this is the repository for the webpage of the Human-Computer Interaction group at the University of Stuttgart, headed by Michael Sedlmair.
 
 If you are a (associated / alumnus) member and want to contribute, please **first read this readme**.
 
@@ -10,10 +10,10 @@ The live version of this webpage can be found here: [visvar.github.io](https://v
 
 # How to Add Content and Update the Webpage
 
-Only change files as described below folders, nothing else!
+Only change files as described in the folders below; nothing else!
 
 After adding new content, there are two general options:
-1. Update the wepage yourself (prefered)
+1. Update the webpage yourself (preferred)
    1. Add your changes
    2. Make sure to run `npm i` to install/ update the used packages.
    3. [Compile](#compiling) the page yourself
@@ -30,9 +30,9 @@ The main page is inside `aboutus.html`.
 
 Publications are stored in **two files** depending on the authors' affiliation with the group at the time of publication: 
 - `bibliography_group.bib`
-  - published during group-membership
+  - published during group membership
 - `bibliography_prior.bib`
-  - published prior to joining the group
+  - published before joining the group
 
 ### General:
 - You <ins>can use Unicode</ins> (e.g., é, â, ..) but **NOT** LaTeX (e.g., \c{c}, \\"{a})
@@ -62,7 +62,7 @@ Publications are stored in **two files** depending on the authors' affiliation w
 - Add <ins>month in numbers</ins>, not names or abbrevations (January = 1)
 
 `doi`
-- Enter the full doi URL, not just the DOI (i.e., https://doi.org/<your.doi.here>)
+- Enter the full DOI URL, not just the DOI (i.e., https://doi.org/<your.doi.here>)
 
 `url`
 - Add any additional URL, but **NOT the doi again!**
@@ -71,26 +71,26 @@ Publications are stored in **two files** depending on the authors' affiliation w
 - You can add another link for or about your publication. Not the DOI again, though.
 
 `venue`
-- Please fill a short version of the publication venue here whether it is a journal or conference paper and wheter that information is already in  'journal', 'booktitle', or 'series'.
+- Please fill in a short version of the publication venue here, whether it is a journal or conference paper, and whether that information is already in  'journal', 'booktitle', or 'series'.
 
 `badge`
 - Adding one of the following values will display the respective badge next to the publication's title on the main page and its page
   - **bestpaper, honorablemention, nomination, reproducibility**
-  - Please also write a small sentence about the badge at the end of `note` to have context on the publications page. E.g., 'Received an honorable mention award'. The badge will also be displayed there.
+  - Please also write a small sentence about the badge at the end of the `note` to have context on the publications page. E.g., 'Received an honorable mention award'. The badge will also be displayed there.
 
 `note`
-- You can add any note here and it will be displayed on the page of your publication
+- You can add any note here, and it will be displayed on the page of your publication
 
 `video` and `video2`
-- If there are videos available online you can add the links to them here. Please fill video before video2
-- Embedding youtube videos
-  - To embed a youtube video, you have to enter the embedding link.
-  - You get that by clicking on 'sharing' on youtube and selecting 'embed'.
+- If there are videos available online, you can add the links to them here. Please fill video before video2
+- Embedding YouTube videos
+  - To embed a YouTube video, you have to enter the embedding link.
+  - You get that by clicking on 'sharing' on YouTube and selecting 'embed'.
   - Then, **only copy the link** into video/video2. The link looks like ```https://www.youtube.com/embed/<id>?si=<another id>```.
   - Do <ins>NOT</ins> copy the whole embedding code.
 
 `pdf`
-- Only have a link to your pdf? Add it here.
+- Only have a link to your PDF? Add it here.
 
 `suppl`
 - Only have a link to your supplemental material? Add it here.
@@ -117,9 +117,9 @@ Publications are stored in **two files** depending on the authors' affiliation w
 
 Member information is stored in `config.js`
 - Insert the new member in the correct position.
-  - First, there are <ins>regular members</ins> with the order: Professors, then Post-Docs, then Ph.D.s
-  - Second, come <ins>associated members</ins> with the same order: Professors, then Post-Docs, then Ph.D.s
-  - Finally, there are <ins>alumni</ins> with the same order: Professors, then Post-Docs, then Ph.D.s
+  - First, there are <ins>regular members</ins> with the order: Professors, then Postdoc, then Ph.D.s
+  - Second, come <ins>associated members</ins> with the same order: Professors, then Postdoc, then Ph.D.s
+  - Finally, there are <ins>alumni</ins> with the same order: Professors, then Postdoc, then Ph.D.s
     - Alumni roles are as they were while they last worked in the group.
   - Members of each category are sorted alphabetically by first name.
 - Add as much information as possible. You can take a look at the other member pages for inspiration/ guidance.
@@ -142,27 +142,27 @@ Before compiling, make sure the local version of the repository is up to date (`
 `npm start`
 - starts compiling the whole webpage
 - **Read the output of the script. Missing files and information will be printed there**
-- After compiling you can inspect the local version by opening `index.html` in a browser.
+- After compiling, you can inspect the local version by opening `index.html` in a browser.
 You will need to reload the page (e.g., press (CTRL) F5) in the browser to see changes!
 
 `npm start -- email`
 - compiles the webpage, but the information about missing files and information will be formatted as emails to copy and paste.
 
 `npm run compile`
-- can be run for a fast compile of the HTML if publications, images, etc., did not change.
+- can be run for a fast compile of the HTML if publications, images, etc., have not changed.
 
 Compiling not working, weird output? Check if you have [Microsoft HPC Pack installed, containing another node.exe](https://stackoverflow.com/a/29579878)
 
 ### Publishing
 
-If git shows that files changed, but without any actual changes, the problem is likely line endings.
+If Git shows that files have changed, but without any actual changes, the problem is likely due to line endings.
 To fix this, please adjust your git settings as follows (-global is optional):
 
 `git config --global core.autocrlf input`
 
 Ask @ChristianKrauter to make you a contributor.
 
-To publish changes simply do a git commit and push, e.g., run
+To publish changes, do a git commit and push, e.g., run
 
 - `git add .`
 - `git commit -m "some useful commit message"`
@@ -174,7 +174,7 @@ To publish changes simply do a git commit and push, e.g., run
 
 - assets/: all assets
   - img/: images
-    - badges/: images for awards etc.
+    - badges/: images for awards, etc.
     - misc/: logo, etc.
     - people/: member pictures
     - qr/: QR code PNGs for all publication pages
@@ -188,7 +188,7 @@ To publish changes simply do a git commit and push, e.g., run
 - scripts/: compile scripts
 - aboutus.html: main page content
 - bibliography_group.bib: publications
-- bibliography_prior.bib: publications (prior to group association)
+- bibliography_prior.bib: publications (before group association)
 - config.js member information
 - index.html: compiled main page
 - package.json: npm specifications
