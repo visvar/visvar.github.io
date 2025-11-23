@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs'
 import QRCode from 'qrcode'
 import { pageUrl, pageTitle, allowedMissingPDF, allowedArxiv, allowedMissingDOI, memberConfig } from '../config.js'
+import { handleIEEECopyright } from './add-copyright-ieee.js';
 import pkg from 'bibtex-tidy'
 const { tidy } = pkg
 import bibtex from "@hygull/bibtex"
@@ -59,6 +60,27 @@ publications.forEach(pub => {
     console.log(`Publication ${pub['key']}'s month is not numeric`)
     console.log('Compile panic')
     process.exit()
+  }
+  // check for ieee copyright
+  const fieldsToCheck = ['publisher', 'journal', 'booktitle', 'venue'];
+  let foundIEEE = false;
+
+  for (const field of fieldsToCheck) {
+    const value = pub['data'][field];
+    if (typeof value === 'string' && value.toLowerCase().includes('ieee')) {
+      // console.log(`🔍 Found "IEEE" in field "${field}": ${value}`);
+      foundIEEE = true;
+      break; // Stop checking other fields once found
+    }
+  }
+
+  if (foundIEEE) {
+    const pdf = pub['data']['pdf']
+    const key = pub['key']
+    if (allPdfs.has(`${key}.pdf`))
+    {
+      handleIEEECopyright(`assets/pdf/${key}.pdf`, pub['data']['year'])
+    }
   }
 });
 
