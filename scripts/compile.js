@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs'
 import QRCode from 'qrcode'
-import { pageUrl, pageTitle, allowedMissingPDF, allowedArxiv, allowedMissingDOI, memberConfig } from '../config.js'
+import { pageUrl, pageTitle, allowedMissingPDF, allowedPDFLink, allowedArxiv, allowedMissingDOI, memberConfig } from '../config.js'
 import pkg from 'bibtex-tidy'
 const { tidy } = pkg
 import bibtex from "@hygull/bibtex"
@@ -60,34 +60,34 @@ publications.forEach(pub => {
     console.log('Compile panic')
     process.exit()
   }
-});
+})
 
 // Sort by year and month descending, then title ascending
 pubs_group.sort((a, b) => {
   if (parseInt(a['data']['year']) !== parseInt(b['data']['year']))
-    return parseInt(b['data']['year']) - parseInt(a['data']['year']);
+    return parseInt(b['data']['year']) - parseInt(a['data']['year'])
   else if (parseInt(b['data']['month']) !== parseInt(a['data']['month']))
     return parseInt(b['data']['month']) - parseInt(a['data']['month'])
   return a['data']['title'].localeCompare(b['data']['title'])
-});
+})
 
 // Sort by year and month descending, then title ascending
 pubs_prior.sort((a, b) => {
   if (parseInt(a['data']['year']) !== parseInt(b['data']['year']))
-    return parseInt(b['data']['year']) - parseInt(a['data']['year']);
+    return parseInt(b['data']['year']) - parseInt(a['data']['year'])
   else if (parseInt(b['data']['month']) !== parseInt(a['data']['month']))
     return parseInt(b['data']['month']) - parseInt(a['data']['month'])
   return a['data']['title'].localeCompare(b['data']['title'])
-});
+})
 
 // Sort by year and month descending, then title ascending
 publications.sort((a, b) => {
   if (parseInt(a['data']['year']) !== parseInt(b['data']['year']))
-    return parseInt(b['data']['year']) - parseInt(a['data']['year']);
+    return parseInt(b['data']['year']) - parseInt(a['data']['year'])
   else if (parseInt(b['data']['month']) !== parseInt(a['data']['month']))
     return parseInt(b['data']['month']) - parseInt(a['data']['month'])
   return a['data']['title'].localeCompare(b['data']['title'])
-});
+})
 
 createPages()
 
@@ -336,14 +336,14 @@ function createPublicationsHtml(publications, member = null) {
     const imageExists = allTeasers.has(`${key}.png`)
 
     // PDF, video, and supplemental might be a link instead of file
-    let pdf = pub['data']['pdf']
+    let pdfLink = pub['data']['pdf']
     let pdfExists = allPdfs.has(`${key}.pdf`)
     let pdfIsLink = false
-    if (!pdfExists && pdf) {
+    if (!pdfExists && pdfLink) {
       pdfExists = true
       pdfIsLink = true
     } else {
-      pdf = `${p}/assets/pdf/${key}.pdf`
+      pdfLink = `${p}/assets/pdf/${key}.pdf`
     }
 
     let video = pub['data']['video']
@@ -428,7 +428,7 @@ function createPublicationsHtml(publications, member = null) {
         ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI</a>` : ''}
         ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
         ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link</a>` : ''}
-        ${pdfExists ? pdfIsLink ? `<a href="${pdf}" target="_blank" rel="noreferrer">PDF [link]</a>` : `<a href="${pdf}" target="_blank" rel="noreferrer">PDF</a>` : ''}
+        ${pdfExists ? pdfIsLink ? `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF [link]</a>` : `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF</a>` : ''}
         ${supplExists ? `<a href="${suppl}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
         ${videoExists ? videoEmbed ? `<a href="https://www.youtube.com/watch?v=${video.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video</a>` : `<a href="${video}" target="_blank" rel="noreferrer">video</a>` : ''}
         ${videoExists2 ? videoEmbed2 ? `<a href="https://www.youtube.com/watch?v=${video2.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video</a>` : `<a href="${video2}" target="_blank" rel="noreferrer">video</a>` : ''}
@@ -454,14 +454,14 @@ function createPublicationPageHtml(pub) {
   const imageExists = allTeasers.has(`${key}.png`)
 
   // PDF, video, and supplemental might be a link instead of file
-  let pdf = pub['data']['pdf']
+  let pdfLink = pub['data']['pdf']
   let pdfExists = allPdfs.has(`${key}.pdf`)
   let pdfIsLink = false
-  if (!pdfExists && pdf) {
+  if (!pdfExists && pdfLink) {
     pdfExists = true
     pdfIsLink = true
   } else {
-    pdf = `../assets/pdf/${key}.pdf`
+    pdfLink = `../assets/pdf/${key}.pdf`
   }
 
   let video = pub['data']['video']
@@ -539,7 +539,7 @@ function createPublicationPageHtml(pub) {
                   ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI</a>` : ''}
                   ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
                   ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link</a>` : ''}
-                  ${pdfExists ? pdfIsLink ? `<a href="${pdf}" target="_blank" rel="noreferrer">PDF [link]</a>` : `<a href="${pdf}" target="_blank" rel="noreferrer">PDF</a>` : ''}
+                  ${pdfExists ? pdfIsLink ? `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF [link]</a>` : `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF</a>` : ''}
                   ${supplExists ? `<a href="${suppl}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
                   ${videoExists ? videoEmbed ? `<p><iframe width="560" height="315" src="${video}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>` : `<a href="${video}" target="_blank" rel="noreferrer">video</a>` : ''}
                   ${videoExists2 ? videoEmbed2 ? `<p><iframe width="560" height="315" src="${video2}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>` : `<a href="${video2}" target="_blank" rel="noreferrer">video</a>` : ''}
@@ -730,6 +730,7 @@ function reportMissingOrExtraInfo(publications) {
   // Missing files and information
   let missingPublicationInfo = false
   let missingFiles = false
+  let missingPdfFileGotLink = false
   let missingData = {}
 
   // Function to add an item to one of the two lists for a given key
@@ -738,17 +739,20 @@ function reportMissingOrExtraInfo(publications) {
       // Initialize the key with two empty lists if it doesn't exist
       missingData[member] = {
         personal: [],
-        publication: []
-      };
+        publication: [],
+        pdfIsLink: false
+      }
     }
 
     // Add the item to the specified list
     if (list === 'personal') {
-      missingData[member].personal.push(item);
+      missingData[member].personal.push(item)
     } else if (list === 'publication') {
-      missingData[member].publication.push(item);
+      missingData[member].publication.push(item)
+    } else if (list === 'pdfIsLink') {
+      missingData[member].pdfIsLink = true
     } else {
-      console.error("Invalid list:", list);
+      console.error("Invalid list:", list)
     }
   }
 
@@ -791,11 +795,21 @@ function reportMissingOrExtraInfo(publications) {
       addMissing(getResp(pub), 'publication', `${key}.png (teaser)`)
     }
     // Publication PDF
-    let pdf = pub['data']['pdf']
-    if ((!pdf) && !allPdfs.has(`${key}.pdf`) && !allowedMissingPDF.includes(key)) {
-      // No link AND no file
-      missingFiles = true
-      addMissing(getResp(pub), 'publication', `${key}.pdf (publication)`)
+    let pdfLink = pub['data']['pdf']
+    let pdfExists = allPdfs.has(`${key}.pdf`)
+
+    // No file, no exception
+    if (!pdfExists && !allowedMissingPDF.includes(key)) {
+      // Is a link, but no exception
+      if (pdfLink && !allowedPDFLink.includes(key)) {
+        missingPdfFileGotLink = true
+        addMissing(getResp(pub), 'publication', `${key} pdf is a link`)
+        addMissing(getResp(pub), 'pdfIsLink', '')
+        // no file, no link, no excpetion for either
+      } else {
+        missingFiles = true
+        addMissing(getResp(pub), 'publication', `${key}.pdf`)
+      }
     }
   }
 
@@ -873,6 +887,10 @@ function reportMissingOrExtraInfo(publications) {
 
       console.log("\nPlease update the information/ upload the files as described in the readme")
       console.log("(https://github.com/visvar/visvar.github.io/blob/main/README.md) as soon as possible.")
+      if (value.pdfIsLink) {
+        console.log("\nPDFs should be available as files. For the PDFs that are only linked, please add them as files.")
+        console.log("If you think this is not possible (e.g., bc of rights) check with Michael and update me with his approval to supress this request next time.")      
+      }
       console.log("\nIf you have a question or encounter any problems, please reach out to me.")
       console.log("\n\n\n\n")
     }
@@ -896,11 +914,16 @@ function reportMissingOrExtraInfo(publications) {
       }
     }
 
+    console.log("----------------------------------------------\n----------------------------------------------")
+
     if (missingPublicationInfo) {
       console.log('\nadd missing publication information in:\n  bibliography.bib')
     }
     if (missingFiles) {
       console.log("\nput missing...\n  PDF's in assets/pdf/\n  PNG's in assets/img/teaser/")
+    }
+    if (missingPdfFileGotLink) {
+      console.log("\nadd files for pdfs that are linked. If you think this is not possible (e.g., bc of rights) check with Michael and update me with his agreement.")      
     }
     if (missingInfo) {
       console.log('\nadd missing personal info in\n  config.js\nput missing profile pictures in\n  assets/img/people')
