@@ -338,8 +338,10 @@ function createPublicationsHtml(publications, member = null) {
     // PDF, video, and supplemental might be a link instead of file
     let pdf = pub['data']['pdf']
     let pdfExists = allPdfs.has(`${key}.pdf`)
+    let pdfIsLink = false
     if (!pdfExists && pdf) {
       pdfExists = true
+      pdfIsLink = true
     } else {
       pdf = `${p}/assets/pdf/${key}.pdf`
     }
@@ -426,7 +428,7 @@ function createPublicationsHtml(publications, member = null) {
         ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI</a>` : ''}
         ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
         ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link</a>` : ''}
-        ${pdfExists ? `<a href="${pdf}" target="_blank" rel="noreferrer">PDF</a>` : ''}
+        ${pdfExists ? pdfIsLink ? `<a href="${pdf}" target="_blank" rel="noreferrer">PDF [link]</a>` : `<a href="${pdf}" target="_blank" rel="noreferrer">PDF</a>` : ''}
         ${supplExists ? `<a href="${suppl}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
         ${videoExists ? videoEmbed ? `<a href="https://www.youtube.com/watch?v=${video.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video</a>` : `<a href="${video}" target="_blank" rel="noreferrer">video</a>` : ''}
         ${videoExists2 ? videoEmbed2 ? `<a href="https://www.youtube.com/watch?v=${video2.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video</a>` : `<a href="${video2}" target="_blank" rel="noreferrer">video</a>` : ''}
@@ -454,8 +456,10 @@ function createPublicationPageHtml(pub) {
   // PDF, video, and supplemental might be a link instead of file
   let pdf = pub['data']['pdf']
   let pdfExists = allPdfs.has(`${key}.pdf`)
+  let pdfIsLink = false
   if (!pdfExists && pdf) {
     pdfExists = true
+    pdfIsLink = true
   } else {
     pdf = `../assets/pdf/${key}.pdf`
   }
@@ -535,7 +539,7 @@ function createPublicationPageHtml(pub) {
                   ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI</a>` : ''}
                   ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
                   ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link</a>` : ''}
-                  ${pdfExists ? `<a href="${pdf}" target="_blank" rel="noreferrer">PDF</a>` : ''}
+                  ${pdfExists ? pdfIsLink ? `<a href="${pdf}" target="_blank" rel="noreferrer">PDF [link]</a>` : `<a href="${pdf}" target="_blank" rel="noreferrer">PDF</a>` : ''}
                   ${supplExists ? `<a href="${suppl}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
                   ${videoExists ? videoEmbed ? `<p><iframe width="560" height="315" src="${video}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>` : `<a href="${video}" target="_blank" rel="noreferrer">video</a>` : ''}
                   ${videoExists2 ? videoEmbed2 ? `<p><iframe width="560" height="315" src="${video2}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>` : `<a href="${video2}" target="_blank" rel="noreferrer">video</a>` : ''}
