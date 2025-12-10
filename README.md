@@ -38,7 +38,8 @@ Publications are stored in **two files** depending on the authors' affiliation w
 - You <ins>can use Unicode</ins> (e.g., é, â, ..) but **NOT** LaTeX (e.g., \c{c}, \\"{a})
 - Add as much information as possible
 - **Clean up** your entry as you would for the references in a camera-ready paper
-- `Always add a teaser.` If your paper does not have any pictures: **Add a screenshot of the first page with title and authors**, like [xiao2024systematic](https://visvar.github.io/pub/xiao2024systematic.html)
+- `Always add a teaser.` If your paper does not have any pictures: **Add a screenshot of the first page with title and authors**. See [xiao2024systematic](https://visvar.github.io/pub/xiao2024systematic.html) for an example.
+- Add PDFs as files if possible. Please consult the publisher guidelines and talk to Michael if you are unsure about the rights.  
 
 ### Some rules:
 
@@ -82,7 +83,8 @@ Publications are stored in **two files** depending on the authors' affiliation w
 - You can add any note here, and it will be displayed on the page of your publication
 
 `video` and `video2`
-- If there are videos available online, you can add the links to them here. Please fill video before video2
+- If there are videos available online, you can add links to them here.
+- **Please fill video before video2**
 - Embedding YouTube videos
   - To embed a YouTube video, you have to enter the embedding link.
   - You get that by clicking on 'sharing' on YouTube and selecting 'embed'.
@@ -112,6 +114,7 @@ Publications are stored in **two files** depending on the authors' affiliation w
 - [assets/pdf/](./assets/pdf/) for PDFs.
 - [assets/suppl/](./assets/suppl/) for supplemental material (must be .zip).
 - [assets/video/](./assets/video/) for videos (must be .mp4).
+  - There can be two videos files for each publication named `{citation_key}.mp4` and `{citation_key}_2.mp4`
 
 ## Adding new Members
 
