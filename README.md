@@ -72,7 +72,7 @@ Publications are stored in **two files** depending on the authors' affiliation w
 - You can add another link for or about your publication. Not the DOI again, though.
 
 `venue`
-- Please fill in a short version of the publication venue here, whether it is a journal or conference paper, and whether that information is already in  'journal', 'booktitle', or 'series'.
+- Please fill in a short version of the publication venue here for any type (journal, conference, ...) even if that information is already in 'journal', 'booktitle', or 'series'.
 
 `badge`
 - Adding one of the following values will display the respective badge next to the publication's title on the main page and its page
