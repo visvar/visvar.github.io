@@ -28,6 +28,8 @@ The main page is inside `aboutus.html`.
 
 ## Add Publications
 
+Example entries can be found [here](#example-bibliography-entries).
+
 Publications are stored in **two files** depending on the authors' affiliation with the group at the time of publication: 
 - `bibliography_group.bib`
   - published during group membership
@@ -41,7 +43,7 @@ Publications are stored in **two files** depending on the authors' affiliation w
 - `Always add a teaser.` If your paper does not have any pictures: **Add a screenshot of the first page with title and authors**. See [xiao2024systematic](https://visvar.github.io/pub/xiao2024systematic.html) for an example.
 - Add PDFs as files if possible. Please consult the publisher guidelines and talk to Michael if you are unsure about the rights.  
 
-### Some rules:
+### Bibliography Rules:
 
 `citation key`
 - The pattern for keys is <ins>\<lastname>\<Year>\<FirstWord></ins> (example: heyen2020clavis).
@@ -49,7 +51,27 @@ Publications are stored in **two files** depending on the authors' affiliation w
 
 `author`
 - Enter authors as <ins>firstname lastname, ...</ins>, **NOT** 'lastname, firstname; ...'
-  - Author names of members must be identical to those in `config.js`
+  - Author names of members must be identical to those in `config.js`.
+  - If this is violated, the publication will not show up on a members page.
+
+`booktitle`
+- Add the **cleaned** version of the booktitle according to [cleaned_bibstring.bib](./cleaned_bibstring.bib).
+  - If no cleaned version is available for your booktitle, please clean it accordingly and update cleaned_bibstring.bib.
+
+`series`
+- Series is for the abbreviation of the booktitle. It is optional, but if you add it, please without any year (e.g., CHI, not CHI `22).
+
+`venue`
+- Please add the abbreviation of the publication venue (journal, conference, ...), even if that information is already in 'journal', 'booktitle', or 'series'. If there is no abbreviation, use the full journal or booktitle.
+
+`publisher`
+- Please use shortened names (e.g., ACM instead of Association for Computing Machinery, ...)
+
+`address`
+- Add the address of the publisher for conference papers, but not for journal papers
+
+`location`
+- Please do not use the location tag.
 
 `footnoteindices` and `footnotetext`
 - Use for author footnotes, e.g., co-first authorship
@@ -70,9 +92,6 @@ Publications are stored in **two files** depending on the authors' affiliation w
 
 `url2`
 - You can add another link for or about your publication. Not the DOI again, though.
-
-`venue`
-- Please fill in a short version of the publication venue here for any type (journal, conference, ...) even if that information is already in 'journal', 'booktitle', or 'series'.
 
 `badge`
 - Adding one of the following values will display the respective badge next to the publication's title on the main page and its page
@@ -211,3 +230,51 @@ To publish changes, do a git commit and push, e.g., run
 - [image-js](https://github.com/image-js/image-js) for image resizing for thumbnails (`npm run resizePeople`, `npm run resizeThumbs`)
 - [npm-check-updates](https://github.com/raineorshine/npm-check-updates) for updating packages (`npm run upd`)
 - [qrcode](https://github.com/soldair/node-qrcode) to generate QR codes
+
+# Example Bibliography Entries
+
+Conference paper:
+
+```
+@inproceedings{rau2025traversing,
+    title           = {Traversing Dual Realities: Investigating Techniques for Transitioning 3D Objects between Desktop and Augmented Reality Environments},
+    author          = {Tobias Rau, Tobias Isenberg, Andreas Köhn, Michael Sedlmair, Benjamin Lee},
+    year            = {2025},
+    month           = {04},
+    booktitle       = {Conf. Human Factors in Computing Systems},
+    publisher       = {ACM},
+    address         = {New York, NY, USA},
+    series          = {CHI},
+    doi             = {https://doi.org/10.1145/3706598.3713949},
+    note            = {Received a best paper award},
+    badge           = {bestpaper},
+    isbn            = {9798400713941},
+    url             = {https://hal.science/hal-05050852},
+    articleno       = {1236},
+    numpages        = {16},
+    video           = {https://www.youtube.com/embed/gknKEMn2Rv4?si=mVAY_XpgiNoG7PtZ},
+    pdf             = {https://arxiv.org/abs/2504.00371},
+    venue           = {CHI},
+    abstract        = {Desktop environments can integrate augmented reality (AR) head-worn devices to support 3D representations, visualizations, and interactions in a novel yet familiar setting. As users navigate across the dual realities - desktop and AR - a way to move 3D objects between them is needed. We devise three baseline transition techniques based on common approaches in the literature and evaluate their usability and practicality in an initial user study (N=18). After refining both our transition techniques and the surrounding technical setup, we validate the applicability of the overall concept for real-world activities in an expert user study (N=6). In it, computational chemists followed their usual desktop workflows to build, manipulate, and analyze 3D molecular structures, but now aided with the addition of AR and our transition techniques. Based on our findings from both user studies, we provide lessons learned and takeaways for the design of 3D object transition techniques in desktop + AR environments.}
+}
+```
+
+Journal article:
+
+```
+@article{rau2025maico,
+    title           = {MAICO: A Visualization Design Study on AI-Assisted Music Composition},
+    author          = {Simeon Rau, Frank Heyen, Benedikt Brachtel, Michael Sedlmair},
+    year            = {2025},
+    month           = {02},
+    journal         = {IEEE Trans. Visualization Computer Graphics},
+    pages           = {1--16},
+    doi             = {https://doi.org/10.1109/TVCG.2025.3539779},
+    url             = {https://www.replicabilitystamp.org/#https-github-com-visvar-maicov2},
+    note            = {Received the Graphics Replicability Stamp},
+    badge           = {reproducibility},
+    suppl           = {https://github.com/visvar/MAICoV2},
+    venue           = {TVCG},
+    abstract        = {We contribute a design study on using visual analytics for AI-assisted music composition. The main result is the interface MAICO (Music AI Co-creativity), which allows composers and other music creators to interactively generate, explore, select, edit, and compare samples from generative music models. MAICO is based on the idea of visual parameter space analysis and supports the simultaneous analysis of hundreds of short samples of symbolic music from multiple models, displaying them in different metric- and similarity-based layouts. We developed and evaluated MAICO together with a professional composer who actively used it for five months to create, among other things, a composition for the Biennale Arte 2024 in Venice, which was recorded by the Munich Symphonic Orchestra. We discuss our design choices and lessons learned from this endeavor to support Human-AI co-creativity with visual analytics.}
+}
+```
