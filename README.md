@@ -94,9 +94,10 @@ Publications are stored in **two files** depending on the authors' affiliation w
 - You can add another link for or about your publication. Not the DOI again, though.
 
 `badge`
-- Adding one of the following values will display the respective badge next to the publication's title on the main page and its page
-  - **bestpaper, honorablemention, nomination, reproducibility**
-  - Please also write a small sentence about the badge at the end of the `note` to have context on the publications page. E.g., 'Received an honorable mention award'. The badge will also be displayed there.
+- To display one or multiple icons for a publication, add the repsective word in this bib entry. Separate multiple entries with a ',' ano no spaces. The badge(s) will be shown next to the publication's title on the main page and on the publication's own page.
+  - Available badges:
+    - **bestpaper, honorablemention, nomination, reproducibility, openaccess**
+  - With added badge(s), there needs to be a small sentence describing it/them at the end of the `note`-entry. This information will be shown on the publications page. E.g., 'Received an honorable mention award'.
 
 `note`
 - You can add any note here, and it will be displayed on the page of your publication

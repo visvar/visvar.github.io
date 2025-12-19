@@ -403,6 +403,13 @@ function createPublicationsHtml(publications, member = null) {
       return text
     }).join(', ')
 
+    var badgesHTML = ''
+    if (pub['data']['badge']) {
+      pub['data']['badge'].split(',').forEach(badge => {
+        badgesHTML += `<img style="height:1em; width:auto; vertical-align: sub;" src="${p}/assets/img/badges/${badge}.png"/> `
+      });
+    }
+
     return `
   ${i === 0 || year !== publications[i - 1]['data']['year']
         ? `<h2 class="yearHeading">${year}</h2>` : ''}
@@ -421,7 +428,7 @@ function createPublicationsHtml(publications, member = null) {
     <div class="metaData ${imageExists ? '' : 'noImage'}">
       <h3>
         <a href="${p}/pub/${key}.html" target="_blank">
-        ${pub['data']['badge'] ? `<img style="height:1em; width:auto; vertical-align: sub;" src="${p}/assets/img/badges/${pub['data']['badge']}.png"/> ` : ''}${pub['data']['title']}
+        ${badgesHTML}${pub['data']['title']}
         </a>
       </h3>
       <div class="authors">
@@ -525,7 +532,14 @@ function createPublicationPageHtml(pub) {
     return text
   }).join(', ')
 
-  const title = `${pub['data']['title']}${pub['data']['badge'] ? ` <img style="height:1em; width:auto; vertical-align: sub;" src="../assets/img/badges/${pub['data']['badge']}.png"/>` : ''}`
+  var badgesHTML = ''
+  if (pub['data']['badge']) {
+    pub['data']['badge'].split(',').forEach(badge => {
+      badgesHTML += ` <img style="height:1em; width:auto; vertical-align: sub;" src="../assets/img/badges/${badge}.png"/>`
+    });
+  }
+
+  const title = `${pub['data']['title']}`
 
   const html = `${htmlHead(title, '..')}
     <body>
@@ -562,7 +576,7 @@ function createPublicationPageHtml(pub) {
                 ${`<div class="bibtex"><textarea>${formatBibtex(pub['key'], bib.getBibCodeFromObject(pub, 3))}</textarea></div>`}
                 ${pub['data']['acks'] ? `<div class="abstract"><b>Acknowledgements.</b> ${pub['data']['acks']}</div>` : ''}
                 ${pub['data']['note'] ? `<div>${pub['data']['note']}
-                  ${pub['data']['badge'] ? `<img style="height:1em; width:auto; vertical-align: sub;" src="../assets/img/badges/${pub['data']['badge']}.png"/>` : ''}
+                  ${pub['data']['badge'] ? badgesHTML : ''}
                 </div>` : ''}
                 <div class="qrcontainer">
                   <div class="qrtitle">Link to this page:</div>
