@@ -477,6 +477,28 @@ export const memberConfig = [
     ],
     projects: []
   },
+    {
+    name: 'Regine Lendway',
+    title: 'Regine Lendway, M.Sc.',
+    role: 'phd',
+    path: 'regine_lendway',
+    bio: `
+    <p>
+      I am a PhD student working on human-centered approaches to intention prediction in immersive and interactive systems.
+      My research interests lie at the intersection of human-computer interaction, human-robot interaction, and extended reality,
+      with a focus on gaze and motion as signals for anticipating user actions.
+      I completed both my Bachelor’s and Master’s degrees in computer science at the University of Tübingen.
+    </p>
+    `,
+    research: ['Human-Robot Interaction', 'Human-Computer Interaction', 'Augmented Reality', 'Multimodal Sensing'],
+    links: [
+      { text: 'University of Stuttgart website', url: 'https://www.vis.uni-stuttgart.de/en/institute/team/Lendway/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?hl=de&user=G-DRzdMAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0009-0006-2884-897X' },
+      { text: 'LinkedIn', url: 'https://www.linkedin.com/in/regine-lendway-683868211/' }
+    ],
+    projects: []
+  },
   {
     name: 'Rene Cutura',
     title: 'Rene Cutura, M.Sc.',
