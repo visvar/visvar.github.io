@@ -953,7 +953,10 @@ function reportMissingOrExtraInfo(publications) {
       console.log("\nput missing...\n  PDF's in assets/pdf/\n  PNG's in assets/img/teaser/")
     }
     if (missingPdfFileGotLink) {
-      console.log("\nadd files for pdfs that are linked. If you think this is not possible (e.g., bc of rights) check with Michael and update me with his agreement.")
+      console.log("\nadd files for pdfs that are linked.")
+      console.log("  If you think this is not possible (e.g., bc of rights) check the publisher rules.")
+      console.log("  Still not sure? Talk to Michael.")
+      console.log("  It is not possible? Write me (with approval from Michael) and I will supress this request next time.")
     }
     if (missingInfo) {
       console.log('\nadd missing personal info in\n  config.js\nput missing profile pictures in\n  assets/img/people')
