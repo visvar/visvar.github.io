@@ -725,6 +725,30 @@ export const memberConfig = [
     ],
     projects: []
   },
+  {
+    name: 'Franziska Becker',
+    title: 'Franziska Becker, M.Sc.',
+    role: 'associatedphd',
+    path: 'franziska_becker',
+    bio: `
+    <p>
+      I'm a visualization researcher, originally from cognitive science, and study interaction and sensemaking in visualization contexts.
+    </p>
+    <p>
+      I did my Bachelor’s degree in cognitive science and then completed my Master’s degree in computer science, both at the University of Osnabrück in Germany.
+      Right now, I am close to finishing my Ph.D. at the University of Stuttgart, under supervision of Thomas Ertl.
+    </p>
+    `,
+    research: ['Visualization &amp; visual analytics', 'Externalization', 'HCI', 'Game Design'],
+    links: [
+      { text: 'University of Stuttgart website', url: 'https://www.vis.uni-stuttgart.de/team/Becker-00016/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=d7qIUDoAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0001-6146-7841' },
+      { text: 'LinkedIn', url: 'https://www.linkedin.com/in/franziska-becker-6715703a0' },
+      { text: 'GitHub', url: 'https://github.com/ArielMant0' }
+    ],
+    projects: []
+  },
 
   // alumni posdocs
   {
