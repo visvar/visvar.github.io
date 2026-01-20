@@ -5,6 +5,7 @@ export const pageTitle = 'HCI Stuttgart'
 
 // keys of publications that get exempted from missing file and info checks
 export const allowedMissingPDF = ['ling2021visimages']
+export const allowedPDFLink = []
 export const allowedArxiv = ['heyen2022cellovis', 'heyen2022datadriven', 'heyen2023tabcomp', 'kouts2023lsdvis', 'chen2022not', 'sippl2019tr', 'isenberg2014keyvis-tr', 'rijken2021illegible']
 export const allowedMissingDOI = [
   'park2025design', 'talsma2024towards', 'fan2023virtual', 'zhang20233d', 'heyen2022postermidicontroller',
@@ -473,6 +474,28 @@ export const memberConfig = [
       { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Doerr-00001/' },
       { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=DJBB8I8AAAAJ' },
       { text: 'ORCID', url: 'https://orcid.org/0000-0003-3249-5354' }
+    ],
+    projects: []
+  },
+    {
+    name: 'Regine Lendway',
+    title: 'Regine Lendway, M.Sc.',
+    role: 'phd',
+    path: 'regine_lendway',
+    bio: `
+    <p>
+      I am a PhD student working on human-centered approaches to intention prediction in immersive and interactive systems.
+      My research interests lie at the intersection of human-computer interaction, human-robot interaction, and extended reality,
+      with a focus on gaze and motion as signals for anticipating user actions.
+      I completed both my Bachelor’s and Master’s degrees in computer science at the University of Tübingen.
+    </p>
+    `,
+    research: ['Human-Robot Interaction', 'Human-Computer Interaction', 'Augmented Reality', 'Multimodal Sensing'],
+    links: [
+      { text: 'University of Stuttgart website', url: 'https://www.vis.uni-stuttgart.de/en/institute/team/Lendway/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?hl=de&user=G-DRzdMAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0009-0006-2884-897X' },
+      { text: 'LinkedIn', url: 'https://www.linkedin.com/in/regine-lendway-683868211/' }
     ],
     projects: []
   },

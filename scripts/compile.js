@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs'
 import QRCode from 'qrcode'
-import { pageUrl, pageTitle, allowedMissingPDF, allowedArxiv, allowedMissingDOI, memberConfig } from '../config.js'
+import { pageUrl, pageTitle, allowedMissingPDF, allowedPDFLink, allowedArxiv, allowedMissingDOI, memberConfig } from '../config.js'
 import pkg from 'bibtex-tidy'
 const { tidy } = pkg
 import bibtex from "@hygull/bibtex"
@@ -60,34 +60,34 @@ publications.forEach(pub => {
     console.log('Compile panic')
     process.exit()
   }
-});
+})
 
 // Sort by year and month descending, then title ascending
 pubs_group.sort((a, b) => {
   if (parseInt(a['data']['year']) !== parseInt(b['data']['year']))
-    return parseInt(b['data']['year']) - parseInt(a['data']['year']);
+    return parseInt(b['data']['year']) - parseInt(a['data']['year'])
   else if (parseInt(b['data']['month']) !== parseInt(a['data']['month']))
     return parseInt(b['data']['month']) - parseInt(a['data']['month'])
   return a['data']['title'].localeCompare(b['data']['title'])
-});
+})
 
 // Sort by year and month descending, then title ascending
 pubs_prior.sort((a, b) => {
   if (parseInt(a['data']['year']) !== parseInt(b['data']['year']))
-    return parseInt(b['data']['year']) - parseInt(a['data']['year']);
+    return parseInt(b['data']['year']) - parseInt(a['data']['year'])
   else if (parseInt(b['data']['month']) !== parseInt(a['data']['month']))
     return parseInt(b['data']['month']) - parseInt(a['data']['month'])
   return a['data']['title'].localeCompare(b['data']['title'])
-});
+})
 
 // Sort by year and month descending, then title ascending
 publications.sort((a, b) => {
   if (parseInt(a['data']['year']) !== parseInt(b['data']['year']))
-    return parseInt(b['data']['year']) - parseInt(a['data']['year']);
+    return parseInt(b['data']['year']) - parseInt(a['data']['year'])
   else if (parseInt(b['data']['month']) !== parseInt(a['data']['month']))
     return parseInt(b['data']['month']) - parseInt(a['data']['month'])
   return a['data']['title'].localeCompare(b['data']['title'])
-});
+})
 
 createPages()
 
@@ -336,41 +336,50 @@ function createPublicationsHtml(publications, member = null) {
     const imageExists = allTeasers.has(`${key}.png`)
 
     // PDF, video, and supplemental might be a link instead of file
-    let pdf = pub['data']['pdf']
-    let pdfExists = allPdfs.has(`${key}.pdf`)
-    if (!pdfExists && pdf) {
-      pdfExists = true
+    let pdfLink = pub['data']['pdf']
+    let pdfFile = allPdfs.has(`${key}.pdf`)
+    let pdfIsLink = false
+    if (!pdfFile && pdfLink) {
+      pdfFile = true
+      pdfIsLink = true
     } else {
-      pdf = `${p}/assets/pdf/${key}.pdf`
+      pdfLink = `${p}/assets/pdf/${key}.pdf`
     }
 
-    let video = pub['data']['video']
-    let videoExists = allVideos.has(`${key}.mp4`)
-    let videoEmbed = false
-    if (!videoExists && video) {
-      videoExists = true
-      if (video.includes("youtube.com/embed")) {
-        videoEmbed = true
-      }
-    } else {
-      video = `${p}/assets/video/${key}.mp4`
-    }
-    let videoExists2 = false
-    let video2 = pub['data']['video2']
-    let videoEmbed2 = false
-    if (video2) {
-      videoExists2 = true
-      if (video2.includes("youtube.com/embed")) {
-        videoEmbed2 = true
+    let videoHTML = ''
+    let videoLink = pub['data']['video']
+    let videoFile = allVideos.has(`${key}.mp4`)
+    if (videoFile) {
+      videoHTML = `<a href="${p}/assets/video/${key}.mp4" target="_blank" rel="noreferrer">video</a>`
+    } else if (videoLink) {
+      if (videoLink.includes("youtube.com/embed")) {
+        videoHTML = `<a href="https://www.youtube.com/watch?v=${videoLink.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video [link]</a>`
+      } else {
+        videoHTML = `<a href="${videoLink}" target="_blank" rel="noreferrer">video [link]</a>`
       }
     }
 
-    let suppl = pub['data']['suppl']
-    let supplExists = allSuppl.has(`${key}.zip`)
-    if (!supplExists && suppl) {
-      supplExists = true
+    let video2HTML = ''
+    let video2Link = pub['data']['video2']
+    let video2File = allVideos.has(`${key}_2.mp4`)
+    if (video2File) {
+      video2HTML = `<a href="${p}/assets/video/${key}_2.mp4" target="_blank" rel="noreferrer">video</a>`
+    } else if (video2Link) {
+      if (video2Link.includes("youtube.com/embed")) {
+        video2HTML = `<a href="https://www.youtube.com/watch?v=${video2Link.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video [link]</a>`
+      } else {
+        video2HTML = `<a href="${video2Link}" target="_blank" rel="noreferrer">video [link]</a>`
+      }
+    }
+
+    let supplLink = pub['data']['suppl']
+    let supplFile = allSuppl.has(`${key}.zip`)
+    let supplIsLink = false
+    if (!supplFile && supplLink) {
+      supplFile = true
+      supplIsLink = true
     } else {
-      suppl = `${p}/assets/suppl/${key}.zip`
+      supplLink = `${p}/assets/suppl/${key}.zip`
     }
 
     var footNoteIndicesList = []
@@ -394,6 +403,13 @@ function createPublicationsHtml(publications, member = null) {
       return text
     }).join(', ')
 
+    var badgesHTML = ''
+    if (pub['data']['badge']) {
+      pub['data']['badge'].split(',').forEach(badge => {
+        badgesHTML += `<img style="height:1em; width:auto; vertical-align: sub;" src="${p}/assets/img/badges/${badge}.png"/> `
+      });
+    }
+
     return `
   ${i === 0 || year !== publications[i - 1]['data']['year']
         ? `<h2 class="yearHeading">${year}</h2>` : ''}
@@ -412,7 +428,7 @@ function createPublicationsHtml(publications, member = null) {
     <div class="metaData ${imageExists ? '' : 'noImage'}">
       <h3>
         <a href="${p}/pub/${key}.html" target="_blank">
-        ${pub['data']['badge'] ? `<img style="height:1em; width:auto; vertical-align: sub;" src="${p}/assets/img/badges/${pub['data']['badge']}.png"/> ` : ''}${pub['data']['title']}
+        ${badgesHTML}${pub['data']['title']}
         </a>
       </h3>
       <div class="authors">
@@ -426,10 +442,10 @@ function createPublicationsHtml(publications, member = null) {
         ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI</a>` : ''}
         ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
         ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link</a>` : ''}
-        ${pdfExists ? `<a href="${pdf}" target="_blank" rel="noreferrer">PDF</a>` : ''}
-        ${supplExists ? `<a href="${suppl}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
-        ${videoExists ? videoEmbed ? `<a href="https://www.youtube.com/watch?v=${video.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video</a>` : `<a href="${video}" target="_blank" rel="noreferrer">video</a>` : ''}
-        ${videoExists2 ? videoEmbed2 ? `<a href="https://www.youtube.com/watch?v=${video2.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video</a>` : `<a href="${video2}" target="_blank" rel="noreferrer">video</a>` : ''}
+        ${pdfFile ? pdfIsLink ? `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF [link]</a>` : `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF</a>` : ''}
+        ${supplFile ? supplIsLink ? `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental [link]</a>` : `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
+        ${videoHTML}
+        ${video2HTML}
       </div>
     </div>
   </div>
@@ -452,41 +468,50 @@ function createPublicationPageHtml(pub) {
   const imageExists = allTeasers.has(`${key}.png`)
 
   // PDF, video, and supplemental might be a link instead of file
-  let pdf = pub['data']['pdf']
-  let pdfExists = allPdfs.has(`${key}.pdf`)
-  if (!pdfExists && pdf) {
-    pdfExists = true
+  let pdfLink = pub['data']['pdf']
+  let pdfFile = allPdfs.has(`${key}.pdf`)
+  let pdfIsLink = false
+  if (!pdfFile && pdfLink) {
+    pdfFile = true
+    pdfIsLink = true
   } else {
-    pdf = `../assets/pdf/${key}.pdf`
+    pdfLink = `../assets/pdf/${key}.pdf`
   }
 
-  let video = pub['data']['video']
-  let videoExists = allVideos.has(`${key}.mp4`)
-  let videoEmbed = false
-  if (!videoExists && video) {
-    videoExists = true
-    if (video.includes("youtube.com/embed")) {
-      videoEmbed = true
-    }
-  } else {
-    video = `../assets/video/${key}.mp4`
-  }
-  let videoExists2 = false
-  let video2 = pub['data']['video2']
-  let videoEmbed2 = false
-  if (video2) {
-    videoExists2 = true
-    if (video2.includes("youtube.com/embed")) {
-      videoEmbed2 = true
+  let videoHTML = ''
+  let videoLink = pub['data']['video']
+  let videoFile = allVideos.has(`${key}.mp4`)
+  if (videoFile) {
+    videoHTML = `<a href="../assets/video/${key}.mp4" target="_blank" rel="noreferrer">video</a>`
+  } else if (videoLink) {
+    if (videoLink.includes("youtube.com/embed")) {
+      videoHTML = `<p><iframe width="560" height="315" src="${videoLink}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>`
+    } else {
+      videoHTML = `<a href="${videoLink}" target="_blank" rel="noreferrer">video [link]</a>`
     }
   }
 
-  let suppl = pub['data']['suppl']
-  let supplExists = allSuppl.has(`${key}.zip`)
-  if (!supplExists && suppl) {
-    supplExists = true
+  let video2HTML = ''
+  let video2Link = pub['data']['video2']
+  let video2File = allVideos.has(`${key}_2.mp4`)
+  if (video2File) {
+    video2HTML = `<a href="../assets/video/${key}_2.mp4" target="_blank" rel="noreferrer">video</a>`
+  } else if (video2Link) {
+    if (video2Link.includes("youtube.com/embed")) {
+      video2HTML = `<p><iframe width="560" height="315" src="${video2Link}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>`
+    } else {
+      video2HTML = `<a href="${video2Link}" target="_blank" rel="noreferrer">video [link]</a>`
+    }
+  }
+
+  let supplLink = pub['data']['suppl']
+  let supplFile = allSuppl.has(`${key}.zip`)
+  let supplIsLink = false
+  if (!supplFile && supplLink) {
+    supplFile = true
+    supplIsLink = true
   } else {
-    suppl = `../assets/suppl/${key}.zip`
+    supplLink = `../assets/suppl/${key}.zip`
   }
 
   var footNoteIndicesList = []
@@ -507,7 +532,14 @@ function createPublicationPageHtml(pub) {
     return text
   }).join(', ')
 
-  const title = `${pub['data']['title']}${pub['data']['badge'] ? ` <img style="height:1em; width:auto; vertical-align: sub;" src="../assets/img/badges/${pub['data']['badge']}.png"/>` : ''}`
+  var badgesHTML = ''
+  if (pub['data']['badge']) {
+    pub['data']['badge'].split(',').forEach(badge => {
+      badgesHTML += ` <img style="height:1em; width:auto; vertical-align: sub;" src="../assets/img/badges/${badge}.png"/>`
+    });
+  }
+
+  const title = `${pub['data']['title']}`
 
   const html = `${htmlHead(title, '..')}
     <body>
@@ -535,16 +567,16 @@ function createPublicationPageHtml(pub) {
                   ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI</a>` : ''}
                   ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
                   ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link</a>` : ''}
-                  ${pdfExists ? `<a href="${pdf}" target="_blank" rel="noreferrer">PDF</a>` : ''}
-                  ${supplExists ? `<a href="${suppl}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
-                  ${videoExists ? videoEmbed ? `<p><iframe width="560" height="315" src="${video}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>` : `<a href="${video}" target="_blank" rel="noreferrer">video</a>` : ''}
-                  ${videoExists2 ? videoEmbed2 ? `<p><iframe width="560" height="315" src="${video2}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>` : `<a href="${video2}" target="_blank" rel="noreferrer">video</a>` : ''}
+                  ${pdfFile ? pdfIsLink ? `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF [link]</a>` : `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF</a>` : ''}
+                  ${supplFile ? supplIsLink ? `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental [link]</a>` : `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
+                  ${videoHTML}
+                  ${video2HTML}
                 </div>
                 ${pub['data']['abstract'] ? `<div class="abstract"><b>Abstract.</b> ${pub['data']['abstract']}</div>` : ''}
                 ${`<div class="bibtex"><textarea>${formatBibtex(pub['key'], bib.getBibCodeFromObject(pub, 3))}</textarea></div>`}
                 ${pub['data']['acks'] ? `<div class="abstract"><b>Acknowledgements.</b> ${pub['data']['acks']}</div>` : ''}
                 ${pub['data']['note'] ? `<div>${pub['data']['note']}
-                  ${pub['data']['badge'] ? `<img style="height:1em; width:auto; vertical-align: sub;" src="../assets/img/badges/${pub['data']['badge']}.png"/>` : ''}
+                  ${pub['data']['badge'] ? badgesHTML : ''}
                 </div>` : ''}
                 <div class="qrcontainer">
                   <div class="qrtitle">Link to this page:</div>
@@ -726,6 +758,7 @@ function reportMissingOrExtraInfo(publications) {
   // Missing files and information
   let missingPublicationInfo = false
   let missingFiles = false
+  let missingPdfFileGotLink = false
   let missingData = {}
 
   // Function to add an item to one of the two lists for a given key
@@ -734,17 +767,20 @@ function reportMissingOrExtraInfo(publications) {
       // Initialize the key with two empty lists if it doesn't exist
       missingData[member] = {
         personal: [],
-        publication: []
-      };
+        publication: [],
+        pdfIsLink: false
+      }
     }
 
     // Add the item to the specified list
     if (list === 'personal') {
-      missingData[member].personal.push(item);
+      missingData[member].personal.push(item)
     } else if (list === 'publication') {
-      missingData[member].publication.push(item);
+      missingData[member].publication.push(item)
+    } else if (list === 'pdfIsLink') {
+      missingData[member].pdfIsLink = true
     } else {
-      console.error("Invalid list:", list);
+      console.error("Invalid list:", list)
     }
   }
 
@@ -787,11 +823,21 @@ function reportMissingOrExtraInfo(publications) {
       addMissing(getResp(pub), 'publication', `${key}.png (teaser)`)
     }
     // Publication PDF
-    let pdf = pub['data']['pdf']
-    if ((!pdf) && !allPdfs.has(`${key}.pdf`) && !allowedMissingPDF.includes(key)) {
-      // No link AND no file
-      missingFiles = true
-      addMissing(getResp(pub), 'publication', `${key}.pdf (publication)`)
+    let pdfLink = pub['data']['pdf']
+    let pdfFile = allPdfs.has(`${key}.pdf`)
+
+    // No file, no exception
+    if (!pdfFile && !allowedMissingPDF.includes(key)) {
+      // Is a link, but no exception
+      if (pdfLink && !allowedPDFLink.includes(key)) {
+        missingPdfFileGotLink = true
+        addMissing(getResp(pub), 'publication', `${key} pdf is a link`)
+        addMissing(getResp(pub), 'pdfIsLink', '')
+        // no file, no link, no excpetion for either
+      } else {
+        missingFiles = true
+        addMissing(getResp(pub), 'publication', `${key}.pdf`)
+      }
     }
   }
 
@@ -869,6 +915,12 @@ function reportMissingOrExtraInfo(publications) {
 
       console.log("\nPlease update the information/ upload the files as described in the readme")
       console.log("(https://github.com/visvar/visvar.github.io/blob/main/README.md) as soon as possible.")
+      if (value.pdfIsLink) {
+        console.log("\nPDFs should be available as files. For the PDFs that are only linked, please add them as files.")
+        console.log("If you think this is not possible (e.g., bc of rights) check the publisher rules.")
+        console.log("Still not sure? Talk to Michael.")
+        console.log("It is not possible? Write me (with approval from Michael) and I will supress this request next time.")
+      }
       console.log("\nIf you have a question or encounter any problems, please reach out to me.")
       console.log("\n\n\n\n")
     }
@@ -892,11 +944,19 @@ function reportMissingOrExtraInfo(publications) {
       }
     }
 
+    console.log("----------------------------------------------\n----------------------------------------------")
+
     if (missingPublicationInfo) {
       console.log('\nadd missing publication information in:\n  bibliography.bib')
     }
     if (missingFiles) {
       console.log("\nput missing...\n  PDF's in assets/pdf/\n  PNG's in assets/img/teaser/")
+    }
+    if (missingPdfFileGotLink) {
+      console.log("\nadd files for pdfs that are linked.")
+      console.log("  If you think this is not possible (e.g., bc of rights) check the publisher rules.")
+      console.log("  Still not sure? Talk to Michael.")
+      console.log("  It is not possible? Write me (with approval from Michael) and I will supress this request next time.")
     }
     if (missingInfo) {
       console.log('\nadd missing personal info in\n  config.js\nput missing profile pictures in\n  assets/img/people')
