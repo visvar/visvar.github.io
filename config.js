@@ -342,6 +342,24 @@ export const memberConfig = [
     projects: []
   },
   {
+    name: 'Jena Satkunarajan',
+    title: 'Jena Satkunarajan, M.Sc.',
+    role: 'phd',
+    path: 'jena_satkunarajan',
+    bio:`
+    <p>
+    I research progressive, human-AI-collaborative approaches for exploratory data analysis and creativity support.
+    <p>
+    `,
+    research: ['Information Visualization', 'Generative AI', 'Exploratory Data Analysis', 'Creativity Support'],
+    links: [
+      { text: 'University of Stuttgart website', url: 'https://www.vis.uni-stuttgart.de/team/Satkunarajan/' },
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=hZzJ8J8AAAAJ&hl'},
+      { text: 'ORCID', url: 'https://orcid.org/0000-0003-3204-9231' },
+    ],
+    projects: []
+  },
+  {
     name: 'Jonas Haischt',
     title: 'Jonas Haischt, M.Sc.',
     role: 'phd',
