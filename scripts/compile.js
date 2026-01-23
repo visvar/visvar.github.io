@@ -829,14 +829,21 @@ function reportMissingOrExtraInfo(publications) {
     // No file, no exception
     if (!pdfFile && !allowedMissingPDF.includes(key)) {
       // Is a link, but no exception
-      if (pdfLink && !allowedPDFLink.includes(key)) {
-        missingPdfFileGotLink = true
-        addMissing(getResp(pub), 'publication', `${key} pdf is a link`)
-        addMissing(getResp(pub), 'pdfIsLink', '')
-        // no file, no link, no excpetion for either
+      if (pdfLink) {
+        // link not allowed if not excepted and published since joining the group
+        if (!allowedPDFLink.includes(key) && pubs_group.includes(pub)) {
+          missingPdfFileGotLink = true
+          addMissing(getResp(pub), 'publication', `${key} pdf file`)
+          addMissing(getResp(pub), 'pdfIsLink', '')
+        }
+        // no pdf, not even a link
       } else {
         missingFiles = true
-        addMissing(getResp(pub), 'publication', `${key}.pdf`)
+        if (pubs_prior.includes(pub)) {
+          addMissing(getResp(pub), 'publication', `${key} pdf file (or link)`)
+        } else {
+          addMissing(getResp(pub), 'publication', `${key} pdf file`)
+        }
       }
     }
   }
