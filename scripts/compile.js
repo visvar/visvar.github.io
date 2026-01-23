@@ -923,7 +923,7 @@ function reportMissingOrExtraInfo(publications) {
       console.log("\nPlease update the information/ upload the files as described in the readme")
       console.log("(https://github.com/visvar/visvar.github.io/blob/main/README.md) as soon as possible.")
       if (value.pdfIsLink) {
-        console.log("\nPDFs should be available as files. For the PDFs that are only linked, please add them as files.")
+        console.log("\nPDFs should be available as files (for pubs since joining the group). For the PDFs that are only linked, please add them as files.")
         console.log("If you think this is not possible (e.g., bc of rights) check the publisher rules.")
         console.log("Still not sure? Talk to Michael.")
         console.log("It is not possible? Write me (with approval from Michael) and I will supress this request next time.")
