@@ -2,6 +2,7 @@ import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs'
 import QRCode from 'qrcode'
 import { pageUrl, pageTitle, allowedMissingPDF, allowedPDFLink, allowedArxiv, allowedMissingDOI, memberConfig } from '../config.js'
 import pkg from 'bibtex-tidy'
+import open from 'open'
 const { tidy } = pkg
 import bibtex from "@hygull/bibtex"
 
@@ -896,40 +897,43 @@ function reportMissingOrExtraInfo(publications) {
 
   // Create Report
   if (printEmails) {
-    console.log(`\n\n\nEmails for missing files and information:`)
-    console.log(`\n\n\nNotification/ Reminder: Missing Information on the HCI website\n\n\n`)
+    console.log(`\n\n\nPreparing emails for missing files and information\n`)
+    var subject = `\n\n\nNotification/ Reminder: Missing Information on the HCI website\n\n\n`
     for (const [member, value] of Object.entries(missingData)) {
-      console.log('Hi ' + member)
-      console.log("\nThis is a friendly notice/ reminder that there is some information missing on the HCI website from your:\n")
+      var recipient = member
+      var body = `Dear ${member},\n`
+      body += "\nThis is a friendly notice/ reminder that there is some information missing on the HCI website from your:\n"
 
       if (value.publication.length > 0) {
         if (value.publication.length > 1) {
-          console.log('Publications:')
+          body += 'Publications:\n'
         } else {
-          console.log('Publication:')
+          body += 'Publication:\n'
         }
         value.publication.forEach(info => {
-          console.log('  ' + info)
+          body += '    ' + info + '\n'
         })
       }
 
       if (value.personal.length > 0) {
-        console.log('Profile:')
+        body += 'Profile:\n'
         value.personal.forEach(info => {
-          console.log('  ' + info)
+          body += '  ' + info + '\n'
         })
       }
 
-      console.log("\nPlease update the information/ upload the files as described in the readme")
-      console.log("(https://github.com/visvar/visvar.github.io/blob/main/README.md) as soon as possible.")
+      body += "\nPlease update the information/ upload the files as described in the readme\n"
+      body += "(https://github.com/visvar/visvar.github.io/blob/main/README.md) as soon as possible.\n"
       if (value.pdfIsLink) {
-        console.log("\nPDFs should be available as files (for pubs since joining the group). For the PDFs that are only linked, please add them as files.")
-        console.log("If you think this is not possible (e.g., bc of rights) check the publisher rules.")
-        console.log("Still not sure? Talk to Michael.")
-        console.log("It is not possible? Write me (with approval from Michael) and I will supress this request next time.")
+        body += "\nPDFs should be available as files (for pubs since joining the group). For the PDFs that are only linked, please add them as files."
+        body += "If you think this is not possible (e.g., bc of rights) check the publisher rules.\n"
+        body += "Still not sure? Talk to Michael.\n"
+        body += "It is not possible? Write me (with approval from Michael) and I will supress this request next time.\n"
       }
-      console.log("\nIf you have a question or encounter any problems, please reach out to me.")
-      console.log("\n\n\n\n")
+      body += "\nIf you have a question or encounter any problems, please reach out to me.\n"
+      body += "\nBest\nChris"
+
+      triggerEmail(member, subject, body)
     }
   } else {
     console.log(`\n\n\nmissing files and information:\n`)
@@ -968,6 +972,18 @@ function reportMissingOrExtraInfo(publications) {
     if (missingInfo) {
       console.log('\nadd missing personal info in\n  config.js\nput missing profile pictures in\n  assets/img/people')
     }
+  }
+}
+
+async function triggerEmail(recipient, subject, body) {
+  const mailtoUrl = `mailto:${recipient}?subject=${subject}&body=${encodeURIComponent(body)}`;
+
+  try {
+    console.log(`Opening mail client for ${recipient}...`);
+    await open(mailtoUrl, { wait: true });
+    console.log("Success: OS received the command.");
+  } catch (error) {
+    console.error("Failed to open mail client:", error);
   }
 }
 
