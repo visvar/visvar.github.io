@@ -6,7 +6,10 @@ export const pageTitle = 'HCI Stuttgart'
 // keys of publications that get exempted from missing file and info checks
 export const allowedMissingPDF = ['ling2021visimages']
 export const allowedPDFLink = []
-export const allowedArxiv = ['heyen2022cellovis', 'heyen2022datadriven', 'heyen2023tabcomp', 'kouts2023lsdvis', 'chen2022not', 'sippl2019tr', 'isenberg2014keyvis-tr', 'rijken2021illegible']
+export const allowedArxiv = [
+  'heyen2022cellovis', 'heyen2022datadriven', 'heyen2023tabcomp', 'kouts2023lsdvis', 'chen2022not', 'sippl2019tr',
+  'isenberg2014keyvis-tr', 'rijken2021illegible', 'mack2025visuotactile'
+]
 export const allowedMissingDOI = [
   'park2025design', 'talsma2024towards', 'fan2023virtual', 'zhang20233d', 'heyen2022postermidicontroller',
   'rau2021visual', 'heyen2020supporting', 'hube2018the', 'cutura2018viscoder', 'aigner2018valid',
@@ -328,7 +331,7 @@ export const memberConfig = [
     title: 'Janet Mazur, M.Sc.',
     role: 'phd',
     path: 'janet_mazur',
-    bio:`
+    bio: `
     <p>
     In my research, I focus on <i>VR Driving Simulation</i> and how immersion and realism can be enhanced by adding G-Force feedback. I am an external Ph.D. student from Mercedes-Benz AG, Virtual Reality Center, and supervised by the Visualization Research Center of the University of Stuttgart (VISUS).
     <p>
@@ -336,7 +339,7 @@ export const memberConfig = [
     research: ['VR/AR', 'HCI', 'Driving Simulation', 'Robotics'],
     links: [
       { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/team/Mazur-00001/' },
-      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=c6-2mpQAAAAJ&hl=de'},
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=c6-2mpQAAAAJ&hl=de' },
       { text: 'ORCID', url: '0009-0001-4480-1438' },
     ],
     projects: []
@@ -346,7 +349,7 @@ export const memberConfig = [
     title: 'Jena Satkunarajan, M.Sc.',
     role: 'phd',
     path: 'jena_satkunarajan',
-    bio:`
+    bio: `
     <p>
     I research progressive, human-AI-collaborative approaches for exploratory data analysis and creativity support.
     <p>
@@ -354,7 +357,7 @@ export const memberConfig = [
     research: ['Information Visualization', 'Generative AI', 'Exploratory Data Analysis', 'Creativity Support'],
     links: [
       { text: 'University of Stuttgart website', url: 'https://www.vis.uni-stuttgart.de/team/Satkunarajan/' },
-      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=hZzJ8J8AAAAJ&hl'},
+      { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=hZzJ8J8AAAAJ&hl' },
       { text: 'ORCID', url: 'https://orcid.org/0000-0003-3204-9231' },
     ],
     projects: []
@@ -495,7 +498,7 @@ export const memberConfig = [
     ],
     projects: []
   },
-    {
+  {
     name: 'Regine Lendway',
     title: 'Regine Lendway, M.Sc.',
     role: 'phd',
