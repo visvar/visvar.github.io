@@ -162,6 +162,10 @@ Always run `npm i` to install or update packages (you need to have [Node.js and 
 
 Before compiling, make sure the local version of the repository is up to date (`git pull`).
 
+`npm run compile`
+- run for a fast compile **without updating images**
+- if you changed or added a image, run `npm start` (see below)
+
 `npm start`
 - starts compiling the whole webpage
 - **Read the output of the script. Missing files and information will be printed there**
@@ -170,9 +174,6 @@ You will need to reload the page (e.g., press (CTRL) F5) in the browser to see c
 
 `npm start -- email`
 - compiles the webpage, but the information about missing files and information will be formatted as emails to copy and paste.
-
-`npm run compile`
-- can be run for a fast compile of the HTML if publications, images, etc., have not changed.
 
 Compiling not working, weird output? Check if you have [Microsoft HPC Pack installed, containing another node.exe](https://stackoverflow.com/a/29579878)
 
