@@ -791,36 +791,36 @@ function reportMissingOrExtraInfo(publications) {
     if (!pub['data']['doi'] || pub['data']['doi'] === '') {
       if (!allowedMissingDOI.includes(key)) {
         missingPublicationInfo = true
-        addMissing(getResp(pub), 'publication', `${key} doi`)
+        addMissing(getResp(pub), 'publication', `${key} is missing a doi`)
       }
     } else {
       if (!pub['data']['doi'].includes('http')) {
         missingPublicationInfo = true
-        addMissing(getResp(pub), 'publication', `${key} doi is not a link`)
+        addMissing(getResp(pub), 'publication', `${key} the doi is not a link`)
       }
       if (pub['data']['doi'].toLowerCase().includes('arxiv') && !allowedArxiv.includes(key)) {
         missingPublicationInfo = true
-        addMissing(getResp(pub), 'publication', `${key} doi is arxiv`)
+        addMissing(getResp(pub), 'publication', `${key} the doi is not final but arxiv`)
       }
     }
     if (!pub['data']['venue'] || pub['data']['venue'] === '') {
       missingPublicationInfo = true
-      addMissing(getResp(pub), 'publication', `${key} venue`)
+      addMissing(getResp(pub), 'publication', `${key} is missing a venue`)
     }
     if (!pub['data']['abstract'] | pub['data']['abstract'] === '') {
       missingPublicationInfo = true
-      addMissing(getResp(pub), 'publication', `${key} abstract`)
+      addMissing(getResp(pub), 'publication', `${key} is missing an abstract`)
     }
     if (pub['data']['badge'] && !pub['data']['note']) {
       missingPublicationInfo = true
-      addMissing(getResp(pub), 'publication', `${key} please add info about the badge in the note`)
+      addMissing(getResp(pub), 'publication', `${key} is missing info about the badge in the note`)
     }
 
     // Missing files
     // Publication teaser images
     if (!allTeasers.has(`${key}.png`)) {
       missingFiles = true
-      addMissing(getResp(pub), 'publication', `${key}.png (teaser)`)
+      addMissing(getResp(pub), 'publication', `${key} is missing a teaser image`)
     }
     // Publication PDF
     let pdfLink = pub['data']['pdf']
@@ -833,16 +833,16 @@ function reportMissingOrExtraInfo(publications) {
         // link not allowed if not excepted and published since joining the group
         if (!allowedPDFLink.includes(key) && pubs_group.includes(pub)) {
           missingPdfFileGotLink = true
-          addMissing(getResp(pub), 'publication', `${key} pdf file`)
+          addMissing(getResp(pub), 'publication', `${key} is missing a pdf file`)
           addMissing(getResp(pub), 'pdfIsLink', '')
         }
         // no pdf, not even a link
       } else {
         missingFiles = true
         if (pubs_prior.includes(pub)) {
-          addMissing(getResp(pub), 'publication', `${key} pdf file (or link)`)
+          addMissing(getResp(pub), 'publication', `${key} is missing a pdf file or link`)
         } else {
-          addMissing(getResp(pub), 'publication', `${key} pdf file`)
+          addMissing(getResp(pub), 'publication', `${key} is missing a pdf file`)
         }
       }
     }
@@ -857,40 +857,40 @@ function reportMissingOrExtraInfo(publications) {
     }
     if (member.title === '') {
       missingInfo = true
-      addMissing(member.name, 'personal', 'a title')
+      addMissing(member.name, 'personal', 'is missing a title')
     }
     if (member.role === '') {
       missingInfo = true
-      addMissing(member.name, 'personal', 'a role')
+      addMissing(member.name, 'personal', 'is missing a role')
     }
     if (member.path === '') {
       missingInfo = true
-      addMissing(member.name, 'personal', 'a path')
+      addMissing(member.name, 'personal', 'is missing a path')
     }
-    if (member.bio === '') {
+    if (member.bio.trim() === '') {
       missingInfo = true
-      addMissing(member.name, 'personal', 'a bio')
+      addMissing(member.name, 'personal', 'is missing a bio')
     }
     if (member.research.length === 0) {
       missingInfo = true
-      addMissing(member.name, 'personal', 'research interests')
+      addMissing(member.name, 'personal', 'is missing research interests')
     }
     const links = member.links.map(d => d.text)
     if (!links.includes('University of Stuttgart website')) {
       missingInfo = true
-      addMissing(member.name, 'personal', 'a University link')
+      addMissing(member.name, 'personal', 'is missing a University link')
     }
     if (!links.includes('ORCID')) {
       missingInfo = true
-      addMissing(member.name, 'personal', 'an ORCID link')
+      addMissing(member.name, 'personal', 'is missing an ORCID link')
     }
     if (!links.includes('Google Scholar')) {
       missingInfo = true
-      addMissing(member.name, 'personal', 'a Google Scholar link')
+      addMissing(member.name, 'personal', 'is missing a Google Scholar link')
     }
     if (!allPeopleImages.has(member.path + '.jpg')) {
       missingInfo = true
-      addMissing(member.name, 'personal', 'a profile picture')
+      addMissing(member.name, 'personal', 'is missing a profile picture')
     }
   }
 
@@ -960,10 +960,10 @@ function reportMissingOrExtraInfo(publications) {
       console.log("\nput missing...\n  PDF's in assets/pdf/\n  PNG's in assets/img/teaser/")
     }
     if (missingPdfFileGotLink) {
-      console.log("\nadd files for pdfs that are linked.")
+      console.log("\nadd files for pdfs that are linked (for group publications).")
       console.log("  If you think this is not possible (e.g., bc of rights) check the publisher rules.")
       console.log("  Still not sure? Talk to Michael.")
-      console.log("  It is not possible? Write me (with approval from Michael) and I will supress this request next time.")
+      console.log("  It is not possible? Write chris (with approval from Michael) and he will supress this request next time.")
     }
     if (missingInfo) {
       console.log('\nadd missing personal info in\n  config.js\nput missing profile pictures in\n  assets/img/people')
