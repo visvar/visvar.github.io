@@ -202,15 +202,14 @@ function createMainPageHtml(publications, memberConfig) {
 
   const html = `${htmlHead(pageTitle)}
 <body>
-  <a class="anchor" name="top"></a>
   <main>
-    ${headerAndNav()}
+    ${headerAndNav('.', 'home')}
     <div>
       <article><a class="anchor" name="aboutus"></a>
         ${readFileSync('./aboutus.html')}
       </article>
-      <article> <a class="anchor" name="members"></a>
-        <h1>Members</h1>
+      <article>
+        <h1 id="members">Members</h1>
         <div class="memberList">
         ${memberList}
         </div>
@@ -227,8 +226,7 @@ function createMainPageHtml(publications, memberConfig) {
           ${alumniList}
         </div>
       </article>
-      <article> <a class="anchor" name="publications"></a>
-        <h1>Publications</h1>
+        <h1 id="publications">Publications</h1>
         ${createPublicationsHtml(publications)}
       </article>
       ${footer()}
@@ -246,11 +244,10 @@ function createMemberPageHtml(member, authoredPubsGroup, authoredPubsPrior) {
   const title = `${member.title} | ${pageTitle}`
   var html = `${htmlHead(title, '..')}
 <body>
-  <a class="anchor" name="top"></a>
   <main>
-    ${headerAndNav('..')}
+    ${headerAndNav('..', 'member', authoredPubsGroup.length, authoredPubsPrior.length)}
     <div>
-      <article><a class="anchor" name="aboutus"></a>
+      <article>
         <h1>${member.title}</h1>
         <div class="aboutMember">
           <div class="avatarAndBio">
@@ -286,15 +283,15 @@ function createMemberPageHtml(member, authoredPubsGroup, authoredPubsPrior) {
 
   if (authoredPubsGroup.length > 0) {
     html += `
-      <article> <a class="anchor" name="publications"></a>
-        <h1>Publications</h1>
+      <article>
+        <h1 id="publications">Publications</h1>
         ${createPublicationsHtml(authoredPubsGroup, member)}
       </article>`
   }
   if (authoredPubsPrior.length > 0) {
     html += `
       <article>
-        <h1>Former Publications</h1>
+        <h1 id="formerpublications">Former Publications</h1>
         ${createPublicationsHtml(authoredPubsPrior, member)}
       </article>`
   }
@@ -544,11 +541,10 @@ function createPublicationPageHtml(pub) {
 
   const html = `${htmlHead(title, '..')}
     <body>
-      <a class="anchor" name="top"></a>
       <main>
-        ${headerAndNav('..')}
+        ${headerAndNav('..', 'publication')}
         <div>
-          <article><a class="anchor" name="publications"></a>
+          <article>
             <h1>${title}</h1>
             <div class="pubPageContent">
               ${imageExists ? `
@@ -643,9 +639,9 @@ function htmlHead(title, path = '.') {
  * @param {'.'|'..'} [path=.] either '.' for index.html or '..' for others
  * @returns {string} HTML code
  */
-function headerAndNav(path = '.') {
-  return `
-<div>
+function headerAndNav(path = '.', pageType, groupPubs, priorPubs) {
+  let html = `
+  <div>
   <header>
     <div>
       <a href="${path}/index.html">
@@ -654,16 +650,29 @@ function headerAndNav(path = '.') {
     </div>
     <div>
       <nav>
-      <ul>
-        <li><a href="${path}/index.html#aboutus">about us</a></li>
-        <li><a href="${path}/index.html#members">members</a></li>
-        <li><a href="${path}/index.html#publications">publications</a></li>
-      </ul>
+        <ul>`
+  if (pageType == 'home') {
+    html += `
+          <li><a href="${path}/index.html#aboutus">about us</a></li>
+          <li><a href="${path}/index.html#members">members</a></li>
+          <li><a href="${path}/index.html#publications">publications</a></li>`
+  } else if (pageType == 'member') {
+    html += `
+          <li><a href="${path}/index.html">home</a></li>
+          ${groupPubs > 0 ? `<li><a href="#publications">publications</a></li>` : ''}
+          ${priorPubs > 0 ? `<li><a href="#formerpublications">former publications</a></li>` : ''}`
+  } else {
+    html += `
+          <li><a href="${path}/index.html">home</a></li>`
+  }
+  html += `
+        </ul>
       </nav>
     </div>
   </header>
-</div>
-`
+</div>`
+
+  return html
 }
 
 /**
@@ -685,9 +694,8 @@ function footer(path = '.') {
 function createImprint() {
   const html = `${htmlHead(pageTitle)}
 <body>
-  <a class="anchor" name="top"></a>
   <main>
-    ${headerAndNav('.')}
+    ${headerAndNav()}
     <div>
       <article>
         ${readFileSync('./imprint_config.html')}
