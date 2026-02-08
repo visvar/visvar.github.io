@@ -1,7 +1,6 @@
 // Page configuration
-export const publicationSheet = './Papers.csv'
 export const pageUrl = 'https://visvar.github.io'
-export const pageTitle = 'HCI Stuttgart'
+export const pageTitle = 'The HCI Research Group in Stuttgart'
 
 // keys of publications that get exempted from missing file and info checks
 export const allowedMissingPDF = ['ling2021visimages']

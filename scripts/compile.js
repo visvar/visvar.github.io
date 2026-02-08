@@ -13,7 +13,7 @@ if (argument) {
   if (argument === 'email') {
     printEmails = true
   } else {
-    console.log("Received invalid argument:", argument)
+    console.log(`Received invalid argument ${argument} and ignoring it.`)
   }
 }
 
@@ -63,7 +63,7 @@ publications.forEach(pub => {
   }
 })
 
-// Sort by year and month descending, then title ascending
+// Sort publications by year and month descending, then title ascending
 pubs_group.sort((a, b) => {
   if (parseInt(a['data']['year']) !== parseInt(b['data']['year']))
     return parseInt(b['data']['year']) - parseInt(a['data']['year'])
@@ -72,7 +72,6 @@ pubs_group.sort((a, b) => {
   return a['data']['title'].localeCompare(b['data']['title'])
 })
 
-// Sort by year and month descending, then title ascending
 pubs_prior.sort((a, b) => {
   if (parseInt(a['data']['year']) !== parseInt(b['data']['year']))
     return parseInt(b['data']['year']) - parseInt(a['data']['year'])
@@ -81,7 +80,6 @@ pubs_prior.sort((a, b) => {
   return a['data']['title'].localeCompare(b['data']['title'])
 })
 
-// Sort by year and month descending, then title ascending
 publications.sort((a, b) => {
   if (parseInt(a['data']['year']) !== parseInt(b['data']['year']))
     return parseInt(b['data']['year']) - parseInt(a['data']['year'])
@@ -89,6 +87,12 @@ publications.sort((a, b) => {
     return parseInt(b['data']['month']) - parseInt(a['data']['month'])
   return a['data']['title'].localeCompare(b['data']['title'])
 })
+
+console.log('\n\n')
+console.log('Stats:')
+console.log(`  ${publications.length} publications`)
+console.log(`  ${allTeasers.size - 1} teasers`) // -1 for the 'small' folder
+console.log(`  ${allPdfs.size} pdfs`)
 
 createPages()
 
@@ -102,12 +106,6 @@ createPages()
  * Creates all HTML pages
 */
 async function createPages() {
-  console.log('\n\n')
-  console.log('Stats:')
-  console.log(`  ${publications.length} publications`)
-  console.log(`  ${allTeasers.size - 1} teasers`) // -1 for the 'small' folder
-  console.log(`  ${allPdfs.size} pdfs`)
-
   // Member / author pages
   for (const member of memberConfig) {
     const authoredPubsGroup = pubs_group.filter(d => d['data']['author'].includes(member.name))
@@ -151,7 +149,7 @@ function createMainPageHtml(publications, memberConfig) {
   }
 
   const memberList = getMemberHtml(memberConfig.filter(d => d.role === 'professor' | d.role === 'postdoc' | d.role === 'phd').sort((a, b) => {
-    // Sorting rules
+    // Sorting rules: first professors, then postdocs, then phds
     if (a.role === 'professor' && b.role === 'postdoc') {
       return -1
     } else if (a.role === 'postdoc' && b.role === 'professor') {
@@ -170,33 +168,31 @@ function createMainPageHtml(publications, memberConfig) {
       return 1
     }
 
-    // Sort phd's by name
+    // Sort members of the same role by name
     return a.name < b.name ? -1 : 1
   }))
 
-
   const associatedList = getMemberHtml(memberConfig.filter(d => d.role === 'associatedpostdoc' | d.role === 'associatedphd').sort((a, b) => {
-    // Sorting rules
+    // Sorting rules: postdoc before phd
     if (a.role === 'associatedpostdoc' && b.role === 'associatedphd') {
       return -1
     } if (a.role === 'associatedphd' && b.role === 'associatedpostdoc') {
       return 1
     }
 
-    // Sort phd's by name
+    // Sort members of the same role by name
     return a.name < b.name ? -1 : 1
   }))
 
-
   const alumniList = getMemberHtml(memberConfig.filter(d => d.role === 'alumnuspostdoc' | d.role === 'alumnusphd').sort((a, b) => {
-    // Sorting rules
+    // Sorting rules: postdoc before phd
     if (a.role === 'alumnuspostdoc' && b.role === 'alumnusphd') {
       return -1
     } if (a.role === 'alumnusphd' && b.role === 'alumnuspostdoc') {
       return 1
     }
 
-    // Sort phd's by name
+    // Sort members of the same role by name
     return a.name < b.name ? -1 : 1
   }))
 
@@ -619,7 +615,7 @@ function htmlHead(title, path = '.') {
     <!-- OG Metadata -->
     <meta property="og:site_name" content="HCI VISUS" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="The HCI Research Group in Stuttgart" />
+    <meta property="og:title" content="${pageTitle}" />
     <meta property="og:url" content="https://visvar.github.io/" />
     <meta property="og:description" content="All about the people and their research at the HCI group at VISUS, University of Stuttgart." />
     <meta property="og:image" content="https://visvar.github.io/assets/img/misc/hcivisus.png" />
@@ -627,7 +623,7 @@ function htmlHead(title, path = '.') {
 
     <!-- Twitter card -->
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title"  content="The HCI Research Group in Stuttgart" />
+    <meta name="twitter:title"  content="${pageTitle}" />
     <meta name="twitter:description" content="All about the people and their research at the HCI group at VISUS, University of Stuttgart." />
     <meta name="twitter:image" content="https://visvar.github.io/assets/img/misc/hcivisus.png" />
   </head>
