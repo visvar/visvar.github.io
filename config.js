@@ -182,15 +182,15 @@ export const memberConfig = [
     path: 'christian_krauter',
     bio: `
     <p>
-    My research interests cover Human-Computer Interaction (HCI), information visualization, and Augmented and Virtual Reality (AR/VR), and I plan to combine these areas during my Ph.D. studies.
+      My research interest lies in Human-Computer Interaction (HCI) with a focus on mobile devices of the future.
+      I am further interested in information visualization and Augmented and Virtual Reality.
     </p>
     <p>
-    I completed my Bachelor’s degree in media informatics, followed by a Master’s degree in computer science, both at the University of Stuttgart.
-    Currently, I am pursuing my Ph.D. at the same university.
-    My previous work covered notification placement in VR (bachelor thesis, <a href="https://doi.org/10.1145/3311350.3347190" target="_blank" rel="noreferrer">link</a>), an immersive social distancing VR demo (<a href="https://doi.org/10.1145/3473856.3474031" target="_blank" rel="noreferrer">link</a>, <a href="https://visvar.github.io/pdf/krauter2021muc.pdf" target="_blank" rel="noreferrer">pdf</a>), and a smart chair for sitting posture recognition and feedback (master thesis).
+      I completed my Bachelor’s degree in media informatics, followed by a Master’s degree in computer science, both at the University of Stuttgart.
+      My previous work covered notification placement in VR (bachelor thesis), an immersive social distancing VR demo, and a smart chair for sitting posture recognition and feedback (master thesis).
     </p>
     <p>
-    Please contact me if you are interested in thesis writing or collaboration opportunities or have any questions about my research. I look forward to hearing from you.
+      Please contact me if you are interested in thesis writing or collaboration opportunities or have any questions about my research. I look forward to hearing from you.
     </p>
     `,
     research: ['HCI', 'AR/ VR', 'Information Visualization'],
