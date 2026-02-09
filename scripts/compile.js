@@ -17,6 +17,8 @@ if (argument) {
   }
 }
 
+let srOnlyText = "<span class='sr-only'>(opens in new tab)</span>"
+
 // Load files
 const allTeasers = new Set(readdirSync("assets/img/teaser"))
 const allPeopleImages = new Set(readdirSync("assets/img/people"))
@@ -262,14 +264,14 @@ function createMemberPageHtml(member, authoredPubsGroup, authoredPubsPrior) {
             <div>
               <h2>Links</h2>
               <ul>
-                <li>${member.links.map(d => `<a href="${d.url}" target="_blank" rel="noreferrer">${d.text}</a>`).join("</li>\n<li>")}</li>
+                <li>${member.links.map(d => `<a href="${d.url}" target="_blank" rel="noreferrer">${d.text}${srOnlyText}</a>`).join("</li>\n<li>")}</li>
               </ul>
             </div>
             ${member.projects.length === 0 ? '' : `
             <div>
             <h2>Projects &amp; Funding</h2>
             <ul>
-              <li>${member.projects.map(d => `<a href="${d.url}" target="_blank" rel="noreferrer">${d.text}</a>`).join("</li>\n<li>")}</li>
+              <li>${member.projects.map(d => `<a href="${d.url}" target="_blank" rel="noreferrer">${d.text}${srOnlyText}</a>`).join("</li>\n<li>")}</li>
             </ul>
           </div>
             `}
@@ -340,12 +342,12 @@ function createPublicationsHtml(publications, member = null) {
     let videoLink = pub['data']['video']
     let videoFile = allVideos.has(`${key}.mp4`)
     if (videoFile) {
-      videoHTML = `<a href="${p}/assets/video/${key}.mp4" target="_blank" rel="noreferrer">video</a>`
+      videoHTML = `<a href="${p}/assets/video/${key}.mp4" target="_blank" rel="noreferrer">video${srOnlyText}</a>`
     } else if (videoLink) {
       if (videoLink.includes("youtube.com/embed")) {
-        videoHTML = `<a href="https://www.youtube.com/watch?v=${videoLink.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video</a>`
+        videoHTML = `<a href="https://www.youtube.com/watch?v=${videoLink.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video${srOnlyText}</a>`
       } else {
-        videoHTML = `<a href="${videoLink}" target="_blank" rel="noreferrer">video</a>`
+        videoHTML = `<a href="${videoLink}" target="_blank" rel="noreferrer">video${srOnlyText}</a>`
       }
     }
 
@@ -353,12 +355,12 @@ function createPublicationsHtml(publications, member = null) {
     let video2Link = pub['data']['video2']
     let video2File = allVideos.has(`${key}_2.mp4`)
     if (video2File) {
-      video2HTML = `<a href="${p}/assets/video/${key}_2.mp4" target="_blank" rel="noreferrer">video</a>`
+      video2HTML = `<a href="${p}/assets/video/${key}_2.mp4" target="_blank" rel="noreferrer">video${srOnlyText}</a>`
     } else if (video2Link) {
       if (video2Link.includes("youtube.com/embed")) {
-        video2HTML = `<a href="https://www.youtube.com/watch?v=${video2Link.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video</a>`
+        video2HTML = `<a href="https://www.youtube.com/watch?v=${video2Link.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video${srOnlyText}</a>`
       } else {
-        video2HTML = `<a href="${video2Link}" target="_blank" rel="noreferrer">video</a>`
+        video2HTML = `<a href="${video2Link}" target="_blank" rel="noreferrer">video${srOnlyText}</a>`
       }
     }
 
@@ -424,11 +426,11 @@ function createPublicationsHtml(publications, member = null) {
         ${venue} (${year})
       </div>
       <div class="links">
-        ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI</a>` : ''}
-        ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
-        ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link</a>` : ''}
-        ${pdfLink ? `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF</a>` : ''}
-        ${supplLink ? `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
+        ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI${srOnlyText}</a>` : ''}
+        ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link${srOnlyText}</a>` : ''}
+        ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link${srOnlyText}</a>` : ''}
+        ${pdfLink ? `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF${srOnlyText}</a>` : ''}
+        ${supplLink ? `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental${srOnlyText}</a>` : ''}
         ${videoHTML}
         ${video2HTML}
       </div>
@@ -463,12 +465,12 @@ function createPublicationPageHtml(pub) {
   let videoLink = pub['data']['video']
   let videoFile = allVideos.has(`${key}.mp4`)
   if (videoFile) {
-    videoHTML = `<a href="../assets/video/${key}.mp4" target="_blank" rel="noreferrer">video</a>`
+    videoHTML = `<a href="../assets/video/${key}.mp4" target="_blank" rel="noreferrer">video${srOnlyText}</a>`
   } else if (videoLink) {
     if (videoLink.includes("youtube.com/embed")) {
       videoHTML = `<p><iframe width="560" height="315" src="${videoLink}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>`
     } else {
-      videoHTML = `<a href="${videoLink}" target="_blank" rel="noreferrer">video</a>`
+      videoHTML = `<a href="${videoLink}" target="_blank" rel="noreferrer">video${srOnlyText}</a>`
     }
   }
 
@@ -476,12 +478,12 @@ function createPublicationPageHtml(pub) {
   let video2Link = pub['data']['video2']
   let video2File = allVideos.has(`${key}_2.mp4`)
   if (video2File) {
-    video2HTML = `<a href="../assets/video/${key}_2.mp4" target="_blank" rel="noreferrer">video</a>`
+    video2HTML = `<a href="../assets/video/${key}_2.mp4" target="_blank" rel="noreferrer">video${srOnlyText}</a>`
   } else if (video2Link) {
     if (video2Link.includes("youtube.com/embed")) {
       video2HTML = `<p><iframe width="560" height="315" src="${video2Link}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>`
     } else {
-      video2HTML = `<a href="${video2Link}" target="_blank" rel="noreferrer">video</a>`
+      video2HTML = `<a href="${video2Link}" target="_blank" rel="noreferrer">video${srOnlyText}</a>`
     }
   }
 
@@ -528,7 +530,7 @@ function createPublicationPageHtml(pub) {
             <div class="pubPageContent">
               ${imageExists ? `
               <a href="../assets/img/teaser/${key}.png" target="_blank" title="show image full size">
-                <img class="teaser" id="image${key}" src="../assets/img/teaser/${key}.png"/>
+                <img class="teaser" id="image${key}" src="../assets/img/teaser/${key}.png"/>${srOnlyText}
               </a>` : ''}
               <div>
                 <div class="authors">
@@ -540,11 +542,11 @@ function createPublicationPageHtml(pub) {
                 </div>
                 <div class="materials">
                   <b>Materials.</b>
-                  ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI</a>` : ''}
-                  ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
-                  ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link</a>` : ''}
-                  ${pdfLink ? `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF</a>` : ''}
-                  ${supplLink ? `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
+                  ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI${srOnlyText}</a>` : ''}
+                  ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link${srOnlyText}</a>` : ''}
+                  ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link${srOnlyText}</a>` : ''}
+                  ${pdfLink ? `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF${srOnlyText}</a>` : ''}
+                  ${supplLink ? `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental${srOnlyText}</a>` : ''}
                   ${videoHTML}
                   ${video2HTML}
                 </div>

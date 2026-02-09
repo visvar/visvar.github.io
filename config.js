@@ -162,7 +162,7 @@ export const memberConfig = [
     </p>
     <p>
       My main research interests include situated visualization using wearable Augmented Reality devices and other applications.
-      I also work in the Cluster of Excellence Integrative Computational Design and Construction for Architecture (<a href="https://www.intcdc.uni-stuttgart.de" target="_blank" rel="noreferrer">IntCDC</a>), helping to build solutions for the architechture and construction industry involving immersive experiences.
+      I also work in the Cluster of Excellence Integrative Computational Design and Construction for Architecture (<a href="https://www.intcdc.uni-stuttgart.de" target="_blank" rel="noreferrer">IntCDC<span class='sr-only'>(opens in new tab)</span></a>), helping to build solutions for the architechture and construction industry involving immersive experiences.
     </p>
     `,
     research: ['Situated visualization', 'XR applied to the construction industry', 'User studies', 'HCI'],
@@ -214,25 +214,25 @@ export const memberConfig = [
       My research focuses on data-driven music visualization that supports students and teachers.
       For example, augmented and alternative
       <a href="../pub/heyen2023visual.html" target="_blank" rel="noreferrer">
-      sheet music notation</a>
+      sheet music notation<span class='sr-only'>(opens in new tab)</span></a>
       helps reading and understanding a piece more quickly.
       <a href="../pub/heyen2022datadriven.html" target="_blank" rel="noreferrer">
-      Collecting and visualizing practice data</a>
+      Collecting and visualizing practice data<span class='sr-only'>(opens in new tab)</span></a>
       supports musicians in learning their instruments more efficiently.
 
       Besides audio and MIDI, such practice data may include
       <a href="../pub/heyen2022cellovis.html" target="_blank" rel="noreferrer">
-      motion capture</a>
+      motion capture<span class='sr-only'>(opens in new tab)</span></a>
       of the musician.
       To make analysis more immersive and increase the visual connection to the instrument, visualization can be displayed in
       <a href="../pub/heyen2022cellovis.html" target="_blank" rel="noreferrer">
-      virtual</a> and
+      virtual<span class='sr-only'>(opens in new tab)</span></a> and
       <a href="../pub/heyen2022augmented.html" target="_blank" rel="noreferrer">
-      augmented reality</a>.
+      augmented reality<span class='sr-only'>(opens in new tab)</span></a>.
 
       My collaborations include work on visualization for
       <a href="../pub/rau2022visualization.html" target="_blank" rel="noreferrer">
-      human-AI composing</a> and participating in the <a href="https://www.visual-computing.org/2024/05/15/dr4et-hackathon-dimensionality-reductions-for-eye-tracking/"  target="_blank" rel="noreferrer">DR4ET hackathon</a>.
+      human-AI composing<span class='sr-only'>(opens in new tab)</span></a> and participating in the <a href="https://www.visual-computing.org/2024/05/15/dr4et-hackathon-dimensionality-reductions-for-eye-tracking/"  target="_blank" rel="noreferrer">DR4ET hackathon<span class='sr-only'>(opens in new tab)</span></a>.
     </p>
     `,
     research: ['Visualization &amp; visual analytics', 'Visual music analysis', 'Immersive &amp; situated analytics', 'VR/AR', 'HCI'],
@@ -279,7 +279,7 @@ export const memberConfig = [
     bio: `
     <p>
     My research focuses how to support industrial robot programming with techniques of extended reality.
-    A proof of concept paper for robot programming using a Mixed Reality user interface can be found <a href="https://ieeexplore.ieee.org/abstract/document/10161095" target="_blank" rel="noreferrer">here</a> and a video <a href="https://www.youtube.com/watch?v=VL1_hjB78pQ" target="_blank" rel="noreferrer">here</a>.
+    A proof of concept paper for robot programming using a Mixed Reality user interface can be found <a href="https://ieeexplore.ieee.org/abstract/document/10161095" target="_blank" rel="noreferrer">here<span class='sr-only'>(opens in new tab)</span></a> and a video <a href="https://www.youtube.com/watch?v=VL1_hjB78pQ" target="_blank" rel="noreferrer">here<span class='sr-only'>(opens in new tab)</span></a>.
     To incorporate XR into today’s robot programming workflow, we evaluated a hybrid user interface consisting of a classical desktop interface and AR visualization in an expert user study here.
     Furthermore, I want to explore how classical robot teaching can be supported by AR/XR.
     </p>
@@ -529,10 +529,10 @@ export const memberConfig = [
       My research focuses on visualization for dimensionality reduction, especially the comparison between
       different techniques.
       I developed and maintain two open-source JavaScript libraries for dimensionality reduction
-      (<a href="https://github.com/saehm/DruidJS" target="_blank" rel="noreferrer">DruidJS</a>) and scatterplot gridification
-      (<a href="https://github.com/saehm/hagrid" target="_blank" rel="noreferrer">Hagrid</a>).
+      (<a href="https://github.com/saehm/DruidJS" target="_blank" rel="noreferrer">DruidJS<span class='sr-only'>(opens in new tab)</span></a>) and scatterplot gridification
+      (<a href="https://github.com/saehm/hagrid" target="_blank" rel="noreferrer">Hagrid<span class='sr-only'>(opens in new tab)</span></a>).
       Besides more serious research, I occasionally explore ways to create <a
-        href="https://observablehq.com/@saehrimnir/visap21" target="_blank" rel="noreferrer">data art</a> as well.
+        href="https://observablehq.com/@saehrimnir/visap21" target="_blank" rel="noreferrer">data art<span class='sr-only'>(opens in new tab)</span></a> as well.
     </p>
     `,
     research: ['Visualization', 'Dimensionality reduction', 'Data art'],
@@ -657,8 +657,8 @@ export const memberConfig = [
     path: 'tobias_rau',
     bio: `
     <p>
-      My research focuses on hybrid analysis on desktop and in augmented reality for chemical structure simulations (see <a href="https://charpack.github.io/" target="_blank" rel="noreferrer">charpack.github.io</a>).
-      This project is part of the <a href="https://www.simtech.uni-stuttgart.de/exc/" target="_blank" rel="noreferrer">Cluster of Excellence EXC 2075 "Data-Integrated Simulation Science (SimTech)"</a> of the University of Stuttgart and a joint effort of the <a href="https://www.itheoc.uni-stuttgart.de/" target="_blank" rel="noreferrer">Institute for Theoretical Chemistry</a> and the <a href="https://www.visus.uni-stuttgart.de/en/" target="_blank" rel="noreferrer">Visualization Research Center (VISUS)</a>.
+      My research focuses on hybrid analysis on desktop and in augmented reality for chemical structure simulations (see <a href="https://charpack.github.io/" target="_blank" rel="noreferrer">charpack.github.io<span class='sr-only'>(opens in new tab)</span></a>).
+      This project is part of the <a href="https://www.simtech.uni-stuttgart.de/exc/" target="_blank" rel="noreferrer">Cluster of Excellence EXC 2075 "Data-Integrated Simulation Science (SimTech)"<span class='sr-only'>(opens in new tab)</span></a> of the University of Stuttgart and a joint effort of the <a href="https://www.itheoc.uni-stuttgart.de/" target="_blank" rel="noreferrer">Institute for Theoretical Chemistry<span class='sr-only'>(opens in new tab)</span></a> and the <a href="https://www.visus.uni-stuttgart.de/en/" target="_blank" rel="noreferrer">Visualization Research Center (VISUS)<span class='sr-only'>(opens in new tab)</span></a>.
     </p>`,
     research: ['Visualization', 'VR/AR'],
     links: [
@@ -755,7 +755,7 @@ export const memberConfig = [
     <p>
     I completed my Master’s degree in Human-Computer Interaction at the University of Paris-Saclay in France.
     Currently, I am pursuing my Ph.D. at the University of Stuttgart.
-    In my previous work I explored micro visualization reading under locomotion such as while <a href="https://doi.org/10.1109/VIS55277.2024.00017" target="_blank" rel="noreferrer">walking and jogging</a> or <a href="http://doi.org/10.5220/0011665500003417" target="_blank" rel="noreferrer">playing a tennis-like game in VR</a>), and in motion to assist patients with (<a href="http://doi.org/10.2312/evp.20241090" target="_blank" rel="noreferrer">wrist rehabilitation exercises at home</a>).
+    In my previous work I explored micro visualization reading under locomotion such as while <a href="https://doi.org/10.1109/VIS55277.2024.00017" target="_blank" rel="noreferrer">walking and jogging<span class='sr-only'>(opens in new tab)</span></a> or <a href="http://doi.org/10.5220/0011665500003417" target="_blank" rel="noreferrer">playing a tennis-like game in VR<span class='sr-only'>(opens in new tab)</span></a>), and in motion to assist patients with (<a href="http://doi.org/10.2312/evp.20241090" target="_blank" rel="noreferrer">wrist rehabilitation exercises at home<span class='sr-only'>(opens in new tab)</span></a>).
     </p>
     `,
     research: ['Micro Visualization', 'Mobile Visualization', 'Information Visualization', 'HCI', 'AR/VR'],
@@ -805,7 +805,7 @@ export const memberConfig = [
     In particular, my work has investigated how 2D surfaces can be used inside of an immersive 3D space to facilitate (collaborative) visual analysis and data understanding.
     </p>
     <p>
-    I submitted my PhD at the <a href="https://www.monash.edu/it/hcc/dvia-lab" target="_blank" rel="noreferrer">Data Visualisation and Immersive Analytics Lab</a>, Monash University.
+    I submitted my PhD at the <a href="https://www.monash.edu/it/hcc/dvia-lab" target="_blank" rel="noreferrer">Data Visualisation and Immersive Analytics Lab<span class='sr-only'>(opens in new tab)</span></a>, Monash University.
     My supervisors were Prof. Tim Dwyer (main), A/Prof. Bernhard Jenny, Dr. Maxime Cordeil, and Dr. Arnaud Prouzeau.
     </p>
     `,
@@ -876,8 +876,7 @@ export const memberConfig = [
     <p>
     Magdalena Schwarzl studied computer science, first at the University of Vienna specializing in "Scientific Computing" (bachelor) and then at the University of Utah, USA specializing in "Data Visualization and Computer Graphics" (master). From January to December 2019 she worked as a doctoral researcher in Prof. Dr. Michael Sedlmair's lab group at the Visualization Research Center of the University of Stuttgart (VISUS). Her dissertation topic concerned visualization in augmented and virtual reality. Sadly,
     <a href="https://www.vis.uni-stuttgart.de/aktuelles/news/Nachruf-auf-ehemalige-VISUS-Doktorandin-Magdalena-Schwarzl/" target="_blank" rel="noreferrer">
-    Magdalena passed away
-    </a>
+    Magdalena passed away<span class='sr-only'>(opens in new tab)</span></a>
     on June 22nd 2022 after a long-lasting sickness.
     </p>
     `,
