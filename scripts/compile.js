@@ -332,11 +332,7 @@ function createPublicationsHtml(publications, member = null) {
     // PDF, video, and supplemental might be a link instead of file
     let pdfLink = pub['data']['pdf']
     let pdfFile = allPdfs.has(`${key}.pdf`)
-    let pdfIsLink = false
-    if (!pdfFile && pdfLink) {
-      pdfFile = true
-      pdfIsLink = true
-    } else {
+    if (pdfFile) {
       pdfLink = `${p}/assets/pdf/${key}.pdf`
     }
 
@@ -347,9 +343,9 @@ function createPublicationsHtml(publications, member = null) {
       videoHTML = `<a href="${p}/assets/video/${key}.mp4" target="_blank" rel="noreferrer">video</a>`
     } else if (videoLink) {
       if (videoLink.includes("youtube.com/embed")) {
-        videoHTML = `<a href="https://www.youtube.com/watch?v=${videoLink.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video [link]</a>`
+        videoHTML = `<a href="https://www.youtube.com/watch?v=${videoLink.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video</a>`
       } else {
-        videoHTML = `<a href="${videoLink}" target="_blank" rel="noreferrer">video [link]</a>`
+        videoHTML = `<a href="${videoLink}" target="_blank" rel="noreferrer">video</a>`
       }
     }
 
@@ -360,19 +356,15 @@ function createPublicationsHtml(publications, member = null) {
       video2HTML = `<a href="${p}/assets/video/${key}_2.mp4" target="_blank" rel="noreferrer">video</a>`
     } else if (video2Link) {
       if (video2Link.includes("youtube.com/embed")) {
-        video2HTML = `<a href="https://www.youtube.com/watch?v=${video2Link.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video [link]</a>`
+        video2HTML = `<a href="https://www.youtube.com/watch?v=${video2Link.split("embed/")[1].split("?")[0]}" target="_blank" rel="noreferrer">video</a>`
       } else {
-        video2HTML = `<a href="${video2Link}" target="_blank" rel="noreferrer">video [link]</a>`
+        video2HTML = `<a href="${video2Link}" target="_blank" rel="noreferrer">video</a>`
       }
     }
 
     let supplLink = pub['data']['suppl']
     let supplFile = allSuppl.has(`${key}.zip`)
-    let supplIsLink = false
-    if (!supplFile && supplLink) {
-      supplFile = true
-      supplIsLink = true
-    } else {
+    if (supplFile) {
       supplLink = `${p}/assets/suppl/${key}.zip`
     }
 
@@ -435,8 +427,8 @@ function createPublicationsHtml(publications, member = null) {
         ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI</a>` : ''}
         ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
         ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link</a>` : ''}
-        ${pdfFile ? pdfIsLink ? `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF [link]</a>` : `<a href="${pdfLink}" target="_blank">PDF</a>` : ''}
-        ${supplFile ? supplIsLink ? `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental [link]</a>` : `<a href="${supplLink}" target="_blank">supplemental</a>` : ''}
+        ${pdfLink ? `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF</a>` : ''}
+        ${supplLink ? `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
         ${videoHTML}
         ${video2HTML}
       </div>
@@ -463,11 +455,7 @@ function createPublicationPageHtml(pub) {
   // PDF, video, and supplemental might be a link instead of file
   let pdfLink = pub['data']['pdf']
   let pdfFile = allPdfs.has(`${key}.pdf`)
-  let pdfIsLink = false
-  if (!pdfFile && pdfLink) {
-    pdfFile = true
-    pdfIsLink = true
-  } else {
+  if (pdfFile) {
     pdfLink = `../assets/pdf/${key}.pdf`
   }
 
@@ -480,7 +468,7 @@ function createPublicationPageHtml(pub) {
     if (videoLink.includes("youtube.com/embed")) {
       videoHTML = `<p><iframe width="560" height="315" src="${videoLink}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>`
     } else {
-      videoHTML = `<a href="${videoLink}" target="_blank" rel="noreferrer">video [link]</a>`
+      videoHTML = `<a href="${videoLink}" target="_blank" rel="noreferrer">video</a>`
     }
   }
 
@@ -493,17 +481,13 @@ function createPublicationPageHtml(pub) {
     if (video2Link.includes("youtube.com/embed")) {
       video2HTML = `<p><iframe width="560" height="315" src="${video2Link}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>`
     } else {
-      video2HTML = `<a href="${video2Link}" target="_blank" rel="noreferrer">video [link]</a>`
+      video2HTML = `<a href="${video2Link}" target="_blank" rel="noreferrer">video</a>`
     }
   }
 
   let supplLink = pub['data']['suppl']
   let supplFile = allSuppl.has(`${key}.zip`)
-  let supplIsLink = false
-  if (!supplFile && supplLink) {
-    supplFile = true
-    supplIsLink = true
-  } else {
+  if (supplFile) {
     supplLink = `../assets/suppl/${key}.zip`
   }
 
@@ -559,8 +543,8 @@ function createPublicationPageHtml(pub) {
                   ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI</a>` : ''}
                   ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
                   ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link</a>` : ''}
-                  ${pdfFile ? pdfIsLink ? `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF [link]</a>` : `<a href="${pdfLink}" target="_blank">PDF</a>` : ''}
-                  ${supplFile ? supplIsLink ? `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental [link]</a>` : `<a href="${supplLink}" target="_blank">supplemental</a>` : ''}
+                  ${pdfLink ? `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF</a>` : ''}
+                  ${supplLink ? `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
                   ${videoHTML}
                   ${video2HTML}
                 </div>
