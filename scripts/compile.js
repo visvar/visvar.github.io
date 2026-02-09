@@ -435,8 +435,8 @@ function createPublicationsHtml(publications, member = null) {
         ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI</a>` : ''}
         ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
         ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link</a>` : ''}
-        ${pdfFile ? pdfIsLink ? `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF [link]</a>` : `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF</a>` : ''}
-        ${supplFile ? supplIsLink ? `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental [link]</a>` : `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
+        ${pdfFile ? pdfIsLink ? `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF [link]</a>` : `<a href="${pdfLink}" target="_blank">PDF</a>` : ''}
+        ${supplFile ? supplIsLink ? `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental [link]</a>` : `<a href="${supplLink}" target="_blank">supplemental</a>` : ''}
         ${videoHTML}
         ${video2HTML}
       </div>
@@ -559,8 +559,8 @@ function createPublicationPageHtml(pub) {
                   ${doi && doi !== '' ? `<a href="${doi}" target="_blank" rel="noreferrer">DOI</a>` : ''}
                   ${url && url !== '' ? `<a href="${url}" target="_blank" rel="noreferrer">link</a>` : ''}
                   ${url2 && url2 !== '' ? `<a href="${url2}" target="_blank" rel="noreferrer">link</a>` : ''}
-                  ${pdfFile ? pdfIsLink ? `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF [link]</a>` : `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF</a>` : ''}
-                  ${supplFile ? supplIsLink ? `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental [link]</a>` : `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental</a>` : ''}
+                  ${pdfFile ? pdfIsLink ? `<a href="${pdfLink}" target="_blank" rel="noreferrer">PDF [link]</a>` : `<a href="${pdfLink}" target="_blank">PDF</a>` : ''}
+                  ${supplFile ? supplIsLink ? `<a href="${supplLink}" target="_blank" rel="noreferrer">supplemental [link]</a>` : `<a href="${supplLink}" target="_blank">supplemental</a>` : ''}
                   ${videoHTML}
                   ${video2HTML}
                 </div>
