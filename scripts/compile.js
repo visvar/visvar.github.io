@@ -392,7 +392,7 @@ function createPublicationsHtml(publications, member = null) {
       }
       // If author is a group member, link to their page
       if (nameMemberMap.has(d)) {
-        return `<a href="${p}/members/${nameMemberMap.get(d).path}.html" target="_blank">${text}</a>`
+        return `<a href="${p}/members/${nameMemberMap.get(d).path}.html">${text}</a>`
       }
       return text
     }).join(', ')
@@ -410,7 +410,7 @@ function createPublicationsHtml(publications, member = null) {
   <div class="paper" id="paper${key}">
     ${imageExists
         ? `
-      <a href="${p}/pub/${key}.html" target="_blank">
+      <a href="${p}/pub/${key}.html">
         <img
           class="publicationImage"
           loading="lazy"
@@ -421,8 +421,7 @@ function createPublicationsHtml(publications, member = null) {
       }
     <div class="metaData ${imageExists ? '' : 'noImage'}">
       <h3>
-        <a href="${p}/pub/${key}.html" target="_blank">
-        ${badgesHTML}${pub['data']['title']}
+        <a href="${p}/pub/${key}.html"> ${badgesHTML}${pub['data']['title']}
         </a>
       </h3>
       <div class="authors">
@@ -521,7 +520,7 @@ function createPublicationPageHtml(pub) {
 
     // If author is a group member, link to their page
     if (nameMemberMap.has(d)) {
-      return `<a href="../members/${nameMemberMap.get(d).path}.html" target="_blank">${text}</a>`
+      return `<a href="../members/${nameMemberMap.get(d).path}.html">${text}</a>`
     }
     return text
   }).join(', ')
