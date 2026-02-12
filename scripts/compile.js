@@ -203,7 +203,7 @@ function createMainPageHtml(publications, memberConfig) {
   <main>
     ${headerAndNav('.', 'home')}
     <div>
-      <article><a class="anchor" name="aboutus"></a>
+      <article>
         ${readFileSync('./aboutus.html')}
       </article>
       <article>
