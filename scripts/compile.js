@@ -914,10 +914,11 @@ function reportMissingOrExtraInfo(publications) {
       body += "\nPlease update the information/ upload the files as described in the readme\n"
       body += "(https://github.com/visvar/visvar.github.io/blob/main/README.md) as soon as possible.\n"
       if (value.pdfIsLink) {
-        body += "\nPDFs should be available as files (for pubs since joining the group). For the PDFs that are only linked, please add them as files."
-        body += "If you think this is not possible (e.g., bc of rights) check the publisher rules.\n"
-        body += "Still not sure? Talk to Michael.\n"
-        body += "It is not possible? Write me (with approval from Michael) and I will supress this request next time.\n"
+        body += "\nPDFs should be available as files (for pubs since joining the group)."
+        body += "\n  For the PDFs that are only linked, please add them as files."
+        body += "\n  If you think this is not possible (e.g., bc of rights) check the publisher rules."
+        body += "\n  Still not sure? Talk to Michael."
+        body += "\n--> It is not possible? Write me (with approval from Michael) and I will supress this request next time.\n"
       }
       body += "\nIf you have a question or encounter any problems, please reach out to me.\n"
       body += "\nBest\nChris"
