@@ -965,12 +965,11 @@ function reportMissingOrExtraInfo(publications) {
 }
 
 async function triggerEmail(recipient, subject, body) {
-  const mailtoUrl = `mailto:${recipient}?subject=${subject}&body=${encodeURIComponent(body)}`;
+  const mailtoUrl = `mailto:${recipient}?cc=michael.sedlmair@visus.uni-stuttgart.de&subject=${subject}&body=${encodeURIComponent(body)}`;
 
   try {
     console.log(`Opening mail client for ${recipient}...`);
     await open(mailtoUrl, { wait: true });
-    console.log("Success: OS received the command.");
   } catch (error) {
     console.error("Failed to open mail client:", error);
   }
