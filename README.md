@@ -4,7 +4,7 @@ Hello, this is the repository for the webpage of the Human-Computer Interaction 
 
 If you are a (associated / alumnus) member and want to contribute, please **first read this readme**.
 
-If you have any questions, feedback, or feature suggestions, please @ChristianKrauter.
+If you have any questions, feedback, or feature suggestions, please contact [Chris Krauter](https://github.com/ChristianKrauter).
 
 The live version of this webpage can be found here: [visvar.github.io](https://visvar.github.io/).
 
@@ -42,6 +42,16 @@ Publications are stored in **two files** depending on the authors' affiliation w
 - **Clean up** your entry as you would for the references in a camera-ready paper
 - `Always add a teaser.` If your paper does not have any pictures: **Add a screenshot of the first page with title and authors**. See [xiao2024systematic](https://visvar.github.io/pub/xiao2024systematic.html) for an example.
 - Add PDFs as files if possible. Please consult the publisher guidelines and talk to Michael if you are unsure about the rights.  
+
+### Files
+
+**Media names must match the publication's key** in the bibliography file.
+
+- [assets/img/teaser/](./assets/img/teaser/) for publication teasers (must be .png)
+- [assets/pdf/](./assets/pdf/) for PDFs.
+- [assets/suppl/](./assets/suppl/) for supplemental material (must be .zip).
+- [assets/video/](./assets/video/) for videos (must be .mp4).
+  - There can be two videos files for each publication named `{citation_key}.mp4` and `{citation_key}_2.mp4`
 
 ### Bibliography Rules:
 
@@ -113,6 +123,7 @@ Publications are stored in **two files** depending on the authors' affiliation w
 
 `pdf`
 - Only have a link to your PDF? Add it here.
+- You have a PDF file (see [Files](#files)), you do not need this key in your bib entry.
 
 `suppl`
 - Only have a link to your supplemental material? Add it here.
@@ -125,16 +136,6 @@ Publications are stored in **two files** depending on the authors' affiliation w
 
 `funding`
 - You can add funding information here to be displayed on the publications page
-
-### Assets
-
-**Media names must match the publication's key** in the bibliography file.
-
-- [assets/img/teaser/](./assets/img/teaser/) for publication teasers (must be .png)
-- [assets/pdf/](./assets/pdf/) for PDFs.
-- [assets/suppl/](./assets/suppl/) for supplemental material (must be .zip).
-- [assets/video/](./assets/video/) for videos (must be .mp4).
-  - There can be two videos files for each publication named `{citation_key}.mp4` and `{citation_key}_2.mp4`
 
 ## Adding new Members
 
