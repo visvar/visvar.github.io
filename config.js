@@ -153,7 +153,7 @@ export const memberConfig = [
   {
     name: 'Aimée Sousa Calepso',
     title: 'Aimée Sousa Calepso, M.Sc.',
-    role: 'phd',
+    role: 'alumnusphd',
     path: 'aimee_sousa_calepso',
     bio: `
     <p>
