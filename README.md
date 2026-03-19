@@ -41,7 +41,8 @@ Publications are stored in **two files** depending on the authors' affiliation w
 - Add as much information as possible
 - **Clean up** your entry as you would for the references in a camera-ready paper
 - `Always add a teaser.` If your paper does not have any pictures: **Add a screenshot of the first page with title and authors**. See [xiao2024systematic](https://visvar.github.io/pub/xiao2024systematic.html) for an example.
-- Add PDFs as files if possible. Please consult the publisher guidelines and talk to Michael if you are unsure about the rights.  
+- Add PDFs as files if possible. It depends on the publisher's policy under which circumstances you are allowed to upload pdfs. Check [Open Policy Finder](https://openpolicyfinder.jisc.ac.uk/) for the respective policy for your publisher.
+  - Hint: ACM allows authors version, IEEE usually needs copyright hint on first page.
 
 ### Files
 
