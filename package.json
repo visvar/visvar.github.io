@@ -11,6 +11,7 @@
     "resizeThumbs": "node ./scripts/image-resizer.js assets/img/teaser 256",
     "compile": "node ./scripts/compile.js",
     "checklinks": "node ./scripts/check-broken-links.js",
+    "ieeecopyright": "node ./scripts/add-copyright-ieee.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "upd": "npm-check-updates -u"
   },
@@ -21,7 +22,10 @@
     "bibtex-tidy": "^1.14.0",
     "image-js": "^1.3.0",
     "npm-check-updates": "^19.3.2",
+    "open": "^11.0.0",
+    "pdf-lib": "^1.17.1",
+    "pdf-parse": "^2.4.5",
     "qrcode": "^1.5.4",
-    "open": "^11.0.0"
+    "pdfjs-dist": "^5.5.207"
   }
 }

@@ -40,8 +40,16 @@ Publications are stored in **two files** depending on the authors' affiliation w
 - You <ins>can use Unicode</ins> (e.g., é, â, ..) but **NOT** LaTeX (e.g., \c{c}, \\"{a})
 - Add as much information as possible
 - **Clean up** your entry as you would for the references in a camera-ready paper
-- `Always add a teaser.` If your paper does not have any pictures: **Add a screenshot of the first page with title and authors**. See [xiao2024systematic](https://visvar.github.io/pub/xiao2024systematic.html) for an example.
-- Add PDFs as files if possible. Please consult the publisher guidelines and talk to Michael if you are unsure about the rights.  
+- **Always add a teaser.**
+  - If your paper does not have any pictures: **Add a screenshot of the first page with title and authors**. See [xiao2024systematic](https://visvar.github.io/pub/xiao2024systematic.html) for an example.
+- Add PDFs as files if possible.
+  - It depends on the publisher's policy under which circumstances you are allowed to upload pdfs. Check [Open Policy Finder](https://openpolicyfinder.jisc.ac.uk/) for the respective policy for your publisher.
+    - Hint: ACM usually allows authors version, IEEE usually needs copyright hint on first page. But its your responsibility to check!
+    - Add IEEE copyright notice per script
+      - ```npm run ieeecopyright -- <citationkey>```
+      - Example: ```npm run ieeecopyright -- abbas2019eurovis```
+      - If citation key does not include a year, pass it as a second argument
+      - The script checks if the copyright notice is on the first page of the pdf. No OCR for images though.
 
 ### Files
 
