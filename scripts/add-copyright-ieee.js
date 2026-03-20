@@ -2,29 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 
-const copyrightText = "© 20XX IEEE.  Personal use of this material is permitted.  Permission from IEEE must be obtained for all other uses, in any current or future media, including reprinting/republishing this material for advertising or promotional purposes, creating new collective works, for resale or redistribution to servers or lists, or reuse of any copyrighted component of this work in other works.";
-
-export async function handleIEEECopyright(path, year) {
-    const newText = copyrightText.replace("20XX", year);
-    
-    console.log("Adding IEEE copyright note to "+path);
-    await addCopyrightToPDF(path, newText);
-}
-
-
-/**
- * Checks if the copyright note has already been added to the PDF
- * by inspecting the document's title metadata.
- * @param {string} inputPath - Path to the PDF file.
- * @returns {Promise<boolean>} - True if the note is already present.
- */
-async function isCopyrightPresent(inputPath) {
-    const existingPdfBytes = fs.readFileSync(inputPath);
-    const pdfDoc = await PDFDocument.load(existingPdfBytes);
-    const subject = pdfDoc.getSubject();
-    return subject === 'ieee-copyright-added';
-}
-
+const copyrightText = "© XXXX IEEE. Personal use of this material is permitted. Permission from IEEE must be obtained for all other uses, in any current or future media, including reprinting/republishing this material for advertising or promotional purposes, creating new collective works, for resale or redistribution to servers or lists, or reuse of any copyrighted component of this work in other works.";
+const pathToPDFs = "./assets/pdf/";
 
 /**
  * Adds a copyright note to the first page of a PDF and saves it.
@@ -34,8 +13,13 @@ async function isCopyrightPresent(inputPath) {
  * @param {string} copyrightText - The copyright note to add.
  * @param {string} year - The year to insert into the copyright text.
  */
-async function addCopyrightToPDF(inputPath, copyrightText, year) {
-    const existingPdfBytes = fs.readFileSync(inputPath);
+async function addIEEECopyrightToPDF(inputPath, copyrightNotice) {
+    try {
+        const existingPdfBytes = fs.readFileSync(inputPath);    
+    } catch (err) {
+        console.log("Error: PDF file does not exist: " + inputPath);
+        process.exit();
+    }
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
 
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
@@ -43,12 +27,11 @@ async function addCopyrightToPDF(inputPath, copyrightText, year) {
     const firstPage = pages[0];
 
     const { width, height } = firstPage.getSize();
-    const fontSize = 10;
+    const fontSize = 8;
     const margin = 20;
     const maxWidth = width - 2 * margin;
 
-    const newText = copyrightText.replace("20XX", year);
-    const lines = wrapText(newText, font, fontSize, maxWidth);
+    const lines = wrapText(copyrightNotice, font, fontSize, maxWidth);
 
     let y = height - margin - fontSize;
     for (const line of lines) {
@@ -62,12 +45,9 @@ async function addCopyrightToPDF(inputPath, copyrightText, year) {
         y -= fontSize + 2;
     }
 
-    // Set metadata flag
-    // pdfDoc.setSubject('ieee-copyright-added');
-
     const modifiedPdfBytes = await pdfDoc.save();
     fs.writeFileSync(inputPath, modifiedPdfBytes);
-    console.log(`✅ PDF saved to ${inputPath}`);
+    console.log(`PDF saved`);
 }
 
 /**
@@ -94,9 +74,18 @@ function wrapText(text, font, fontSize, maxWidth) {
 }
 
 function main(args) {
-  console.log('Arguments:', args);
-  handleIEEECopyright(args[0], args[1])
-  
+    console.log("Adding IEEE copyright note to " + args[0] + " year " + args[1]);
+
+    if (!args[1]) {
+        console.log('Error: two arguments needed: citation key and publication year');
+        process.exit();
+    } else if (!args[1].match(/[0-9][0-9][0-9][0-9]/)) {
+        console.log('Error: year needs to be a 4 digit number');
+        process.exit();
+    }
+
+    const newText = copyrightText.replace("XXXX", args[1]);
+    addIEEECopyrightToPDF(path.join(pathToPDFs, args[0]) + ".pdf", newText);
 }
 
 main(process.argv.slice(2));
