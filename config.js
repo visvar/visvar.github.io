@@ -7,7 +7,7 @@ export const allowedMissingPDF = ['ling2021visimages']
 export const allowedPDFLink = []
 export const allowedArxiv = [
   'heyen2022cellovis', 'heyen2022datadriven', 'heyen2023tabcomp', 'kouts2023lsdvis', 'chen2022not', 'sippl2019tr',
-  'isenberg2014keyvis-tr', 'rijken2021illegible', 'mack2025visuotactile'
+  'isenberg2014keyvis-tr', 'rijken2021illegible', 'mack2025visuotactile', 'bartels2026rendering'
 ]
 export const allowedMissingDOI = [
   'park2025design', 'talsma2024towards', 'fan2023virtual', 'zhang20233d', 'heyen2022postermidicontroller',
