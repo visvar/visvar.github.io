@@ -80,7 +80,7 @@ export const memberConfig = [
   {
     name: 'Steffen Koch',
     title: 'Dr. Steffen Koch',
-    role: 'senior researcher',
+    role: 'postdoc',
     path: 'steffen_koch',
     bio: `
     <p>
@@ -90,7 +90,7 @@ export const memberConfig = [
       His research interests include information visualization and visual analytics. He contributed interactive visual approaches for text and multi-dimensional data, in the digital humanities, for social media research, computer network analysis, and other domains.
     </p>
     `,
-    research: ['Visualization &amp; visual analytics', 'VR/AR', 'HCI'],
+    research: ['Information Visualization', 'Visual Analytics'],
     links: [
       {
         text: "University of Stuttgart website",
