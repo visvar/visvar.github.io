@@ -78,6 +78,37 @@ export const memberConfig = [
 
   // Postdocs
   {
+    name: 'Steffen Koch',
+    title: 'Dr. Steffen Koch',
+    role: 'senior researcher',
+    path: 'steffen_koch',
+    bio: `
+    <p>
+      Steffen Koch received his PhD degree from the University of Stuttgart in 2012, where he is a senior researcher and lecturer at the Institute for Visualization and Interactive Systems. He holds this position since 2015, interrupted by a visiting professorship at Ulm University in 2017/2018. 
+    </p>
+    <p>
+      His research interests include information visualization and visual analytics. He contributed interactive visual approaches for text and multi-dimensional data, in the digital humanities, for social media research, computer network analysis, and other domains.
+    </p>
+    `,
+    research: ['Visualization &amp; visual analytics', 'VR/AR', 'HCI'],
+    links: [
+      {
+        text: "University of Stuttgart website",
+        url: "https://www.vis.uni-stuttgart.de/team/Koch-00006/"
+      },
+      {
+        text: "Google Scholar",
+        url: "https://scholar.google.de/citations?user=lwBW7xUAAAAJ"
+      },
+      {
+        text: "ORCID",
+        url: "https://orcid.org/0000-0002-8123-8330"
+      },
+    ],
+    projects: []
+  },
+
+  {
     name: 'Alexander Achberger',
     title: 'Alexander Achberger, Ph.D.',
     role: 'postdoc',
