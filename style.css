@@ -311,6 +311,7 @@ nav a:hover {
   border: 10px solid #f8f8f8;
   border-radius: 10px;
   background: #fcfcfc;
+  resize: vertical;
 }
 
 .pubPageContent div.materials a {
