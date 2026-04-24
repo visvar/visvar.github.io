@@ -823,16 +823,16 @@ function reportMissingOrExtraInfo(publications) {
         // link not allowed if not excepted and published since joining the group
         if (!allowedPDFLink.includes(key) && pubs_group.includes(pub)) {
           missingPdfFileGotLink = true
-          addMissing(getResp(pub), 'publication', `${key} is missing a pdf file`)
+          addMissing(getResp(pub), 'publication', `${key} is missing a PDF file`)
           addMissing(getResp(pub), 'pdfIsLink', '')
         }
         // no pdf, not even a link
       } else {
         missingFiles = true
         if (pubs_prior.includes(pub)) {
-          addMissing(getResp(pub), 'publication', `${key} is missing a pdf file or link`)
+          addMissing(getResp(pub), 'publication', `${key} is missing a PDF file or link`)
         } else {
-          addMissing(getResp(pub), 'publication', `${key} is missing a pdf file`)
+          addMissing(getResp(pub), 'publication', `${key} is missing a PDF file`)
         }
       }
     }
@@ -916,9 +916,9 @@ function reportMissingOrExtraInfo(publications) {
       if (value.pdfIsLink) {
         body += "\nPDFs should be available as files (for pubs since joining the group)."
         body += "\n  For the PDFs that are only linked, please add them as files."
-        body += "\n  If you think this is not possible (e.g., bc of rights) check the publisher rules."
+        body += "\n  If you think this is not possible (e.g., bc of rights), check the publisher's rules."
         body += "\n  Still not sure? Talk to Michael."
-        body += "\n--> It is not possible? Write me (with approval from Michael) and I will supress this request next time.\n"
+        body += "\n--> Is it not possible? Write me (with Michael's approval), and I will suppress this request next time.\n"
       }
       body += "\nIf you have a question or encounter any problems, please reach out to me.\n"
       body += "\nBest\nChris"
