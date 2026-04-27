@@ -489,11 +489,10 @@ export const memberConfig = [
     path: 'natalie_hube',
     bio: `
     <p>
-      As part of my research, I focus on the usage of human representations in Virtual & Augmented Reality for
-      international collaboration.
-      Further areas of research interest include HCI, information visualization, and computer graphics.
-      I am a PhD student at Mercedes-Benz AG, Virtual Reality Center, in Stuttgart and am supervised by the
-      University of Stuttgart, VISUS, Chair of Virtual Reality and Augmented Reality.
+      As part of my research, I focus on avatars and human representations in VR, AR and xR for 
+      collaborative scenarios and immersive environmetns in general. 
+      Further areas of research interest include HCI, information visualization, and computer graphics. 
+      I am an external PhD student at the University of Stuttgart, VISUS, Chair of Virtual Reality and Augmented Reality.
     </p>
     <p>
       Future work: Avatars for VR/AR, Collaboration in Immersive Environments.
