@@ -441,7 +441,7 @@ function createPublicationsHtml(publications, member = null) {
 }
 
 /**
- * Creates publication html page
+ * Creates html page for a publication
  */
 function createPublicationPageHtml(pub) {
   const key = pub['key']
@@ -526,7 +526,7 @@ function createPublicationPageHtml(pub) {
         ${headerAndNav('..', 'publication')}
         <div>
           <article>
-            <h1>${title}</h1>
+            <h1>${badgesHTML} ${title}</h1>
             <div class="pubPageContent">
               ${imageExists ? `
               <a href="../assets/img/teaser/${key}.png" target="_blank" title="show image full size">
