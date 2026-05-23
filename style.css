@@ -392,6 +392,10 @@ a[href*=".mp4" i][href*="visvar.github.io"]::after {
 /* phone layout */
 @media (min-width: 0px) {
 
+  html {
+    scroll-padding-top: 60px;
+  }
+
   main {
     grid-template-columns: auto;
     max-width: 960px;
@@ -441,6 +445,10 @@ a[href*=".mp4" i][href*="visvar.github.io"]::after {
 /* tablet layout */
 @media (min-width: 720px) {
 
+  html {
+    scroll-padding-top: 20px;
+  }
+
   main {
     grid-template-columns: 250px auto;
     margin-top: 0;
@@ -489,6 +497,10 @@ a[href*=".mp4" i][href*="visvar.github.io"]::after {
 
 /* desktop layout */
 @media (min-width: 1020px) {
+
+  html {
+    scroll-padding-top: 20px;
+  }
 
   main {
     grid-template-columns: 250px auto;
