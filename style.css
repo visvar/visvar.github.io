@@ -3,6 +3,7 @@
  * Basics
  *
  */
+
 * {
   --textColor: #363636;
   --textColor2: #363636;
@@ -339,9 +340,7 @@ a[target="_blank"]:not(:has(img))::after {
   width: 0.85em;
   height: 0.85em;
   margin-left: 6px;
-  vertical-align: middle;
-  position: relative;
-  top: -0.1em;
+  margin-top: .2em;
   background-repeat: no-repeat;
   background-size: contain;
   /* new-tab icon*/
