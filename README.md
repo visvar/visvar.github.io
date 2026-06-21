@@ -12,15 +12,11 @@ The live version of this webpage can be found here: [visvar.github.io](https://v
 
 Only change files as described in the folders below; nothing else!
 
-After adding new content, there are two general options:
-1. Update the webpage yourself (preferred)
-   1. Add your changes
-   2. Make sure to run `npm i` to install/ update the used packages.
-   3. [Compile](#compiling) the page yourself
-2. Only update the content
-   1. Add your changes
-   2. Create a pull request with your changes.
-   3. Your changes will take effect on the next compile run by anyone.
+After adding new content, **you can just commit your changes!** They will be compiled and deployed automatically after ~5 minutes.
+
+To test your changes locally, you can
+   1. run `npm i` to install/ update the used packages
+   3. [Compile](#compiling) the page
 
 ## Update the "About" Page
 
