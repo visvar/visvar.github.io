@@ -1,0 +1,42 @@
+name: Build and Push Changes
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Build Script
+        run: npm start
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email ""
+          
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "Automatisierter Build durch GitHub Action [skip ci]"
+            git push
+          else
+            echo "no changes"
+          fi
