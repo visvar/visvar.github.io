@@ -37,6 +37,7 @@ Publications are stored in **two files** depending on the authors' affiliation w
   - published before joining the group
 
 ### General:
+- **Read the [Bibliography Rules](#bibliography-rules)** 
 - You <ins>can use Unicode</ins> (e.g., é, â, ..) but **NOT** LaTeX (e.g., \c{c}, \\"{a})
 - Add as much information as possible
 - **Clean up** your entry as you would for the references in a camera-ready paper
@@ -61,15 +62,22 @@ Publications are stored in **two files** depending on the authors' affiliation w
 - [assets/video/](./assets/video/) for videos (must be .mp4).
   - There can be two videos files for each publication named `{citation_key}.mp4` and `{citation_key}_2.mp4`
 
-### Bibliography Rules:
+### Bibliography Rules
 
 `citation key`
 - The pattern for keys is <ins>\<lastname>\<Year>\<FirstWord></ins> (example: heyen2020clavis).
   - Add an increasing number (2,3,...), if necessary for uniqueness
 
 `author`
-- Enter authors as <ins>firstname lastname, ...</ins>, **NOT** 'lastname, firstname; ...'
-  - Author names of members must be identical to those in `config.js`.
+- Standard bibliography author rules
+  - Authors separated by ` and `
+  - Three variants
+    - First von Last
+    - von Last, First
+    - von Last, Jr, First
+  - e.g.: `author = {Simeon Rau and Michael Sedlamir}`
+  - e.g.: `author = {Rau, Simeon and Sedlmair, Michael}`
+- Author names of members must match those in `config.js`.
   - If this is violated, the publication will not show up on a members page.
 
 `booktitle`
