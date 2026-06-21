@@ -41,26 +41,26 @@ publications.forEach(pub => {
   if (!pub['AUTHOR'] || pub['AUTHOR'] === '') {
     console.log(`Publication ${pub['key']} is missing author(s)`)
     console.log('Compile panic')
-    process.exit()
+    process.exit(1)
   }
   if (!pub['TITLE'] || pub['TITLE'] === '') {
     console.log(`Publication ${pub['key']} is missing a title`)
     console.log('Compile panic')
-    process.exit()
+    process.exit(1)
   }
   if (!pub['YEAR'] || pub['YEAR'] === '') {
     console.log(`Publication ${pub['key']} is missing a year`)
     console.log('Compile panic')
-    process.exit()
+    process.exit(1)
   }
   if (!pub['MONTH'] || pub['MONTH'] === '') {
     console.log(`Publication ${pub['key']} is missing a month`)
     console.log('Compile panic')
-    process.exit()
+    process.exit(1)
   } else if (!/^\d+$/.test(pub['MONTH'])) {
     console.log(`Publication ${pub['key']}'s month is not numeric`)
     console.log('Compile panic')
-    process.exit()
+    process.exit(1)
   }
 })
 
@@ -129,7 +129,6 @@ async function createPages() {
   await createQRCodes(publications)
 
   // Detect missing and extra files
-  process.exit()
   reportMissingOrExtraInfo(publications)
 }
 
@@ -714,11 +713,10 @@ function parseBibtexAuthorNames(publications) {
         case 3:
           cleanedAuthors += authorParts[2] + ' ' + authorParts[0].trim() + ' ' + authorParts[1].trim() + ', '
           break;
-
         default:
-          //console.log(`Publication ${pub['key']} has wrongly formatted authors`)
-          //console.log('Compile panic')
-          //process.exit()
+          console.log(`Publication ${pub['key']} has wrongly formatted authors`)
+          console.log('Compile panic')
+          process.exit(1)
           break;
       }
     });
