@@ -89,6 +89,8 @@ publications.sort((a, b) => {
   return a['TITLE'].localeCompare(b['TITLE'])
 })
 
+parseBibtexAuthorNames(publications)
+
 console.log('\n\n')
 console.log('Stats:')
 console.log(`  ${publications.length} publications`)
@@ -109,8 +111,8 @@ createPages()
 async function createPages() {
   // Member / author pages
   for (const member of memberConfig) {
-    const authoredPubsGroup = pubs_group.filter(d => d['AUTHOR'].includes(member.name))
-    const authoredPubsPrior = pubs_prior.filter(d => d['AUTHOR'].includes(member.name))
+    const authoredPubsGroup = pubs_group.filter(d => d['cleanedAuthors'].includes(member.name))
+    const authoredPubsPrior = pubs_prior.filter(d => d['cleanedAuthors'].includes(member.name))
     createMemberPageHtml(member, authoredPubsGroup, authoredPubsPrior)
   }
 
@@ -375,7 +377,7 @@ function createPublicationsHtml(publications, member = null) {
       footNoteIndicesList = footNoteIndices.split(',').map(Number)
     }
 
-    const authors = pub['AUTHOR'].split(',').map(d => d.trim())
+    const authors = pub['cleanedAuthors'].split(',').map(d => d.trim())
     const authorHtml = authors.map((d, i) => {
       // If this is the author's member page, make them bold
       var text = ''
@@ -498,7 +500,7 @@ function createPublicationPageHtml(pub) {
     footNoteIndicesList = footNoteIndices.split(',').map(Number)
   }
 
-  const authors = pub['AUTHOR'].split(',').map(d => d.trim())
+  const authors = pub['cleanedAuthors'].split(',').map(d => d.trim())
   const authorHtml = authors.map((d, i) => {
     // If this is the author's member page, make them bold
     var text = ''
@@ -694,6 +696,38 @@ function createImprint() {
  *
  */
 
+function parseBibtexAuthorNames(publications) {
+  publications.forEach(pub => {
+    let authorsOrig = pub['AUTHOR'];
+    let authorsList = authorsOrig.split(' and ');
+    let cleanedAuthors = ''
+
+    authorsList.forEach(author => {
+      let authorParts = author.split(',');
+      switch (authorParts.length) {
+        case 1:
+          cleanedAuthors += authorParts[0].trim() + ', '
+          break;
+        case 2:
+          cleanedAuthors += authorParts[1].trim() + ' ' + authorParts[0].trim() + ', '
+          break;
+        case 3:
+          cleanedAuthors += authorParts[2] + ' ' + authorParts[0].trim() + ' ' + authorParts[1].trim() + ', '
+          break;
+
+        default:
+          //console.log(`Publication ${pub['key']} has wrongly formatted authors`)
+          //console.log('Compile panic')
+          //process.exit()
+          break;
+      }
+    });
+
+    cleanedAuthors = cleanedAuthors.trim().replace(/,$/, '')
+    pub['cleanedAuthors'] = cleanedAuthors
+  });
+}
+
 function bibtexObjToString(bibObj) {
   let output = '@';
   output += bibObj['type'] + '{' + bibObj['key'] + ',\n';
@@ -720,7 +754,7 @@ function reportMissingOrExtraInfo(publications) {
   // For each missing file we want to know who is responsible
   const memberNames = new Set(memberConfig.filter(d => d.role === 'professor' | d.role === 'postdoc' | d.role === 'phd' | d.role === 'associatedpostdoc' | d.role === 'associatedphd').map(d => d.name))
   const getResp = (pub) => {
-    const authors = pub['AUTHOR'].split(', ')
+    const authors = pub['cleanedAuthors'].split(', ')
     for (const author of authors) {
       if (memberNames.has(author)) {
         return author
@@ -1004,7 +1038,7 @@ async function triggerEmail(recipient, subject, body) {
 function formatBibtex(key, bibtexString) {
   try {
     const formatted = tidy(bibtexString, {
-      omit: ['abstract', 'acks', 'address', 'badge', 'note', 'pdf', 'suppl', 'url2', 'venue', 'video', 'video2', 'footnoteindices', 'footnotetext'],
+      omit: ['abstract', 'acks', 'address', 'badge', 'note', 'pdf', 'suppl', 'url2', 'venue', 'video', 'video2', 'footnoteindices', 'footnotetext', 'cleanedauthors'],
       curly: true,
       space: 4,
       align: 14,
