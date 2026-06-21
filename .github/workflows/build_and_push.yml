@@ -7,11 +7,19 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  build:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -23,7 +31,7 @@ jobs:
           cache: 'npm'
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm install
 
       - name: Run Build Script
         run: npm start
@@ -35,8 +43,20 @@ jobs:
           
           if [ -n "$(git status --porcelain)" ]; then
             git add .
-            git commit -m "Automatisierter Build durch GitHub Action [skip ci]"
+            git commit -m "automatic build with GitHub Action [skip ci]"
             git push
           else
             echo "no changes"
           fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
