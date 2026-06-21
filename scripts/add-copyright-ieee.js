@@ -93,12 +93,12 @@ async function copyrightNoticeMissing(pdfPath, searchText) {
 
         if (fullText.toLowerCase().includes(searchText.toLowerCase())) {
             console.log('Error: PDF already includes the copyright notice.');
-            process.exit();
+            process.exit(1);
         }
 
     } catch (error) {
         console.error('PDF Error:', error.message);
-        process.exit();
+        process.exit(1);
     }
 }
 
@@ -107,7 +107,7 @@ function doesFileExist(filePath) {
         fs.readFileSync(filePath);
     } catch (err) {
         console.log('Error: PDF file does not exist: ' + filePath);
-        process.exit();
+        process.exit(1);
     }
 }
 
@@ -119,13 +119,13 @@ async function main(args) {
             year = args[0].match(/\d{4}/)[0]
         } else if (!args[1] || !args[1].match(/^\d{4}$/)) {
             console.log('Error: If the citation key does not include a year, you need to pass it as a second argument in the form of a 4-digit number.');
-            process.exit();
+            process.exit(1);
         } else {
             year = args[1].match(/^\d{4}$/)[0]
         }
     } else {
         console.log('Error: Please supply a citation key.');
-        process.exit();
+        process.exit(1);
     }
 
     let filePath = path.join(pdfPath, args[0]) + '.pdf';
