@@ -36,6 +36,7 @@ Publications are stored in **two files** depending on the authors' affiliation w
 - **Read the [Bibliography Rules](#bibliography-rules)** 
 - You <ins>can use Unicode</ins> (e.g., é, â, ..) but **NOT** LaTeX (e.g., \c{c}, \\"{a})
 - Add as much information as possible
+- Use **bibstrings** where possible (see [booktitle](#booktitle))
 - **Clean up** your entry as you would for the references in a camera-ready paper
 - **Always add a teaser.**
   - If your paper does not have any pictures: **Add a screenshot of the first page with title and authors**. See [xiao2024systematic](https://visvar.github.io/pub/xiao2024systematic.html) for an example.
@@ -60,6 +61,8 @@ Publications are stored in **two files** depending on the authors' affiliation w
 
 ### Bibliography Rules
 
+#### Base
+
 `citation key`
 - The pattern for keys is <ins>\<lastname>\<Year>\<FirstWord></ins> (example: heyen2020clavis).
   - Add an increasing number (2,3,...), if necessary for uniqueness
@@ -71,20 +74,29 @@ Publications are stored in **two files** depending on the authors' affiliation w
     - First von Last
     - von Last, First
     - von Last, Jr, First
-  - e.g.: `author = {Simeon Rau and Michael Sedlamir}`
-  - e.g.: `author = {Rau, Simeon and Sedlmair, Michael}`
+  - e.g.: `author = {Simeon Rau and Michael Sedlamir},`
+  - e.g.: `author = {Rau, Simeon and Sedlmair, Michael},`
 - Author names of members must match those in `config.js`.
   - If this is violated, the publication will not show up on a members page.
 
-`booktitle`
-- Add the **cleaned** version of the booktitle according to [cleaned_bibstring.bib](./cleaned_bibstring.bib).
-  - If no cleaned version is available for your booktitle, please clean it accordingly and update cleaned_bibstring.bib.
+`year` and `month`
+- Use year and month, not date
+- Add <ins>month in numbers</ins>, not names or abbrevations (January = 01)
 
-`series`
-- Series is for the abbreviation of the booktitle. It is optional, but if you add it, please without any year (e.g., CHI, not CHI `22).
+`doi`
+- Enter the full DOI URL, not just the DOI (i.e., https://doi.org/<your.doi.here>)
+
+<div id="booktitle"></div> 
+
+`booktitle` / `journal`
+- Add the shorthand (without {} parantheses) as described in [cleaned_bibstring.bib](./cleaned_bibstring.bib) and it get's replaced automatically
+  - e.g. `booktitle = CHI,`
+  - e.g. `jounral = TVCG,`
+- If no cleaned version is available for your booktitle, please clean it accordingly and update cleaned_bibstring.bib.
 
 `venue`
-- Please add the abbreviation of the publication venue (journal, conference, ...), even if that information is already in 'journal', 'booktitle', or 'series'. If there is no abbreviation, use the full journal or booktitle.
+- Please add the abbreviation of the publication venue (journal, conference, ...), even if that information is already in 'journal', 'booktitle', or 'series'. If there is no abbreviation, use the full (cleaned) journal or booktitle.
+  - e.g. `venue = {CHI},`
 
 `publisher`
 - Please use shortened names (e.g., ACM instead of Association for Computing Machinery, ...)
@@ -92,37 +104,10 @@ Publications are stored in **two files** depending on the authors' affiliation w
 `address`
 - Add the address of the publisher for conference papers, but not for journal papers
 
-`location`
-- Please do not use the location tag.
+`abstract`
+- Add your abstract **without any formatting, newlines, or LaTeX commands!**
 
-`footnoteindices` and `footnotetext`
-- Use for author footnotes, e.g., co-first authorship
-- `footnoteindices`: add position of authors with a footnote (starts at 0)
-  - e.g., {0,1} for first and second author
-- `footnotetext`: add text to be shown
-  - e.g., {contributed equally}
-
-`year` and `month`
-- Use year and month, not date
-- Add <ins>month in numbers</ins>, not names or abbrevations (January = 1)
-
-`doi`
-- Enter the full DOI URL, not just the DOI (i.e., https://doi.org/<your.doi.here>)
-
-`url`
-- Add any additional URL, but **NOT the doi again!**
-
-`url2`
-- You can add another link for or about your publication. Not the DOI again, though.
-
-`badge`
-- To display one or multiple icons for a publication, add the repsective word in this bib entry. Separate multiple entries with a ',' ano no spaces. The badge(s) will be shown next to the publication's title on the main page and on the publication's own page.
-  - Available badges:
-    - **bestpaper, honorablemention, nomination, reproducibility, openaccess**
-  - With added badge(s), there needs to be a small sentence describing it/them at the end of the `note`-entry. This information will be shown on the publications page. E.g., 'Received an honorable mention award'.
-
-`note`
-- You can add any note here, and it will be displayed on the page of your publication
+#### Optional
 
 `video` and `video2`
 - If there are videos available online, you can add links to them here.
@@ -140,14 +125,42 @@ Publications are stored in **two files** depending on the authors' affiliation w
 `suppl`
 - Only have a link to your supplemental material? Add it here.
 
-`abstract`
-- Add your abstract **without any formatting, newlines, or LaTeX commands!**
-
 `acks`
 - You can add your acknowledgements here to be displayed on the publications page
 
 `funding`
 - You can add funding information here to be displayed on the publications page
+
+`url`
+- Add any additional URL, but **NOT the doi again!**
+
+`url2`
+- You can add another link for or about your publication. Not the DOI again, though.
+
+`badge`
+- To display one or multiple icons for a publication, add the repsective word in this bib entry. Separate multiple entries with a ',' ano no spaces. The badge(s) will be shown next to the publication's title on the main page and on the publication's own page.
+  - Available badges:
+    - **bestpaper, honorablemention, nomination, reproducibility, openaccess**
+  - With added badge(s), there needs to be a small sentence describing it/them at the end of the `note`-entry. This information will be shown on the publications page. E.g., 'Received an honorable mention award'.
+
+`note`
+- You can add any note here, and it will be displayed on the page of your publication
+
+`footnoteindices` and `footnotetext`
+- Use for author footnotes, e.g., co-first authorship
+- `footnoteindices`: add position of authors with a footnote (starts at 0)
+  - e.g., {0,1} for first and second author
+- `footnotetext`: add text to be shown
+  - e.g., {contributed equally}
+
+`series`
+- Series is for the abbreviation of the booktitle. It is optional, but if you add it, please without any year
+  - e.g. `sereis = {CHI},` NOT ~~`series = {CHI '22},`~~.
+
+#### Do NOT use
+
+`location`
+- Please do not use the location tag.
 
 ## Adding new Members
 
