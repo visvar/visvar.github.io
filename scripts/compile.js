@@ -32,8 +32,12 @@ const allPubHTML = new Set(readdirSync("pub"))
 const nameMemberMap = new Map(memberConfig.map(d => [d.name, d]))
 
 // Load publications
-var pubs_group = bibtexParse.entries(readFileSync('./bibliography_group.bib').toString());
-var pubs_prior = bibtexParse.entries(readFileSync('./bibliography_prior.bib').toString());
+var pubs_group = bibtexParse.entries(
+  readFileSync('./cleaned_bibstring.bib').toString()
+  + readFileSync('./bibliography_group.bib').toString());
+var pubs_prior = bibtexParse.entries(
+  readFileSync('./cleaned_bibstring.bib').toString()
+  + readFileSync('./bibliography_prior.bib').toString());
 const publications = pubs_group.concat(pubs_prior)
 
 // Check the most important stuff
