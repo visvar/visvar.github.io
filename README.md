@@ -74,7 +74,7 @@ Publications are stored in **two files** depending on the authors' affiliation w
     - First von Last
     - von Last, First
     - von Last, Jr, First
-  - e.g.: `author = {Simeon Rau and Michael Sedlamir},`
+  - e.g.: `author = {Simeon Rau and Michael Sedlmair},`
   - e.g.: `author = {Rau, Simeon and Sedlmair, Michael},`
 - Author names of members must match those in `config.js`.
   - If this is violated, the publication will not show up on a members page.
