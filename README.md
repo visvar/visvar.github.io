@@ -188,10 +188,6 @@ Always run `npm i` to install or update packages (you need to have [Node.js and 
 
 Before compiling, make sure the local version of the repository is up to date (`git pull`).
 
-`npm run compile`
-- run for a fast compile **without updating images**
-- if you changed or added a image, run `npm start` (see below)
-
 `npm start`
 - starts compiling the whole webpage
 - **Read the output of the script. Missing files and information will be printed there**
