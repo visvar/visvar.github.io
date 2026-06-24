@@ -1,10 +1,7 @@
-import { readdirSync } from 'fs'
+import { mkdirSync, readFileSync, readdirSync, existsSync, writeFileSync } from "fs";
 import path from 'path'
-import { readSync, writeSync } from 'image-js'
-
-// Using alpha of image-js to able to use interpolation
-// See https://github.com/image-js/image-js/issues/496#issuecomment-583258046
-// https://github.com/image-js/image-js/issues/496#issuecomment-583483759
+import crypto from 'crypto'
+import { read, write } from 'image-js'
 
 if (process.argv.length !== 4) {
   console.error('No directory or targetWidth argument given, run program as "node image-resizer.js ./dir 64" for rescaling images in ./dir to 64px')
@@ -15,55 +12,77 @@ if (process.argv.length !== 4) {
 const directory = process.argv[2]
 const targetWidth = +process.argv[3]
 
-rescale(directory, targetWidth)
+await optimizeImagesFolder(directory, targetWidth);
 
-async function rescale(directory, targetWidth) {
-  console.log(`image-resizer.js, dir=${directory} width=${targetWidth}`)
-  const files = readdirSync(directory)
-  let noChange = 0
-  for (const file of files) {
-    if (!file.includes('.') || file.endsWith('.svg')) {
-      // Subdirectory or at least no image file
-      continue
-    }
+// Helper to generate a file hash
+function getFileHash(filePath) {
+  const fileBuffer = readFileSync(filePath);
+  return crypto.createHash('md5').update(fileBuffer).digest('hex');
+}
+
+async function optimizeImagesFolder(srcDir, targetWidth) {
+  const destDir = path.join(directory, 'small')
+  const manifestPath = path.join(destDir, 'images-manifest.json');
+
+  // Ensure destination folder exists
+  if (!existsSync(destDir)) {
+    mkdirSync(destDir, { recursive: true });
+  }
+
+  // Load existing manifest or create a new one
+  let manifest = {};
+  if (existsSync(manifestPath)) {
     try {
-      const image = await readSync(path.join(directory, file))
-      let processed
+      manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    } catch (e) {
+      console.warn("Malformed manifest found, resetting...");
+    }
+  }
+
+  const files = readdirSync(srcDir);
+  let manifestChanged = false;
+
+  for (const file of files) {
+    if (!/\.(jpg|jpeg|png|webp)$/i.test(file)) continue;
+
+    const sourcePath = path.join(srcDir, file);
+    const destPath = path.join(destDir, file);
+
+    const currentHash = getFileHash(sourcePath);
+
+    // Hash matches AND the reduced file exists
+    if (manifest[file] === currentHash && existsSync(destPath)) {
+      continue;
+    }
+
+    try {
+      console.log(`[resizing] ${file}...`);
+
+      const image = await read(sourcePath);
+      let smallImage
+
       if (image.width <= targetWidth) {
         // Only make smaller, not larger
-        // console.log(`  image width ${image.width} <= target width ${targetWidth}, copying`)
-        processed = image
+        smallImage = image
       } else {
-        processed = image.resize({
+        smallImage = image.resize({
           width: targetWidth,
           interpolation: 'BICUBIC',
-        })
+        });
       }
-      // Compare to old one and do not overwrite if identical
-      const outPath = path.join(directory, 'small', file)
-      try {
-        const old = await readSync(outPath)
-        if (processed.data.length === old.data.length) {
-          let identical = true
-          for (let i = 0; i < processed.data.length; i++) {
-            if (processed.data[i] !== old.data[i]) {
-              identical = false
-              break
-            }
-          }
-          if (identical) {
-            // console.log("  no change, skipping")
-            noChange++
-            continue
-          }
-        }
-      } catch {
-        // Doesn't matter, just write the image in case checking for identical fails
-      }
-      writeSync(outPath, processed)
-    } catch (error) {
-      console.log(`Error with ${file}:`)
-      console.log(error.message)
+
+      await write(destPath, smallImage);
+
+      manifest[file] = currentHash;
+      manifestChanged = true;
+    } catch (err) {
+      console.error(`Failed to process ${file}:`, err);
     }
+  }
+
+  // Update manifest if there are changes
+  if (manifestChanged) {
+    writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+    console.log(`[Image Optimization] Manifest updated.`);
   }
 }
