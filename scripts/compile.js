@@ -555,12 +555,10 @@ function createPublicationPageHtml(pub) {
                   ${videoHTML}
                   ${video2HTML}
                 </div>
+                ${pub['NOTE'] ? `<div>${pub['NOTE']} ${pub['BADGE'] ? badgesHTML : ''}</div>` : ''}
                 ${pub['ABSTRACT'] ? `<div class="abstract"><b>Abstract.</b> ${pub['ABSTRACT']}</div>` : ''}
-                ${`<div class="bibtex"><textarea>${formatBibtex(pub['key'], bibtexObjToString(pub))}</textarea></div>`}
                 ${pub['ACKS'] ? `<div class="abstract"><b>Acknowledgements.</b> ${pub['ACKS']}</div>` : ''}
-                ${pub['NOTE'] ? `<div>${pub['NOTE']}
-                  ${pub['BADGE'] ? badgesHTML : ''}
-                </div>` : ''}
+                ${`<div class="bibtex"><textarea>${formatBibtex(pub['key'], bibtexObjToString(pub))}</textarea></div>`}
                 <div class="qrcontainer">
                   <div class="qrtitle">Link to this page:</div>
                   <img class="qrimage" src="../assets/img/qr/${key}.png"/>
