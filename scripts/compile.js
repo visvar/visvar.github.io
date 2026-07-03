@@ -327,7 +327,7 @@ function createPublicationsHtml(publications, member = null) {
   return publications.map((pub, i) => {
     const key = pub['key']
     const image = `${p}/assets/img/teaser/small/${key}.png`
-    const year = pub['YEAR']
+    const year = parseInt(pub['YEAR'])
     const doi = pub['DOI']
     const url = pub['URL']
     const url2 = pub['URL2']
@@ -404,7 +404,7 @@ function createPublicationsHtml(publications, member = null) {
     }
 
     return `
-  ${i === 0 || year !== publications[i - 1]['YEAR']
+  ${i === 0 || year !== parseInt(publications[i - 1]['YEAR'])
         ? `<h2 class="yearHeading">${year}</h2>` : ''}
   <div class="paper" id="paper${key}">
     ${imageExists
@@ -450,7 +450,7 @@ function createPublicationsHtml(publications, member = null) {
  */
 function createPublicationPageHtml(pub) {
   const key = pub['key']
-  const year = pub['YEAR']
+  const year = parseInt(pub['YEAR'])
   const doi = pub['DOI']
   const url = pub['URL']
   const url2 = pub['URL2']

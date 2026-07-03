@@ -126,10 +126,7 @@ Publications are stored in **two files** depending on the authors' affiliation w
 - Only have a link to your supplemental material? Add it here.
 
 `acks`
-- You can add your acknowledgements here to be displayed on the publications page
-
-`funding`
-- You can add funding information here to be displayed on the publications page
+- You can add your acknowledgements here to be displayed on the publications page.
 
 `url`
 - Add any additional URL, but **NOT the doi again!**
