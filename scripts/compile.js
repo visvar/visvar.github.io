@@ -214,21 +214,22 @@ function createMainPageHtml(publications, memberConfig) {
       <article>
         <h1 id="members">Members</h1>
         <div class="memberList">
-        ${memberList}
+          ${memberList}
         </div>
-        </article>
-        <article>
+      </article>
+      <article>
         <h1>Associated Researchers</h1>
         <div class="memberList">
           ${associatedList}
         </div>
-        </article>
-        <article>
+      </article>
+      <article>
         <h1>Alumni</h1>
         <div class="memberList alumni">
           ${alumniList}
         </div>
       </article>
+      <article>
         <h1 id="publications">Publications</h1>
         ${createPublicationsHtml(publications)}
       </article>
