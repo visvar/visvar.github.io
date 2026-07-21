@@ -6,10 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "npm run resizePeople && npm run resizeThumbs && node ./scripts/compile.js",
-    "topng": "node ./scripts/image-to-png.js",
     "resizePeople": "node ./scripts/image-resizer.js assets/img/people 256",
     "resizeThumbs": "node ./scripts/image-resizer.js assets/img/teaser 256",
-    "checklinks": "node ./scripts/check-broken-links.js",
     "ieeecopyright": "node ./scripts/add-copyright-ieee.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "upd": "npm-check-updates -u"
