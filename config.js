@@ -369,7 +369,7 @@ export const memberConfig = [
     links: [
       { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/team/Mazur-00001/' },
       { text: 'Google Scholar', url: 'https://scholar.google.com/citations?user=c6-2mpQAAAAJ&hl=de' },
-      { text: 'ORCID', url: '0009-0001-4480-1438' },
+      { text: 'ORCID', url: 'https://orcid.org/0009-0001-4480-1438' },
     ],
     projects: []
   },
@@ -409,8 +409,8 @@ export const memberConfig = [
     research: ['Tracking for VR/AR', 'HCI'],
     links: [
       { text: 'University of Stuttgart website', url: 'https://www.visus.uni-stuttgart.de/en/institute/team/Haischt/' },
-      { text: 'Google Scholar', url: ' https://scholar.google.de/citations?user=XA7lsOMAAAAJ' },
-      { text: 'ORCID', url: '0000-0002-2494-5143' },
+      { text: 'Google Scholar', url: 'https://scholar.google.de/citations?user=XA7lsOMAAAAJ' },
+      { text: 'ORCID', url: 'https://orcid.org/0000-0002-2494-5143' },
     ],
     projects: []
   },
