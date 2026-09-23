@@ -16,7 +16,7 @@
   "license": "",
   "devDependencies": {
     "bibtex-parse": "^2.1.0",
-    "bibtex-tidy": "^1.15.1",
+    "bibtex-tidy": "1.14.0",
     "image-js": "^1.7.0",
     "npm-check-updates": "^23.1.0",
     "open": "^11.0.4",

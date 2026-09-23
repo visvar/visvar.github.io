@@ -1,9 +1,8 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs'
 import QRCode from 'qrcode'
 import { pageUrl, pageTitle, allowedMissingPDF, allowedPDFLink, allowedArxiv, allowedMissingDOI, memberConfig } from '../config.js'
-import pkg from 'bibtex-tidy'
+import { tidy } from 'bibtex-tidy'
 import open from 'open'
-const { tidy } = pkg
 import * as bibtexParse from 'bibtex-parse'
 
 let printEmails = false
@@ -1050,6 +1049,7 @@ function formatBibtex(key, bibtexString) {
     })
     return formatted.bibtex
   } catch (e) {
+    console.warn(e)
     console.warn(`Invalid bibtex for pub with key ${key}`)
     return bibtexString
   }
